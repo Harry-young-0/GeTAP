@@ -1,0 +1,1374 @@
+﻿Traits,Group
+Arthrosis,Age-related joint degeneration
+Gonarthrosis,Age-related joint degeneration
+Hyperplasia of prostate,Benign Growth
+Benign neoplasm: Conjunctiva,Benign Growth
+Benign neoplasm: Conjunctiva (ICD C excluded),Benign Growth
+Eosinophil count,Blood Traits
+Granulocyte percentage of myeloid white cells,Blood Traits
+Platelet distribution width,Blood Traits
+High light scatter percentage of red cells,Blood Traits
+High light scatter reticulocyte count,Blood Traits
+Immature fraction of reticulocytes,Blood Traits
+"
+                                           Lymphocyte count",Blood Traits
+Lymphocyte percentage of white cells,Blood Traits
+Mean corpuscular hemoglobin,Blood Traits
+Mean corpuscular volume,Blood Traits
+Neutrophil percentage of white cells,Blood Traits
+Plateletcrit,Blood Traits
+Red cell distribution width,Blood Traits
+Red blood cell (erythrocyte) count,Blood Traits
+Reticulocyte count,Blood Traits
+White blood cell count,Blood Traits
+"Cause of death: myelodysplastic syndrome, unspecified",Blood Traits
+B Mem:%IgA,Blood Traits
+B-cell lymphoma 6 protein,Other Gene Expression Change
+basophil cell count,Blood Traits
+Basophill percentage,Blood Traits
+CD44 antigen,Other Gene Expression Change
+eosinophil cell count,Blood Traits
+Eosinophill percentage,Blood Traits
+Hemoglobin A1c,Blood Traits
+High light scatter reticulocyte percentage,Blood Traits
+High light scatter reticulocyte percentage of red cells,Blood Traits
+Immature reticulocyte fraction,Blood Traits
+lymphocyte cell count,Blood Traits
+Lymphocyte count,Blood Traits
+Lymphocyte counts,Blood Traits
+Lymphocyte percentage,Blood Traits
+Mean corpuscular haemoglobin,Blood Traits
+Mean reticulocyte volume,Blood Traits
+Mean sphered cell volume,Blood Traits
+monocyte cell count,Blood Traits
+Monocyte count,Blood Traits
+Monocyte percentage,Blood Traits
+Monocyte percentage of white cells,Blood Traits
+neutrophil cell count,Blood Traits
+Neutrophill count,Blood Traits
+Neutrophill percentage,Blood Traits
+Platelet count,Blood Traits
+Platelet crit,Blood Traits
+Red blood cell (erythrocyte) distribution width,Blood Traits
+Red blood cell count,Blood Traits
+Reticulocyte fraction of red cells,Blood Traits
+Reticulocyte percentage,Blood Traits
+Sum basophil neutrophil counts,Blood Traits
+Total protein,Blood Traits
+White blood cell (leukocyte) count,Blood Traits
+white blood cell count,Blood Traits
+Mean platelet (thrombocyte) volume,Blood Traits
+Mean platelet volume,Blood Traits
+Eosinophil counts,Blood Traits
+Eosinophil percentage of granulocytes,Blood Traits
+Eosinophil percentage of white cells,Blood Traits
+Granulocyte count,Blood Traits
+Haematocrit percentage,Blood Traits
+Haemoglobin concentration,Blood Traits
+Hematocrit,Blood Traits
+Hemoglobin concentration,Blood Traits
+Myeloid white cell count,Blood Traits
+Neutrophil count,Blood Traits
+Neutrophil gelatinase-associated lipocalin,Other Gene Expression Change
+Neutrophil percentage of granulocytes,Blood Traits
+Sum neutrophil eosinophil counts,Blood Traits
+White blood cell count (basophil),Blood Traits
+Basophil percentage of granulocytes,Blood Traits
+Basophil percentage of white cells,Blood Traits
+MDC:%CD1c-,Blood Traits
+MDC:%CD1c+,Blood Traits
+Mean corpuscular haemoglobin concentration,Blood Traits
+NKeff:%314-158a+,Blood Traits
+Frequency of other exercises in last 4 weeks,Bodily Ability: Exercise
+Frequency of stair climbing in last 4 weeks,Bodily Ability: Exercise
+Number of days/week walked 10+ minutes,Bodily Ability: Exercise
+Types of physical activity in last 4 weeks: Walking for pleasure (not as a means of transport),Bodily Ability: Exercise
+Hand grip strength (right),Bodily Ability: Exercise
+Apoliprotein A,Body Fat
+Apoliprotein B,Body Fat
+Body mass index,Body Fat
+Body fat percentage,Body Fat
+High density lipoprotein,Body Fat
+LDL cholesterol,Body Fat
+LDL direct,Body Fat
+HDL cholesterol,Body Fat
+Low density lipoprotein,Body Fat
+Familial hypercholesterolemia,Body Fat
+Impedance of leg left,Body Fat
+Impedance of leg (left),Body Fat
+Impedance of leg right,Body Fat
+Impedance of leg (right),Body Fat
+Impedance of whole body,Body Fat
+Leg fat percentage left,Body Fat
+Leg fat percentage (left),Body Fat
+Leg fat percentage right,Body Fat
+Leg fat percentage (right),Body Fat
+"Medication for cholesterol, blood pressure or diabetes: cholesterol lowering medication",Body Fat
+Self-reported high cholesterol,Body Fat
+Total cholesterol,Body Fat
+Apolipoprotein B,Body Fat
+Arm fat mass (left),Body Fat
+Arm fat mass (right),Body Fat
+Arm fat percentage (left),Body Fat
+Arm fat percentage (right),Body Fat
+Body mass index (BMI),Body Fat
+Cholesterol,Body Fat
+Cholesterol esters in large VLDL,Body Fat
+Cholesterol esters in medium LDL,Body Fat
+Cholesterol esters in medium VLDL,Body Fat
+Concentration of IDL particles,Body Fat
+Concentration of large LDL particles,Body Fat
+Concentration of medium LDL particles,Body Fat
+Concentration of small LDL particles,Body Fat
+Concentration of small VLDL particles,Body Fat
+Concentration of very small VLDL particles,Body Fat
+Diagnoses - secondary ICD10: E78.0 Pure hypercholesterolaemia,Body Fat
+Free cholesterol,Body Fat
+Free cholesterol in IDL,Body Fat
+Free cholesterol in large LDL,Body Fat
+Free cholesterol in small VLDL,Body Fat
+Free cholesterol to esterified cholesterol ratio,Body Fat
+Leg fat mass (left),Body Fat
+Leg fat mass (right),Body Fat
+Low-density-lipoprotein cholesterol,Body Fat
+Medication for cholesterol  blood pressure  diabetes  or take exogenous hormones: Cholesterol lowering medication,Body Fat
+Medication for cholesterol  blood pressure or diabetes: Cholesterol lowering medication,Body Fat
+"Medication for cholesterol, blood pressure or diabetes: Cholesterol lowering medication",Body Fat
+"Medication for cholesterol, blood pressure, diabetes, or take exogenous hormones: Cholesterol lowering medication",Body Fat
+Non-cancer illness code  self-reported: high cholesterol,Body Fat
+"Non-cancer illness code, self-reported: high cholesterol",Body Fat
+Phospholipids in IDL,Body Fat
+Phospholipids in large LDL,Body Fat
+Phospholipids in medium LDL,Body Fat
+Phospholipids in small VLDL,Body Fat
+Phospholipids in very small VLDL,Body Fat
+Serum total cholesterol,Body Fat
+Total cholesterol in IDL,Body Fat
+Total cholesterol in large LDL,Body Fat
+Total cholesterol in LDL,Body Fat
+Total cholesterol in medium LDL,Body Fat
+Total cholesterol in medium VLDL,Body Fat
+Total cholesterol in small LDL,Body Fat
+Total cholesterol in small VLDL,Body Fat
+Total fatty acids,Body Fat
+Total lipids in IDL,Body Fat
+Total lipids in large LDL,Body Fat
+Total lipids in medium LDL,Body Fat
+Total lipids in small LDL,Body Fat
+Total lipids in small VLDL,Body Fat
+Total lipids in very small VLDL,Body Fat
+Triglycerides in IDL,Body Fat
+Triglycerides in very large HDL,Body Fat
+Triglycerides in very small VLDL,Body Fat
+Trunk fat mass,Body Fat
+Trunk fat percentage,Body Fat
+Whole body fat mass,Body Fat
+body mass index,Body Fat
+Impedance of arm (left),Body Fat
+Impedance of arm (right),Body Fat
+Weight change compared with 1 year ago,Body Fat
+Ankle spacing width,Body Size
+Comparative height size at age 10,Body Size
+3mm asymmetry index (right),Eye Traits
+Leg predicted mass (right),Body Size
+Leg predicted mass (left),Body Size
+Sitting height,Body Size
+Standing height,Body Size
+Leg fat-free mass (right),Body Size
+Leg fat-free mass (left),Body Size
+Trunk predicted mass,Body Size
+Trunk fat-free mass,Body Size
+Whole body fat-free mass,Body Size
+Whole body water mass,Body Size
+Arm fat-free mass (left),Body Size
+Arm fat-free mass (right),Body Size
+Arm predicted mass (left),Body Size
+Arm predicted mass (right),Body Size
+Height,Body Size
+Hip circumference,Body Size
+Waist circumference,Body Size
+Weight,Body Size
+Ankle spacing width (left),Body Size
+Heel bone mineral density,Bone Traits
+Heel bone mineral density (BMD),Bone Traits
+"Heel bone mineral density (BMD) T-score, automated",Bone Traits
+Heel bone mineral density (BMD) T-score  automated,Bone Traits
+"Heel quantitative ultrasound index (QUI), direct entry",Bone Traits
+"Heel Broadband ultrasound attenuation, direct entry",Bone Traits
+Total body bone mineral density,Bone Traits
+Fractured bone site(s): Other bones,Bone Traits
+Fractured bone site(s): Wrist,Bone Traits
+Fractured/broken bones in last 5 years,Bone Traits
+Heel broadband ultrasound attenuation (right),Bone Traits
+Barret oesophagus,Cancer
+Benign neoplasm of bone and articular cartilage,Cancer
+Cause of death: multiple myeloma,Cancer
+Clear cell ovarian cancer,Cancer
+Response to radiotherapy in prostate cancer toxicity rectal bleeding,Cancer
+Cause of death: acute myeloid leukaemia,Cancer
+NET25 0096,Cancer
+NET100 1217,Cancer
+NET100 0268,Cancer
+NET100 1459,Cancer
+Mucinous ovarian cancer: invasive and low malignant potential,Cancer
+Myeloid leukaemia,Cancer
+Diagnoses - secondary ICD10: Z85.3 Personal history of malignant neoplasm of breast,Cancer
+NET100 0051,Cancer
+NET100 0478,Cancer
+NET100 1068,Cancer
+NET100 1107,Cancer
+NET100 1251,Cancer
+NET100 1423,Cancer
+NET100 1463,Cancer
+NET100 1472,Cancer
+NET25 0090,Cancer
+NET25 0191,Cancer
+Number of self-reported cancers,Cancer
+NET100 0113,Cancer
+NET100 0217,Cancer
+NET100 0252,Cancer
+NET100 1305,Cancer
+NET100 0282,Cancer
+NET100 0316,Cancer
+NET100 0481,Cancer
+NET100 0562,Cancer
+NET100 0811,Cancer
+NET100 0962,Cancer
+NET100 1230,Cancer
+NET100 1442,Cancer
+NET25 0121,Cancer
+"Type of cancer: ICD10: D06.9 Cervix, unspecified",Cancer
+NET100 0241,Cancer
+NET100 0600,Cancer
+Diagnoses - main ICD10: C67 Malignant neoplasm of bladder,Cancer
+Neuroblastoma (MYCN amplification),Cancer
+Breast cancer,Cancer
+NET100 1221,Cancer
+NET100 1294,Cancer
+ER- Breast cancer (iCOGS),Cancer
+NET100 0100,Cancer
+NET100 0114,Cancer
+NET100 0210,Cancer
+NET100 0258,Cancer
+NET100 0259,Cancer
+NET100 0277,Cancer
+NET100 0528,Cancer
+NET100 0637,Cancer
+NET100 0679,Cancer
+NET100 0684,Cancer
+NET100 0705,Cancer
+NET100 0813,Cancer
+NET100 0951,Cancer
+NET100 1097,Cancer
+NET100 1110,Cancer
+NET100 1266,Cancer
+NET25 0166,Cancer
+NET100 0009,Cancer
+NET100 0156,Cancer
+NET100 0993,Cancer
+NET100 1233,Cancer
+NET25 0043,Cancer
+"Type of cancer: ICD10: C43.7 Malignant melanoma of lower limb, including hip",Cancer
+NET100 0067,Cancer
+NET100 0926,Cancer
+NET100 1323,Cancer
+Cardiovascular disease prevalence,Cardiovascular Traits
+Coronary artery disease,Cardiovascular Traits
+Myocardial infarction,Cardiovascular Traits
+Cause of death: cardiomegaly,Cardiovascular Traits
+Age angina diagnosed,Cardiovascular Traits
+Coronary heart disease,Cardiovascular Traits
+Diagnoses - secondary ICD10: I25.1 Atherosclerotic heart disease,Cardiovascular Traits
+Arrhythmia,Cardiovascular Traits
+Atrial fibrillation,Cardiovascular Traits
+Death due to cardiac causes,Cardiovascular Traits
+"Diagnoses - secondary ICD10: I25.9 Chronic ischaemic heart disease, unspecified",Cardiovascular Traits
+Valvular heart disease including rheumatic fever,Cardiovascular Traits
+Operative procedures - main OPCS: K63.4 Coronary arteriography using two catheters,Cardiovascular Traits
+Mouth/teeth dental problems: Dentures,Dental
+Mouth/teeth dental problems: Mouth ulcers,Dental
+Treatment/medication code: insulin product,Diabetes
+Insulin secretion rate,Diabetes
+"Type1 diabetes, definitions combined",Diabetes
+Biguanides,Diabetes
+Other (not insulin) diabetes medications,Diabetes
+Cause of death: duodenum,Digestive Traits
+Cause of death: sigmoid colon,Digestive Traits
+Cause of death: other and unspecified intestinal obstruction,Digestive Traits
+Postprocedural disorders of digestive system,Digestive Traits
+Diseases of the digestive system,Digestive Traits
+Age at menopause,Endocrine Traits
+Age at menopause (last menstrual period),Endocrine Traits
+Age started hormone-replacement therapy (HRT),Endocrine Traits
+Menopause,Endocrine Traits
+Had menopause,Endocrine Traits
+Somatotropin,Endocrine Traits
+Diagnoses - main ICD10: E03 Other hypothyroidism,Endocrine Traits
+Eye,Eye Traits
+Corneal hysteresis (left),Eye Traits
+Glaucoma,Eye Traits
+3mm cylindrical power angle (left),Eye Traits
+3mm weak meridian angle (left),Eye Traits
+Central corneal thickness,Eye Traits
+Corneal hysteresis (right),Eye Traits
+Corneal resistance factor (left),Eye Traits
+Corneal resistance factor (right),Eye Traits
+Spherical power (left),Eye Traits
+Spherical power (right),Eye Traits
+Eye problems/disorders: Diabetes related eye disease,Eye Traits
+Cataract,Eye Traits
+"Reason for glasses/contact lenses: For long-sightedness, i.e. for distance and near, but particularly for near tasks like reading (called 'hypermetropia')",Eye Traits
+Reason for glasses/contact lenses: For short-sightedness  i.e. only or mainly for distance viewing such as driving  cinema etc (called 'myopia'),Eye Traits
+"Reason for glasses/contact lenses: For short-sightedness, i.e. only or mainly for distance viewing such as driving, cinema etc (called 'myopia')",Eye Traits
+Cirrhosis,Fibrosis
+Interstitial lung disease,Fibrosis
+All pneumoniae,Inflammation
+Asthma,Inflammation
+Asthma-related pneumonia,Inflammation
+Asthma-related pneumonia or sepsis,Inflammation
+Crohns disease,Inflammation
+C-reactive protein,Inflammation
+COPD/asthma related pneumonia or pneumonia derived septichaemia,Inflammation
+COPD/asthma/ILD related pneumonia or pneumonia derived septichaemia,Inflammation
+FESS (DNB20),Inflammation
+Gastritis,Inflammation
+Inflammatory bowel disease,Inflammation
+Gout-related co-morbidities,Inflammation
+Keratitis,Inflammation
+"Cause of death: asthma, unspecified",Inflammation
+"Hayfever, allergic rhinitis or eczema",Inflammation
+Self-reported fibrosing alveolitis or unspecified alveolitis,Inflammation
+Multiple sclerosis,Inflammation
+Pneumonia (excl. viral and due to other infectious organisms not elsewhere classified),Inflammation
+"Pneumonia, organism unsepcified",Inflammation
+Pneumonias (Asthma/COPD co-morbidities),Inflammation
+Psoriasis,Inflammation
+Rheumatoid arthritis,Inflammation
+Self-reported asthma,Inflammation
+Self-reported graves disease,Inflammation
+Self-reported psoriasis,Inflammation
+Viral meningitis,Inflammation
+Cause of death: chronic obstructive pulmonary disease with acute lower respiratory infection,Inflammation
+Other predominantly sexually transmitted diseases,Inflammation
+Self-reported chronic sinusitis,Inflammation
+Viral warts,Inflammation
+Asthma (mode),Inflammation
+Blood clot  DVT  bronchitis  emphysema  asthma  rhinitis  eczema  allergy diagnosed by doctor: Asthma,Inflammation
+Blood clot  DVT  bronchitis  emphysema  asthma  rhinitis  eczema  allergy diagnosed by doctor: Hayfever  allergic rhinitis or eczema,Inflammation
+"Blood clot, DVT, bronchitis, emphysema, asthma, rhinitis, eczema, allergy diagnosed by doctor: Asthma",Inflammation
+"Blood clot, DVT, bronchitis, emphysema, asthma, rhinitis, eczema, allergy diagnosed by doctor: Hayfever, allergic rhinitis or eczema",Inflammation
+Crohn's disease,Inflammation
+Diagnoses - secondary ICD10: Z88.6 Personal history of allergy to analgesic agent,Inflammation
+Non-cancer illness code  self-reported: asthma,Inflammation
+Non-cancer illness code  self-reported: psoriasis,Inflammation
+"Non-cancer illness code, self-reported: asthma",Inflammation
+"Non-cancer illness code, self-reported: psoriasis",Inflammation
+Psoriatic arthropathies related co-morbidities,Inflammation
+Rheumatoid Arthritis,Inflammation
+Ulcerative colitis,Inflammation
+Diagnoses - main ICD10: K29 Gastritis and duodenitis,Inflammation
+Age asthma diagnosed,Inflammation
+Age asthma diagnosed by doctor,Inflammation
+Allergic asthma,Inflammation
+Allergic asthma (mode),Inflammation
+"Allergic disease (asthma, hay fever or eczema)",Inflammation
+Asthma (more excluded),Inflammation
+"Asthma, hospital admissions 1",Inflammation
+Asthma/COPD (KELA buy),Inflammation
+C-Reactive protein level,Inflammation
+CD4mem:%Th1* (5),Inflammation
+CD4mem:%Th17,Inflammation
+CD4mem:R6+,Inflammation
+Childhood asthma (age<16),Inflammation
+Chronic lower respiratory diseases,Inflammation
+COPD differential diagnosis,Inflammation
+"Diagnoses - secondary ICD10: J45.9 Asthma, unspecified",Inflammation
+Diagnoses - secondary ICD10: K29.8 Duodenitis,Inflammation
+Doctor diagnosed asthma,Inflammation
+Doctor diagnosed hayfever or allergic rhinitis,Inflammation
+Infections of the skin and subcutaneous tissue,Inflammation
+Non-cancer illness code  self-reported: hayfever/allergic rhinitis,Inflammation
+"Non-cancer illness code, self-reported: bronchitis",Inflammation
+"Non-cancer illness code, self-reported: hayfever/allergic rhinitis",Inflammation
+Other enthesopathies,Inflammation
+"Bacterial intestinal infections, IBD co-morbidities",Inflammation
+Collagenous colitis,Inflammation
+"COPD, early/later onset",Inflammation
+Herpesviral keratitis and keratoconjunctivitis,Inflammation
+Other noninfective gastroenteritis and colitis,Inflammation
+"Monoarthritis, not elsewhere classified",Inflammation
+Blood clot  DVT  bronchitis  emphysema  asthma  rhinitis  eczema  allergy diagnosed by doctor: Emphysema/chronic bronchitis,Inflammation
+"Blood clot, DVT, bronchitis, emphysema, asthma, rhinitis, eczema, allergy diagnosed by doctor: Emphysema/chronic bronchitis",Inflammation
+Chronic sinusitis,Inflammation
+Non-cancer illness code  self-reported: emphysema/chronic bronchitis,Inflammation
+"Non-cancer illness code, self-reported: emphysema/chronic bronchitis",Inflammation
+Urate,Kidney Traits
+log eGFR creatinine,Kidney Traits
+Creatinine,Kidney Traits
+Serum creatinine,Kidney Traits
+Serum creatinine (eGFRcrea),Kidney Traits
+log eGFR creatinine in non diabetics,Kidney Traits
+Estimated glomerular filtration rate,Kidney Traits
+Estimated glomerular filtration rate (eGFR),Kidney Traits
+extra,Kidney Traits
+Creatine,Kidney Traits
+Urinary albumin excretion,Kidney Traits
+Acute nephritic syndrome,Kidney Traits
+Diagnoses - main ICD10: N13 Obstructive and reflux uropathy,Kidney Traits
+Basal metabolic rate,Metabolism
+Non-cancer illness code  self-reported: hypothyroidism/myxoedema,Metabolism
+"Non-cancer illness code, self-reported: hypothyroidism/myxoedema",Metabolism
+"Malate dehydrogenase, cytoplasmic",Metabolism
+Palmitoyl sphingomyelin,Metabolites/Hormones/Other Products
+Testosterone,Metabolites/Hormones/Other Products
+"18:2, linoleic acid (LA)",Metabolites/Hormones/Other Products
+Calcium,Metabolites/Hormones/Other Products
+Omega-6 fatty acids,Metabolites/Hormones/Other Products
+Other polyunsaturated fatty acids than 18:2,Metabolites/Hormones/Other Products
+Pro-opiomelanocortin,Metabolites/Hormones/Other Products
+Sphingomyelins,Metabolites/Hormones/Other Products
+Urea,Metabolites/Hormones/Other Products
+Alkaline phosphatase,Metabolites/Hormones/Other Products
+Albumin,Metabolites/Hormones/Other Products
+Arginine,Metabolites/Hormones/Other Products
+Chloride,Metabolites/Hormones/Other Products
+Direct bilirubin,Metabolites/Hormones/Other Products
+Glucose,Metabolites/Hormones/Other Products
+Phosphate,Metabolites/Hormones/Other Products
+Total bilirubin,Metabolites/Hormones/Other Products
+X-01911,Metabolites/Hormones/Other Products
+Potassium,Metabolites/Hormones/Other Products
+Triglycerides,Metabolites/Hormones/Other Products
+"4-androsten-3beta,17beta-diol disulfate 2*",Metabolites/Hormones/Other Products
+Albumin/globulin ratio,Metabolites/Hormones/Other Products
+Non-albumin protein,Metabolites/Hormones/Other Products
+Blood urea nitrogen,Metabolites/Hormones/Other Products
+Chiro-inositol,Metabolites/Hormones/Other Products
+Estrone 3-sulfate,Metabolites/Hormones/Other Products
+Phenyllactate (PLA),Metabolites/Hormones/Other Products
+X-06226,Metabolites/Hormones/Other Products
+X-11847,Metabolites/Hormones/Other Products
+Acetylphosphate,Metabolites/Hormones/Other Products
+Urinary sodium-potassium ratio,Metabolites/Hormones/Other Products
+Diseases of the nervous system,Nervous System Traits
+IDP T1 FAST ROIs L angular gyrus,Neurological Function/Brain Traits
+IDP dMRI TBSS L3 Retrolenticular part of internal capsule R,Neurological Function/Brain Traits
+IDP dMRI ProbtrackX L1 ifo r,Neurological Function/Brain Traits
+IDP dMRI TBSS OD External capsule R,Neurological Function/Brain Traits
+IDP dMRI TBSS L2 Splenium of corpus callosum,Neurological Function/Brain Traits
+DKTatlas rh supramarginal area,Neurological Function/Brain Traits
+Duration to first press of snap-button in each round,Neurological Function/Brain Traits
+IDP dMRI ProbtrackX L3 fmi,Neurological Function/Brain Traits
+IDP dMRI TBSS FA Genu of corpus callosum,Neurological Function/Brain Traits
+IDP dMRI TBSS L2 Genu of corpus callosum,Neurological Function/Brain Traits
+IDP T1 FAST ROIs L mid temp gyrus post,Neurological Function/Brain Traits
+Mean time to correctly identify matches,Neurological Function/Brain Traits
+a2009s rh G orbital area,Neurological Function/Brain Traits
+IDP dMRI TBSS L3 Posterior limb of internal capsule L,Neurological Function/Brain Traits
+IDP dMRI TBSS L3 Posterior limb of internal capsule R,Neurological Function/Brain Traits
+Parkinson's disease,Neurological Function/Brain Traits
+"Parkinson's disease, strict definition",Neurological Function/Brain Traits
+a2009s lh G orbital thickness,Neurological Function/Brain Traits
+DKTatlas rh entorhinal area,Neurological Function/Brain Traits
+Errors before selecting correct item in alphanumeric path (trail #2),Neurological Function/Brain Traits
+IDP dMRI ProbtrackX ICVF mcp,Neurological Function/Brain Traits
+IDP dMRI ProbtrackX ISOVF unc r,Neurological Function/Brain Traits
+IDP dMRI ProbtrackX MO mcp,Neurological Function/Brain Traits
+IDP dMRI TBSS L1 Cingulum hippocampus L,Neurological Function/Brain Traits
+IDP dMRI TBSS MO Pontine crossing tract,Neurological Function/Brain Traits
+IDP dMRI TBSS MO Superior corona radiata R,Neurological Function/Brain Traits
+IDP T1 FAST ROIs V cerebellum VIIIa,Neurological Function/Brain Traits
+a2009s lh G&S cingul-Mid-Post area,Neurological Function/Brain Traits
+a2009s lh S pericallosal area,Neurological Function/Brain Traits
+DKTatlas lh posteriorcingulate area,Neurological Function/Brain Traits
+IDP dMRI TBSS ISOVF Posterior corona radiata R,Neurological Function/Brain Traits
+a2009s rh G subcallosal thickness,Neurological Function/Brain Traits
+IDP dMRI ProbtrackX FA str r,Neurological Function/Brain Traits
+IDP T1 FAST ROIs R cerebellum I-IV,Neurological Function/Brain Traits
+a2009s lh G temporal middle thickness,Neurological Function/Brain Traits
+a2009s lh S collat transv post thickness,Neurological Function/Brain Traits
+a2009s lh S oc-temp lat thickness,Neurological Function/Brain Traits
+a2009s lh S orbital med-olfact area,Neurological Function/Brain Traits
+a2009s rh G&S cingul-Mid-Post area,Neurological Function/Brain Traits
+DKTatlas rh transversetemporal area,Neurological Function/Brain Traits
+IDP dMRI ProbtrackX ICVF cgh r,Neurological Function/Brain Traits
+IDP dMRI ProbtrackX ISOVF cgh r,Neurological Function/Brain Traits
+IDP dMRI ProbtrackX MO slf r,Neurological Function/Brain Traits
+IDP dMRI TBSS L2 Fornix cres+Stria terminalis R,Neurological Function/Brain Traits
+IDP T1 FAST ROIs L precentral gyrus,Neurological Function/Brain Traits
+IDP T1 FAST ROIs L temporal pole,Neurological Function/Brain Traits
+IDP T1 FAST ROIs V cerebellum crus I,Neurological Function/Brain Traits
+IDP T1 FIRST left accumbens volume,Neurological Function/Brain Traits
+IDP T1 FIRST left accumbens volume plus IDP T1 FIRST right accumbens volume,Neurological Function/Brain Traits
+IDP T1 FIRST right pallidum volume,Neurological Function/Brain Traits
+a2009s lh S central area,Neurological Function/Brain Traits
+a2009s lh S subparietal thickness,Neurological Function/Brain Traits
+IDP dMRI ProbtrackX MD unc l,Neurological Function/Brain Traits
+IDP tfMRI 90th-percentile zstat faces-shapes,Neurological Function/Brain Traits
+IDP dMRI TBSS MO Inferior cerebellar peduncle R,Neurological Function/Brain Traits
+IDP T1 FIRST brain stem+4th ventricle volume,Neurological Function/Brain Traits
+Alcohol intake frequency,Other
+Average weekly spirits intake,Other
+Breastfed as a baby,Other
+"Cereal type: Other (e.g. Cornflakes, Frosties)",Other
+Diagnoses - secondary ICD10: K59.0 Constipation,Other
+Nap during day,Other
+Hair/balding pattern: Pattern 1,Other
+Hair or balding pattern: pattern 2,Other
+Hair/balding pattern: Pattern 2,Other
+Hair/balding pattern: Pattern 3,Other
+Hair or balding pattern: pattern 4,Other
+Hair/balding pattern: Pattern 4,Other
+"Hair colour (natural, before greying): Blonde",Other
+"Hair colour (natural, before greying): Dark brown",Other
+Home area population density: Scotland large urban area,Other
+Home area population density - urban or rural: Scotland - Large Urban Area,Other
+Place of birth in UK - north co-ordinate,Other
+Abnormal findings on diagnostic imaging of lung,Other
+Abnormal findings on diagnostic imaging of other body structures,Other
+Cause of death: home,Other
+"Haemangioma and lymphangioma, any site",Other
+Leg pain in calf or calves,Other
+Maternal smoking around birth,Other
+Milk chocolate intake,Other
+Herbal tea intake,Other
+Treatment with aloe vera product,Other
+Treatment with atorvastatin,Other
+Treatment with cholesterol lowering medication,Other
+Treatment with simvastatin,Other
+Treatment with zapain caplet,Other
+Treatment with benadryl allergy relief 8mg capsule,Other
+Treatment with calcichew 1.25g chewable tablet,Other
+Treatment with co-tenidone,Other
+Treatment with creon e or c granules in capsule,Other
+Treatment with finasteride,Other
+Treatment with ibuprofen product,Other
+Treatment with ibuprofen product,Other
+Treatment with kapake capsule,Other
+Treatment with kliovance 1mg or 0.5mg tablet,Other
+Treatment with nitrolingual 400micrograms spray,Other
+Treatment with pyridoxine preparation,Other
+Treatment with solpadol capsule,Other
+Treatment with tiotropium,Other
+Particulate matter air pollution (pm10); 2007,Other
+Nitrogen dioxide air pollution; 2007,Other
+Nitrogen dioxide air pollution; 2005,Other
+Nitrogen dioxide air pollution; 2006,Other
+Time spent using computer,Other
+Operation code: varicose vein surgery,Other
+Operative procedures - secondary OPCS: Y82.2 Injection of local anaesthetic NEC,Other
+Operation code: unclassifiable,Other
+Diagnoses - main ICD10: M23 Internal derangement of knee,Other
+Diagnoses - main ICD10: E04 Other non-toxic goitre,Other
+Current employment status: Retired,Other
+Qualifications: None of the above,Other
+Job SOC coding: Civil Service administrative officers and assistants,Other
+"Job coding: civil service administrative officer or assistant or clerk, tax collector, prison service clerk, law courts clerk",Other
+Age completed full time education,Other
+PCT responsible for patient data: MANCHESTER PCT,Other
+Age started wearing glasses or contact lenses,Other
+Alcohol intake frequency.,Other
+Age first had sexual intercourse,Other
+Blood clot  DVT  bronchitis  emphysema  asthma  rhinitis  eczema  allergy diagnosed by doctor: None of the above,Other
+"Blood clot, DVT, bronchitis, emphysema, asthma, rhinitis, eczema, allergy diagnosed by doctor: None of the above",Other
+Bread type: Brown,Other
+Carrot intake,Other
+Dried fruit intake,Other
+Fractured bone site(s): Arm,Other
+Fresh fruit intake,Other
+"Hair colour (natural, before greying): Black",Other
+Home location - north co-ordinate (rounded),Other
+Illnesses of father: Heart disease,Other
+Illnesses of mother: Heart disease,Other
+Medication for cholesterol  blood pressure  diabetes  or take exogenous hormones: None of the above,Other
+Medication for cholesterol  blood pressure or diabetes: None of the above,Other
+"Medication for cholesterol, blood pressure or diabetes: None of the above",Other
+Non-oily fish intake,Other
+Operative procedures - main OPCS: W87.9 Unspecified diagnostic endoscopic examination of knee joint,Other
+Own or rent accommodation lived in: Rent - from private landlord or letting agency,Other
+Pain type(s) experienced in last month: Neck or shoulder pain,Other
+PCT where patients GP was registered: GATESHEAD PCT,Other
+PCT where patients GP was registered: HALTON AND ST HELENS PCT,Other
+PCT where patients GP was registered: ST HELENS PCT,Other
+Time spent watching television (TV),Other
+Tinnitus: Yes  but not now  but have in the past,Other
+Traffic intensity on the nearest major road,Other
+Treatment/medication code: amitriptyline,Other
+Treatment/medication code: atorvastatin,Other
+Treatment/medication code: levothyroxine sodium,Other
+Treatment/medication code: methotrexate,Other
+Treatment/medication code: simvastatin,Other
+Usual walking pace,Other
+Vascular/heart problems diagnosed by doctor: None of the above,Other
+Workplace very cold: Rarely/never,Other
+Baguette intake,Other
+Cereal intake,Other
+Hearing difficulty/problems: No,Other
+Hearing difficulty/problems: Yes,Other
+"Never eat eggs, dairy, wheat, sugar: Sugar or foods/drinks containing sugar",Other
+Other specified/unspecified dorsopathies,Other
+Pain type(s) experienced in last month: Back pain,Other
+Parental longevity (father's age at death),Other
+"Pulse rate, automated reading",Other
+Qualifications: O levels/GCSEs or equivalent,Other
+Salt added to food,Other
+Skin colour,Other
+Time to complete round,Other
+Treatment/medication code: indapamide,Other
+Treatment/medication code: lisinopril+hydrochlorothiazide 10mg/12.5mg tablet,Other
+Treatment/medication code: valsartan,Other
+Birth weight,Other
+Birth weight of first child,Other
+Breakfast cereal consumed,Other
+Chest pain or discomfort,Other
+Childhood sunburn occasions,Other
+Diagnoses - main ICD10: Z30.2 Sterilisation,Other
+Diagnoses - main ICD10: Z46 Fitting and adjustment of other devices,Other
+Diagnoses - secondary ICD10: R33 Retention of urine,Other
+Duration of light DIY,Other
+Ever smoked,Other
+Facial ageing,Other
+Factors influencing health status and contact with health services,Other
+"Hair colour (natural, before greying): Light brown",Other
+Illnesses of father: Chronic bronchitis/emphysema,Other
+Illnesses of mother: Diabetes,Other
+Interpolated Age of participant when non-cancer illness first diagnosed,Other
+Interpolated Year when non-cancer illness first diagnosed,Other
+Interpolated Year when operation took place,Other
+Main speciality of consultant (recoded): Trauma and orthopaedics,Other
+Methods of admission to hospital (recoded): Emergency admission,Other
+Milk type used: Full cream,Other
+Milk type used: Never/rarely have milk,Other
+Mixture of day and night shifts worked: Shift pattern was worked for some (but not all) of job,Other
+Number of measurements made,Other
+Number of self-reported non-cancer illnesses,Other
+Oily fish intake,Other
+Operation code: nasal/sinus/nose surgery,Other
+Operation code: tonsillectomy +/- adenoids,Other
+Other pulmonary diagnosis,Other
+Past tobacco smoking,Other
+PCT where patients GP was registered: MANCHESTER PCT,Other
+Plays computer games,Other
+Qualifications: College or University degree,Other
+Salad / raw vegetable intake,Other
+Spells in hospital,Other
+Spread type: Butter/spreadable butter,Other
+Sweet potato intake,Other
+Taking other prescription medications,Other
+"Tense, sore, or aching muscles during worst period of anxiety",Other
+Treatment/medication code: tramadol,Other
+Type of fat/oil used in cooking: Rapeseed oil,Other
+Vitamin and mineral supplements: Vitamin C,Other
+volume MaskVol,Other
+Water intake,Other
+Years of schooling,Other
+Home location at assessment - north co-ordinate (rounded),Other
+Length of mobile phone use,Other
+"Ever had known person concerned about, or recommend reduction of, alcohol consumption: Yes, but not in the last year",Other
+Workplace had a lot of diesel exhaust: Often,Other
+Current employment status: In paid employment or self-employed,Other
+Diagnoses - main ICD10: K59.0 Constipation,Other
+Operation code: vasectomy,Other
+Operative procedures - main OPCS: T52.1 Palmar fasciectomy,Other
+Subjective visual disturbances,Other
+Time from waking to first cigarette,Other
+"Activities undertaken to treat depression: Other therapeutic activities such as mindfulness, yoga or art classes",Other
+Age at first live birth,Other
+Average total household income before tax,Other
+Breathing problems improved/stopped away from workplace or on holiday: Yes,Other
+College completion,Other
+Egg consumers,Other
+Ever had prostate specific antigen (PSA) test,Other
+Illness  injury  bereavement  stress in last 2 years: Death of a close relative,Other
+"Illness, injury, bereavement, stress in last 2 years: Death of a close relative",Other
+Illnesses of father: Alzheimer's disease/dementia,Other
+Ingredients in canned soup: Vegetables,Other
+"Injury, poisoning and certain other consequences of external causes",Other
+"Job coding: primary /junior school teacher or teaching professional, nursery school teacher (including head teacher)",Other
+Job SOC coding: Primary and nursery education teaching professionals,Other
+Job SOC coding: Receptionists,Other
+Length of working week for main job,Other
+Number of night shifts worked monthly during mixed shift periods,Other
+Operation code: reduction or fixation of bone fracture,Other
+Operative procedures - main OPCS: S06.9 Unspecified other excision of lesion of skin,Other
+PCT responsible for patient data: DERBYSHIRE COUNTY PCT,Other
+PCT where patients GP was registered: DERBYSHIRE COUNTY PCT,Other
+Poultry intake,Other
+Processed meat intake,Other
+Qualifications: A levels/AS levels or equivalent,Other
+Townsend deprivation index at recruitment,Other
+Transport type for commuting to job workplace: Cycle,Other
+Treatment/medication code: felodipine,Other
+Treatment/medication code: salbutamol,Other
+"Types of physical activity in last 4 weeks: Heavy DIY (eg: weeding, lawn mowing, carpentry, digging)",Other
+Types of spread used on bread/crackers: Butter on bread/crackers,Other
+Weekly usage of mobile phone in last 3 months,Other
+Workplace had a lot of diesel exhaust: Sometimes,Other
+Age at last live birth,Other
+Diagnoses - main ICD10: R07 Pain in throat and chest,Other
+Diagnoses - main ICD10: S02 Fracture of skull and facial bones,Other
+Home area population density - urban or rural: England/Wales - Urban - less sparse,Other
+Home location - east co-ordinate (rounded),Other
+Home location at assessment - east co-ordinate (rounded),Other
+Illnesses of siblings: Heart disease,Other
+Operative procedures - main OPCS: X99.8 No procedure performed,Other
+Pain type(s) experienced in last month: Headache,Other
+Parental longevity (both parents in top 10%),Other
+Beef intake,Other
+Daytime dozing / sleeping (narcolepsy),Other
+Inverse distance to the nearest road,Other
+Number of live births,Other
+Operative procedures - secondary OPCS: Y82.3 Application of local anaesthetic NEC,Other
+PCT responsible for patient data: BIRMINGHAM EAST AND NORTH PCT,Other
+PCT where patients GP was registered: BIRMINGHAM EAST AND NORTH PCT,Other
+Time to answer,Other
+Treatment/medication code: paracetamol,Other
+Alcoholic drinks per week,Other
+Ease of skin tanning,Other
+FI6 : conditional arithmetic,Other
+Number of cigarettes currently smoked daily (current cigarette smokers),Other
+Number of incorrect matches in round,Other
+Activator of apoptosis harakiri,Other Gene Expression Change
+Bisphosphoglycerate mutase,Other Gene Expression Change
+ENSG00000018510,Other Gene Expression Change
+ENSG00000225808,Other Gene Expression Change
+ENSG00000213963,Other Gene Expression Change
+ENSG00000197557,Other Gene Expression Change
+ENSG00000116044,Other Gene Expression Change
+ENSG00000196659,Other Gene Expression Change
+Importin subunit alpha-1,Other Gene Expression Change
+Interferon alpha-8,Other Gene Expression Change
+Interferon gamma receptor 2,Other Gene Expression Change
+Kallikrein-11,Other Gene Expression Change
+Lymphotactin,Other Gene Expression Change
+GTPase KRas,Other Gene Expression Change
+Glucocorticoid receptor,Other Gene Expression Change
+Oxysterol-binding protein-related protein 11,Other Gene Expression Change
+Protein FAM171B,Other Gene Expression Change
+SHBG,Other Gene Expression Change
+MCP-3,Other Gene Expression Change
+"Cytochrome c oxidase subunit 7A1, mitochondrial",Other Gene Expression Change
+Transforming growth factor beta-1-induced transcript 1 protein,Other Gene Expression Change
+Ubiquitin-like protein ISG15,Other Gene Expression Change
+Aspartate aminotransferase,Other Gene Expression Change
+Complement C1q tumor necrosis factor-related protein 3,Other Gene Expression Change
+Uroporphyrinogen-III synthase,Other Gene Expression Change
+"Alpha-(1,3)-fucosyltransferase 9",Other Gene Expression Change
+Interleukin-8,Other Gene Expression Change
+Cystatin-D,Other Gene Expression Change
+"5'(3')-deoxyribonucleotidase, cytosolic type",Other Gene Expression Change
+Cell growth regulator with EF hand domain protein 1,Other Gene Expression Change
+Complement C1q and tumor necrosis factor-related protein 9A,Other Gene Expression Change
+Corticotropin-releasing factor-binding protein,Other Gene Expression Change
+Cysteine-rich hydrophobic domain-containing protein 2,Other Gene Expression Change
+Dual specificity protein phosphatase 13 isoform A,Other Gene Expression Change
+ENSG00000065989,Other Gene Expression Change
+ENSG00000076662,Other Gene Expression Change
+ENSG00000079805,Other Gene Expression Change
+ENSG00000079999,Other Gene Expression Change
+ENSG00000080573,Other Gene Expression Change
+ENSG00000090339,Other Gene Expression Change
+ENSG00000099203,Other Gene Expression Change
+ENSG00000102575,Other Gene Expression Change
+ENSG00000105364,Other Gene Expression Change
+ENSG00000105376,Other Gene Expression Change
+ENSG00000105397,Other Gene Expression Change
+ENSG00000105401,Other Gene Expression Change
+ENSG00000105518,Other Gene Expression Change
+ENSG00000105520,Other Gene Expression Change
+ENSG00000127616,Other Gene Expression Change
+ENSG00000129347,Other Gene Expression Change
+ENSG00000129351,Other Gene Expression Change
+ENSG00000129353,Other Gene Expression Change
+ENSG00000129354,Other Gene Expression Change
+ENSG00000129355,Other Gene Expression Change
+ENSG00000130164,Other Gene Expression Change
+ENSG00000130733,Other Gene Expression Change
+ENSG00000130734,Other Gene Expression Change
+ENSG00000130811,Other Gene Expression Change
+ENSG00000130813,Other Gene Expression Change
+ENSG00000130816,Other Gene Expression Change
+ENSG00000142444,Other Gene Expression Change
+ENSG00000142453,Other Gene Expression Change
+ENSG00000158402,Other Gene Expression Change
+ENSG00000161888,Other Gene Expression Change
+ENSG00000168890,Other Gene Expression Change
+ENSG00000173928,Other Gene Expression Change
+ENSG00000174652,Other Gene Expression Change
+ENSG00000180739,Other Gene Expression Change
+ENSG00000183246,Other Gene Expression Change
+ENSG00000183401,Other Gene Expression Change
+ENSG00000187266,Other Gene Expression Change
+ENSG00000197256,Other Gene Expression Change
+ENSG00000205517,Other Gene Expression Change
+ENSG00000205643,Other Gene Expression Change
+ENSG00000211710,Other Gene Expression Change
+ENSG00000220201,Other Gene Expression Change
+ENSG00000226104,Other Gene Expression Change
+ENSG00000262691,Other Gene Expression Change
+ENSG00000267100,Other Gene Expression Change
+ENSG00000267197,Other Gene Expression Change
+Ephrin type-B receptor 3,Other Gene Expression Change
+Epididymal-specific lipocalin-8,Other Gene Expression Change
+Gamma glutamyltransferase,Other Gene Expression Change
+Growth/differentiation factor 11/8,Other Gene Expression Change
+IGF-1,Other Gene Expression Change
+Insulin gene enhancer protein ISL-1,Other Gene Expression Change
+Intercellular adhesion molecule 1,Other Gene Expression Change
+Intercellular adhesion molecule 5,Other Gene Expression Change
+Interferon alpha-14,Other Gene Expression Change
+"N-acetylglutamate synthase, mitochondrial",Other Gene Expression Change
+NKG2-D type II integral membrane protein,Other Gene Expression Change
+Peptidyl-prolyl cis-trans isomerase-like 1,Other Gene Expression Change
+Piwi-like protein 1,Other Gene Expression Change
+R-spondin-3,Other Gene Expression Change
+Sepiapterin reductase,Other Gene Expression Change
+T-box transcription factor TBX22,Other Gene Expression Change
+Transcobalamin-1,Other Gene Expression Change
+Trem-like transcript 4 protein,Other Gene Expression Change
+Zinc finger protein 276,Other Gene Expression Change
+Armadillo repeat-containing protein 5,Other Gene Expression Change
+Calcium/calmodulin-dependent protein kinase type II subunit alpha,Other Gene Expression Change
+Chordin-like protein 2,Other Gene Expression Change
+Dual specificity protein phosphatase 4,Other Gene Expression Change
+ENSG00000010278,Other Gene Expression Change
+ENSG00000010292,Other Gene Expression Change
+ENSG00000010295,Other Gene Expression Change
+ENSG00000089692,Other Gene Expression Change
+ENSG00000111321,Other Gene Expression Change
+ENSG00000111639,Other Gene Expression Change
+ENSG00000111640,Other Gene Expression Change
+ENSG00000111642,Other Gene Expression Change
+ENSG00000111644,Other Gene Expression Change
+ENSG00000111652,Other Gene Expression Change
+ENSG00000111671,Other Gene Expression Change
+ENSG00000126746,Other Gene Expression Change
+ENSG00000139182,Other Gene Expression Change
+ENSG00000139190,Other Gene Expression Change
+ENSG00000139192,Other Gene Expression Change
+ENSG00000139193,Other Gene Expression Change
+ENSG00000139197,Other Gene Expression Change
+ENSG00000184574,Other Gene Expression Change
+ENSG00000215039,Other Gene Expression Change
+ENSG00000245667,Other Gene Expression Change
+ENSG00000250510,Other Gene Expression Change
+ENSG00000256433,Other Gene Expression Change
+ENSG00000256913,Other Gene Expression Change
+ENSG00000269892,Other Gene Expression Change
+Haloacid dehalogenase-like hydrolase domain-containing protein 2,Other Gene Expression Change
+Mitotic spindle assembly checkpoint protein MAD1,Other Gene Expression Change
+N-acetyl-D-glucosamine kinase,Other Gene Expression Change
+Protein regulator of cytokinesis 1,Other Gene Expression Change
+Retinoschisin,Other Gene Expression Change
+RNA-binding protein 40,Other Gene Expression Change
+Sialic acid-binding Ig-like lectin 11,Other Gene Expression Change
+Syntaxin-7,Other Gene Expression Change
+Tapasin-related protein,Other Gene Expression Change
+Tuberoinfundibular peptide of 39 residues,Other Gene Expression Change
+Acid sphingomyelinase-like phosphodiesterase 3a,Other Gene Expression Change
+"Angiopoietin-1 receptor, soluble",Other Gene Expression Change
+AT-rich interactive domain-containing protein 3A,Other Gene Expression Change
+Bactericidal permeability-increasing protein,Other Gene Expression Change
+Creatine kinase,Other Gene Expression Change
+Cystatin C,Other Gene Expression Change
+Cysteine-rich secretory protein LCCL domain-containing 2,Other Gene Expression Change
+E3 ubiquitin-protein ligase RNF43,Other Gene Expression Change
+ENSG00000008838,Other Gene Expression Change
+ENSG00000035681,Other Gene Expression Change
+ENSG00000067191,Other Gene Expression Change
+ENSG00000072694,Other Gene Expression Change
+ENSG00000073584,Other Gene Expression Change
+ENSG00000073605,Other Gene Expression Change
+ENSG00000100055,Other Gene Expression Change
+ENSG00000108244,Other Gene Expression Change
+ENSG00000108306,Other Gene Expression Change
+ENSG00000108344,Other Gene Expression Change
+ENSG00000108349,Other Gene Expression Change
+ENSG00000108352,Other Gene Expression Change
+ENSG00000111424,Other Gene Expression Change
+ENSG00000125686,Other Gene Expression Change
+ENSG00000126351,Other Gene Expression Change
+ENSG00000126353,Other Gene Expression Change
+ENSG00000126368,Other Gene Expression Change
+ENSG00000131748,Other Gene Expression Change
+ENSG00000131759,Other Gene Expression Change
+ENSG00000131771,Other Gene Expression Change
+ENSG00000133961,Other Gene Expression Change
+ENSG00000141720,Other Gene Expression Change
+ENSG00000141736,Other Gene Expression Change
+ENSG00000141741,Other Gene Expression Change
+ENSG00000141744,Other Gene Expression Change
+ENSG00000141753,Other Gene Expression Change
+ENSG00000161381,Other Gene Expression Change
+ENSG00000161395,Other Gene Expression Change
+ENSG00000161405,Other Gene Expression Change
+ENSG00000167258,Other Gene Expression Change
+ENSG00000167914,Other Gene Expression Change
+ENSG00000167920,Other Gene Expression Change
+ENSG00000169609,Other Gene Expression Change
+ENSG00000172057,Other Gene Expression Change
+ENSG00000173991,Other Gene Expression Change
+ENSG00000188895,Other Gene Expression Change
+ENSG00000188971,Other Gene Expression Change
+ENSG00000198355,Other Gene Expression Change
+ENSG00000205784,Other Gene Expression Change
+ENSG00000234477,Other Gene Expression Change
+ENSG00000240057,Other Gene Expression Change
+ENSG00000263874,Other Gene Expression Change
+ENSG00000264198,Other Gene Expression Change
+ENSG00000264968,Other Gene Expression Change
+ENSG00000265666,Other Gene Expression Change
+ENSG00000266208,Other Gene Expression Change
+ENSG00000266469,Other Gene Expression Change
+Epididymal secretory protein E3-beta,Other Gene Expression Change
+Estradiol 17-beta-dehydrogenase 2,Other Gene Expression Change
+Fas apoptotic inhibitory molecule 3,Other Gene Expression Change
+Hepatocyte growth factor,Other Gene Expression Change
+Interleukin-25,Other Gene Expression Change
+Interleukin-6 receptor subunit alpha,Other Gene Expression Change
+Lactotransferrin,Other Gene Expression Change
+Low affinity immunoglobulin epsilon Fc receptor,Other Gene Expression Change
+Matrix metalloproteinase-14,Other Gene Expression Change
+Matrix metalloproteinase-9,Other Gene Expression Change
+Myeloblastin,Other Gene Expression Change
+Myeloperoxidase,Other Gene Expression Change
+Oligophrenin-1,Other Gene Expression Change
+Oxidized low-density lipoprotein receptor 1,Other Gene Expression Change
+Prostaglandin reductase 1,Other Gene Expression Change
+Protein transport protein Sec61 subunit beta,Other Gene Expression Change
+Resistin,Other Gene Expression Change
+Toll-like receptor 4,Other Gene Expression Change
+Tolloid-like protein 1,Other Gene Expression Change
+Triggering receptor expressed on myeloid cells 1,Other Gene Expression Change
+Tumor necrosis factor-inducible gene 6 protein,Other Gene Expression Change
+Vascular endothelial growth factor D,Other Gene Expression Change
+ENSG00000104133,Other Gene Expression Change
+ENSG00000166710,Other Gene Expression Change
+ENSG00000171763,Other Gene Expression Change
+ENSG00000171766,Other Gene Expression Change
+ENSG00000185880,Other Gene Expression Change
+ENSG00000229474,Other Gene Expression Change
+Forkhead box protein J2,Other Gene Expression Change
+Glypican-6,Other Gene Expression Change
+Receptor-type tyrosine-protein phosphatase H,Other Gene Expression Change
+Aldo-keto reductase family 1 member C1,Other Gene Expression Change
+C-type lectin domain family 4 member D,Other Gene Expression Change
+Cell differentiation protein RCD1 homolog,Other Gene Expression Change
+Cyclin-dependent kinase 4 inhibitor B,Other Gene Expression Change
+Cytochrome P450 3A4,Other Gene Expression Change
+Diacylglycerol kinase beta,Other Gene Expression Change
+Dickkopf-like protein 1,Other Gene Expression Change
+ENSG00000113368,Other Gene Expression Change
+ENSG00000155324,Other Gene Expression Change
+ENSG00000164241,Other Gene Expression Change
+ENSG00000164902,Other Gene Expression Change
+ENSG00000173926,Other Gene Expression Change
+Growth/differentiation factor 11,Other Gene Expression Change
+Interferon alpha-5,Other Gene Expression Change
+Mannan-binding lectin serine protease 1,Other Gene Expression Change
+Non-secretory ribonuclease,Other Gene Expression Change
+Protein kinase C iota type,Other Gene Expression Change
+RAC-beta serine/threonine-protein kinase,Other Gene Expression Change
+SCP2 sterol-binding domain-containing protein 1,Other Gene Expression Change
+Serpin A9,Other Gene Expression Change
+Signal transducer and activator of transcription 3,Other Gene Expression Change
+Testis-expressed sequence 29 protein,Other Gene Expression Change
+UBX domain-containing protein 4,Other Gene Expression Change
+Vesicle-associated membrane protein-associated protein A,Other Gene Expression Change
+Voltage-gated potassium channel subunit beta-2,Other Gene Expression Change
+"Amelogenin, X isoform",Other Gene Expression Change
+Calcineurin B homologous protein 1,Other Gene Expression Change
+CD123 on 11c+123+DC,Other Gene Expression Change
+CD4:%RTE,Other Gene Expression Change
+CUB and zona pellucida-like domain-containing protein 1,Other Gene Expression Change
+ENSG00000049167,Other Gene Expression Change
+ENSG00000068796,Other Gene Expression Change
+ENSG00000086189,Other Gene Expression Change
+ENSG00000086200,Other Gene Expression Change
+ENSG00000164181,Other Gene Expression Change
+ENSG00000164182,Other Gene Expression Change
+ENSG00000186105,Other Gene Expression Change
+ENSG00000251330,Other Gene Expression Change
+Gigaxonin,Other Gene Expression Change
+"High affinity cGMP-specific 3',5'-cyclic phosphodiesterase 9A",Other Gene Expression Change
+HRAS-like suppressor 2,Other Gene Expression Change
+Interferon lambda-1,Other Gene Expression Change
+Melanocyte protein PMEL,Other Gene Expression Change
+Microfibrillar-associated protein 2,Other Gene Expression Change
+Nuclear nucleic acid-binding protein C1D,Other Gene Expression Change
+Platelet factor 4 variant,Other Gene Expression Change
+Protein GPR107,Other Gene Expression Change
+Protein Largen,Other Gene Expression Change
+Pterin-4-alpha-carbinolamine dehydratase,Other Gene Expression Change
+SHC-transforming protein 2,Other Gene Expression Change
+Transmembrane protease serine 11A,Other Gene Expression Change
+Transmembrane protein 87B,Other Gene Expression Change
+Transmembrane protein C16orf54,Other Gene Expression Change
+Tropomodulin-1,Other Gene Expression Change
+"40S ribosomal protein S4, X isoform",Other Gene Expression Change
+Death-associated protein kinase 2,Other Gene Expression Change
+E3 ubiquitin-protein ligase RNF13,Other Gene Expression Change
+ENSG00000064886,Other Gene Expression Change
+ENSG00000085465,Other Gene Expression Change
+ENSG00000116455,Other Gene Expression Change
+ENSG00000116459,Other Gene Expression Change
+ENSG00000121931,Other Gene Expression Change
+ENSG00000121933,Other Gene Expression Change
+ENSG00000134255,Other Gene Expression Change
+ENSG00000143110,Other Gene Expression Change
+ENSG00000143119,Other Gene Expression Change
+ENSG00000155366,Other Gene Expression Change
+ENSG00000156171,Other Gene Expression Change
+ENSG00000162777,Other Gene Expression Change
+ENSG00000233337,Other Gene Expression Change
+ENSG00000243960,Other Gene Expression Change
+ENSG00000260948,Other Gene Expression Change
+High mobility group protein B1,Other Gene Expression Change
+High mobility group protein B3,Other Gene Expression Change
+"Indoleamine 2,3-dioxygenase 1",Other Gene Expression Change
+Interleukin-1 receptor type 2,Other Gene Expression Change
+Interleukin-17 receptor C,Other Gene Expression Change
+Ladinin-1,Other Gene Expression Change
+"Lamina-associated polypeptide 2, isoforms beta/gamma",Other Gene Expression Change
+Nuclear RNA export factor 1,Other Gene Expression Change
+Probable inactive ribonuclease-like protein 13,Other Gene Expression Change
+Protein CASC4,Other Gene Expression Change
+Protein NDRG4,Other Gene Expression Change
+Ras-related protein Rab-27A,Other Gene Expression Change
+Retinol-binding protein 4,Other Gene Expression Change
+RNA polymerase II subunit A C-terminal domain phosphatase SSU72,Other Gene Expression Change
+Serine/arginine-rich splicing factor 7,Other Gene Expression Change
+Serine/threonine-protein kinase 17B,Other Gene Expression Change
+Structural maintenance of chromosomes protein 3,Other Gene Expression Change
+Tyrosine-protein kinase Fgr,Other Gene Expression Change
+Uncharacterized protein KIAA0040,Other Gene Expression Change
+Zinc fingers and homeoboxes protein 3,Other Gene Expression Change
+Cystatin-F,Other Gene Expression Change
+ENSG00000004468,Other Gene Expression Change
+ENSG00000005471,Other Gene Expression Change
+ENSG00000007312,Other Gene Expression Change
+ENSG00000012124,Other Gene Expression Change
+ENSG00000019582,Other Gene Expression Change
+ENSG00000035720,Other Gene Expression Change
+ENSG00000064225,Other Gene Expression Change
+ENSG00000067182,Other Gene Expression Change
+ENSG00000069702,Other Gene Expression Change
+ENSG00000073331,Other Gene Expression Change
+ENSG00000075151,Other Gene Expression Change
+ENSG00000076554,Other Gene Expression Change
+ENSG00000076555,Other Gene Expression Change
+ENSG00000077238,Other Gene Expression Change
+ENSG00000077984,Other Gene Expression Change
+ENSG00000081189,Other Gene Expression Change
+ENSG00000081985,Other Gene Expression Change
+ENSG00000082293,Other Gene Expression Change
+ENSG00000082438,Other Gene Expression Change
+ENSG00000082512,Other Gene Expression Change
+ENSG00000083457,Other Gene Expression Change
+ENSG00000087157,Other Gene Expression Change
+ENSG00000088930,Other Gene Expression Change
+ENSG00000091490,Other Gene Expression Change
+ENSG00000091972,Other Gene Expression Change
+ENSG00000095585,Other Gene Expression Change
+ENSG00000096696,Other Gene Expression Change
+ENSG00000100296,Other Gene Expression Change
+ENSG00000100298,Other Gene Expression Change
+ENSG00000100385,Other Gene Expression Change
+ENSG00000100427,Other Gene Expression Change
+ENSG00000100453,Other Gene Expression Change
+ENSG00000100721,Other Gene Expression Change
+ENSG00000101017,Other Gene Expression Change
+ENSG00000101336,Other Gene Expression Change
+ENSG00000103365,Other Gene Expression Change
+ENSG00000103479,Other Gene Expression Change
+ENSG00000104490,Other Gene Expression Change
+ENSG00000104894,Other Gene Expression Change
+ENSG00000104921,Other Gene Expression Change
+ENSG00000105369,Other Gene Expression Change
+ENSG00000105374,Other Gene Expression Change
+ENSG00000106524,Other Gene Expression Change
+ENSG00000106537,Other Gene Expression Change
+ENSG00000107317,Other Gene Expression Change
+ENSG00000108370,Other Gene Expression Change
+ENSG00000110080,Other Gene Expression Change
+ENSG00000110777,Other Gene Expression Change
+ENSG00000111602,Other Gene Expression Change
+ENSG00000111880,Other Gene Expression Change
+ENSG00000112053,Other Gene Expression Change
+ENSG00000112149,Other Gene Expression Change
+ENSG00000112182,Other Gene Expression Change
+ENSG00000112486,Other Gene Expression Change
+ENSG00000113263,Other Gene Expression Change
+ENSG00000114993,Other Gene Expression Change
+ENSG00000115523,Other Gene Expression Change
+ENSG00000115607,Other Gene Expression Change
+ENSG00000117009,Other Gene Expression Change
+ENSG00000117322,Other Gene Expression Change
+ENSG00000118217,Other Gene Expression Change
+ENSG00000118276,Other Gene Expression Change
+ENSG00000118513,Other Gene Expression Change
+ENSG00000118515,Other Gene Expression Change
+ENSG00000119866,Other Gene Expression Change
+ENSG00000120162,Other Gene Expression Change
+ENSG00000120278,Other Gene Expression Change
+ENSG00000121060,Other Gene Expression Change
+ENSG00000122986,Other Gene Expression Change
+ENSG00000123505,Other Gene Expression Change
+ENSG00000123700,Other Gene Expression Change
+ENSG00000124225,Other Gene Expression Change
+ENSG00000125538,Other Gene Expression Change
+ENSG00000125844,Other Gene Expression Change
+ENSG00000128218,Other Gene Expression Change
+ENSG00000128641,Other Gene Expression Change
+ENSG00000131634,Other Gene Expression Change
+ENSG00000131873,Other Gene Expression Change
+ENSG00000132185,Other Gene Expression Change
+ENSG00000132589,Other Gene Expression Change
+ENSG00000132704,Other Gene Expression Change
+ENSG00000133056,Other Gene Expression Change
+ENSG00000133424,Other Gene Expression Change
+ENSG00000133789,Other Gene Expression Change
+ENSG00000134070,Other Gene Expression Change
+ENSG00000134539,Other Gene Expression Change
+ENSG00000134545,Other Gene Expression Change
+ENSG00000135144,Other Gene Expression Change
+ENSG00000135318,Other Gene Expression Change
+ENSG00000135362,Other Gene Expression Change
+ENSG00000135842,Other Gene Expression Change
+ENSG00000135862,Other Gene Expression Change
+ENSG00000136478,Other Gene Expression Change
+ENSG00000136573,Other Gene Expression Change
+ENSG00000136999,Other Gene Expression Change
+ENSG00000137101,Other Gene Expression Change
+ENSG00000137757,Other Gene Expression Change
+ENSG00000137824,Other Gene Expression Change
+ENSG00000138463,Other Gene Expression Change
+ENSG00000138772,Other Gene Expression Change
+ENSG00000138795,Other Gene Expression Change
+ENSG00000139055,Other Gene Expression Change
+ENSG00000139174,Other Gene Expression Change
+ENSG00000139187,Other Gene Expression Change
+ENSG00000140545,Other Gene Expression Change
+ENSG00000141622,Other Gene Expression Change
+ENSG00000141682,Other Gene Expression Change
+ENSG00000142583,Other Gene Expression Change
+ENSG00000143185,Other Gene Expression Change
+ENSG00000143376,Other Gene Expression Change
+ENSG00000143515,Other Gene Expression Change
+ENSG00000143799,Other Gene Expression Change
+ENSG00000144218,Other Gene Expression Change
+ENSG00000144645,Other Gene Expression Change
+ENSG00000144655,Other Gene Expression Change
+ENSG00000144802,Other Gene Expression Change
+ENSG00000145088,Other Gene Expression Change
+ENSG00000145649,Other Gene Expression Change
+ENSG00000146021,Other Gene Expression Change
+ENSG00000146592,Other Gene Expression Change
+ENSG00000147535,Other Gene Expression Change
+ENSG00000147905,Other Gene Expression Change
+ENSG00000148926,Other Gene Expression Change
+ENSG00000149260,Other Gene Expression Change
+ENSG00000149294,Other Gene Expression Change
+ENSG00000150637,Other Gene Expression Change
+ENSG00000150995,Other Gene Expression Change
+ENSG00000151208,Other Gene Expression Change
+ENSG00000151748,Other Gene Expression Change
+ENSG00000152217,Other Gene Expression Change
+ENSG00000152894,Other Gene Expression Change
+ENSG00000153064,Other Gene Expression Change
+ENSG00000154734,Other Gene Expression Change
+ENSG00000156738,Other Gene Expression Change
+ENSG00000157557,Other Gene Expression Change
+ENSG00000157734,Other Gene Expression Change
+ENSG00000158109,Other Gene Expression Change
+ENSG00000159674,Other Gene Expression Change
+ENSG00000159958,Other Gene Expression Change
+ENSG00000160219,Other Gene Expression Change
+ENSG00000160223,Other Gene Expression Change
+ENSG00000160307,Other Gene Expression Change
+ENSG00000160408,Other Gene Expression Change
+ENSG00000160683,Other Gene Expression Change
+ENSG00000161905,Other Gene Expression Change
+ENSG00000162373,Other Gene Expression Change
+ENSG00000162551,Other Gene Expression Change
+ENSG00000162924,Other Gene Expression Change
+ENSG00000163508,Other Gene Expression Change
+ENSG00000163534,Other Gene Expression Change
+ENSG00000163958,Other Gene Expression Change
+ENSG00000164056,Other Gene Expression Change
+ENSG00000164087,Other Gene Expression Change
+ENSG00000164330,Other Gene Expression Change
+ENSG00000164610,Other Gene Expression Change
+ENSG00000164649,Other Gene Expression Change
+ENSG00000165061,Other Gene Expression Change
+ENSG00000165209,Other Gene Expression Change
+ENSG00000165716,Other Gene Expression Change
+ENSG00000167106,Other Gene Expression Change
+ENSG00000167483,Other Gene Expression Change
+ENSG00000167536,Other Gene Expression Change
+ENSG00000167851,Other Gene Expression Change
+ENSG00000168081,Other Gene Expression Change
+ENSG00000169499,Other Gene Expression Change
+ENSG00000169575,Other Gene Expression Change
+ENSG00000169583,Other Gene Expression Change
+ENSG00000169744,Other Gene Expression Change
+ENSG00000169902,Other Gene Expression Change
+ENSG00000170476,Other Gene Expression Change
+ENSG00000170525,Other Gene Expression Change
+ENSG00000171236,Other Gene Expression Change
+ENSG00000171476,Other Gene Expression Change
+ENSG00000171604,Other Gene Expression Change
+ENSG00000172543,Other Gene Expression Change
+ENSG00000173581,Other Gene Expression Change
+ENSG00000174123,Other Gene Expression Change
+ENSG00000174130,Other Gene Expression Change
+ENSG00000174469,Other Gene Expression Change
+ENSG00000176533,Other Gene Expression Change
+ENSG00000179820,Other Gene Expression Change
+ENSG00000180644,Other Gene Expression Change
+ENSG00000182199,Other Gene Expression Change
+ENSG00000182541,Other Gene Expression Change
+ENSG00000183621,Other Gene Expression Change
+ENSG00000183762,Other Gene Expression Change
+ENSG00000184557,Other Gene Expression Change
+ENSG00000185909,Other Gene Expression Change
+ENSG00000186265,Other Gene Expression Change
+ENSG00000187554,Other Gene Expression Change
+ENSG00000187775,Other Gene Expression Change
+ENSG00000189292,Other Gene Expression Change
+ENSG00000196092,Other Gene Expression Change
+ENSG00000196139,Other Gene Expression Change
+ENSG00000196628,Other Gene Expression Change
+ENSG00000196663,Other Gene Expression Change
+ENSG00000196872,Other Gene Expression Change
+ENSG00000196954,Other Gene Expression Change
+ENSG00000197057,Other Gene Expression Change
+ENSG00000197520,Other Gene Expression Change
+ENSG00000197705,Other Gene Expression Change
+ENSG00000198216,Other Gene Expression Change
+ENSG00000204466,Other Gene Expression Change
+ENSG00000204852,Other Gene Expression Change
+ENSG00000211658,Other Gene Expression Change
+ENSG00000211673,Other Gene Expression Change
+ENSG00000211933,Other Gene Expression Change
+ENSG00000213231,Other Gene Expression Change
+ENSG00000226777,Other Gene Expression Change
+ENSG00000230438,Other Gene Expression Change
+ENSG00000233461,Other Gene Expression Change
+ENSG00000236901,Other Gene Expression Change
+ENSG00000241106,Other Gene Expression Change
+ENSG00000242265,Other Gene Expression Change
+ENSG00000248832,Other Gene Expression Change
+ENSG00000250366,Other Gene Expression Change
+ENSG00000261040,Other Gene Expression Change
+ETS homologous factor,Other Gene Expression Change
+Immunoglobulin lambda-like polypeptide 1,Other Gene Expression Change
+L-Selectin,Other Gene Expression Change
+NKG2D ligand 1,Other Gene Expression Change
+Retinoic acid receptor responder protein 1,Other Gene Expression Change
+Tumor necrosis factor receptor superfamily member 1A,Other Gene Expression Change
+WAP four-disulfide core domain protein 2,Other Gene Expression Change
+Zinc finger protein 174,Other Gene Expression Change
+Beta-defensin 121,Other Gene Expression Change
+ENSG00000116717,Other Gene Expression Change
+Intercellular adhesion molecule 4,Other Gene Expression Change
+Physical Activity Measurements,Physical Activity Measurements
+Major depressive disorder,Psychological
+Senility,Psychological
+Self-reported neurological injury or trauma,Psychological
+Diagnoses - main ICD10: F43 Reaction to severe stress  and adjustment disorders,Psychological
+Ever highly irritable/argumentative for 2 days,Psychological
+More irritable than usual during worst period of anxiety,Psychological
+Morning/evening person (chronotype),Psychological
+"Seen doctor (GP) for nerves, anxiety, tension or depression",Psychological
+"Ever felt worried, tense, or anxious for most of a month or longer",Psychological
+bipolar disorder,Psychological
+Bipolar disorder,Psychological
+Depressed affect,Psychological
+Ever depressed for a whole week,Psychological
+Fed-up feelings,Psychological
+Feeling miserable,Psychological
+Financial situation satisfaction,Psychological
+Frequency of depressed mood in last 2 weeks,Psychological
+Getting up in morning,Psychological
+Guilty feelings,Psychological
+Manifestations of mania or irritability: I was more talkative than usual,Psychological
+Miserableness,Psychological
+Neurociticism,Psychological
+Neuroticism score,Psychological
+Worry too long after an embarrassing experience,Psychological
+Worry too long after embarrassment,Psychological
+Depression (broad),Psychological
+Ever suffered mental distress preventing usual activities,Psychological
+Feeling guilty,Psychological
+Feeling tense,Psychological
+Feeling worry,Psychological
+Irritability,Psychological
+Irritable mood,Psychological
+"Loneliness, isolation",Psychological
+Major depressive disorder (probable),Psychological
+Neuroticism,Psychological
+Non-cancer illness code  self-reported: depression,Psychological
+schizophrenia,Psychological
+Seen doctor (GP) for nerves  anxiety  tension or depression,Psychological
+Sleeplessness / insomnia,Psychological
+Tense / 'highly strung',Psychological
+Worrier / anxious feelings,Psychological
+Feeling lonely,Psychological
+Ever sought or received professional help for mental distress,Psychological
+Mental health problems ever diagnosed by a professional: Depression,Psychological
+Diseases of the respiratory system,Respiratory Disease
+ILD differential diagnosis,Respiratory Disease
+Treatment/medication code: becotide 50 inhaler,Respiratory Disease
+Treatment/medication code: qvar 50 inhaler,Respiratory Disease
+Treatment/medication code: seretide 50 evohaler,Respiratory Disease
+Treatment/medication code: ventolin 100micrograms inhaler,Respiratory Disease
+Forced expiratory volume in 1-second,Respiratory Function
+Forced expiratory volume in 1-second (FEV1),Respiratory Function
+"Forced expiratory volume in 1-second, best measure",Respiratory Function
+"Forced expiratory volume in 1-second (FEV1), Best measure",Respiratory Function
+Forced expiratory volume in 1-second (FEV1)  Best measure,Respiratory Function
+Forced vital capacity,Respiratory Function
+Forced vital capacity (FVC),Respiratory Function
+"Forced vital capacity, best measure",Respiratory Function
+"Forced vital capacity (FVC), Best measure",Respiratory Function
+Forced vital capacity (FVC)  Best measure,Respiratory Function
+Forced expiratory volume in 1-second (FEV1)  predicted percentage,Respiratory Function
+"Forced expiratory volume in 1-second (FEV1), predicted percentage",Respiratory Function
+Reproduciblity of spirometry measurement using ERS/ATS criteria,Respiratory Function
+Wheeze or whistling in the chest in last year,Respiratory Function
+"Cause of death: subarachnoid haemorrhage from intracranial artery, unspecified",Stroke/Clotting/Haemorrhage
+"No blood clot, bronchitis, emphysema, asthma, rhinitis, eczema or allergy diagnosed by doctor",Stroke/Clotting/Haemorrhage
+Purpura and other haemorrhagic conditions,Stroke/Clotting/Haemorrhage
+Ischemic stroke,Stroke/Clotting/Haemorrhage
+Stroke,Stroke/Clotting/Haemorrhage
+Illnesses of siblings: Stroke,Stroke/Clotting/Haemorrhage
+Other follicular disorders,Unspecified Disease
+"Diagnoses - secondary ICD10: J90 Pleural effusion, not elsewhere classified",Unspecified Disease
+Diagnoses - main ICD10: K40 Inguinal hernia,Unspecified Disease
+Diagnoses - main ICD10: N95 Menopausal and other perimenopausal disorders,Unspecified Disease
+Diseases of the skin and subcutaneous tissue,Unspecified Disease
+Other and unspecified mononeuropathies of lower limb,Unspecified Disease
+Diagnoses - main ICD10: N93 Other abnormal uterine and vaginal bleeding,Unspecified Disease
+Dorsalgia,Unspecified Disease
+Diagnoses - main ICD10: H02 Other disorders of eyelid,Unspecified Disease
+Diagnoses - main ICD10: R10.4 Other and unspecified abdominal pain,Unspecified Disease
+Diseases of the blood and blood-forming organs and certain disorders involving the immune mechanism,Unspecified Disease
+Other disorders of eyelid,Unspecified Disease
+Calculus of kidney and ureter,Urinary Tract Traits
+Urolithiasis,Urinary Tract Traits
+Systolic blood pressure,Vascular Traits
+"Non-cancer illness code, self-reported: hypertension",Vascular Traits
+Vascular/heart problems diagnosed by doctor: High blood pressure,Vascular Traits
+diastolic blood pressure,Vascular Traits
+Diastolic blood pressure  automated reading,Vascular Traits
+Diseases of the circulatory system,Vascular Traits
+Mean arterial pressure,Vascular Traits
+systolic blood pressure,Vascular Traits
+Pulse rate  automated reading,Vascular Traits
+Hypertensive diseases,Vascular Traits
+"Diastolic blood pressure, automated reading",Vascular Traits
+Non-cancer illness code  self-reported: hypertension,Vascular Traits
+Systolic blood pressure  automated reading,Vascular Traits
+"Systolic blood pressure, automated reading",Vascular Traits
+Other diseases of arteries and capillaries,Vascular Traits

@@ -1,0 +1,55 @@
+﻿RAW_Tissue,Tissue,Secondary
+Heart - Left Ventricle,Heart,Muscle
+Heart - Atrial Appendage,Heart,Muscle
+Artery - Aorta,Vascular,NA
+Artery - Coronary,Vascular,NA
+Artery - Tibial,Vascular,NA
+Nerve - Tibial,Nervous,NA
+Brain - Amygdala,Nervous,Brain
+Brain - Anterior cingulate cortex (BA24),Nervous,Brain
+Brain - Caudate (basal ganglia),Nervous,Brain
+Brain - Cerebellar Hemisphere,Nervous,Brain
+Brain - Cerebellum,Nervous,Brain
+Brain - Cortex,Nervous,Brain
+Brain - Frontal Cortex (BA9),Nervous,Brain
+Brain - Hippocampus,Nervous,Brain
+Brain - Nucleus accumbens (basal ganglia),Nervous,Brain
+Brain - Putamen (basal ganglia),Nervous,Brain
+Brain - Spinal cord (cervical c-1),Nervous,Brain
+Brain - Substantia nigra,Nervous,Brain
+Breast - Mammary Tissue,Mammary,NA
+Ovary,Female Reproductive Tissue,Endocrine
+Uterus,Female Reproductive Tissue,NA
+Vagina,Female Reproductive Tissue,NA
+Cervix - Ectocervix,Female Reproductive Tissue,NA
+Cervix - Endocervix,Female Reproductive Tissue,NA
+Fallopian Tube,Female Reproductive Tissue,NA
+Prostate,Male Specific Tissue,Endocrine
+Testis,Male Specific Tissue,Endocrine
+Cells - Cultured fibroblasts,Cultured Cells,NA
+Cells - EBV-transformed lymphocytes,Cultured Cells,NA
+Lung,Respiratory,NA
+Whole Blood,Blood,NA
+Adipose - Subcutaneous,Fat,NA
+Adipose - Visceral (Omentum),Fat,NA
+Colon - Transverse,Digestive,NA
+Colon - Sigmoid,Digestive,NA
+Small Intestine - Terminal Ileum,Digestive,NA
+Pancreas,Digestive,Endocrine
+Esophagus - Gastroesophageal Junction,Digestive,NA
+Stomach,Digestive,NA
+Esophagus - Mucosa,Digestive,NA
+Liver,Digestive,Endocrine
+Minor Salivary Gland,Digestive,NA
+Adrenal Gland,Endocrine,NA
+Thyroid,Endocrine,Immune
+Pituitary,Endocrine,NA
+Spleen,Lymphatic,Immune
+Muscle - Skeletal,Muscle,NA
+Esophagus - Muscularis,Muscle,NA
+Skin - Not Sun Exposed (Suprapubic),Skin,NA
+Skin - Sun Exposed (Lower leg),Skin,NA
+Kidney - Cortex,Urinary,Kidney
+Kidney - Medulla,Urinary,Kidney
+Bladder,Urinary,NA
+Brain - Hypothalamus,Nervous,Brain
