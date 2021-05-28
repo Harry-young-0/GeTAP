@@ -1,4 +1,4 @@
-﻿RAW_Tissue,Tissue,Secondary
+RAW_Tissue,Tissue,Secondary
 Heart - Left Ventricle,Heart,Muscle
 Heart - Atrial Appendage,Heart,Muscle
 Artery - Aorta,Vascular,NA
@@ -28,7 +28,7 @@ Prostate,Male Specific Tissue,Endocrine
 Testis,Male Specific Tissue,Endocrine
 Cells - Cultured fibroblasts,Cultured Cells,NA
 Cells - EBV-transformed lymphocytes,Cultured Cells,NA
-Lung,Respiratory,NA
+Lung,Respiratory Tissue,NA
 Whole Blood,Blood,NA
 Adipose - Subcutaneous,Fat,NA
 Adipose - Visceral (Omentum),Fat,NA
