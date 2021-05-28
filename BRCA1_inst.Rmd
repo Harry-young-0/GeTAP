@@ -63,14 +63,14 @@ A lot of this code is probably less efficient than it could be. In general I've 
 
 ##File Setup
 
-Finally, it is important to set up a file system similar to what I've done for it to run automatically. /Users/hy14913/Local_work_folder/Epidemiology/GENENAME_test/ containing Gtex and LDMatrix folders, each with Plots folder within. This will make the ctrl-f replace function work well. If you don't want to use your desktop you can ctrl-f and replace "/Users/hy14913/Local_work_folder/Epidemiology/" with whatever head folder you want: e.g. "~/OneDrive - University of Bristol/PhD/Epidemiology/" 
+Finally, it is important to set up a file system similar to what I've done for it to run automatically. C:/Users/Harry Young/Documents/Local Wokr/GENENAME_test/ containing Gtex and LDMatrix folders, each with Plots folder within. This will make the ctrl-f replace function work well. If you don't want to use your desktop you can ctrl-f and replace "C:/Users/Harry Young/Documents/Local Wokr/" with whatever head folder you want: e.g. "~/OneDrive - University of Bristol/PhD/Epidemiology/" 
 
-Here is an optional chunk to load in all the directories you'll need to run this notebook as is (as above simply change /Users/hy14913/Local_work_folder/Epidemiology/) to whatever your file path is to the master folder:
+Here is an optional chunk to load in all the directories you'll need to run this notebook as is (as above simply change C:/Users/Harry Young/Documents/Local Wokr/) to whatever your file path is to the master folder:
 
 INCOMPLETE : add a repository for Full_trait_database and Full_Tissue_database (and egene data if needed)
 
 
-For my databases, I have made them freely available but obviously where you save them to look up, modify and add to is up to you. So use ctrl-f to find all occurences of 'setwd("~/OneDrive - University of Bristol/PhD/Epidemiology/Trait and Tissue Groups")' and change to wherever you have saved teh tissue and trait databases.
+For my databases, I have made them freely available but obviously where you save them to look up, modify and add to is up to you. So use ctrl-f to find all occurences of 'setwd("C:/Users/Harry Young/Documents/Local Wokr/Trait and Tissue Groups")' and change to wherever you have saved teh tissue and trait databases.
 
 If you'd like to add your changes tot he online database for others to use please email me your updated csv and I'll add to it.
 
@@ -87,7 +87,7 @@ I would suggest setting up a folder to run all of this into, copying it over to 
 
 e.g, use the following code in every chunk:
 ```{r}
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex")
 ```
 
 Firstly we read in the dataframe of interest and do some initial clean-up steps:
@@ -95,7 +95,7 @@ Firstly we read in the dataframe of interest and do some initial clean-up steps:
 To read in the dataframe first search your gene of interest into Gtex portal. Then click significant single-tissue eQTL and download the csv. Rename the file Gtex_BRCA1_START.
 ```{r Initial load and clean}
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex")
 Gtex_BRCA1 = read_csv("Gtex_BRCA1_START.csv")
 
 df = Gtex_BRCA1
@@ -130,7 +130,7 @@ Save this file as "cleaned" data:
 ```{r Save clean data}
 # setwd repeated here 
 # setwd("~/OneDrive - University of Bristol/PhD/Epidemiology/Quantitative and Qualitative SNP lists")
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex")
 write_excel_csv(df, "BRCA1_Gtex_cleaned.csv")
 
 ```
@@ -140,7 +140,7 @@ Then we need to isolate the unique SNPs for searching in the ieugwasR package:
 ```{r Unique SNPs from Gtex}
 unique_BRCA1_Gtex_snps = unique(df$rsid)
 # setwd("~/OneDrive - University of Bristol/PhD/Epidemiology/Quantitative and Qualitative SNP lists")
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex")
 write.table(unique_BRCA1_Gtex_snps, "unique_BRCA1_Gtex_snps.csv", sep="\t", row.names=FALSE, col.names=FALSE) # saving the file
 ```
 
@@ -162,14 +162,14 @@ Alternatively use these lines of code. You'll have to ask for a "token" from the
 
 if(length(unique_BRCA1_Gtex_snps)<1000){
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/LDMatrix")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/LDMatrix")
 BRCA1_r2 = LDmatrix(unique_BRCA1_Gtex_snps, pop = "EUR", r2d = "r2", token ="f0d7bc798f5c")
 write_csv(BRCA1_r2, "BRCA1_r2.csv")
 
 
 
 # open up the .csv file from the website as tab-deliminated 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/LDMatrix")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/LDMatrix")
 BRCA1_r2 = read_csv("BRCA1_r2.csv")
 head(BRCA1_r2)
 
@@ -245,7 +245,7 @@ for(n in 1:(ncol(linked_test0.75)-1)){
 test = na.omit(linked_test0.75[,1+1])
 
 # Saving for later
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex")
 #Cleanup before saving the data
 rm(df, BRCA1_r2, Gtex_BRCA1, linked_test0.5, linked_test0.75, linked0.5, linked0.75, temp, temp0.5D_2, temp0.75D_2, unique_snps, i,n,test)
 ##Save the environment
@@ -268,7 +268,7 @@ save.image("rs_overlap_ALL_BRCA1.RData")
 
 
 if(length(unique_BRCA1_Gtex_snps)>=1000){
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/LDMatrix")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/LDMatrix")
 
  library(LDlinkR)
  BRCA1_LIMITED_SNP_LIST = SNPclip(
@@ -319,7 +319,7 @@ if(nrow(Gtex_PHEWAS)==0){
   print("Houston, we have a problem. Re run this chunk using the play button in the top right of the box. If that still doesn't work, run line by line using ctrl-enter OR cmd-enter. If it still doesn't work then I'm afraid something has gone really wrong! email me at hy14913@bristol.ac.uk")
 } else{
 # Then save using the following line:
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex")
 write_excel_csv(Gtex_PHEWAS, "BRCA1_GtextoPHEWAS_RAW.csv")
 }
 ```
@@ -333,7 +333,7 @@ Merging was fairly riddled with pitfalls. In the end the dyplr(full_join) (also 
 
 Firstly, load in these libraries and start to reorganize the Gtex-to-phewas RAW and original Gtex data to get more of a feel for what the data looks like:
 ```{r initial read in of dataframes and ordering step}
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex")
 BRCA1_GtextoPHEWAS_RAW = read_csv("BRCA1_GtextoPHEWAS_RAW.csv") # load in Phewas output
 BRCA1_Gtex_cleaned = read_csv("BRCA1_Gtex_cleaned.csv") #  load in Gtex input
 
@@ -392,7 +392,7 @@ rm(test2) # cleanup removing the extra table
 
   
 #setwd("~/OneDrive - University of Bristol/PhD/Epidemiology/Cross-Reference/GtextoPheWAS-Sorted/BRCA1")
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex")
 write_excel_csv(test, "BRCA1_merge_GTEX_PHEWAS.csv")
 
 
@@ -406,7 +406,7 @@ Now that we have a merged table, we now need to filter out any ambiguous cases. 
 Firstly, Let's correct the beta value (this can be done later if you forget) :
 ```{r setting up a corrected beta column}
 # Setup df as our merged dataframe:
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex")
 df = read_csv("BRCA1_merge_GTEX_PHEWAS.csv")
 #Sometimes the alleles slip into TRUE/FALSE collumns so to correct that:
 df$a = as.character(df$a)
@@ -434,7 +434,7 @@ write_excel_csv(df, "BRCA1_merge_GTEX_PHEWAS-betacor.csv")
 ### 3b. ambiguous cases (AT  CG):
 To solve reverse vs sense strand issues
 ```{r setting up an ambiguous case column}
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex")
 df = read_csv("BRCA1_merge_GTEX_PHEWAS-betacor.csv")
 
 
@@ -479,10 +479,10 @@ We need to assign those groups to the main dataframe:
 
 ```{r Assign Trait Groups}
 # read in our df (traits vs SNPs)
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex")
 df = read_csv( "BRCA1_merge_GTEX_PHEWAS_betacor_ambig.csv")
 # read in trait database
-setwd("~/OneDrive - University of Bristol/PhD/Epidemiology/Trait and Tissue Groups")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/Trait and Tissue Groups")
 Full_trait_database = read_csv("Full_trait_database.csv")
 #loop to assign these groups
 df_backup=df
@@ -516,7 +516,7 @@ This time the database won't change because Gtex has a finite number of tissues.
 
 ```{r Assign Tissue Groups}
 # load in tissue database
-setwd("~/OneDrive - University of Bristol/PhD/Epidemiology/Trait and Tissue Groups")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/Trait and Tissue Groups")
 Full_tissue_database = read_csv("Full_tissue_database.csv")
 
 # df$tissue_group = df$Tissue ## duplicate the search column
@@ -556,7 +556,7 @@ df$beta_direction = ifelse(df$beta_cor<0, "Negative",
 df$NES_direction = ifelse(df$NES <0, "Negative",
 							ifelse(df$NES>0, "Positive", "No Change"))
 # save unorganised
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex")
 write_excel_csv(df, "BRCA1_merge_GTEX_PHEWAS_betacor_ambig_grouped.csv")
 ```
 
@@ -610,7 +610,7 @@ df = df[,c("Gene Symbol",
            # "LD_r2_0.5")] 
 
 # setwd("~/OneDrive - University of Bristol/PhD/Epidemiology/Cross-Reference/GtextoPheWAS-Sorted/BRCA1")
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex")
 write_excel_csv(df, "BRCA1_merge_GTEX_PHEWAS_betacor_ambig_grouped.csv")
 ```
 
@@ -625,7 +625,7 @@ Firstly you need to clean up 'repeated traits'. This is annoying things like a c
 These 2 appear as separate traits where they are essentially the same. So the following lines helps clean this up. I tend to look at the plots then come back to this code to add in more errors. But this serves as a list of ones I've found!
 
 ```{r Cleaning up duplicated traits}
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex")
 df = read_csv("BRCA1_merge_GTEX_PHEWAS_betacor_ambig_grouped.csv")
 
 # all of these work as replace the first argument with the second argument
@@ -760,7 +760,7 @@ if nrow(test) is 0 then no overlap, if not you need to check what overlap there 
 df = df[which(df$ambiguous == "No" | df$ambiguous == "FS"),]
 
 #And finally save it:
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex")
 write_csv(df, "BRCA1_gtexPHEWAS_no_ukaORAmbig_FINAL.csv")
 ```
 ###4d. Ok now to deal with those pesky LD snps  - SKIP IF YOU RAN 2.3 - it will error anyway if you try
@@ -780,12 +780,12 @@ The plan is as follows:
 BACKUP LOOP IN ARCHIVE
 
 ```{r Removal of LD linked snps for r20.5}
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex")
 unique_BRCA1_Gtex_snps= read_tsv("unique_BRCA1_Gtex_snps.csv", col_names = FALSE) # read the original unique snps file
 unique_BRCA1_Gtex_snps = unique_BRCA1_Gtex_snps$X1
 if(length(unique_BRCA1_Gtex_snps)<1000){
 rm(list=ls())
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex")
 load("rs_overlap_ALL_BRCA1.RData")  # specifically the dataframe with ambiguous data removed
 ## Annoyingly, in testing this stuff I found another source of error in my code. There are a whole load of snps that have been associated with a trait twice with similar p-values - I think these are OK because essentially they have been shown by two separate studies.
 
@@ -1077,7 +1077,7 @@ Before we get started on the data we've so lovingly brought to this stage, it is
 
 
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/eGene")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/eGene")
 #load in full egene info from gtex
 Gtex_egene = read_csv("sample-egene_info_Gtex.csv")
 # and full_tissue_database
@@ -1115,7 +1115,7 @@ for(group in Gtex_egene$tissue_group){
 
 group_count_df_final= unique(group_count_df_final)
 group_count_df_final = group_count_df_final %>% filter_at(vars(group_count_sum, group_count_mean, group_count_sd), any_vars(. >0 | is.na(.)==TRUE)) 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/eGene")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/eGene")
 write_excel_csv(group_count_df_final, "Gtex_egene_SUMMARY_CountsvsTissueGroup.csv")
 
 ```
@@ -1145,12 +1145,12 @@ Gtex_egenes_plot_full
 
 
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/Gtex_egene")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/Gtex_egene")
 ggsave("eGenesvsTissue.pdf")
 ```
 Now by Tissue Group:
 ```{r Plotting the raw Gtex data against Tissue Group}
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/eGene")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/eGene")
 Gtex_egene_SUMMARY_CountsvsTissueGroup = read_csv("Gtex_egene_SUMMARY_CountsvsTissueGroup.csv")
 Gtex_egenes_plot_full = ggplot(Gtex_egene_SUMMARY_CountsvsTissueGroup, aes(x=tissue_group, y=group_count_mean)) + #Plot of SNPs NES vs beta from original dataset
   #geom_jitter(aes(color=NES)) +
@@ -1164,7 +1164,7 @@ Gtex_egenes_plot_full = ggplot(Gtex_egene_SUMMARY_CountsvsTissueGroup, aes(x=tis
 
 Gtex_egenes_plot_full
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/Gtex_egene") # SAVE it in dedicated plotting folder
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/Gtex_egene") # SAVE it in dedicated plotting folder
 ggsave("eGenesvsTissueGroup.pdf")
 ```
 
@@ -1183,7 +1183,7 @@ Gtex_samples_count_plot_full = ggplot(Gtex_egene, aes(x=Tissue, y=`# RNASeq and 
 
 Gtex_samples_count_plot_full
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/Gtex_egene") # SAVE it in dedicated plotting folder
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/Gtex_egene") # SAVE it in dedicated plotting folder
 ggsave("Num_samplesvsTissue.pdf")
 ```
 
@@ -1209,7 +1209,7 @@ Correlation = ggplot(Gtex_egene[1:49,], aes(x=RNASeq_and_Genotyped_Samples, y=eG
 
 Correlation
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/Gtex_egene") # SAVE it in dedicated plotting folder
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/Gtex_egene") # SAVE it in dedicated plotting folder
 ggsave("eGenesvsnumberSamples.pdf")
 ```
 
@@ -1217,7 +1217,7 @@ ggsave("eGenesvsnumberSamples.pdf")
 ## our df plotting
 First step is to make sure that you are using the correctly filtered dataframe for no ambiguous or ukb-a data by loading in the ukaORambig_FINAL OR linkage removed set:  BRCA1_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv dataframe as df:
 ```{r Reading in the FINAL df}
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex")
 # df = read_csv("BRCA1_gtexPHEWAS_no_ukaORAmbig_FINAL.csv")
 df = read_csv("BRCA1_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv")
 ```
@@ -1230,7 +1230,7 @@ df$logp_DIR =1
 df$logp_DIR = if_else(df$NES_direction =="Negative", -1,1)
 df$logp_DIR = df$logp*df$logp_DIR
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex")
 write_csv(df, "BRCA1_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv")
 
 ```
@@ -1245,7 +1245,7 @@ First, download the overview of BRCA1 expression in the body from the Gtex searc
 Then it's useful to see what the original Gtex Data looks like in terms of tissues affected and direction of expression change:
 
 ```{r NES vs tissue FULL}
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex")
 
 Gtex_BRCA1_START = read_csv("Gtex_BRCA1_START.csv")
 
@@ -1261,7 +1261,7 @@ NESvsTiss_full
 
 
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/NES_vs_tissue_and_overview") # save in this dedicated folder
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/NES_vs_tissue_and_overview") # save in this dedicated folder
 ggsave("NESvsTiss_full.pdf")
 ```
 
@@ -1284,7 +1284,7 @@ NESvsTiss = ggplot(eQTL_from_Phewas, aes(x=Tissue, y=NES, color = `P-Value`)) + 
   geom_vline(aes(xintercept=0,))
 NESvsTiss
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/NES_vs_tissue_and_overview")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/NES_vs_tissue_and_overview")
 ggsave("NESvsTiss_Phewas.pdf")
 ```
 
@@ -1304,7 +1304,7 @@ I tend to use relative nnumber of SNPs as It's the comparisons I'm interested in
 NOTE: MAY HAVE TO UNCOMMENT THE LINE ylim(0,0.5) - this sets the y limits, if you want a specific range plotted
 
 ```{r The full traitgroup list}
-setwd("~/OneDrive - University of Bristol/PhD/Epidemiology/Trait and Tissue Groups")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/Trait and Tissue Groups")
 Full_trait_database = read_csv("Full_trait_database.csv")
 
 # set up the order to match later figures:
@@ -1356,7 +1356,7 @@ Simple_traitgroup_plot = ggplot(test, aes(x=traitgroup, y =n/nrow(df))) + #Plot 
 Simple_traitgroup_plot
 
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots") #SAVE it
 ggsave("Simple_numbervstraitgroup.pdf")
 
 
@@ -1375,7 +1375,7 @@ Count_plot = ggplot(df, aes(x=traitgroup, y=tissue_group)) + #Plot of Tissue vs 
 Count_plot
 
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/Tissue_Group_and_Trait_Group_overlap") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/Tissue_Group_and_Trait_Group_overlap") #SAVE it
 ggsave("Tiss-trait_overlap.pdf")
 ```
 
@@ -1388,7 +1388,7 @@ Count_facet = ggplot(df, aes(x=traitgroup, y=tissue_group)) + #Plot of Tissue vs
   theme(axis.text.x = element_text(angle = 45, hjust =1))+ 
   facet_grid(cols = vars(NES_direction))
 Count_facet
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/Tissue_Group_and_Trait_Group_overlap") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/Tissue_Group_and_Trait_Group_overlap") #SAVE it
 ggsave("Tiss-trait_overlap_facet_by_NES.pdf")
 
 ```
@@ -1400,7 +1400,7 @@ Here it is important to use the df without SNPs in Linkage Disequilibrium. First
 LD_Gtex = df%>%
   dplyr::select(Tissue, tissue_group, rsid, `P-Value`, NES, position_gtex, chr_gtex, a, b, NES_direction)
 LD_Gtex = unique(LD_Gtex)
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex")
 write_csv(LD_Gtex, "BRCA1_LDRED_Gtex.csv")
 
 
@@ -1415,7 +1415,7 @@ SNPcount = ggplot(LD_Gtex, aes(x=rsid,  fill = NES_direction)) +
 SNPcount
 
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/snp_against_Tissue") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/snp_against_Tissue") #SAVE it
 ggsave("rsID_count_OVERVIEW.pdf")
 ```
 
@@ -1464,13 +1464,13 @@ SNPcount
 
 LD_Gtex$position_gtex = as.numeric(LD_Gtex$position_gtex)
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/snp_against_Tissue") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/snp_against_Tissue") #SAVE it
 ggsave("Position_count_OVERVIEW.pdf")
 ```
 ####Now the same thing but instead split by tissue:
 
 ```{r}
-setwd("~/OneDrive - University of Bristol/PhD/Epidemiology/Trait and Tissue Groups")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/Trait and Tissue Groups")
 Full_tissue_database = read_csv("Full_tissue_database.csv")
 
 list_of_tissues = unique(Full_tissue_database$RAW_Tissue)
@@ -1502,14 +1502,14 @@ SNPcountperTissue = ggplot(test, aes(x=Tissue, y=count/nrow(LD_Gtex), fill=NES_d
 
 SNPcountperTissue
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/snp_against_Tissue") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/snp_against_Tissue") #SAVE it
 ggsave("Tissue-rsid_count_OVERVIEW.pdf")
 
 
 ```
 ####And  by tissue group for a less huge plot:
 ```{r}
-setwd("~/OneDrive - University of Bristol/PhD/Epidemiology/Trait and Tissue Groups")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/Trait and Tissue Groups")
 Full_tissue_database = read_csv("Full_tissue_database.csv")
 
 list_of_tissuegroups = unique(Full_tissue_database$Tissue)
@@ -1543,16 +1543,16 @@ SNPcountperTissuegroup = ggplot(test, aes(x=tissue_group, y=count/nrow(LD_Gtex),
 
 SNPcountperTissuegroup
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/snp_against_Tissue") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/snp_against_Tissue") #SAVE it
 ggsave("TissueGROUP-rsid_count_OVERVIEW.pdf")
 
 
 ```
 #### Now using the Full Gtex dataset (BEFORE LD removal etc)
 ```{r}
-setwd("~/OneDrive - University of Bristol/PhD/Epidemiology/Trait and Tissue Groups")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/Trait and Tissue Groups")
 Full_tissue_database = read_csv("Full_tissue_database.csv")
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex")
 Gtex = read_csv("BRCA1_Gtex_cleaned.csv")
 
 # Assign Tissue groups to Gtex Dataframe
@@ -1607,7 +1607,7 @@ SNPcountperTissuegroup = ggplot(test, aes(x=tissue_group, y=count/nrow(Gtex), fi
 
 SNPcountperTissuegroup
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/snp_against_Tissue") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/snp_against_Tissue") #SAVE it
 ggsave("TissueGROUP-rsid_count_OVERVIEW_RED.pdf")
 
 
@@ -1618,7 +1618,7 @@ ggsave("TissueGROUP-rsid_count_OVERVIEW_RED.pdf")
 df_BRCA1_RED = df %>% dplyr::select(Tissue, tissue_group, `P-Value`) 
 df_BRCA1_RED = unique(df_BRCA1_RED)
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/eGene") 
+setwd("C:/Users/Harry Young/Documents/Local Wokr/eGene") 
 Gtex_egene = read_csv("FINAL_Gtex_egene.csv")
 Gtex_egene = Gtex_egene %>% rename(eGenes = `# eGenes`,
                                   RNASeq_and_Genotyped_Samples = `# RNASeq and Genotyped samples`)
@@ -1651,7 +1651,7 @@ Correlation + annotate(geom="text",  x=12, y=20, label = paste0("r2 = ", round(r
 
 
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/snp_against_Tissue") # SAVE it in dedicated plotting folder
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/snp_against_Tissue") # SAVE it in dedicated plotting folder
 ggsave("RNAvsMERGEDdfcount.pdf")
 
 
@@ -1684,7 +1684,7 @@ SNPcountperTissueComb
 # 
 # SNPcountperTissueComb
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/snp_against_Tissue") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/snp_against_Tissue") #SAVE it
 ggsave("Tissue-rsid_count_COMBO_option2.pdf")
 
 }
@@ -1703,7 +1703,7 @@ SNPposcountperTissueComb = ggplot(test, aes(x=position_gtex,  y=Tissue, color="b
 
 SNPposcountperTissueComb
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/snp_against_Tissue") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/snp_against_Tissue") #SAVE it
 ggsave("Tissue-Position_count_FOR_GENE_Diagram_All_HIGHLIGHT.pdf", width=10, height=6)
 }
 ```
@@ -1721,7 +1721,7 @@ SNPposcountperTissueComb = ggplot(test[which(test$n>1),], aes(x=position_gtex,  
 
 SNPposcountperTissueComb
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/snp_against_Tissue") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/snp_against_Tissue") #SAVE it
 ggsave("Tissue-Position_count_FOR_GENE_Diagram_ZOOM.pdf")
 }
 ```
@@ -1761,7 +1761,7 @@ pvsTrait = ggplot(df, aes(x=traitgroup, y=logp_DIR, color=beta_direction)) + #Pl
 pvsTrait
 
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/p vs traitgroup split Expression direction") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/p vs traitgroup split Expression direction") #SAVE it
 ggsave("pvalvstraitgroup_LOG.pdf")
 ```
 ####Raw count in each beta direction
@@ -1789,7 +1789,7 @@ pvsTrait
 
 
   
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/p vs traitgroup split Expression direction") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/p vs traitgroup split Expression direction") #SAVE it
 ggsave("COUNTvstraitgroup_overview_SEATLE.pdf")
 
 
@@ -1815,7 +1815,7 @@ pvsTrait = ggplot()+ #Plot of Traitgroup vs SNP Count
            fill =c("darkorchid4","darkorchid4"))
 pvsTrait
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/p vs traitgroup split Expression direction") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/p vs traitgroup split Expression direction") #SAVE it
 ggsave("COUNTvstraitgroup_REL_overview_SEATLE.pdf")
 
 
@@ -1840,7 +1840,7 @@ pvsTrait = ggplot()+ #Plot of Traitgroup vs SNP Count
            fill =c("darkorchid4","darkorchid4"))
 pvsTrait
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/p vs traitgroup split Expression direction") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/p vs traitgroup split Expression direction") #SAVE it
 ggsave("COUNTvstraitgroup_REL_overview_SEATLE_NOOGEC.pdf")
 
 
@@ -1867,7 +1867,7 @@ pvsTraitCUTOFF = ggplot()+ #Plot of Traitgroup vs SNP Count
            fill =c("darkorchid4","darkorchid4"))
 pvsTraitCUTOFF
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/p vs traitgroup split Expression direction") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/p vs traitgroup split Expression direction") #SAVE it
 ggsave("pvalvstraitgroup_MIAMI_CUTOFF.pdf")
 
 ```
@@ -1894,7 +1894,7 @@ pvsTrait_bytraitgroup = ggplot(df, aes(x=trait, y=logp_DIR, color=beta_direction
 pvsTrait_bytraitgroup
 
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
 ggsave("pvsTrait_bytraitgroup.pdf", width = 30, height =15)# Actually setting some dimensions due to long names
 ```
 With cutoff:
@@ -1914,7 +1914,7 @@ pvsTrait_fullfacet = ggplot(df[which(df$p<5e-8),], aes(x=trait, y=logp_DIR, colo
   #annotate("label",x=c(19.3,19.3), y=c(175,-175), label=c("Positive","Negative"), colour = c("white","white"), fill =c("darkorchid4","darkorchid4"))# change x and y coordinates to move the floating labels
 pvsTrait_fullfacet
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
 ggsave("pvalvstrait_bytraitgroupCUTOFF.pdf", width = 10, height =6)# Actually setting some dimensions due to long names
 ```
 Now that plot is a big one and often needs tweaking so do change the height and width in the code and then check it in the folder you've saved it in. Not as automated but at this point it's kind of up to you on how much you want to change the plotting to suit your own needs.
@@ -1943,7 +1943,7 @@ pvsTrait_byINFL = ggplot(df[which(df$traitgroup =="Inflammation"),], aes(x=trait
            fill =c("darkorchid4","darkorchid4"))
 pvsTrait_byINFL
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
 ggsave("pvsTrait_INFL_LOG.pdf", width = 6, height =10)# Actually setting some dimensions due to long names
 }
 ```
@@ -1970,7 +1970,7 @@ pvsTrait_byINFL = ggplot(df[which(df$traitgroup =="Inflammation"),], aes(x=trait
            fill =c("darkorchid4","darkorchid4"))
 pvsTrait_byINFL
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
 ggsave("pvsTrait_INFL_LOG_TISCOL.pdf", width = 6, height =7)# Actually setting some dimensions due to long names
 }
 ```
@@ -2001,7 +2001,7 @@ pvsTrait_byINFL = ggplot(subcat, aes(x=trait, y=logp_DIR, color=beta_direction))
   #          fill =c("darkorchid4","darkorchid4"))
 pvsTrait_byINFL
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
 ggsave("pvsTrait_INFL_LOG_TISCOL.pdf", width = 12, height =10)# Actually setting some dimensions due to long names
 }
 ```
@@ -2030,7 +2030,7 @@ pvsTrait_bybody = ggplot(subcat, aes(x=trait, y=logp_DIR, color=beta_direction))
   #          fill =c("darkorchid4","darkorchid4"))
 pvsTrait_bybody
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
 ggsave("pvsTrait_BODY_LOG_TISCOL.pdf")# Actually setting some dimensions due to long names
 }
 
@@ -2056,7 +2056,7 @@ pvsTrait_bybody = ggplot() + #Plot of Traitgroup vs p (P-Value is the Gtex P not
   #          fill =c("darkorchid4","darkorchid4"))
 pvsTrait_bybody
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
 ggsave("pvsTrait_BODY_LOG_TISCOL_BAR.pdf")# Actually setting some dimensions due to long names
 }
 ```
@@ -2086,7 +2086,7 @@ pvsTrait_bykidney = ggplot(subcat, aes(x=trait, y=logp_DIR, color=beta_direction
   #          fill =c("darkorchid4","darkorchid4"))
 pvsTrait_bykidney
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
 ggsave("pvsTrait_Kidney_LOG_TISCOL.pdf")# Actually setting some dimensions due to long names
 }
 
@@ -2113,7 +2113,7 @@ pvsTrait_byRF = ggplot(df[which(df$traitgroup =="Respiratory"),], aes(x=trait, y
            fill =c("darkorchid4","darkorchid4"))
 pvsTrait_byRF
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
 ggsave("pvsTrait_respFunc_LOG.pdf", width = 6, height =10)# Actually setting some dimensions due to long names
 }
 
@@ -2141,7 +2141,7 @@ pvsTrait_byRF = ggplot(df[which(df$Subcat =="Other Gene Expression Change"),], a
            fill =c("darkorchid4","darkorchid4"))
 pvsTrait_byRF
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
 ggsave("pvsTrait_OEGC_LOG.pdf", width = 6, height =10)# Actually setting some dimensions due to long names
 }
 ```
@@ -2163,7 +2163,7 @@ num_of_SNPs_by_beta = ggplot()+ #Plot of Traitgroup vs SNP Count
   #annotate("label",x=c(10.6,10.6), y=c(0.2,-0.17), label=c("Positive","Negative"), colour = c("white","white"), fill =c("darkorchid4","darkorchid4"))
 num_of_SNPs_by_beta
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
 ggsave("num_of_SNPs_by_beta_CUTOFF.pdf", width = 10, height =6)# Actually setting some dimensions due to long names
 ```
 
@@ -2188,7 +2188,7 @@ This section now grabs all exons from all available protein coding transcripts f
 *Save into a dedicated folder: All_Exon_Options. as "your_file_name.csv"
 *Repeat for all possible transcripts
 ```{r assigning gene regions to df and gtex}
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Ensembl/All_Exon_Options")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Ensembl/All_Exon_Options")
 
 temp = list.files(pattern="*.csv")
 myfiles = lapply(temp, read_csv)
@@ -2211,7 +2211,7 @@ BRCA1_structure_FIN = BRCA1_structure %>% dplyr::select( Start, End, EI)
 BRCA1_structure_FIN = unique(BRCA1_structure_FIN)
 
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Ensembl")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Ensembl")
 write_csv(BRCA1_structure_FIN, "BRCA1_structure_FIN.csv")
 write_csv(BRCA1_structure, "BRCA1_structure_FULL.csv")
 
@@ -2220,10 +2220,10 @@ Now to load in and modify the main df and Gtex in order to have information on w
 ```{r}
 
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Ensembl")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Ensembl")
 BRCA1_structure_FIN =read_csv("BRCA1_structure_FIN.csv")
 BRCA1_structure =read_csv( "BRCA1_structure_FULL.csv")
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex")
 df = read_csv("BRCA1_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv")
 Gtex = read_csv("BRCA1_Gtex_cleaned.csv")
 
@@ -2309,7 +2309,7 @@ This simply looks to see if the SNP position is within any of the regulatory reg
 2. Next choose chromosome and start/end based on Gtex data and merged
 3. Run getBM() to pull out human regulatory features within this region
 ```{r Assigning regulatory regions}
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Ensembl")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Ensembl")
 
 
 ensembl = useMart("ENSEMBL_MART_FUNCGEN")
@@ -2328,9 +2328,9 @@ write_csv(temp, "BRCA1_full_REG_region.csv")
 ```
 Now we assign those reg features to df and gtex dataframes
 ```{r}
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Ensembl")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Ensembl")
 reg_feat = read_csv("BRCA1_full_REG_region.csv") # from biomart from ensembl - 
-# setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex")
+# setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex")
 # df = read_csv("BRCA1_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv") # from before
 # df, and Gtex from previous CHUNK
 
@@ -2357,7 +2357,7 @@ for(n in 1:nrow(Gtex)){
   }
 }
 # repeated for the merged data pre LD/ambig/ukba removal
-setwd("~/Local_work_folder/Epidemiology/BRCA1_test/Gtex")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex")
 df_merge = read_csv("BRCA1_merge_GTEX_PHEWAS_betacor_ambig_grouped.csv")
 
 
@@ -2377,7 +2377,7 @@ for(n in 1:nrow(df_merge)){
 
 write_csv(df_merge, "BRCA1_merge_GTEX_PHEWAS_betacor_ambig_grouped_reg.csv")
 # I'm just overiding this file with the new one for simplicity but you can make a new file if you see fit
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex")
 write_csv(df, "BRCA1_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv")
 write_csv(Gtex, "BRCA1_Gtex_cleaned_REG.csv")
 
@@ -2388,11 +2388,11 @@ Ok so this next bit is getting more and more complicated... Essentially There ar
 DO THESE NEXT FEW STEPS for BRCA1 KEAP1 ORMDL3 and ATP5f1
 First load in main dataframe with bound regions and the structure as a dataframe called *rectangles*
 ```{r load in main dataframe with bound regions and the structure as a dataframe called rectangles, results=FALSE, message=FALSE}
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex")
 df_merge = read_csv("BRCA1_merge_GTEX_PHEWAS_betacor_ambig_grouped_reg.csv")
 Gtex = read_csv("BRCA1_Gtex_cleaned_REG.csv")
 df = read_csv("BRCA1_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv")
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Ensembl")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Ensembl")
 reg_feat = read_csv("BRCA1_full_REG_region.csv") 
 BRCA1_rectangles = read_csv("BRCA1_structure_FIN.csv") # from before
 ```
@@ -2414,7 +2414,7 @@ reg_feat_for_bind = reg_feat_for_bind %>% rename(Start=chromosome_start,
 # and finally binding the two table together
 gene_and_reg = rbind(reg_feat_for_bind, BRCA1_rectangles)
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Ensembl") # saving in the Ensembl folder
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Ensembl") # saving in the Ensembl folder
 write_csv(gene_and_reg, "BRCA1_and_reg_feat_FOR_GENE_DIAGRAM.csv")
 
 ```
@@ -2499,7 +2499,7 @@ gene_structure_G = ggplot()+
 
 gene_structure_G
 
-setwd("~/Local_work_folder/Epidemiology/BRCA1_test/Gene_diagram_output")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gene_diagram_output")
 ggsave("Gene_structure_G.pdf")
 
 ```
@@ -2548,11 +2548,11 @@ gene_structure_RED = ggplot()+
 gene_structure_RED
 
 
-setwd("~/Local_work_folder/Epidemiology/BRCA1_test/Gene_diagram_output")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gene_diagram_output")
 ggsave("Gene_structure_gtex_from_merge.pdf")
 ```
 ####2b. Gtex SNPs (P-Value) after merge and LD removal
-```{r df_gtex_RED}
+```{r df_gtex_RED2}
 df_gtex_RED = df %>% dplyr::select(position_gtex, reg_region, `P-Value`)
 df_gtex_RED$logp=-log10(df_gtex_RED$`P-Value`)
 # df_RED = as.data.frame(df$position_gtex)
@@ -2594,7 +2594,7 @@ gene_structure_RED = ggplot()+
 gene_structure_RED
 
 
-setwd("~/Local_work_folder/Epidemiology/BRCA1_test/Gene_diagram_output")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gene_diagram_output")
 ggsave("Gene_structure_gtex_RED.pdf")
 ```
 
@@ -2644,7 +2644,7 @@ gene_structure_RED_P = ggplot()+
 gene_structure_RED_P
 
 
-setwd("~/Local_work_folder/Epidemiology/BRCA1_test/Gene_diagram_output")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gene_diagram_output")
 ggsave("Gene_structure_PheWAS_RED.pdf")
 ```
 
@@ -2654,7 +2654,7 @@ This Section has been moved before the Circos proper because we are still making
 All of these are also available with SNPs coloured based on the reg_region they are in (uncomment those lines), Also, change pch from 20 to 21 for rings as opposed to points which can look better, 
 ##### Curved Gtex (all, pre-merge and LD removal)
 ```{r Curved Gene diagrams Gtex_G}
-setwd("~/Local_work_folder/Epidemiology/BRCA1_test/Gene_diagram_output")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gene_diagram_output")
 library(circlize) # in preamble too
 # Similar to above, select relevent columns, remove duplicates and 
 
@@ -2729,7 +2729,7 @@ dev.off()
 
 ##### Curved Gtex (all, pre-merge and LD removal) + Colour
 ```{r Curved Gene diagrams Gtex_G}
-setwd("~/Local_work_folder/Epidemiology/BRCA1_test/Gene_diagram_output")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gene_diagram_output")
 library(circlize) # in preamble too
 # Similar to above, select relevent columns, remove duplicates and 
 
@@ -2813,7 +2813,7 @@ dev.off()
 ```
 ##### CURVED Gtex SNPs (P-Value) after merge and LD removal
 ```{r Curved Gene diagrams Gtex_RED}
-setwd("~/Local_work_folder/Epidemiology/BRCA1_test/Gene_diagram_output")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gene_diagram_output")
 library(circlize) # in preamble too
 # Similar to above, select relevent columns, remove duplicates and 
 
@@ -2884,7 +2884,7 @@ dev.off()
 ##### CURVED Gtex SNPs (P-Value) after merge and LD removal + Colour
 This plot also has the purple and orange split for figure building - commented out for the moment - remove from release -INCOMPLETE:
 ```{r Curved Gene diagrams Gtex_RED}
-setwd("~/Local_work_folder/Epidemiology/BRCA1_test/Gene_diagram_output")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gene_diagram_output")
 library(circlize) # in preamble too
 # Similar to above, select relevent columns, remove duplicates and 
 
@@ -2967,7 +2967,7 @@ dev.off()
 ```
 ##### CURVED PheWAS SNPs (p Value) after merge and LD removal
 ```{r Curved Gene diagrams PHEWAS_RED}
-setwd("~/Local_work_folder/Epidemiology/BRCA1_test/Gene_diagram_output")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gene_diagram_output")
 library(circlize) # in preamble too
 # Similar to above, select relevent columns, remove duplicates and 
 
@@ -3046,7 +3046,7 @@ dev.off()
 ```
 ##### CURVED PheWAS SNPs (p Value) after merge and LD removal + Colour
 ```{r Curved Gene diagrams PHEWAS_RED}
-setwd("~/Local_work_folder/Epidemiology/BRCA1_test/Gene_diagram_output")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gene_diagram_output")
 library(circlize) # in preamble too
 # Similar to above, select relevent columns, remove duplicates and 
 
@@ -3140,7 +3140,7 @@ snpvsregion = ggplot(Unique_snps, aes(x = reg_region, fill = Intron_or_Exon))+
   theme(axis.text.x = element_text(angle = 45, hjust =1))
 snpvsregion
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/REG_region_counts") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/REG_region_counts") #SAVE it
 ggsave("RegRegion_COUNT_G_P.pdf") # simple gene structure
 ```
 
@@ -3163,7 +3163,7 @@ snpvsregion = ggplot(Unique_snps, aes(x = reg_region, fill = Intron_or_Exon))+
   theme(axis.text.x = element_text(angle = 45, hjust =1))
 snpvsregion
 
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex/Plots/REG_region_counts") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex/Plots/REG_region_counts") #SAVE it
 ggsave("RegRegion_COUNT_G.pdf") # simple gene structure
 
 
@@ -3175,12 +3175,12 @@ Step 1, load in the dataframes you want. In my case that's the full merged df an
 
 NOTE: this is reliant on the Ensembl subfolder - made in the GENE DIAGRAM section 
 ```{r for circos data load in}
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Ensembl")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Ensembl")
 reg_feat = read_csv("BRCA1_full_REG_region.csv")
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex")
 df = read_csv("BRCA1_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv")
 Gtex = read_csv("BRCA1_Gtex_cleaned_REG.csv")
-setwd("~/OneDrive - University of Bristol/PhD/Epidemiology/Trait and Tissue Groups")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/Trait and Tissue Groups")
 Full_tissue_database = read_csv("Full_tissue_database.csv") 
 
 ```
@@ -3198,7 +3198,7 @@ Step 2, This Gtex dataframe doesn't have the tissue groups bound so we need to d
    }
  }
  
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex")
 write_csv(Gtex, "BRCA1_Gtex_cleaned_REG.csv")
 ```
 Step 3, Now we are going to go through and plot each circos plot first. NOTE: this section uses the generic df name "test" as the frequency table that each circos plot is made from. This means each chunk will override this test table. If you would like to save it then use writetsv(test, "filename.tsv"). But they are quick and easy to make and not much point commiting to memory I've found.
@@ -3343,7 +3343,7 @@ Very occasionally the Gtex RAW plot will have different tissues thant he rest as
 
 Sorry this is a little annoying but unfortunately it is the best I can do!
 ```{r circos one - Gtex RAW}
-setwd("~/Local_work_folder/Epidemiology/BRCA1_test/Circos")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Circos")
 
 # First selecting key columns from the Gtex dataframe (pre-merge)
  simple_LUT_G = Gtex %>% dplyr::select(position_gtex, Tissue, tissue_group, `P-Value`)
@@ -3382,7 +3382,7 @@ dev.off()
 
 ####2. Gtex (from merged df)
 ```{r Gtex from merged df circos 2}
-setwd("~/Local_work_folder/Epidemiology/BRCA1_test/Circos")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Circos")
 
 # First selecting key columns from the Gtex dataframe (pre-merge)
  simple_LUT_Gmerge = df %>% dplyr::select(position_gtex, Tissue, tissue_group, `P-Value`)
@@ -3421,7 +3421,7 @@ dev.off()
 
 ####3. Tissue-Traitgroup overlap: NOTE: For these next two the traitgroups are listed here with colours associated. Every gene will have a different list of traitgroups. Best to go through manually and modify accordingly, or use rand_color (see commented lines)
 ```{r tissue trait group overlap for circos 3}
-setwd("~/Local_work_folder/Epidemiology/BRCA1_test/Circos")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Circos")
 # This one Tissuegroup-traitgroup - uising the simple_LUT_COR
 
 # OR using rand_color:
@@ -3461,7 +3461,7 @@ dev.off()
 
 ####3b. Tissue-Traitgroup overlap NO OTHER: 
 ```{r tissue trait group overlap for circos 3b}
-setwd("~/Local_work_folder/Epidemiology/BRCA1_test/Circos")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Circos")
 # This one Tissuegroup-traitgroup - uising the simple_LUT_COR
 
 # OR using rand_color:
@@ -3502,7 +3502,7 @@ dev.off()
 
 ####4. Traitgroup to Position overlap
 ```{r traitggroup to position overlap circos 4}
-setwd("~/Local_work_folder/Epidemiology/BRCA1_test/Circos")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Circos")
 
 simple_LUT_P = df %>% dplyr::select(position_gtex, traitgroup, p)
 
@@ -3542,7 +3542,7 @@ dev.off()
 
 ####4b.Traitgroup_pos overlap NO OTHER: 
 ```{r tissue trait group overlap for circos 4b}
-setwd("~/Local_work_folder/Epidemiology/BRCA1_test/Circos")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Circos")
 # This one Tissuegroup-traitgroup - uising the simple_LUT_COR
 
 # OR using rand_color:
@@ -3596,7 +3596,7 @@ This is a little.... forced. I can't control where the labels go which is really
 library(circlize)
 library(plotly)
 library(tidyverse)
-setwd("/Users/hy14913/Local_work_folder/Epidemiology/BRCA1_test/Gtex")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/BRCA1_test/Gtex")
 Gtex_RED = read_csv("BRCA1_Gtex_cleaned_REG.csv")
 df_final = read_csv("BRCA1_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv")
 df =df_final
