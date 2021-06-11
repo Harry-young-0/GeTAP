@@ -4,7 +4,7 @@ Database of Tissues and Traits and their groupings
 This simple repository is a way of storing the tissue and trait databases I built whilst designing the pipeline (add git link here).
 These are free to download to your file system or can be accessed via github (coded within the pipeline - INCOMPLETE March21)
 
-# Using the main R Notebook
+# Using the main R Notebooks
 There are a lot of instructions within the document itself and you are more than welcome to go through running chunk by chunk to get used to how I've setup this pipeline. That being said I understand a lot of you just want to shove a gene in and not think about it to much.
 
 So here is my quick start guide:
