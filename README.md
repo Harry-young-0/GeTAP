@@ -28,27 +28,44 @@ ONCE ONLY!
 
 ## Downloading the key data that can't be automatically downloaded
 REPEATED PER GENE FROM YOUR GENE LIST
-Annoying there are some bits I just can't automate. I've attached a video and screenshots of the exact steps for these instructions but just to have it in words for completeness:
+Annoying there are some bits I just can't automate. I've attached screenshots (ADD IN A VIDEO TOO?) of the exact steps for these instructions but just to have it in words for completeness:
 1. Go to the Gtex website: https://www.gtexportal.org/home/ 
-2. Use the search bar in the top right to search your gene name.
+2. Use the search bar in the top right to search your gene name (screenshot 1).
 3. Click on the correct gene in the resultant table (screenshot 2)
-4. Download the graph of expression (optional -screenshot 3)
-5. Download the csv of single-tissue eQTLs (screenshot 4)
-6. Click the ensembl link from the first table (screenshot 5)
-7. Click the  transcript ID (screenshot 6)
-8. Click the "x" exons link (screenshot 7)
-9. Click the "Download what you see" button (screenshot 8)
+4. Download the graph of expression (optional)
+5. Download the csv of single-tissue eQTLs (screenshot 3)
+6. Click the ensembl link from the first table (screenshot 4)
+7. Click the  transcript ID (screenshot 5)
+8. Click the "x" exons link (screenshot 6)
+9. Click the "Download what you see" button (screenshot 7)
 10. Repeat steps 7-9 until all transcripts are downloaded.
-11. Copy and paste the Gtex Portal.csv and the gene-exp-plot.svg into the gtex folder and ALL transcript files into Ensembl/All_Exon_Options.
+11. Copy and paste the Gtex Portal.csv and the gene-exp-plot.svg into the gtex folder and ALL transcript files into DRIVE:/YOUR FILE DIRECTORY/YOUR_GENE_NAME/Ensembl/All_Exon_Options.
+
+![Screenshot 2021-06-11 at 15 10 23](https://user-images.githubusercontent.com/66262215/121699983-5ba86f80-cac7-11eb-95f4-63c9cfcd477b.png)
+![Screenshot 2021-06-11 at 15 10 55](https://user-images.githubusercontent.com/66262215/121699986-5cd99c80-cac7-11eb-8243-fc50f2f9c17a.png)
+![Screenshot 2021-06-11 at 15 11 31](https://user-images.githubusercontent.com/66262215/121699998-5f3bf680-cac7-11eb-9519-5970ffa6d5df.png)
+![Screenshot 2021-06-11 at 15 13 05](https://user-images.githubusercontent.com/66262215/121700246-9ca08400-cac7-11eb-996e-388f0ee70bb4.png)
+![Screenshot 2021-06-11 at 15 14 21](https://user-images.githubusercontent.com/66262215/121700762-20f30700-cac8-11eb-9ad9-6f68b9765bc5.png)
+![Screenshot 2021-06-11 at 15 15 28](https://user-images.githubusercontent.com/66262215/121700764-22243400-cac8-11eb-9be2-327172224f80.png)
+![Screenshot 2021-06-11 at 15 17 06](https://user-images.githubusercontent.com/66262215/121700767-22243400-cac8-11eb-97f8-c3e4c50536cc.png)
+
+
+
 
 WHILE THE NEXT STEP IS RUNNING I PREP THE NEXT GENE
 
 
 ## Getting started with putting your first gene in the pipeline
+PRE-SETUP: Open up packages.R and run, this will install all the required packages into your Rstudio.
+
+
 REPEATED PER GENE FROM YOUR GENE LIST
-1. Open up the Shortened_Instructions.Rmd document in RStudio.
-2. Do the same find and replace steps as before:  Use ctrl+f and type in the left-hand box "DRIVE/YOUR FILE DIRECTORY" and then put whatever your folder is called. E.g. C:/Harry Young/local work folder in the right-hand box.
-3. Next use the find and replace system to find all YOURGENE and replace with your gene name e.g. "NRF2" - again ctrl+f, left-hand box: YOURGENE, right-hand box: NRF2(whatever your gene name is), press the "All" button right of Replace.
-5. Now run all using the "run" dropdown... run all in the top right, or ctrl+alt+enter
+1. Open up the Shortened_Instructions_FINAL.Rmd document in RStudio.
+2. Do the same find and replace steps as before:  Use ctrl+f and type in the left-hand box "DRIVE:/YOUR FILE DIRECTORY" and then put whatever your folder is called. E.g. C:/Harry Young/local work folder in the right-hand box.
+3. Next use the find and replace system to find all YOURGENE and replace with your gene name e.g. "NRF2" - again ctrl+f, left-hand box: YOUR_GENE_NAME, right-hand box: NRF2(whatever your gene name is), press the "All" button right of Replace.
+5. Now run all using the "run" dropdown... run all in the top right, or ctrl+alt+enter (SCREENSHOT BELOW)
+ 
+![Screenshot 2021-06-11 at 15 27 54](https://user-images.githubusercontent.com/66262215/121702318-acb96300-cac9-11eb-8996-3228b3aa950f.png)
+
 
 
