@@ -1,0 +1,26 @@
+#First line to clear out environment
+rm(list=ls())
+# Install all required packages:
+install.packages("tidyverse")
+install.packages("circlize")
+install.packages("devtools")
+install.packages("viridis")
+install.packages("RColorBrewer")
+install.packages("BiocManager")
+install.packages("ggpubr")
+library(circlize)
+library(tidyverse)
+library(viridis)
+library(RColorBrewer)
+library(ggpubr)
+
+library(devtools)
+devtools::install_github("CBIIT/LDlinkR")
+devtools::install_github("mrcieu/ieugwasr")
+library(LDlinkR)# uncomment
+library(ieugwasr)
+library(BiocManager)
+BiocManager::install("biomaRt")
+library(biomaRt)
+library(dplyr)
+library(ieugwasr)
