@@ -13,11 +13,17 @@ ONCE ONLY!
 1. In your computer setup a master folder for use as a working folder. For example mine would be C:/Harry Young/local work folder
 2. Open the folder_setup_MOD.R file in RStudio,
 3. Change the gene_names list to include as many of the genes as you want to run as you like. If you're unsure just put a couple of dummy names in you can decide later as this is only setting up the folders!
-4. Change where you're going to create the file directory. Use ctrl+f and type in the left-hand box "DRIVE/YOUR FILE DIRECTORY/" and then put whatever your fodler is called. E.g. C:/Harry Young/local work folder in the right-hand box.
-5. Now simply press the button to the right of "Replace" labelled "All".
-6. Now press run on this file
-7. Download and save the tissue and trait database files and save within your Trait and Tissue Groups folder
-8. Download and Save the sample-egene_info_Gtex.csv into the eGene folder
+4. Change where you're going to create the file directory. Use ctrl+f and type in the left-hand box "DRIVE/YOUR FILE DIRECTORY" and then put whatever your fodler is called. E.g. C:/Harry Young/local work folder in the right-hand box. NOTE: If you are on Mac this is slightly different. It will almost always be: "/UserYOUR FILE DIRECTORY", for example mine is : "/User/Harry/Local Work Folder"
+6. Now simply press the button to the right of "Replace" labelled "All". Screenshots 1-3.
+7. Now press run on this file (top right corner)
+8. Download and save the tissue and trait database files and save within your Trait and Tissue Groups folder
+9. Download and Save the sample-egene_info_Gtex.csv into the eGene folder
+
+![Screenshot 2021-06-11 at 14 54 52](https://user-images.githubusercontent.com/66262215/121697916-6d891300-cac5-11eb-88ae-0f9cef521ed8.png)
+![Screenshot 2021-06-11 at 14 56 02](https://user-images.githubusercontent.com/66262215/121697934-70840380-cac5-11eb-942a-c2025defaa1f.png)
+![Screenshot 2021-06-11 at 14 56 21](https://user-images.githubusercontent.com/66262215/121697926-6f52d680-cac5-11eb-916b-ad402a7d7fa7.png)
+
+
 
 
 ## Downloading the key data that can't be automatically downloaded
