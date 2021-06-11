@@ -59,7 +59,7 @@ WHILE THE NEXT STEP IS RUNNING I PREP THE NEXT GENE
 PRE-SETUP: Open up packages.R and run, this will install all the required packages into your Rstudio.
 
 
-REPEATED PER GENE FROM YOUR GENE LIST
+REPEAT PER GENE FROM YOUR GENE LIST, changing YOUR_GENE_NAME to the genes name each time
 1. Open up the Shortened_Instructions_FINAL.Rmd document in RStudio.
 2. Do the same find and replace steps as before:  Use ctrl+f and type in the left-hand box "DRIVE:/YOUR FILE DIRECTORY" and then put whatever your folder is called. E.g. C:/Harry Young/local work folder in the right-hand box.
 3. Next use the find and replace system to find all YOUR_GENE_NAME and replace with your gene name e.g. "NRF2" - again ctrl+f, left-hand box: YOUR_GENE_NAME, right-hand box: NRF2(whatever your gene name is), press the "All" button right of Replace.
