@@ -5,7 +5,7 @@ output:
     df_print: paged
   pdf_document: default
 ---
-TESTING: Your gene name is GPX1. If this still reads "your gene name" not a specific gene you have chosen (for example KEAP1), Please try the ctrl-f step again 
+TESTING: Your gene name is YOUR_GENE_NAME. If this still reads "your gene name" not a specific gene you have chosen (for example KEAP1), Please try the ctrl-f step again 
 
 ###Please email me at harry.young@bristol.ac.uk with any questions about the pipeline
 
@@ -51,7 +51,7 @@ For those who have never done any R, hopefully the code is commented well enough
 
 I've tried to use descriptive names for things so it's easier to follow but I do use "df" as shorthand for the current dataframe we're working with. (a dataframe essentially being a table)
 
-This notebook is primarily a way of easily seeing what I have done in the pipeline It is important to pay attention to what the block of code is doing and change appropriately for each gene of interest. This notebook is setup for GPX1 (GPX1) so all of the names and working directories reflect this. To change this to your gene of interest simply use ctrl-f and replace all "GPX1" with "your gene of interest". Now all the instructions should reflect your gene of interest  - 310 occurences should be changed.
+This notebook is primarily a way of easily seeing what I have done in the pipeline It is important to pay attention to what the block of code is doing and change appropriately for each gene of interest. This notebook is setup for YOUR_GENE_NAME (YOUR_GENE_NAME) so all of the names and working directories reflect this. To change this to your gene of interest simply use ctrl-f and replace all "YOUR_GENE_NAME" with "your gene of interest". Now all the instructions should reflect your gene of interest  - 309 occurences should be changed.
 
 At the start of most coding blocks I have added in a read_csv line that simply reads in the dataframe that you have just made and saved in the previous steps. This avoids any issues you might find of RStudio keeping track of which is which. Also, this allows you to run through the code in full once and then from then on you can rerun specific STEPS if needed without the need for doing the whole thing. This is particularly useful for the plotting section as it allows you to have your dataframe read in and then you can add or delete as many different forms of plots as you like. I have my favourite set in there at the moment but this is subject to change!
 
@@ -83,22 +83,22 @@ Any issues, first check the common errors section at the end of this document!
 ### This is a preference thing but the code will work so long as you follow the step order.
 The goal here is to look at and get familiar with the data whilst re-organising it in such a way that it makes your life easier when it comes to merging the data later on.
 
-I would suggest setting up a folder to run all of this into, copying it over to backup files as you go, here I've named in GPX1_test:
+I would suggest setting up a folder to run all of this into, copying it over to backup files as you go, here I've named in YOUR_GENE_NAME_test:
 
 e.g, use the following code in every chunk:
 ```{r}
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex")
 ```
 
 Firstly we read in the dataframe of interest and do some initial clean-up steps:
 
-To read in the dataframe first search your gene of interest into Gtex portal. Then click significant single-tissue eQTL and download the csv. Rename the file Gtex_GPX1_START.
+To read in the dataframe first search your gene of interest into Gtex portal. Then click significant single-tissue eQTL and download the csv. Rename the file Gtex_YOUR_GENE_NAME_START.
 ```{r Initial load and clean}
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex")
-Gtex_GPX1 = read_csv("Gtex_GPX1_START.csv")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex")
+Gtex_YOUR_GENE_NAME = read_csv("Gtex_YOUR_GENE_NAME_START.csv")
 
-df = Gtex_GPX1
+df = Gtex_YOUR_GENE_NAME
 head(df)  # This function just shows us the top few rows of the dataframe to see what we're looking at
 
 ### Seprates out the variant ID into usable columns
@@ -130,18 +130,18 @@ Save this file as "cleaned" data:
 ```{r Save clean data}
 # setwd repeated here 
 # setwd("~/OneDrive - University of Bristol/PhD/Epidemiology/Quantitative and Qualitative SNP lists")
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex")
-write_excel_csv(df, "GPX1_Gtex_cleaned.csv")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex")
+write_excel_csv(df, "YOUR_GENE_NAME_Gtex_cleaned.csv")
 
 ```
 
 Then we need to isolate the unique SNPs for searching in the ieugwasR package:
 
 ```{r Unique SNPs from Gtex}
-unique_GPX1_Gtex_snps = unique(df$rsid)
+unique_YOUR_GENE_NAME_Gtex_snps = unique(df$rsid)
 # setwd("~/OneDrive - University of Bristol/PhD/Epidemiology/Quantitative and Qualitative SNP lists")
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex")
-write.table(unique_GPX1_Gtex_snps, "unique_GPX1_Gtex_snps.csv", sep="\t", row.names=FALSE, col.names=FALSE) # saving the file
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex")
+write.table(unique_YOUR_GENE_NAME_Gtex_snps, "unique_YOUR_GENE_NAME_Gtex_snps.csv", sep="\t", row.names=FALSE, col.names=FALSE) # saving the file
 ```
 
 
@@ -150,7 +150,7 @@ This is quite a complicated series of steps, going from the matrix file to clear
 ## querying LDMatrix - DELETE STEPS 2.1 and 2.2 if #SNPS>1000
 #####IMPORTANT BEFORE YOU START: Check the length (number of rows) of your unique_snp_list. if <700, continue with 2.1 and 2.2 AND skip 2.3. If >1000 move to 2.3 SKIPPING 2.1 and 2.2
 ##2.1 Assess Linkage disequilibrium (D')
-First step is to search your list of snps (unique_GPX1_Gtex_snps) into LDMatrix to get an interactive plot of linkage disequilibrium in your snp set. https://ldlink.nci.nih.gov/?tab=ldmatrix 
+First step is to search your list of snps (unique_YOUR_GENE_NAME_Gtex_snps) into LDMatrix to get an interactive plot of linkage disequilibrium in your snp set. https://ldlink.nci.nih.gov/?tab=ldmatrix 
 
 This is an automatable step but I think it is important to see the matrix plot in LD matrix WHEN YOU CAN (<300 online) , open your dataframe of unique SNPs in excel, copy and paste the column into the query box on LD matrix, tick all populations (or even just european) and click calculate.
 
@@ -160,29 +160,29 @@ Alternatively use these lines of code. You'll have to ask for a "token" from the
 ### Step a - get matrices of R2 and dprime
 ```{r Automated r2 and d prime START dataset}
 
-if(length(unique_GPX1_Gtex_snps)<700){
+if(length(unique_YOUR_GENE_NAME_Gtex_snps)<700){
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/LDMatrix")
-GPX1_r2 = LDmatrix(unique_GPX1_Gtex_snps, pop = "EUR", r2d = "r2", token ="f0d7bc798f5c")
-write_csv(GPX1_r2, "GPX1_r2.csv")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/LDMatrix")
+YOUR_GENE_NAME_r2 = LDmatrix(unique_YOUR_GENE_NAME_Gtex_snps, pop = "EUR", r2d = "r2", token ="f0d7bc798f5c")
+write_csv(YOUR_GENE_NAME_r2, "YOUR_GENE_NAME_r2.csv")
 
 
 
 # open up the .csv file from the website as tab-deliminated 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/LDMatrix")
-GPX1_r2 = read_csv("GPX1_r2.csv")
-head(GPX1_r2)
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/LDMatrix")
+YOUR_GENE_NAME_r2 = read_csv("YOUR_GENE_NAME_r2.csv")
+head(YOUR_GENE_NAME_r2)
 
 
-for(n in 1:ncol(GPX1_r2)){#         LOOP to create a df of NA and values above 0.5 - CHANGE THIS CUTOFF TO WHAT YOU WANT
+for(n in 1:ncol(YOUR_GENE_NAME_r2)){#         LOOP to create a df of NA and values above 0.5 - CHANGE THIS CUTOFF TO WHAT YOU WANT
   if(n==1){ # First column is the rsid so skip it using 'next'
     next
   }
-  else if(n==2){linked0.5 = GPX1_r2[which(GPX1_r2[,n]>=0.5),] # For the first column setup a new df to write to, called 'linked0.5'
+  else if(n==2){linked0.5 = YOUR_GENE_NAME_r2[which(YOUR_GENE_NAME_r2[,n]>=0.5),] # For the first column setup a new df to write to, called 'linked0.5'
     linked0.5 = linked0.5[,c(1,n)]
   }
   else{
-    linked0.5_temp =GPX1_r2[which(GPX1_r2[,n]>=0.5),] # Each loop you are making a temporary file 'linked0.5_temp', 
+    linked0.5_temp =YOUR_GENE_NAME_r2[which(YOUR_GENE_NAME_r2[,n]>=0.5),] # Each loop you are making a temporary file 'linked0.5_temp', 
     linked0.5_temp = linked0.5_temp[,c(1,n)] 
     linked0.5 = merge(linked0.5, linked0.5_temp, all.x=T, all.y=T) # Then merging to the original linked0.5 file
   }
@@ -191,15 +191,15 @@ for(n in 1:ncol(GPX1_r2)){#         LOOP to create a df of NA and values above 0
 head(linked0.5)
 
 #Repeated for 0.75
-for(n in 1:ncol(GPX1_r2)){#         LOOP to create a df of NA and values above 0.5 - CHANGE THIS CUTOFF TO WHAT YOU WANT
+for(n in 1:ncol(YOUR_GENE_NAME_r2)){#         LOOP to create a df of NA and values above 0.5 - CHANGE THIS CUTOFF TO WHAT YOU WANT
   if(n==1){ # First column is the rsid so skip it using 'next'
     next
   }
-  else if(n==2){linked0.75 = GPX1_r2[which(GPX1_r2[,n]>=0.75),] # For the first column setup a new df to write to, called 'linked0.75'
+  else if(n==2){linked0.75 = YOUR_GENE_NAME_r2[which(YOUR_GENE_NAME_r2[,n]>=0.75),] # For the first column setup a new df to write to, called 'linked0.75'
     linked0.75 = linked0.75[,c(1,n)]
   }
   else{
-    linked0.75_temp =GPX1_r2[which(GPX1_r2[,n]>=0.75),] # Each loop you are making a temporary file 'linked0.75_temp', 
+    linked0.75_temp =YOUR_GENE_NAME_r2[which(YOUR_GENE_NAME_r2[,n]>=0.75),] # Each loop you are making a temporary file 'linked0.75_temp', 
     linked0.75_temp = linked0.75_temp[,c(1,n)] 
     linked0.75 = merge(linked0.75, linked0.75_temp, all.x=T, all.y=T) # Then merging to the original linked file
   }
@@ -219,8 +219,8 @@ for(n in 2:ncol(linked0.5)){
 head(linked_test0.5)
 
 # now we set up a r2ictionary so we can see which snps associate with which snps
-rs_overlap_r20.5 = vector(mode="list", length = nrow(GPX1_r2)) # set up a dictionary style list
-names(rs_overlap_r20.5) = names(GPX1_r2[,2:ncol(GPX1_r2)]) # add in the names of the snps (rsids)
+rs_overlap_r20.5 = vector(mode="list", length = nrow(YOUR_GENE_NAME_r2)) # set up a dictionary style list
+names(rs_overlap_r20.5) = names(YOUR_GENE_NAME_r2[,2:ncol(YOUR_GENE_NAME_r2)]) # add in the names of the snps (rsids)
 
 for(n in 1:(ncol(linked_test0.5)-1)){
   rs_overlap_r20.5[[n]] = na.omit(linked_test0.5[,n+1]) # fill in the associated snps from the matrix columns
@@ -236,8 +236,8 @@ for(n in 2:ncol(linked0.75)){
 }
 
 # now we set up a dictionary so we can see which snps associate with which snps
-rs_overlap_r20.75 = vector(mode="list", length = nrow(GPX1_r2)) # set up a dictionary style list
-names(rs_overlap_r20.75) = names(GPX1_r2[,2:ncol(GPX1_r2)]) # add in the names of the snps (rsids)
+rs_overlap_r20.75 = vector(mode="list", length = nrow(YOUR_GENE_NAME_r2)) # set up a dictionary style list
+names(rs_overlap_r20.75) = names(YOUR_GENE_NAME_r2[,2:ncol(YOUR_GENE_NAME_r2)]) # add in the names of the snps (rsids)
 
 for(n in 1:(ncol(linked_test0.75)-1)){
   rs_overlap_r20.75[[n]] = na.omit(linked_test0.75[,n+1]) # fill in the associated snps from the matrix columns
@@ -245,11 +245,11 @@ for(n in 1:(ncol(linked_test0.75)-1)){
 test = na.omit(linked_test0.75[,1+1])
 
 # Saving for later
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex")
 #Cleanup before saving the data
-rm(df, GPX1_r2, Gtex_GPX1, linked_test0.5, linked_test0.75, linked0.5, linked0.75, temp, temp0.5D_2, temp0.75D_2, unique_snps, i,n,test)
+rm(df, YOUR_GENE_NAME_r2, Gtex_YOUR_GENE_NAME, linked_test0.5, linked_test0.75, linked0.5, linked0.75, temp, temp0.5D_2, temp0.75D_2, unique_snps, i,n,test)
 ##Save the environment
-save.image("rs_overlap_ALL_GPX1.RData")
+save.image("rs_overlap_ALL_YOUR_GENE_NAME.RData")
 
 }
 
@@ -267,32 +267,32 @@ save.image("rs_overlap_ALL_GPX1.RData")
 # I tend to just go with r2 cutoff = 0.5 but can be adjusted if you like. The exercise here is getting rid of inaccuracies from linked snps and reducing the list of unique snps down. As an example ORMDL3 one of my controls had ~1200 SNPs and an r2 of 0.5 took this down to 60 SNPs. When searched in Phewas this still resulted in 1000s of SNP-trait associations and so still gave a good picture on what was going on. 
 
 
-if(length(unique_GPX1_Gtex_snps)>=1000){
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/LDMatrix")
+if(length(unique_YOUR_GENE_NAME_Gtex_snps)>=1000){
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/LDMatrix")
 
  library(LDlinkR)
- GPX1_LIMITED_SNP_LIST = SNPclip(
-   unique_GPX1_Gtex_snps,
+ YOUR_GENE_NAME_LIMITED_SNP_LIST = SNPclip(
+   unique_YOUR_GENE_NAME_Gtex_snps,
    pop = "EUR",
    r2_threshold = "0.5",
    maf_threshold = "0.01",
   token = "f0d7bc798f5c" )
 
 
-GPX1_LIMITED_SNP_LIST = GPX1_LIMITED_SNP_LIST[grep("Variant kept.", GPX1_LIMITED_SNP_LIST$Details),  ] # selects the ones that passed the test
-GPX1_LIMITED_SNP_LIST = as.data.frame(GPX1_LIMITED_SNP_LIST[,1])
-names(GPX1_LIMITED_SNP_LIST) = "rsid"
+YOUR_GENE_NAME_LIMITED_SNP_LIST = YOUR_GENE_NAME_LIMITED_SNP_LIST[grep("Variant kept.", YOUR_GENE_NAME_LIMITED_SNP_LIST$Details),  ] # selects the ones that passed the test
+YOUR_GENE_NAME_LIMITED_SNP_LIST = as.data.frame(YOUR_GENE_NAME_LIMITED_SNP_LIST[,1])
+names(YOUR_GENE_NAME_LIMITED_SNP_LIST) = "rsid"
 
-write_csv(GPX1_LIMITED_SNP_LIST, "GPX1_LIMITED_SNP_LIST.csv")
-unique_GPX1_Gtex_snps = read_csv("GPX1_LIMITED_SNP_LIST.csv")# , col_names=F
-unique_GPX1_Gtex_snps = unique_GPX1_Gtex_snps$rsid
+write_csv(YOUR_GENE_NAME_LIMITED_SNP_LIST, "YOUR_GENE_NAME_LIMITED_SNP_LIST.csv")
+unique_YOUR_GENE_NAME_Gtex_snps = read_csv("YOUR_GENE_NAME_LIMITED_SNP_LIST.csv")# , col_names=F
+unique_YOUR_GENE_NAME_Gtex_snps = unique_YOUR_GENE_NAME_Gtex_snps$rsid
 }
 ```
 
 
 It may take a couple of iterations but essentially be as harsh or as leniant as you like here, you can always come back and adjust (running the whole script again) if the results are too limited.
 
-save this list as GPX1_LIMITED_SNP_LIST.csv in GPX1_test/Gtex
+save this list as YOUR_GENE_NAME_LIMITED_SNP_LIST.csv in YOUR_GENE_NAME_test/Gtex
 
 # STEP 2: PheWAS searching using ieugwasr 
 ## Searching snps in ieugwasr (source code: Phewas testing.R)
@@ -301,7 +301,7 @@ This next step isn't automatable within the knitr - html format so it is all com
 Then we search using that list in ieugwasr. NOTE:  Large lists of rsIDs can cause a timeout in the search. Give it a go as is and if it doesn't work, then split into batches INCOMPLETE: HASN'T FAILED TO WORK FOR ME YET SO THIS - so unsure on batch size.
 
 NOTE: this chunk of code is your search tool which is why it can't be run with the notebook, uncomment (ctrl-shift-c) and run line by line by clinking on the line and ctrl-enter. Uncommenting then running this chunk may work but often doesn't so line-by-line is safest.
-IMPORTANT: Here I have left it as the unique_GPX1_gtex_snps (unique snp list) but you can also use your LIMITED_snp_list (GPX1_LIMITED_SNP_LIST) from step 2.3 IF YOU USED IT. 
+IMPORTANT: Here I have left it as the unique_YOUR_GENE_NAME_gtex_snps (unique snp list) but you can also use your LIMITED_snp_list (YOUR_GENE_NAME_LIMITED_SNP_LIST) from step 2.3 IF YOU USED IT. 
 
 ### Load in appropriate dataframe and setup a list of unique SNPs, if 2.1 and 2.2 ran:
 
@@ -312,18 +312,18 @@ RUN THIS CHUNK LINE BY LINE,  click the start of the line at pres ctrl-enter or 
 # Load in package - should have been done at start
 library(ieugwasr)
 
-# change out list of snps from unique_GPX1_Gtex_snps to LIMITED_SNP_LIST here depending on choice above
- Gtex_PHEWAS = phewas(unique_GPX1_Gtex_snps, pval = 1e-04) # Adjustable p-value here #
+# change out list of snps from unique_YOUR_GENE_NAME_Gtex_snps to LIMITED_SNP_LIST here depending on choice above
+ Gtex_PHEWAS = phewas(unique_YOUR_GENE_NAME_Gtex_snps, pval = 1e-04) # Adjustable p-value here #
 
 if(nrow(Gtex_PHEWAS)==0){
   print("Houston, we have a problem. Re run this chunk using the play button in the top right of the box. If that still doesn't work, run line by line using ctrl-enter OR cmd-enter. If it still doesn't work then I'm afraid something has gone really wrong! email me at hy14913@bristol.ac.uk")
 } else{
 # Then save using the following line:
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex")
-write_excel_csv(Gtex_PHEWAS, "GPX1_GtextoPHEWAS_RAW.csv")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex")
+write_excel_csv(Gtex_PHEWAS, "YOUR_GENE_NAME_GtextoPHEWAS_RAW.csv")
 }
 ```
-The result of this is seen below with head(GPX1_GtextoPHEWAS_RAW).
+The result of this is seen below with head(YOUR_GENE_NAME_GtextoPHEWAS_RAW).
 
 # Step 3: Merging the datasets
 
@@ -333,11 +333,11 @@ Merging was fairly riddled with pitfalls. In the end the dyplr(full_join) (also 
 
 Firstly, load in these libraries and start to reorganize the Gtex-to-phewas RAW and original Gtex data to get more of a feel for what the data looks like:
 ```{r initial read in of dataframes and ordering step}
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex")
-GPX1_GtextoPHEWAS_RAW = read_csv("GPX1_GtextoPHEWAS_RAW.csv") # load in Phewas output
-GPX1_Gtex_cleaned = read_csv("GPX1_Gtex_cleaned.csv") #  load in Gtex input
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex")
+YOUR_GENE_NAME_GtextoPHEWAS_RAW = read_csv("YOUR_GENE_NAME_GtextoPHEWAS_RAW.csv") # load in Phewas output
+YOUR_GENE_NAME_Gtex_cleaned = read_csv("YOUR_GENE_NAME_Gtex_cleaned.csv") #  load in Gtex input
 
-GPX1_GtextoPHEWAS_RAW = GPX1_GtextoPHEWAS_RAW %>%
+YOUR_GENE_NAME_GtextoPHEWAS_RAW = YOUR_GENE_NAME_GtextoPHEWAS_RAW %>%
   rename(position_phewas = position, # Renaming columns to keep track of their original dataframe
          chr_phewas = chr)
 
@@ -347,19 +347,19 @@ GPX1_GtextoPHEWAS_RAW = GPX1_GtextoPHEWAS_RAW %>%
 #####Reordering PheWas and Gtex dataset - extra - to be removed #####
 # NOT NECERSARY BUT MAKES IT EASIER TO LOOK AT !
 
- GPX1_Gtex_cleaned = GPX1_Gtex_cleaned[,c( "Gencode Id","Gene Symbol","rsid","a","b", "NES","|NES|","Tissue", "P-Value", "Variant Id","chr_gtex", "position_gtex", "build_gtex")]
- head(GPX1_Gtex_cleaned)
- GPX1_GtextoPHEWAS_RAW = GPX1_GtextoPHEWAS_RAW[,c("rsid", "ea","nea","trait","beta", "p","se","n","eaf","chr_phewas","position_phewas", "id")] # "traitgroup",
- head(GPX1_GtextoPHEWAS_RAW)
+ YOUR_GENE_NAME_Gtex_cleaned = YOUR_GENE_NAME_Gtex_cleaned[,c( "Gencode Id","Gene Symbol","rsid","a","b", "NES","|NES|","Tissue", "P-Value", "Variant Id","chr_gtex", "position_gtex", "build_gtex")]
+ head(YOUR_GENE_NAME_Gtex_cleaned)
+ YOUR_GENE_NAME_GtextoPHEWAS_RAW = YOUR_GENE_NAME_GtextoPHEWAS_RAW[,c("rsid", "ea","nea","trait","beta", "p","se","n","eaf","chr_phewas","position_phewas", "id")] # "traitgroup",
+ head(YOUR_GENE_NAME_GtextoPHEWAS_RAW)
 ```
 
 Next step is to actually merge these two dataframes: Either of these work, I use merge because I found it first, but since I've been using dyplr this full_join is also nice. Worth checking that both produce the same dataframe as a test!
 
 ```{r Merging the gtex and phewas dataframes}
 
-test = merge(GPX1_Gtex_cleaned, GPX1_GtextoPHEWAS_RAW, all=T, by = "rsid")
+test = merge(YOUR_GENE_NAME_Gtex_cleaned, YOUR_GENE_NAME_GtextoPHEWAS_RAW, all=T, by = "rsid")
 # OR
-test2 = full_join(GPX1_Gtex_cleaned, GPX1_GtextoPHEWAS_RAW, by = "rsid")
+test2 = full_join(YOUR_GENE_NAME_Gtex_cleaned, YOUR_GENE_NAME_GtextoPHEWAS_RAW, by = "rsid")
 # You will lose eQTL type but that's fine, old column when i was tempted by doing sQTLs too
 test = test[,c("Gencode Id","Gene Symbol","rsid","a","b", "NES","|NES|","Tissue", "P-Value", "Variant Id","chr_gtex", "position_gtex", "build_gtex", "ea","nea","trait","beta", "p","se","n","eaf","chr_phewas","position_phewas", "id")]
 
@@ -385,15 +385,15 @@ head(to_remove) # any rows with lots of NAs in Phewas columns
 test = test %>% drop_na(beta, eaf, chr_phewas, trait) 
 
 ## here a couple of testing lines to see a specific rsidif you want to check your merge worked ok
-# test_rsid = PS_GPX1[which(PS_GPX1$rsid =="rs78616393"),]
-# test_rsid = Gtex_GPX1[which(Gtex_GPX1$rsid =="rs78616393"),]
+# test_rsid = PS_YOUR_GENE_NAME[which(PS_YOUR_GENE_NAME$rsid =="rs78616393"),]
+# test_rsid = Gtex_YOUR_GENE_NAME[which(Gtex_YOUR_GENE_NAME$rsid =="rs78616393"),]
 
 rm(test2) # cleanup removing the extra table 
 
   
-#setwd("~/OneDrive - University of Bristol/PhD/Epidemiology/Cross-Reference/GtextoPheWAS-Sorted/GPX1")
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex")
-write_excel_csv(test, "GPX1_merge_GTEX_PHEWAS.csv")
+#setwd("~/OneDrive - University of Bristol/PhD/Epidemiology/Cross-Reference/GtextoPheWAS-Sorted/YOUR_GENE_NAME")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex")
+write_excel_csv(test, "YOUR_GENE_NAME_merge_GTEX_PHEWAS.csv")
 
 
 
@@ -406,8 +406,8 @@ Now that we have a merged table, we now need to filter out any ambiguous cases. 
 Firstly, Let's correct the beta value (this can be done later if you forget) :
 ```{r setting up a corrected beta column}
 # Setup df as our merged dataframe:
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex")
-df = read_csv("GPX1_merge_GTEX_PHEWAS.csv")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex")
+df = read_csv("YOUR_GENE_NAME_merge_GTEX_PHEWAS.csv")
 #Sometimes the alleles slip into TRUE/FALSE collumns so to correct that:
 df$a = as.character(df$a)
 df$b= as.character(df$b)
@@ -428,14 +428,14 @@ df=df[which(is.na(df$beta_cor)==F),] # Removing cases where alleles are complete
 
 
 
-write_excel_csv(df, "GPX1_merge_GTEX_PHEWAS-betacor.csv")
+write_excel_csv(df, "YOUR_GENE_NAME_merge_GTEX_PHEWAS-betacor.csv")
 ```
 
 ### 3b. ambiguous cases (AT  CG):
 To solve reverse vs sense strand issues
 ```{r setting up an ambiguous case column}
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex")
-df = read_csv("GPX1_merge_GTEX_PHEWAS-betacor.csv")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex")
+df = read_csv("YOUR_GENE_NAME_merge_GTEX_PHEWAS-betacor.csv")
 
 
 
@@ -462,8 +462,8 @@ paste0("The percentage of ambiguous cases is ",nrow(number_of_ambiguous_cases)/n
 
 head(df)
 
-#setwd("~/OneDrive - University of Bristol/PhD/Epidemiology/Cross-Reference/GtextoPheWAS-Sorted/GPX1")
-write_excel_csv(df, "GPX1_merge_GTEX_PHEWAS_betacor_ambig.csv")
+#setwd("~/OneDrive - University of Bristol/PhD/Epidemiology/Cross-Reference/GtextoPheWAS-Sorted/YOUR_GENE_NAME")
+write_excel_csv(df, "YOUR_GENE_NAME_merge_GTEX_PHEWAS_betacor_ambig.csv")
 
 ```
 For the moment we are just labelling the ambiguous data, we can filter it out when plotting.
@@ -479,8 +479,8 @@ We need to assign those groups to the main dataframe:
 
 ```{r Assign Trait Groups}
 # read in our df (traits vs SNPs)
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex")
-df = read_csv( "GPX1_merge_GTEX_PHEWAS_betacor_ambig.csv")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex")
+df = read_csv( "YOUR_GENE_NAME_merge_GTEX_PHEWAS_betacor_ambig.csv")
 # read in trait database
 setwd("C:/Users/Harry Young/Documents/Local Wokr/Trait and Tissue Groups")
 Full_trait_database = read_csv("Full_trait_database.csv")
@@ -556,8 +556,8 @@ df$beta_direction = ifelse(df$beta_cor<0, "Negative",
 df$NES_direction = ifelse(df$NES <0, "Negative",
 							ifelse(df$NES>0, "Positive", "No Change"))
 # save unorganised
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex")
-write_excel_csv(df, "GPX1_merge_GTEX_PHEWAS_betacor_ambig_grouped.csv")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex")
+write_excel_csv(df, "YOUR_GENE_NAME_merge_GTEX_PHEWAS_betacor_ambig_grouped.csv")
 ```
 
 
@@ -609,9 +609,9 @@ df = df[,c("Gene Symbol",
             #"LD_r2_0.75",
            # "LD_r2_0.5")] 
 
-# setwd("~/OneDrive - University of Bristol/PhD/Epidemiology/Cross-Reference/GtextoPheWAS-Sorted/GPX1")
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex")
-write_excel_csv(df, "GPX1_merge_GTEX_PHEWAS_betacor_ambig_grouped.csv")
+# setwd("~/OneDrive - University of Bristol/PhD/Epidemiology/Cross-Reference/GtextoPheWAS-Sorted/YOUR_GENE_NAME")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex")
+write_excel_csv(df, "YOUR_GENE_NAME_merge_GTEX_PHEWAS_betacor_ambig_grouped.csv")
 ```
 
 OK, looking good, we now have our new dataset, merged with the added columns for traitgroup and tissue group.
@@ -625,8 +625,8 @@ Firstly you need to clean up 'repeated traits'. This is annoying things like a c
 These 2 appear as separate traits where they are essentially the same. So the following lines helps clean this up. I tend to look at the plots then come back to this code to add in more errors. But this serves as a list of ones I've found!
 
 ```{r Cleaning up duplicated traits}
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex")
-df = read_csv("GPX1_merge_GTEX_PHEWAS_betacor_ambig_grouped.csv")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex")
+df = read_csv("YOUR_GENE_NAME_merge_GTEX_PHEWAS_betacor_ambig_grouped.csv")
 
 # all of these work as replace the first argument with the second argument
 df = df %>% 
@@ -760,8 +760,8 @@ if nrow(test) is 0 then no overlap, if not you need to check what overlap there 
 df = df[which(df$ambiguous == "No" | df$ambiguous == "FS"),]
 
 #And finally save it:
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex")
-write_csv(df, "GPX1_gtexPHEWAS_no_ukaORAmbig_FINAL.csv")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex")
+write_csv(df, "YOUR_GENE_NAME_gtexPHEWAS_no_ukaORAmbig_FINAL.csv")
 ```
 ###4d. Ok now to deal with those pesky LD snps  - SKIP IF YOU RAN 2.3 - it will error anyway if you try
 
@@ -780,16 +780,16 @@ The plan is as follows:
 BACKUP LOOP IN ARCHIVE
 
 ```{r Removal of LD linked snps for r20.5}
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex")
-unique_GPX1_Gtex_snps= read_tsv("unique_GPX1_Gtex_snps.csv", col_names = FALSE) # read the original unique snps file
-unique_GPX1_Gtex_snps = unique_GPX1_Gtex_snps$X1
-if(length(unique_GPX1_Gtex_snps)<700){
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex")
+unique_YOUR_GENE_NAME_Gtex_snps= read_tsv("unique_YOUR_GENE_NAME_Gtex_snps.csv", col_names = FALSE) # read the original unique snps file
+unique_YOUR_GENE_NAME_Gtex_snps = unique_YOUR_GENE_NAME_Gtex_snps$X1
+if(length(unique_YOUR_GENE_NAME_Gtex_snps)<700){
 rm(list=ls())
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex")
-load("rs_overlap_ALL_GPX1.RData")  # specifically the dataframe with ambiguous data removed
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex")
+load("rs_overlap_ALL_YOUR_GENE_NAME.RData")  # specifically the dataframe with ambiguous data removed
 ## Annoyingly, in testing this stuff I found another source of error in my code. There are a whole load of snps that have been associated with a trait twice with similar p-values - I think these are OK because essentially they have been shown by two separate studies.
 
-df = read_csv("GPX1_gtexPHEWAS_no_ukaORAmbig_FINAL.csv")
+df = read_csv("YOUR_GENE_NAME_gtexPHEWAS_no_ukaORAmbig_FINAL.csv")
 backup =df
 
 dfneg=backup[which(backup$beta_direction=="Negative"),]
@@ -1016,7 +1016,7 @@ test2pos = full_join(dfpos, backuppos, by = c("rsid","p","trait"))
 test2=rbind(test2neg,test2pos)
 test2 = test2 %>% rename(beta_direction = beta_direction.y)
 test2 = test2 %>% dplyr::select(-c("beta_direction.x"))
-write_csv(test2, "GPX1_gtexPHEWAS_no_ukaORAmbig_FINAL_linkagetempr20.5.csv")# full dataframe but with the "test" column 
+write_csv(test2, "YOUR_GENE_NAME_gtexPHEWAS_no_ukaORAmbig_FINAL_linkagetempr20.5.csv")# full dataframe but with the "test" column 
 
 ## OK now we've done that we can look at this ukb-d-raw vs irnt discrepancy
 
@@ -1024,11 +1024,11 @@ write_csv(test2, "GPX1_gtexPHEWAS_no_ukaORAmbig_FINAL_linkagetempr20.5.csv")# fu
 test = test2[which(test2$test=="unlinked"),]
 
 
-write_csv(test, "GPX1_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv") # reduced df
+write_csv(test, "YOUR_GENE_NAME_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv") # reduced df
 } else{
-  df = read_csv("GPX1_gtexPHEWAS_no_ukaORAmbig_FINAL.csv")
+  df = read_csv("YOUR_GENE_NAME_gtexPHEWAS_no_ukaORAmbig_FINAL.csv")
   df$test ="filler"
-  write_csv(df, "GPX1_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv")
+  write_csv(df, "YOUR_GENE_NAME_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv")
 }
 
 ```
@@ -1145,7 +1145,7 @@ Gtex_egenes_plot_full
 
 
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/Gtex_egene")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/Gtex_egene")
 ggsave("eGenesvsTissue.pdf")
 ```
 Now by Tissue Group:
@@ -1164,7 +1164,7 @@ Gtex_egenes_plot_full = ggplot(Gtex_egene_SUMMARY_CountsvsTissueGroup, aes(x=tis
 
 Gtex_egenes_plot_full
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/Gtex_egene") # SAVE it in dedicated plotting folder
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/Gtex_egene") # SAVE it in dedicated plotting folder
 ggsave("eGenesvsTissueGroup.pdf")
 ```
 
@@ -1183,7 +1183,7 @@ Gtex_samples_count_plot_full = ggplot(Gtex_egene, aes(x=Tissue, y=`# RNASeq and 
 
 Gtex_samples_count_plot_full
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/Gtex_egene") # SAVE it in dedicated plotting folder
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/Gtex_egene") # SAVE it in dedicated plotting folder
 ggsave("Num_samplesvsTissue.pdf")
 ```
 
@@ -1209,17 +1209,17 @@ Correlation = ggplot(Gtex_egene[1:49,], aes(x=RNASeq_and_Genotyped_Samples, y=eG
 
 Correlation
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/Gtex_egene") # SAVE it in dedicated plotting folder
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/Gtex_egene") # SAVE it in dedicated plotting folder
 ggsave("eGenesvsnumberSamples.pdf")
 ```
 
 
 ## our df plotting
-First step is to make sure that you are using the correctly filtered dataframe for no ambiguous or ukb-a data by loading in the ukaORambig_FINAL OR linkage removed set:  GPX1_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv dataframe as df:
+First step is to make sure that you are using the correctly filtered dataframe for no ambiguous or ukb-a data by loading in the ukaORambig_FINAL OR linkage removed set:  YOUR_GENE_NAME_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv dataframe as df:
 ```{r Reading in the FINAL df}
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex")
-# df = read_csv("GPX1_gtexPHEWAS_no_ukaORAmbig_FINAL.csv")
-df = read_csv("GPX1_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex")
+# df = read_csv("YOUR_GENE_NAME_gtexPHEWAS_no_ukaORAmbig_FINAL.csv")
+df = read_csv("YOUR_GENE_NAME_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv")
 ```
 Another thing to consider is the use of a -log10 p scale to make it a bot more readable. First we have to remove any annoying true zero values that appear from time to time, here I replace them with a very small p-value of 1e-300
 ```{r}
@@ -1230,8 +1230,8 @@ df$logp_DIR =1
 df$logp_DIR = if_else(df$NES_direction =="Negative", -1,1)
 df$logp_DIR = df$logp*df$logp_DIR
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex")
-write_csv(df, "GPX1_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex")
+write_csv(df, "YOUR_GENE_NAME_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv")
 
 ```
 
@@ -1240,20 +1240,20 @@ Now whenever we can do a variety of plots by pointing our plotting function (ggp
 
 
 ### NES vs tissue plots and expression data
-First, download the overview of GPX1 expression in the body from the Gtex search and save this.
+First, download the overview of YOUR_GENE_NAME expression in the body from the Gtex search and save this.
 
 Then it's useful to see what the original Gtex Data looks like in terms of tissues affected and direction of expression change:
 
 ```{r NES vs tissue FULL}
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex")
 
-Gtex_GPX1_START = read_csv("Gtex_GPX1_START.csv")
+Gtex_YOUR_GENE_NAME_START = read_csv("Gtex_YOUR_GENE_NAME_START.csv")
 
-NESvsTiss_full = ggplot(Gtex_GPX1_START, aes(x=Tissue, y=NES, color = `P-Value`)) + #Plot of SNPs NES vs beta from original dataset
+NESvsTiss_full = ggplot(Gtex_YOUR_GENE_NAME_START, aes(x=Tissue, y=NES, color = `P-Value`)) + #Plot of SNPs NES vs beta from original dataset
   #geom_jitter(aes(color=NES)) +
   geom_point(position = position_jitterdodge())+ # point plot with jitter to avoid overlap
   scale_colour_viridis_c(direction=-1) + # colourblind friendly palette
-  labs(title= "All GPX1 Expression Changes", x= "Tissue", y= "NES")+ # Lables
+  labs(title= "All YOUR_GENE_NAME Expression Changes", x= "Tissue", y= "NES")+ # Lables
   geom_hline(aes(yintercept=0,))+ #  0 line
   theme(axis.text.x = element_text(angle = 70, hjust =1))  # text adjust
 
@@ -1261,7 +1261,7 @@ NESvsTiss_full
 
 
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/NES_vs_tissue_and_overview") # save in this dedicated folder
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/NES_vs_tissue_and_overview") # save in this dedicated folder
 ggsave("NESvsTiss_full.pdf")
 ```
 
@@ -1278,13 +1278,13 @@ NESvsTiss = ggplot(eQTL_from_Phewas, aes(x=Tissue, y=NES, color = `P-Value`)) + 
   #geom_jitter(aes(color=NES)) +
   geom_point(position = position_jitterdodge())+
   scale_colour_viridis_c(direction=-1) +
-  labs(title= "GPX1 Expression Changes Occuring in PheWAS Search", x= "Tissue", y= "NES")+
+  labs(title= "YOUR_GENE_NAME Expression Changes Occuring in PheWAS Search", x= "Tissue", y= "NES")+
   geom_hline(aes(yintercept=0,))+
   theme(axis.text.x = element_text(angle = 70, hjust =1)) +
   geom_vline(aes(xintercept=0,))
 NESvsTiss
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/NES_vs_tissue_and_overview")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/NES_vs_tissue_and_overview")
 ggsave("NESvsTiss_Phewas.pdf")
 ```
 
@@ -1356,7 +1356,7 @@ Simple_traitgroup_plot = ggplot(test, aes(x=traitgroup, y =n/nrow(df))) + #Plot 
 Simple_traitgroup_plot
 
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots") #SAVE it
 ggsave("Simple_numbervstraitgroup.pdf")
 
 
@@ -1370,12 +1370,12 @@ Use of geom_count where spot size is how many overlaps there are:
 Count_plot = ggplot(df, aes(x=traitgroup, y=tissue_group)) + #Plot of Tissue vs trait for overlap
   geom_count()+
   scale_color_viridis_c()+
-  labs(title= "Overall GPX1 Correlations", paste("Overall Count = ", nrow(df)), x ="Trait Group", y = "Tissue Group")+  #CHANGETHIS
+  labs(title= "Overall YOUR_GENE_NAME Correlations", paste("Overall Count = ", nrow(df)), x ="Trait Group", y = "Tissue Group")+  #CHANGETHIS
   theme(axis.text.x = element_text(angle = 45, hjust =1))
 Count_plot
 
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/Tissue_Group_and_Trait_Group_overlap") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/Tissue_Group_and_Trait_Group_overlap") #SAVE it
 ggsave("Tiss-trait_overlap.pdf")
 ```
 
@@ -1384,11 +1384,11 @@ We can also facet these plots to be split based on increased/decreased expressio
 Count_facet = ggplot(df, aes(x=traitgroup, y=tissue_group)) + #Plot of Tissue vs trait for overlap
   geom_count()+
   scale_color_viridis_c()+
-  labs(title= "GPX1 Correlations by Change in Expression", caption = paste("Overall Count = ", nrow(df), "; Positive Count = ", nrow(df[which(df$NES>0),]), "; Negative Count = ", nrow(df[which(df$NES<0),])), x ="Trait Group", y = "Tissue Group")+  #CHANGETHIS
+  labs(title= "YOUR_GENE_NAME Correlations by Change in Expression", caption = paste("Overall Count = ", nrow(df), "; Positive Count = ", nrow(df[which(df$NES>0),]), "; Negative Count = ", nrow(df[which(df$NES<0),])), x ="Trait Group", y = "Tissue Group")+  #CHANGETHIS
   theme(axis.text.x = element_text(angle = 45, hjust =1))+ 
   facet_grid(cols = vars(NES_direction))
 Count_facet
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/Tissue_Group_and_Trait_Group_overlap") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/Tissue_Group_and_Trait_Group_overlap") #SAVE it
 ggsave("Tiss-trait_overlap_facet_by_NES.pdf")
 
 ```
@@ -1400,8 +1400,8 @@ Here it is important to use the df without SNPs in Linkage Disequilibrium. First
 LD_Gtex = df%>%
   dplyr::select(Tissue, tissue_group, rsid, `P-Value`, NES, position_gtex, chr_gtex, a, b, NES_direction)
 LD_Gtex = unique(LD_Gtex)
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex")
-write_csv(LD_Gtex, "GPX1_LDRED_Gtex.csv")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex")
+write_csv(LD_Gtex, "YOUR_GENE_NAME_LDRED_Gtex.csv")
 
 
 
@@ -1415,7 +1415,7 @@ SNPcount = ggplot(LD_Gtex, aes(x=rsid,  fill = NES_direction)) +
 SNPcount
 
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/snp_against_Tissue") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/snp_against_Tissue") #SAVE it
 ggsave("rsID_count_OVERVIEW.pdf")
 ```
 
@@ -1464,7 +1464,7 @@ SNPcount
 
 LD_Gtex$position_gtex = as.numeric(LD_Gtex$position_gtex)
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/snp_against_Tissue") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/snp_against_Tissue") #SAVE it
 ggsave("Position_count_OVERVIEW.pdf")
 ```
 ####Now the same thing but instead split by tissue:
@@ -1502,7 +1502,7 @@ SNPcountperTissue = ggplot(test, aes(x=Tissue, y=count/nrow(LD_Gtex), fill=NES_d
 
 SNPcountperTissue
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/snp_against_Tissue") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/snp_against_Tissue") #SAVE it
 ggsave("Tissue-rsid_count_OVERVIEW.pdf")
 
 
@@ -1543,7 +1543,7 @@ SNPcountperTissuegroup = ggplot(test, aes(x=tissue_group, y=count/nrow(LD_Gtex),
 
 SNPcountperTissuegroup
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/snp_against_Tissue") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/snp_against_Tissue") #SAVE it
 ggsave("TissueGROUP-rsid_count_OVERVIEW.pdf")
 
 
@@ -1552,8 +1552,8 @@ ggsave("TissueGROUP-rsid_count_OVERVIEW.pdf")
 ```{r}
 setwd("C:/Users/Harry Young/Documents/Local Wokr/Trait and Tissue Groups")
 Full_tissue_database = read_csv("Full_tissue_database.csv")
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex")
-Gtex = read_csv("GPX1_Gtex_cleaned.csv")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex")
+Gtex = read_csv("YOUR_GENE_NAME_Gtex_cleaned.csv")
 
 # Assign Tissue groups to Gtex Dataframe
 Gtex$tissue_group = Gtex$Tissue
@@ -1569,7 +1569,7 @@ for( n in 1:nrow(Gtex)){# goes through each tissue group and binds these to the 
 
 
 Gtex$NES_direction = ifelse(Gtex$NES > 0, "Positive", "Negative")
-write_csv(Gtex, "GPX1_Gtex_cleaned.csv") 
+write_csv(Gtex, "YOUR_GENE_NAME_Gtex_cleaned.csv") 
 
 
 list_of_tissuegroups = unique(Full_tissue_database$Tissue)
@@ -1607,7 +1607,7 @@ SNPcountperTissuegroup = ggplot(test, aes(x=tissue_group, y=count/nrow(Gtex), fi
 
 SNPcountperTissuegroup
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/snp_against_Tissue") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/snp_against_Tissue") #SAVE it
 ggsave("TissueGROUP-rsid_count_OVERVIEW_RED.pdf")
 
 
@@ -1615,8 +1615,8 @@ ggsave("TissueGROUP-rsid_count_OVERVIEW_RED.pdf")
 #### Correlation between RNA-seq/genotyped merged df - Checking the pattern isn't just beecause of this:
 ```{r Plotting the raw Gtex egene data against Tissue line graph}
 
-df_GPX1_RED = df %>% dplyr::select(Tissue, tissue_group, `P-Value`) 
-df_GPX1_RED = unique(df_GPX1_RED)
+df_YOUR_GENE_NAME_RED = df %>% dplyr::select(Tissue, tissue_group, `P-Value`) 
+df_YOUR_GENE_NAME_RED = unique(df_YOUR_GENE_NAME_RED)
 
 setwd("C:/Users/Harry Young/Documents/Local Wokr/eGene") 
 Gtex_egene = read_csv("FINAL_Gtex_egene.csv")
@@ -1625,9 +1625,9 @@ Gtex_egene = Gtex_egene %>% rename(eGenes = `# eGenes`,
 Gtex_egene$tissue_group = ifelse(Gtex_egene$tissue_group=="Respiratory", "Respiratory Tissue", Gtex_egene$tissue_group)
 # This Gtex_egene comes from earlier, need to work out whether I can doa read in step here...
 Gtex_RNA_forcomp = Gtex_egene %>% dplyr::select(RNASeq_and_Genotyped_Samples, Tissue, tissue_group)
-df_GPX1_forcomp = df_GPX1_RED %>% group_by(Tissue, tissue_group) %>% summarise(count = length(Tissue[!is.na(Tissue)]))
+df_YOUR_GENE_NAME_forcomp = df_YOUR_GENE_NAME_RED %>% group_by(Tissue, tissue_group) %>% summarise(count = length(Tissue[!is.na(Tissue)]))
 
-comparison_RNA = left_join(df_GPX1_forcomp, Gtex_RNA_forcomp, by=c("Tissue", "tissue_group"))
+comparison_RNA = left_join(df_YOUR_GENE_NAME_forcomp, Gtex_RNA_forcomp, by=c("Tissue", "tissue_group"))
 
 rsq <- function (x, y) cor(x, y) ^ 2
 r2 = rsq(comparison_RNA[,3],comparison_RNA[,4])
@@ -1651,7 +1651,7 @@ Correlation + annotate(geom="text",  x=12, y=20, label = paste0("r2 = ", round(r
 
 
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/snp_against_Tissue") # SAVE it in dedicated plotting folder
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/snp_against_Tissue") # SAVE it in dedicated plotting folder
 ggsave("RNAvsMERGEDdfcount.pdf")
 
 
@@ -1684,7 +1684,7 @@ SNPcountperTissueComb
 # 
 # SNPcountperTissueComb
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/snp_against_Tissue") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/snp_against_Tissue") #SAVE it
 ggsave("Tissue-rsid_count_COMBO_option2.pdf")
 
 }
@@ -1703,7 +1703,7 @@ SNPposcountperTissueComb = ggplot(test, aes(x=position_gtex,  y=Tissue, color="b
 
 SNPposcountperTissueComb
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/snp_against_Tissue") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/snp_against_Tissue") #SAVE it
 ggsave("Tissue-Position_count_FOR_GENE_Diagram_All_HIGHLIGHT.pdf", width=10, height=6)
 }
 ```
@@ -1721,7 +1721,7 @@ SNPposcountperTissueComb = ggplot(test[which(test$n>1),], aes(x=position_gtex,  
 
 SNPposcountperTissueComb
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/snp_against_Tissue") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/snp_against_Tissue") #SAVE it
 ggsave("Tissue-Position_count_FOR_GENE_Diagram_ZOOM.pdf")
 }
 ```
@@ -1739,14 +1739,14 @@ In this section, CARE WITH ylim() annotate()- you'll need to adjust both.
 
 Firstly, we will look at the overview of all snps relative to traitgroups:
 
-```{r NO CUTOFF Trait Groups Effected by SNPs that Change in Expression of GPX1 on Traits by logp}
+```{r NO CUTOFF Trait Groups Effected by SNPs that Change in Expression of YOUR_GENE_NAME on Traits by logp}
 
 df$beta_direction = factor(df$beta_direction, levels=c("Positive", "Negative"))
 pvsTrait = ggplot(df, aes(x=traitgroup, y=logp_DIR, color=beta_direction)) + #Plot of Traitgroup vs p (P-Value is the Gtex P not PS p)
   # geom_jitter(aes(color=NES)) + # Jitter can be nicer but i think i prefer point with jitterdodge
   geom_point(alpha=0.6, position = position_jitterdodge())+ #  alpha is transparancy from 0-1
   scale_colour_viridis_d(direction=-1, ) + # I like this palette but you can remove it or change it - green/blue option begin=0.2, end=0.7
-  labs(title= "Trait Groups Effected by SNPs that Change in Expression of GPX1" , x= "Trait Group", y= "-log(p)")+ #labels
+  labs(title= "Trait Groups Effected by SNPs that Change in Expression of YOUR_GENE_NAME" , x= "Trait Group", y= "-log(p)")+ #labels
   geom_hline(aes(yintercept=0,), alpha=0.3)+ # faint line at 0
   theme(axis.text.x = element_text(angle = 45, hjust =1)) + # setting up x axis labels so they don't overlap
   #facet_grid(rows = vars(NES_direction))+ # facet splits the plot based on a variable, in this case NES direction
@@ -1761,7 +1761,7 @@ pvsTrait = ggplot(df, aes(x=traitgroup, y=logp_DIR, color=beta_direction)) + #Pl
 pvsTrait
 
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/p vs traitgroup split Expression direction") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/p vs traitgroup split Expression direction") #SAVE it
 ggsave("pvalvstraitgroup_LOG.pdf")
 ```
 ####Raw count in each beta direction
@@ -1775,7 +1775,7 @@ pvsTrait = ggplot()+ #Plot of Traitgroup vs SNP Count
   #ylim(-0.175,0.175)+
   geom_hline(yintercept=0, color ="gray70")+
   scale_fill_viridis_d(direction=-1) + # I like this palette but you can remove it or change it 
-  labs(title= "Trait Groups Effected by SNPs that Change in Expression of GPX1" , x= "Trait Group", y= paste("Number of SNP-Trait \nAssociations"))+ #labels
+  labs(title= "Trait Groups Effected by SNPs that Change in Expression of YOUR_GENE_NAME" , x= "Trait Group", y= paste("Number of SNP-Trait \nAssociations"))+ #labels
   theme(axis.text.x = element_text(angle = 45, hjust =1))+  # setting up x axis labels so they don't overlap
   #facet_grid(cols = vars(NES_direction)) # facet splits the plot based on a variable, in this case NES direction
   annotate("label",
@@ -1789,7 +1789,7 @@ pvsTrait
 
 
   
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/p vs traitgroup split Expression direction") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/p vs traitgroup split Expression direction") #SAVE it
 ggsave("COUNTvstraitgroup_overview_SEATLE.pdf")
 
 
@@ -1804,7 +1804,7 @@ pvsTrait = ggplot()+ #Plot of Traitgroup vs SNP Count
     geom_hline(yintercept=0, color ="gray70")+
   #ylim(-0.175,0.175)+
   scale_fill_viridis_d(direction=-1) + # I like this palette but you can remove it or change it 
-  labs(title= "Trait Groups Effected by SNPs that Change in Expression of GPX1" , x= "Trait Group", y= paste("Relative Number of SNP-Trait \nAssociations (n/Total)"))+ #labels
+  labs(title= "Trait Groups Effected by SNPs that Change in Expression of YOUR_GENE_NAME" , x= "Trait Group", y= paste("Relative Number of SNP-Trait \nAssociations (n/Total)"))+ #labels
   theme(axis.text.x = element_text(angle = 45, hjust =1))+  # setting up x axis labels so they don't overlap
   #facet_grid(cols = vars(NES_direction)) # facet splits the plot based on a variable, in this case NES direction
   annotate("label",
@@ -1815,7 +1815,7 @@ pvsTrait = ggplot()+ #Plot of Traitgroup vs SNP Count
            fill =c("darkorchid4","darkorchid4"))
 pvsTrait
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/p vs traitgroup split Expression direction") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/p vs traitgroup split Expression direction") #SAVE it
 ggsave("COUNTvstraitgroup_REL_overview_SEATLE.pdf")
 
 
@@ -1829,7 +1829,7 @@ pvsTrait = ggplot()+ #Plot of Traitgroup vs SNP Count
     geom_hline(yintercept=0, color ="gray70")+
   #ylim(-0.175,0.175)+
   scale_fill_viridis_d(direction=-1) + # I like this palette but you can remove it or change it 
-  labs(title= "Trait Groups Effected by SNPs that Change in Expression of GPX1" , x= "Trait Group", y= paste("Relative Number of SNP-Trait \nAssociations (n/Total)"))+ #labels
+  labs(title= "Trait Groups Effected by SNPs that Change in Expression of YOUR_GENE_NAME" , x= "Trait Group", y= paste("Relative Number of SNP-Trait \nAssociations (n/Total)"))+ #labels
   theme(axis.text.x = element_text(angle = 45, hjust =1))+  # setting up x axis labels so they don't overlap
   #facet_grid(cols = vars(NES_direction)) # facet splits the plot based on a variable, in this case NES direction
   annotate("label",
@@ -1840,7 +1840,7 @@ pvsTrait = ggplot()+ #Plot of Traitgroup vs SNP Count
            fill =c("darkorchid4","darkorchid4"))
 pvsTrait
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/p vs traitgroup split Expression direction") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/p vs traitgroup split Expression direction") #SAVE it
 ggsave("COUNTvstraitgroup_REL_overview_SEATLE_NOOGEC.pdf")
 
 
@@ -1848,7 +1848,7 @@ ggsave("COUNTvstraitgroup_REL_overview_SEATLE_NOOGEC.pdf")
 
 Now for pvstrait but with 5e-8 p-val cutoff: 
 
-```{r Trait Groups Effected by SNPs that Change in Expression of GPX1 on Traits}
+```{r Trait Groups Effected by SNPs that Change in Expression of YOUR_GENE_NAME on Traits}
 
 
 pvsTraitCUTOFF = ggplot()+ #Plot of Traitgroup vs SNP Count
@@ -1856,7 +1856,7 @@ pvsTraitCUTOFF = ggplot()+ #Plot of Traitgroup vs SNP Count
   geom_bar(data= df[which(df$NES_direction=="Negative" & df$p<5e-8),], aes(x=traitgroup, fill=beta_direction, y=(..count../nrow(df[which(df$NES_direction=="Negative" & df$p<5e-8),]))*-1),  position = position_dodge2(width = 1, preserve = "single"))+##  alpha is transparancy from 0-1
   #ylim(-0.175,0.175)+
   scale_fill_viridis_d(direction=-1) + # I like this palette but you can remove it or change it 
-  labs(title= "Trait Groups Effected by SNPs that Change in Expression of GPX1 (p<5e-8)" , x= "Trait Group", y= paste("Relative Number of SNP-Trait \nAssociations (n/Total)"))+ #labels
+  labs(title= "Trait Groups Effected by SNPs that Change in Expression of YOUR_GENE_NAME (p<5e-8)" , x= "Trait Group", y= paste("Relative Number of SNP-Trait \nAssociations (n/Total)"))+ #labels
   theme(axis.text.x = element_text(angle = 45, hjust =1))+  # setting up x axis labels so they don't overlap
   #facet_grid(cols = vars(NES_direction)) # facet splits the plot based on a variable, in this case NES direction
   annotate("label",
@@ -1867,7 +1867,7 @@ pvsTraitCUTOFF = ggplot()+ #Plot of Traitgroup vs SNP Count
            fill =c("darkorchid4","darkorchid4"))
 pvsTraitCUTOFF
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/p vs traitgroup split Expression direction") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/p vs traitgroup split Expression direction") #SAVE it
 ggsave("pvalvstraitgroup_MIAMI_CUTOFF.pdf")
 
 ```
@@ -1883,7 +1883,7 @@ pvsTrait_bytraitgroup = ggplot(df, aes(x=trait, y=logp_DIR, color=beta_direction
   # geom_jitter(aes(color=NES)) + # Jitter can be nicer but i think i prefer point with jitterdodge
   geom_point(alpha=0.6, position = position_jitterdodge())+ #  alpha is transparancy from 0-1
   scale_colour_viridis_d(direction=1, ) + # I like this palette but you can remove it or change it - green/blue option begin=0.2, end=0.7
-  labs(title= "Traits Effected by SNPs that Change in Expression of GPX1" , x= "Trait by Traitgroup", y= "-log(p)")+ #labels
+  labs(title= "Traits Effected by SNPs that Change in Expression of YOUR_GENE_NAME" , x= "Trait by Traitgroup", y= "-log(p)")+ #labels
   geom_hline(aes(yintercept=0,), alpha=0.3)+ # faint line at 0
   theme(axis.text.x = element_text(angle = 70, hjust =1)) + # setting up x axis labels so they don't overlap
   facet_grid(cols = vars(traitgroup), scales = "free_x", switch = 'x') 
@@ -1894,18 +1894,18 @@ pvsTrait_bytraitgroup = ggplot(df, aes(x=trait, y=logp_DIR, color=beta_direction
 pvsTrait_bytraitgroup
 
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
 ggsave("pvsTrait_bytraitgroup.pdf", width = 30, height =15)# Actually setting some dimensions due to long names
 ```
 With cutoff:
 
-```{r Traits Effected by SNPs that Change in Expression of GPX1}
+```{r Traits Effected by SNPs that Change in Expression of YOUR_GENE_NAME}
 
 pvsTrait_fullfacet = ggplot(df[which(df$p<5e-8),], aes(x=trait, y=logp_DIR, color=beta_direction)) + #Plot of Traitgroup vs p (P-Value is the Gtex P not PS p)
   # geom_jitter(aes(color=NES)) + # Jitter can be nicer but i think i prefer point with jitterdodge
   geom_point(alpha=0.6, position = position_jitterdodge())+ #  alpha is transparancy from 0-1
   scale_colour_viridis_d(direction=-1, ) + # I like this palette but you can remove it or change it - green/blue option begin=0.2, end=0.7
-  labs(title= "Traits Effected by SNPs that Change in Expression of GPX1" , x= "Trait by Traitgroup", y= "-log(p)")+ #labels
+  labs(title= "Traits Effected by SNPs that Change in Expression of YOUR_GENE_NAME" , x= "Trait by Traitgroup", y= "-log(p)")+ #labels
   geom_hline(aes(yintercept=0,), alpha=0.3)+ # faint line at 0
   theme(axis.text.x = element_text(angle = 70, hjust =1)) + # setting up x axis labels so they don't overlap
   facet_grid(cols = vars(traitgroup), scales = "free_x", switch = 'x') 
@@ -1914,7 +1914,7 @@ pvsTrait_fullfacet = ggplot(df[which(df$p<5e-8),], aes(x=trait, y=logp_DIR, colo
   #annotate("label",x=c(19.3,19.3), y=c(175,-175), label=c("Positive","Negative"), colour = c("white","white"), fill =c("darkorchid4","darkorchid4"))# change x and y coordinates to move the floating labels
 pvsTrait_fullfacet
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
 ggsave("pvalvstrait_bytraitgroupCUTOFF.pdf", width = 10, height =6)# Actually setting some dimensions due to long names
 ```
 Now that plot is a big one and often needs tweaking so do change the height and width in the code and then check it in the folder you've saved it in. Not as automated but at this point it's kind of up to you on how much you want to change the plotting to suit your own needs.
@@ -1929,7 +1929,7 @@ pvsTrait_byINFL = ggplot(df[which(df$traitgroup =="Inflammation"),], aes(x=trait
   # geom_jitter(aes(color=NES)) + # Jitter can be nicer but i think i prefer point with jitterdodge
   geom_point(position = position_jitterdodge(), size =2)+ #  alpha is transparancy from 0-1
   scale_colour_viridis_d(direction=-1, ) + # I like this palette but you can remove it or change it - green/blue option begin=0.2, end=0.7
-  labs(title= "Trait Groups Effected by SNPs that Change in Expression of GPX1" , x= "Trait Group", y= "-log(p)")+ #labels
+  labs(title= "Trait Groups Effected by SNPs that Change in Expression of YOUR_GENE_NAME" , x= "Trait Group", y= "-log(p)")+ #labels
   geom_hline(aes(yintercept=0,), alpha=0.3)+# faint line at 0
   geom_hline(aes(yintercept=4,), alpha=0.3, color="red")+
   geom_hline(aes(yintercept=-4,), alpha=0.3, color="red")+
@@ -1943,7 +1943,7 @@ pvsTrait_byINFL = ggplot(df[which(df$traitgroup =="Inflammation"),], aes(x=trait
            fill =c("darkorchid4","darkorchid4"))
 pvsTrait_byINFL
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
 ggsave("pvsTrait_INFL_LOG.pdf", width = 6, height =10)# Actually setting some dimensions due to long names
 }
 ```
@@ -1956,7 +1956,7 @@ pvsTrait_byINFL = ggplot(df[which(df$traitgroup =="Inflammation"),], aes(x=trait
   # geom_jitter(aes(color=NES)) + # Jitter can be nicer but i think i prefer point with jitterdodge
   geom_point(position = position_jitterdodge(), size =2)+ #  alpha is transparancy from 0-1
   scale_colour_viridis_d(direction=-1, ) + # I like this palette but you can remove it or change it - green/blue option begin=0.2, end=0.7
-  labs(title= "Trait Groups Effected by SNPs that Change in Expression of GPX1" , x= "Trait Group", y= "-log(p)")+ #labels
+  labs(title= "Trait Groups Effected by SNPs that Change in Expression of YOUR_GENE_NAME" , x= "Trait Group", y= "-log(p)")+ #labels
   geom_hline(aes(yintercept=0,), alpha=0.3)+# faint line at 0
   geom_hline(aes(yintercept=4,), alpha=0.3, color="red")+
   geom_hline(aes(yintercept=-4,), alpha=0.3, color="red")+
@@ -1970,7 +1970,7 @@ pvsTrait_byINFL = ggplot(df[which(df$traitgroup =="Inflammation"),], aes(x=trait
            fill =c("darkorchid4","darkorchid4"))
 pvsTrait_byINFL
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
 ggsave("pvsTrait_INFL_LOG_TISCOL.pdf", width = 6, height =7)# Actually setting some dimensions due to long names
 }
 ```
@@ -1987,7 +1987,7 @@ pvsTrait_byINFL = ggplot(subcat, aes(x=trait, y=logp_DIR, color=beta_direction))
   # geom_jitter(aes(color=NES)) + # Jitter can be nicer but i think i prefer point with jitterdodge
   geom_point(position = position_jitterdodge(), size =1)+ #  alpha is transparancy from 0-1
   scale_colour_viridis_d(direction=-1, ) + # I like this palette but you can remove it or change it - green/blue option begin=0.2, end=0.7
-  labs(title= "Inflammation Trait Groups Effected by SNPs that Change in Expression of GPX1" , x= "Trait Group", y= "-log(p)")+ #labels
+  labs(title= "Inflammation Trait Groups Effected by SNPs that Change in Expression of YOUR_GENE_NAME" , x= "Trait Group", y= "-log(p)")+ #labels
   geom_hline(yintercept=0, alpha=0.3)+# faint line at 0
   # geom_hline(yintercept=4, alpha=0.3, color="red")+
   # geom_hline(yintercept=-4, alpha=0.3, color="red")+
@@ -2001,7 +2001,7 @@ pvsTrait_byINFL = ggplot(subcat, aes(x=trait, y=logp_DIR, color=beta_direction))
   #          fill =c("darkorchid4","darkorchid4"))
 pvsTrait_byINFL
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
 ggsave("pvsTrait_INFL_LOG_TISCOL.pdf", width = 12, height =10)# Actually setting some dimensions due to long names
 }
 ```
@@ -2016,7 +2016,7 @@ pvsTrait_bybody = ggplot(subcat, aes(x=trait, y=logp_DIR, color=beta_direction))
   # geom_jitter(aes(color=NES)) + # Jitter can be nicer but i think i prefer point with jitterdodge
   geom_point(position = position_jitterdodge(), size =1)+ #  alpha is transparancy from 0-1
   scale_colour_viridis_d(direction=-1, ) + # I like this palette but you can remove it or change it - green/blue option begin=0.2, end=0.7
-  labs(title= "Body Fat/Size Trait Groups Effected by SNPs that Change in Expression of GPX1" , x= "Trait Group", y= "-log(p)")+ #labels
+  labs(title= "Body Fat/Size Trait Groups Effected by SNPs that Change in Expression of YOUR_GENE_NAME" , x= "Trait Group", y= "-log(p)")+ #labels
   geom_hline(yintercept=0, alpha=0.3)+# faint line at 0
   geom_hline(yintercept=4, alpha=0.3, color="red")+
   geom_hline(yintercept=-4, alpha=0.3, color="red")+
@@ -2030,7 +2030,7 @@ pvsTrait_bybody = ggplot(subcat, aes(x=trait, y=logp_DIR, color=beta_direction))
   #          fill =c("darkorchid4","darkorchid4"))
 pvsTrait_bybody
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
 ggsave("pvsTrait_BODY_LOG_TISCOL.pdf")# Actually setting some dimensions due to long names
 }
 
@@ -2044,7 +2044,7 @@ pvsTrait_bybody = ggplot() + #Plot of Traitgroup vs p (P-Value is the Gtex P not
     geom_bar(data= subcat[which(subcat$NES_direction=="Positive"),], aes(x=trait, fill=beta_direction, y=..count../nrow(subcat[which(subcat$NES_direction=="Positive"),])),  position = position_dodge2(width = 1, preserve = "single"))+
   geom_bar(data= subcat[which(subcat$NES_direction=="Negative"),], aes(x=trait, fill=beta_direction, y=(..count../nrow(subcat[which(subcat$NES_direction=="Negative"),]))*-1),  position = position_dodge2(width = 1, preserve = "single"))+##  alpha
   scale_fill_viridis_d(direction=-1, ) + # I like this palette but you can remove it or change it - green/blue option begin=0.2, end=0.7
-  labs(title= "Body Fat/Size Trait Groups Effected by SNPs that Change in Expression of GPX1" , x= "Trait Group", y= "Relative Count")+ #labels
+  labs(title= "Body Fat/Size Trait Groups Effected by SNPs that Change in Expression of YOUR_GENE_NAME" , x= "Trait Group", y= "Relative Count")+ #labels
   geom_hline(yintercept=0, alpha=0.3)+# faint line at 0
   theme(axis.text.x = element_text(angle = 45, hjust =1)) + # setting up x axis labels so they don't overlap
   facet_grid(cols = vars(Subcat), scales="free", space="free_x") # facet splits the plot based on a variable, in this case NES direction
@@ -2056,7 +2056,7 @@ pvsTrait_bybody = ggplot() + #Plot of Traitgroup vs p (P-Value is the Gtex P not
   #          fill =c("darkorchid4","darkorchid4"))
 pvsTrait_bybody
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
 ggsave("pvsTrait_BODY_LOG_TISCOL_BAR.pdf")# Actually setting some dimensions due to long names
 }
 ```
@@ -2072,7 +2072,7 @@ pvsTrait_bykidney = ggplot(subcat, aes(x=trait, y=logp_DIR, color=beta_direction
   # geom_jitter(aes(color=NES)) + # Jitter can be nicer but i think i prefer point with jitterdodge
   geom_point(position = position_jitterdodge(), size =1)+ #  alpha is transparancy from 0-1
   scale_colour_viridis_d(direction=-1, ) + # I like this palette but you can remove it or change it - green/blue option begin=0.2, end=0.7
-  labs(title= "Kidney Trait Groups Effected by SNPs that Change in Expression of GPX1" , x= "Trait Group", y= "-log(p)")+ #labels
+  labs(title= "Kidney Trait Groups Effected by SNPs that Change in Expression of YOUR_GENE_NAME" , x= "Trait Group", y= "-log(p)")+ #labels
   geom_hline(yintercept=0, alpha=0.3)+# faint line at 0
   geom_hline(yintercept=4, alpha=0.3, color="red")+
   geom_hline(yintercept=-4, alpha=0.3, color="red")+
@@ -2086,7 +2086,7 @@ pvsTrait_bykidney = ggplot(subcat, aes(x=trait, y=logp_DIR, color=beta_direction
   #          fill =c("darkorchid4","darkorchid4"))
 pvsTrait_bykidney
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
 ggsave("pvsTrait_Kidney_LOG_TISCOL.pdf")# Actually setting some dimensions due to long names
 }
 
@@ -2099,7 +2099,7 @@ pvsTrait_byRF = ggplot(df[which(df$traitgroup =="Respiratory"),], aes(x=trait, y
   # geom_jitter(aes(color=NES)) + # Jitter can be nicer but i think i prefer point with jitterdodge
   geom_point(alpha=0.6, position = position_jitterdodge())+ #  alpha is transparancy from 0-1
   scale_colour_viridis_d(direction=1, ) + # I like this palette but you can remove it or change it - green/blue option begin=0.2, end=0.7
-  labs(title= "Trait Groups Effected by SNPs that Change in Expression of GPX1" , x= "Trait Group", y= "-log(p)")+ #labels
+  labs(title= "Trait Groups Effected by SNPs that Change in Expression of YOUR_GENE_NAME" , x= "Trait Group", y= "-log(p)")+ #labels
   geom_hline(aes(yintercept=0,), alpha=0.3)+# faint line at 0
   geom_hline(aes(yintercept=4,), alpha=0.3, color="red")+
   geom_hline(aes(yintercept=-4,), alpha=0.3, color="red")+
@@ -2113,7 +2113,7 @@ pvsTrait_byRF = ggplot(df[which(df$traitgroup =="Respiratory"),], aes(x=trait, y
            fill =c("darkorchid4","darkorchid4"))
 pvsTrait_byRF
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
 ggsave("pvsTrait_respFunc_LOG.pdf", width = 6, height =10)# Actually setting some dimensions due to long names
 }
 
@@ -2127,7 +2127,7 @@ pvsTrait_byRF = ggplot(df[which(df$Subcat =="Other Gene Expression Change"),], a
   # geom_jitter(aes(color=NES)) + # Jitter can be nicer but i think i prefer point with jitterdodge
   geom_point(alpha=0.6, position = position_jitterdodge())+ #  alpha is transparancy from 0-1
   scale_colour_viridis_d(direction=1, ) + # I like this palette but you can remove it or change it - green/blue option begin=0.2, end=0.7
-  labs(title= "Trait Groups Effected by SNPs that Change in Expression of GPX1" , x= "Trait Group", y= "-log(p)")+ #labels
+  labs(title= "Trait Groups Effected by SNPs that Change in Expression of YOUR_GENE_NAME" , x= "Trait Group", y= "-log(p)")+ #labels
   geom_hline(aes(yintercept=0,), alpha=0.3)+# faint line at 0
   geom_hline(aes(yintercept=4,), alpha=0.3, color="red")+
   geom_hline(aes(yintercept=-4,), alpha=0.3, color="red")+
@@ -2141,7 +2141,7 @@ pvsTrait_byRF = ggplot(df[which(df$Subcat =="Other Gene Expression Change"),], a
            fill =c("darkorchid4","darkorchid4"))
 pvsTrait_byRF
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
 ggsave("pvsTrait_OEGC_LOG.pdf", width = 6, height =10)# Actually setting some dimensions due to long names
 }
 ```
@@ -2150,20 +2150,20 @@ ggsave("pvsTrait_OEGC_LOG.pdf", width = 6, height =10)# Actually setting some di
 For each trait it might also be nice to see how many positive and negative beta values there are for each expression type.
 
 For this we use the same basic plotting setup but using geom_bar and no specific 'y=' setting in aes().
-```{r Number of SNPs that Change Expression of GPX1 and Effect a Trait, fig.width=30,fig.height=30}
+```{r Number of SNPs that Change Expression of YOUR_GENE_NAME and Effect a Trait, fig.width=30,fig.height=30}
 
 num_of_SNPs_by_beta = ggplot()+ #Plot of Traitgroup vs SNP Count
   geom_bar(data= df[which(df$NES_direction=="Positive"),], aes(x=trait, color=beta_direction, y=..count../nrow(df[which(df$NES_direction=="Positive"),])), alpha=0.6, position = position_dodge2(width = 1, preserve = "single"))+
   geom_bar(data= df[which(df$NES_direction=="Negative"),], aes(x=trait, color=beta_direction, y=(..count../nrow(df[which(df$NES_direction=="Negative" ),]))*-1), alpha=0.6, position = position_dodge2(width = 1, preserve = "single"))+##  alpha is transparancy from 0-1
   #ylim(-0.175,0.175)+
   scale_colour_viridis_d(direction=1) + # I like this palette but you can remove it or change it 
-  labs(title= "Number of SNPs that Change in Expression of GPX1 and Effect a Trait" , x= "Trait Group", y= paste("Relative Number of SNP-Trait \nAssociations (n/Total)"))+ #labels
+  labs(title= "Number of SNPs that Change in Expression of YOUR_GENE_NAME and Effect a Trait" , x= "Trait Group", y= paste("Relative Number of SNP-Trait \nAssociations (n/Total)"))+ #labels
   theme(axis.text.x = element_text(angle = 45, hjust =1))+ # setting up x axis labels so they don't overlap
   facet_grid(cols = vars(traitgroup), scales = "free_x", switch = 'x') 
   #annotate("label",x=c(10.6,10.6), y=c(0.2,-0.17), label=c("Positive","Negative"), colour = c("white","white"), fill =c("darkorchid4","darkorchid4"))
 num_of_SNPs_by_beta
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/p vs trait split by trait group and Expression direction") #SAVE it
 ggsave("num_of_SNPs_by_beta_CUTOFF.pdf", width = 10, height =6)# Actually setting some dimensions due to long names
 ```
 
@@ -2173,7 +2173,7 @@ ggsave("num_of_SNPs_by_beta_CUTOFF.pdf", width = 10, height =6)# Actually settin
 ### Preamble, data setup steps
 YOU MUST DO THESE MANUAL STEPS BEFORE KNITTING 
 
-First you have to look up the exon table and regulatory features from ensembl. Then bind it to the new merged df and the original GPX1_Gtex_cleaned df. This step is a little more manual. Unfortunately gene to gene it's hard to write a consistent bit of code for finding introns and exons and cleaning up the df to be what you want it to be. Maybe I can come back here in the final tidying steps! 
+First you have to look up the exon table and regulatory features from ensembl. Then bind it to the new merged df and the original YOUR_GENE_NAME_Gtex_cleaned df. This step is a little more manual. Unfortunately gene to gene it's hard to write a consistent bit of code for finding introns and exons and cleaning up the df to be what you want it to be. Maybe I can come back here in the final tidying steps! 
 #### 1. Gene exon/intron setup
 This section now grabs all exons from all available protein coding transcripts from ensembl. 
 
@@ -2182,7 +2182,7 @@ This section now grabs all exons from all available protein coding transcripts f
 *Save into a dedicated folder: All_Exon_Options. as "your_file_name.csv"
 *Repeat for all possible transcripts
 ```{r assigning gene regions to df and gtex}
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Ensembl/All_Exon_Options")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Ensembl/All_Exon_Options")
 
 temp = list.files(pattern="*.csv")
 myfiles = lapply(temp, read_csv)
@@ -2194,41 +2194,41 @@ for(n in 1:length(myfiles)){
 }
 
 
-GPX1_structure =bind_rows(myfiles, .id="id") # merges the list of dataframes into one dataframe
+YOUR_GENE_NAME_structure =bind_rows(myfiles, .id="id") # merges the list of dataframes into one dataframe
 
-GPX1_structure = GPX1_structure[!grepl("stream", GPX1_structure$`Exon / Intron`),] # remove the 5' and 3' up/downstream regions
-GPX1_structure$EI <- !!rowSums(sapply(GPX1_structure, grepl, pattern = "ENSE"))
-GPX1_structure$EI = if_else(GPX1_structure$EI ==TRUE, "Exon", "Intron")
+YOUR_GENE_NAME_structure = YOUR_GENE_NAME_structure[!grepl("stream", YOUR_GENE_NAME_structure$`Exon / Intron`),] # remove the 5' and 3' up/downstream regions
+YOUR_GENE_NAME_structure$EI <- !!rowSums(sapply(YOUR_GENE_NAME_structure, grepl, pattern = "ENSE"))
+YOUR_GENE_NAME_structure$EI = if_else(YOUR_GENE_NAME_structure$EI ==TRUE, "Exon", "Intron")
 
 # Finally just making a simple to use mini version of the main table of exons/introns
-GPX1_structure_FIN = GPX1_structure %>% dplyr::select( Start, End, EI)
-GPX1_structure_FIN = unique(GPX1_structure_FIN)
+YOUR_GENE_NAME_structure_FIN = YOUR_GENE_NAME_structure %>% dplyr::select( Start, End, EI)
+YOUR_GENE_NAME_structure_FIN = unique(YOUR_GENE_NAME_structure_FIN)
 
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Ensembl")
-write_csv(GPX1_structure_FIN, "GPX1_structure_FIN.csv")
-write_csv(GPX1_structure, "GPX1_structure_FULL.csv")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Ensembl")
+write_csv(YOUR_GENE_NAME_structure_FIN, "YOUR_GENE_NAME_structure_FIN.csv")
+write_csv(YOUR_GENE_NAME_structure, "YOUR_GENE_NAME_structure_FULL.csv")
 
 ```
 Now to load in and modify the main df and Gtex in order to have information on where the SNPS are in relation the the gene
 ```{r}
 
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Ensembl")
-GPX1_structure_FIN =read_csv("GPX1_structure_FIN.csv")
-GPX1_structure =read_csv( "GPX1_structure_FULL.csv")
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex")
-df = read_csv("GPX1_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv")
-Gtex = read_csv("GPX1_Gtex_cleaned.csv")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Ensembl")
+YOUR_GENE_NAME_structure_FIN =read_csv("YOUR_GENE_NAME_structure_FIN.csv")
+YOUR_GENE_NAME_structure =read_csv( "YOUR_GENE_NAME_structure_FULL.csv")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex")
+df = read_csv("YOUR_GENE_NAME_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv")
+Gtex = read_csv("YOUR_GENE_NAME_Gtex_cleaned.csv")
 
 
 
 
-limitsSTART = GPX1_structure[which.max(GPX1_structure$Start),]
-limitsEND = GPX1_structure[which.min(GPX1_structure$End),]
+limitsSTART = YOUR_GENE_NAME_structure[which.max(YOUR_GENE_NAME_structure$Start),]
+limitsEND = YOUR_GENE_NAME_structure[which.min(YOUR_GENE_NAME_structure$End),]
 limits =rbind(limitsSTART,limitsEND)
 
-exons = GPX1_structure[which(GPX1_structure$EI=="Exon"),] # select just exon rows
+exons = YOUR_GENE_NAME_structure[which(YOUR_GENE_NAME_structure$EI=="Exon"),] # select just exon rows
 exons = exons %>% dplyr::select(EI, Start, End) # simplify to raw exon boundaries
 exons = unique(exons) # remove all duplicates
 
@@ -2242,7 +2242,7 @@ for(n in 1:nrow(df)){
 
 
 # setting up a "within Gene region" column by testing if position is within ANY exons, if not autmatically set to intron
-df$Intron_or_Exon = "Intron" # confusingly GPX1 runs backwards so all the signs are flipped to make sense : START>POS>END
+df$Intron_or_Exon = "Intron" # confusingly YOUR_GENE_NAME runs backwards so all the signs are flipped to make sense : START>POS>END
 for( n in 1:nrow(df)){
   for(i in 1:nrow(exons)){
     if(exons$Start[i]>=df$position_gtex[n] & df$position_gtex[n]>=exons$End[i]){
@@ -2269,7 +2269,7 @@ for(n in 1:nrow(Gtex)){
 
 
 
-Gtex$Intron_or_Exon = "Intron" # confusingly GPX1 runs backwards so all the signs are flipped to make sense : START>POS>END
+Gtex$Intron_or_Exon = "Intron" # confusingly YOUR_GENE_NAME runs backwards so all the signs are flipped to make sense : START>POS>END
 for( n in 1:nrow(Gtex)){
   for(i in 1:nrow(exons)){
     if(exons$Start[i]>=Gtex$position_gtex[n] & Gtex$position_gtex[n]>=exons$End[i]){
@@ -2288,8 +2288,8 @@ for(n in 1:nrow(Gtex)){
 
 
  # Only run these next 2 lines if it's the first time, merges changes with the previous data file for simplicity
-write_csv(df, "GPX1_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv")
-write_csv(Gtex, "GPX1_Gtex_cleaned.csv")
+write_csv(df, "YOUR_GENE_NAME_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv")
+write_csv(Gtex, "YOUR_GENE_NAME_Gtex_cleaned.csv")
 
 ```
 #### 2. Regulatory region setup
@@ -2303,29 +2303,29 @@ This simply looks to see if the SNP position is within any of the regulatory reg
 2. Next choose chromosome and start/end based on Gtex data and merged
 3. Run getBM() to pull out human regulatory features within this region
 ```{r Assigning regulatory regions}
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Ensembl")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Ensembl")
 
 
 ensembl = useMart("ENSEMBL_MART_FUNCGEN")
 ensembl = useDataset("hsapiens_regulatory_feature",mart=ensembl)
 # make varibles for chromosome and start and end + fudge factor (to include final points)
 chr = df$chr_phewas[1]
-GPX1_region_st = min(Gtex$position_gtex-10000) # 9640000
-GPX1_region_fin = max(Gtex$position_gtex+10000) #  11400000
-filter_values=list(chr,GPX1_region_st,GPX1_region_fin)
+YOUR_GENE_NAME_region_st = min(Gtex$position_gtex-10000) # 9640000
+YOUR_GENE_NAME_region_fin = max(Gtex$position_gtex+10000) #  11400000
+filter_values=list(chr,YOUR_GENE_NAME_region_st,YOUR_GENE_NAME_region_fin)
 temp = getBM(attributes=c("chromosome_name", "chromosome_start", "chromosome_end", "feature_type_name"), 
       filters = c("chromosome_name", "start", "end"),
       values = filter_values, 
       mart = ensembl)
 
-write_csv(temp, "GPX1_full_REG_region.csv")
+write_csv(temp, "YOUR_GENE_NAME_full_REG_region.csv")
 ```
 Now we assign those reg features to df and gtex dataframes
 ```{r}
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Ensembl")
-reg_feat = read_csv("GPX1_full_REG_region.csv") # from biomart from ensembl - 
-# setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex")
-# df = read_csv("GPX1_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv") # from before
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Ensembl")
+reg_feat = read_csv("YOUR_GENE_NAME_full_REG_region.csv") # from biomart from ensembl - 
+# setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex")
+# df = read_csv("YOUR_GENE_NAME_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv") # from before
 # df, and Gtex from previous CHUNK
 
 
@@ -2351,8 +2351,8 @@ for(n in 1:nrow(Gtex)){
   }
 }
 # repeated for the merged data pre LD/ambig/ukba removal
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex")
-df_merge = read_csv("GPX1_merge_GTEX_PHEWAS_betacor_ambig_grouped.csv")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex")
+df_merge = read_csv("YOUR_GENE_NAME_merge_GTEX_PHEWAS_betacor_ambig_grouped.csv")
 
 
 
@@ -2369,47 +2369,47 @@ for(n in 1:nrow(df_merge)){
 
 
 
-write_csv(df_merge, "GPX1_merge_GTEX_PHEWAS_betacor_ambig_grouped_reg.csv")
+write_csv(df_merge, "YOUR_GENE_NAME_merge_GTEX_PHEWAS_betacor_ambig_grouped_reg.csv")
 # I'm just overiding this file with the new one for simplicity but you can make a new file if you see fit
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex")
-write_csv(df, "GPX1_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv")
-write_csv(Gtex, "GPX1_Gtex_cleaned_REG.csv")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex")
+write_csv(df, "YOUR_GENE_NAME_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv")
+write_csv(Gtex, "YOUR_GENE_NAME_Gtex_cleaned_REG.csv")
 
 ```
 
 Ok so this next bit is getting more and more complicated... Essentially There are a lot of transcripts. So what is an exon or an intron varies on where you look. My first instinct is to just use the all inclusive dataset and just have a whole load of overlapping rectangles to represent every possible region, but it may get messy.
 
-DO THESE NEXT FEW STEPS for GPX1 KEAP1 ORMDL3 and ATP5f1
+DO THESE NEXT FEW STEPS for YOUR_GENE_NAME KEAP1 ORMDL3 and ATP5f1
 First load in main dataframe with bound regions and the structure as a dataframe called *rectangles*
 ```{r load in main dataframe with bound regions and the structure as a dataframe called rectangles, results=FALSE, message=FALSE}
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex")
-df_merge = read_csv("GPX1_merge_GTEX_PHEWAS_betacor_ambig_grouped_reg.csv")
-Gtex = read_csv("GPX1_Gtex_cleaned_REG.csv")
-df = read_csv("GPX1_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv")
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Ensembl")
-reg_feat = read_csv("GPX1_full_REG_region.csv") 
-GPX1_rectangles = read_csv("GPX1_structure_FIN.csv") # from before
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex")
+df_merge = read_csv("YOUR_GENE_NAME_merge_GTEX_PHEWAS_betacor_ambig_grouped_reg.csv")
+Gtex = read_csv("YOUR_GENE_NAME_Gtex_cleaned_REG.csv")
+df = read_csv("YOUR_GENE_NAME_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Ensembl")
+reg_feat = read_csv("YOUR_GENE_NAME_full_REG_region.csv") 
+YOUR_GENE_NAME_rectangles = read_csv("YOUR_GENE_NAME_structure_FIN.csv") # from before
 ```
 
 Now, importantly, both for the linear and curved gene diagram the leg work remains the same. 
-* Define the regions by having start, end and feature columns (as in GPX1_rectangles). 
+* Define the regions by having start, end and feature columns (as in YOUR_GENE_NAME_rectangles). 
 * Next define the y axis as the minimum p value to the maximum p value (pmin to pmax) Plot these as rectangles where the introns and exons take up the middle two quadrants and the reg regions fill the rest.
 * Overlay your SNPs from the appropriate dataframe with x = position and y = p value  
 
-First, we need to take the regulatory feature dataframe (downloaded form ensembl BioMART - see start of section) and clean it to look like GPX1_rectangles
+First, we need to take the regulatory feature dataframe (downloaded form ensembl BioMART - see start of section) and clean it to look like YOUR_GENE_NAME_rectangles
 ```{r Setting up reg feature dataframe }
 # Now simplifying the regulatroy region page down
 reg_feat_for_bind = reg_feat[,2:4]
-# sorting the names to be the same as the GPX1_rectangles 
+# sorting the names to be the same as the YOUR_GENE_NAME_rectangles 
 reg_feat_for_bind = reg_feat_for_bind %>% rename(Start=chromosome_start,
                                                  End=chromosome_end,
                                                  EI=feature_type_name)
 
 # and finally binding the two table together
-gene_and_reg = rbind(reg_feat_for_bind, GPX1_rectangles)
+gene_and_reg = rbind(reg_feat_for_bind, YOUR_GENE_NAME_rectangles)
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Ensembl") # saving in the Ensembl folder
-write_csv(gene_and_reg, "GPX1_and_reg_feat_FOR_GENE_DIAGRAM.csv")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Ensembl") # saving in the Ensembl folder
+write_csv(gene_and_reg, "YOUR_GENE_NAME_and_reg_feat_FOR_GENE_DIAGRAM.csv")
 
 ```
 
@@ -2486,14 +2486,14 @@ gene_structure_G = ggplot()+
         aspect.ratio = 0.1,
         panel.background = element_rect(fill = "white",
                                         colour = "white"))+
-  labs(title= "GPX1 Gene Region Diagram (Gtex SNPs)" , x= "Position", y= "-log(p)",caption = paste("Overall number of SNPs =", Unique_snps))+
+  labs(title= "YOUR_GENE_NAME Gene Region Diagram (Gtex SNPs)" , x= "Position", y= "-log(p)",caption = paste("Overall number of SNPs =", Unique_snps))+
   scale_fill_manual(values=cols)+
   scale_color_manual(values=cols)+
   scale_x_reverse()
 
 gene_structure_G
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gene_diagram_output")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gene_diagram_output")
 ggsave("Gene_structure_G.pdf")
 
 ```
@@ -2531,7 +2531,7 @@ gene_structure_RED = ggplot()+
         aspect.ratio = 0.1,
         panel.background = element_rect(fill = "white",
                                         colour = "white"))+
-  labs(title= "GPX1 Gene Region Diagram (Gtex after Merge SNPs)" , x= "Position", y= "-log(p)",caption = paste("Overall number of SNPs =", Unique_snps))+
+  labs(title= "YOUR_GENE_NAME Gene Region Diagram (Gtex after Merge SNPs)" , x= "Position", y= "-log(p)",caption = paste("Overall number of SNPs =", Unique_snps))+
   scale_fill_manual(values=cols)+
   scale_color_manual(values=cols)+
   scale_x_reverse()
@@ -2542,7 +2542,7 @@ gene_structure_RED = ggplot()+
 gene_structure_RED
 
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gene_diagram_output")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gene_diagram_output")
 ggsave("Gene_structure_gtex_from_merge.pdf")
 ```
 ####2b. Gtex SNPs (P-Value) after merge and LD removal
@@ -2577,7 +2577,7 @@ gene_structure_RED = ggplot()+
         aspect.ratio = 0.1,
         panel.background = element_rect(fill = "white",
                                         colour = "white"))+
-  labs(title= "GPX1 Gene Region Diagram (Gtex after Merge and LD removal SNPs)" , x= "Position", y= "-log(p)",caption = paste("Overall number of SNPs =", Unique_snps))+
+  labs(title= "YOUR_GENE_NAME Gene Region Diagram (Gtex after Merge and LD removal SNPs)" , x= "Position", y= "-log(p)",caption = paste("Overall number of SNPs =", Unique_snps))+
   scale_fill_manual(values=cols)+
   scale_color_manual(values=cols)+
   scale_x_reverse()
@@ -2588,7 +2588,7 @@ gene_structure_RED = ggplot()+
 gene_structure_RED
 
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gene_diagram_output")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gene_diagram_output")
 ggsave("Gene_structure_gtex_RED.pdf")
 ```
 
@@ -2627,7 +2627,7 @@ gene_structure_RED_P = ggplot()+
                                         colour = "white"))+
   # Must add in the reverse here as it will go on the right side of the figure!
   #scale_y_reverse()+ # This can be used to reduce plotting region to remove outliers limits=c(54.596000,pmin)
-  labs(title= "GPX1 Gene Region Diagram (Gtex-PheWAS SNPs)" , x= "Position", y= "-log(p)",caption = paste("Overall number of SNPs =", Unique_snps))+
+  labs(title= "YOUR_GENE_NAME Gene Region Diagram (Gtex-PheWAS SNPs)" , x= "Position", y= "-log(p)",caption = paste("Overall number of SNPs =", Unique_snps))+
   scale_fill_manual(values=cols)+
   scale_color_manual(values=cols)+
   scale_x_reverse()
@@ -2638,7 +2638,7 @@ gene_structure_RED_P = ggplot()+
 gene_structure_RED_P
 
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gene_diagram_output")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gene_diagram_output")
 ggsave("Gene_structure_PheWAS_RED.pdf")
 ```
 
@@ -2648,7 +2648,7 @@ This Section has been moved before the Circos proper because we are still making
 All of these are also available with SNPs coloured based on the reg_region they are in (uncomment those lines), Also, change pch from 20 to 21 for rings as opposed to points which can look better, 
 ##### Curved Gtex (all, pre-merge and LD removal)
 ```{r Curved Gene diagrams Gtex_G}
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gene_diagram_output")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gene_diagram_output")
 library(circlize) # in preamble too
 # Similar to above, select relevent columns, remove duplicates and 
 
@@ -2723,7 +2723,7 @@ dev.off()
 
 ##### Curved Gtex (all, pre-merge and LD removal) + Colour
 ```{r Curved Gene diagrams Gtex_G}
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gene_diagram_output")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gene_diagram_output")
 library(circlize) # in preamble too
 # Similar to above, select relevent columns, remove duplicates and 
 
@@ -2807,7 +2807,7 @@ dev.off()
 ```
 ##### CURVED Gtex SNPs (P-Value) after merge and LD removal
 ```{r Curved Gene diagrams Gtex_RED}
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gene_diagram_output")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gene_diagram_output")
 library(circlize) # in preamble too
 # Similar to above, select relevent columns, remove duplicates and 
 
@@ -2878,7 +2878,7 @@ dev.off()
 ##### CURVED Gtex SNPs (P-Value) after merge and LD removal + Colour
 This plot also has the purple and orange split for figure building - commented out for the moment - remove from release -INCOMPLETE:
 ```{r Curved Gene diagrams Gtex_RED}
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gene_diagram_output")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gene_diagram_output")
 library(circlize) # in preamble too
 # Similar to above, select relevent columns, remove duplicates and 
 
@@ -2961,7 +2961,7 @@ dev.off()
 ```
 ##### CURVED PheWAS SNPs (p Value) after merge and LD removal
 ```{r Curved Gene diagrams PHEWAS_RED}
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gene_diagram_output")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gene_diagram_output")
 library(circlize) # in preamble too
 # Similar to above, select relevent columns, remove duplicates and 
 
@@ -3040,7 +3040,7 @@ dev.off()
 ```
 ##### CURVED PheWAS SNPs (p Value) after merge and LD removal + Colour
 ```{r Curved Gene diagrams PHEWAS_RED}
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gene_diagram_output")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gene_diagram_output")
 library(circlize) # in preamble too
 # Similar to above, select relevent columns, remove duplicates and 
 
@@ -3134,7 +3134,7 @@ snpvsregion = ggplot(Unique_snps, aes(x = reg_region, fill = Intron_or_Exon))+
   theme(axis.text.x = element_text(angle = 45, hjust =1))
 snpvsregion
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/REG_region_counts") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/REG_region_counts") #SAVE it
 ggsave("RegRegion_COUNT_G_P.pdf") # simple gene structure
 ```
 
@@ -3157,7 +3157,7 @@ snpvsregion = ggplot(Unique_snps, aes(x = reg_region, fill = Intron_or_Exon))+
   theme(axis.text.x = element_text(angle = 45, hjust =1))
 snpvsregion
 
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex/Plots/REG_region_counts") #SAVE it
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex/Plots/REG_region_counts") #SAVE it
 ggsave("RegRegion_COUNT_G.pdf") # simple gene structure
 
 
@@ -3169,11 +3169,11 @@ Step 1, load in the dataframes you want. In my case that's the full merged df an
 
 NOTE: this is reliant on the Ensembl subfolder - made in the GENE DIAGRAM section 
 ```{r for circos data load in}
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Ensembl")
-reg_feat = read_csv("GPX1_full_REG_region.csv")
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex")
-df = read_csv("GPX1_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv")
-Gtex = read_csv("GPX1_Gtex_cleaned_REG.csv")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Ensembl")
+reg_feat = read_csv("YOUR_GENE_NAME_full_REG_region.csv")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex")
+df = read_csv("YOUR_GENE_NAME_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv")
+Gtex = read_csv("YOUR_GENE_NAME_Gtex_cleaned_REG.csv")
 setwd("C:/Users/Harry Young/Documents/Local Wokr/Trait and Tissue Groups")
 Full_tissue_database = read_csv("Full_tissue_database.csv") 
 
@@ -3192,8 +3192,8 @@ Step 2, This Gtex dataframe doesn't have the tissue groups bound so we need to d
    }
  }
  
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex")
-write_csv(Gtex, "GPX1_Gtex_cleaned_REG.csv")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex")
+write_csv(Gtex, "YOUR_GENE_NAME_Gtex_cleaned_REG.csv")
 ```
 Step 3, Now we are going to go through and plot each circos plot first. NOTE: this section uses the generic df name "test" as the frequency table that each circos plot is made from. This means each chunk will override this test table. If you would like to save it then use writetsv(test, "filename.tsv"). But they are quick and easy to make and not much point commiting to memory I've found.
 
@@ -3337,7 +3337,7 @@ Very occasionally the Gtex RAW plot will have different tissues thant he rest as
 
 Sorry this is a little annoying but unfortunately it is the best I can do!
 ```{r circos one - Gtex RAW}
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Circos")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Circos")
 
 # First selecting key columns from the Gtex dataframe (pre-merge)
  simple_LUT_G = Gtex %>% dplyr::select(position_gtex, Tissue, tissue_group, `P-Value`)
@@ -3376,7 +3376,7 @@ dev.off()
 
 ####2. Gtex (from merged df)
 ```{r Gtex from merged df circos 2}
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Circos")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Circos")
 
 # First selecting key columns from the Gtex dataframe (pre-merge)
  simple_LUT_Gmerge = df %>% dplyr::select(position_gtex, Tissue, tissue_group, `P-Value`)
@@ -3415,7 +3415,7 @@ dev.off()
 
 ####3. Tissue-Traitgroup overlap: NOTE: For these next two the traitgroups are listed here with colours associated. Every gene will have a different list of traitgroups. Best to go through manually and modify accordingly, or use rand_color (see commented lines)
 ```{r tissue trait group overlap for circos 3}
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Circos")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Circos")
 # This one Tissuegroup-traitgroup - uising the simple_LUT_COR
 
 # OR using rand_color:
@@ -3455,7 +3455,7 @@ dev.off()
 
 ####3b. Tissue-Traitgroup overlap NO OTHER: 
 ```{r tissue trait group overlap for circos 3b}
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Circos")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Circos")
 # This one Tissuegroup-traitgroup - uising the simple_LUT_COR
 
 # OR using rand_color:
@@ -3496,7 +3496,7 @@ dev.off()
 
 ####4. Traitgroup to Position overlap
 ```{r traitggroup to position overlap circos 4}
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Circos")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Circos")
 
 simple_LUT_P = df %>% dplyr::select(position_gtex, traitgroup, p)
 
@@ -3536,7 +3536,7 @@ dev.off()
 
 ####4b.Traitgroup_pos overlap NO OTHER: 
 ```{r tissue trait group overlap for circos 4b}
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Circos")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Circos")
 # This one Tissuegroup-traitgroup - uising the simple_LUT_COR
 
 # OR using rand_color:
@@ -3590,9 +3590,9 @@ This is a little.... forced. I can't control where the labels go which is really
 library(circlize)
 library(plotly)
 library(tidyverse)
-setwd("C:/Users/Harry Young/Documents/Local Wokr/GPX1_test/Gtex")
-Gtex_RED = read_csv("GPX1_Gtex_cleaned_REG.csv")
-df_final = read_csv("GPX1_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv")
+setwd("C:/Users/Harry Young/Documents/Local Wokr/YOUR_GENE_NAME_test/Gtex")
+Gtex_RED = read_csv("YOUR_GENE_NAME_Gtex_cleaned_REG.csv")
+df_final = read_csv("YOUR_GENE_NAME_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv")
 df =df_final
 # Sort all the traitgroup names so they don't overlap with tissues
 # # loops to change trait names to include _traits for clarity
@@ -3909,6 +3909,6 @@ fig
 
 
 # COMMON ERRORS
-'Error: 'GPX1_Dprime.csv' does not exist' - You need to run this chunk (CHUNK 7 - r Automated r2 and d prime START dataset, eval= FALSE, include=FALSE) of code seperately using the little play symbol. I've done this because it can be a lengthy step and is optional (only use if you have less than 999 uniques SNPs)
+'Error: 'YOUR_GENE_NAME_Dprime.csv' does not exist' - You need to run this chunk (CHUNK 7 - r Automated r2 and d prime START dataset, eval= FALSE, include=FALSE) of code seperately using the little play symbol. I've done this because it can be a lengthy step and is optional (only use if you have less than 999 uniques SNPs)
 
 
