@@ -11,7 +11,7 @@ So here is my quick start guide:
 ## Set up the filing system:
 ONCE ONLY!
 1. In your computer setup a master folder for use as a working folder. For example mine would be C:/Harry Young/local work folder
-2. Open the folder_setup_MOD.R file in RStudio,
+2. Open the folder_setup_FINAL.R file in RStudio,
 3. Change the gene_names list to include as many of the genes as you want to run as you like. If you're unsure just put a couple of dummy names in you can decide later as this is only setting up the folders!
 4. Change where you're going to create the file directory. Use ctrl+f and type in the left-hand box "DRIVE/YOUR FILE DIRECTORY" and then put whatever your fodler is called. E.g. C:/Harry Young/local work folder in the right-hand box. NOTE: If you are on Mac this is slightly different. It will almost always be: "/UserYOUR FILE DIRECTORY", for example mine is : "/User/Harry/Local Work Folder"
 6. Now simply press the button to the right of "Replace" labelled "All". Screenshots 1-3.
