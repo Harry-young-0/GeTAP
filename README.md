@@ -33,7 +33,7 @@ Annoying there are some bits I just can't automate. I've attached screenshots (A
 2. Use the search bar in the top right to search your gene name (screenshot 1).
 3. Click on the correct gene in the resultant table (screenshot 2)
 4. Download the graph of expression (optional)
-5. Download the csv of single-tissue eQTLs (screenshot 3)
+5. Download the csv of single-tissue eQTLs (screenshot 3) and save as "Gtex_YOUR_GENE_NAME_START.csv" (e.g. Gtex_NRF2_START) in the Gtex folder
 6. Click the ensembl link from the first table (screenshot 4)
 7. Click the  transcript ID (screenshot 5)
 8. Click the "x" exons link (screenshot 6)
@@ -61,7 +61,7 @@ PRE-SETUP: Open up packages.R and run, this will install all the required packag
 
 REPEAT PER GENE FROM YOUR GENE LIST, changing YOUR_GENE_NAME to the genes name each time
 1. Open up the Shortened_Instructions_FINAL.Rmd document in RStudio.
-2. Do the same find and replace steps as before:  Use ctrl+f and type in the left-hand box "DRIVE:/YOUR FILE DIRECTORY" and then put whatever your folder is called. E.g. C:/Harry Young/local work folder in the right-hand box.
+2. Do the same find and replace steps as before:  Use ctrl+f and type in the left-hand box "DRIVE:/YOUR FILE DIRECTORY/" and then put whatever your folder is called. E.g. C:/Harry Young/local work folder/ in the right-hand box.
 3. Next use the find and replace system to find all YOUR_GENE_NAME and replace with your gene name e.g. "NRF2" - again ctrl+f, left-hand box: YOUR_GENE_NAME, right-hand box: NRF2(whatever your gene name is), press the "All" button right of Replace.
 5. Now run all using the "run" dropdown... run all in the top right, or ctrl+alt+enter (SCREENSHOT BELOW)
  
