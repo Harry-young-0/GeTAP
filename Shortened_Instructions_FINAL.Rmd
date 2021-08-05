@@ -57,13 +57,6 @@ Finally, it is important to set up a file system similar to what I've done for i
 
 Here is an optional chunk to load in all the directories you'll need to run this notebook as is (as above simply change DRIVE:/YOUR FILE DIRECTORY/) to whatever your file path is to the master folder:
 
-INCOMPLETE : add a repository for Full_trait_database and Full_Tissue_database (and egene data if needed)
-
-
-For my databases, I have made them freely available but obviously where you save them to look up, modify and add to is up to you. So use ctrl-f to find all occurrences of 'setwd("DRIVE:/YOUR FILE DIRECTORY/Trait and Tissue Groups")' and change to wherever you have saved the tissue and trait databases.
-
-If you'd like to add your changes tot he online database for others to use please email me your updated csv and I'll add to it.
-
 Any issues, first check the common errors section at the end of this document!
 
 # STEP 1: Organising each dataset
