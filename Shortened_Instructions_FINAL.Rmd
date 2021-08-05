@@ -250,7 +250,7 @@ save.image("rs_overlap_ALL_YOUR_GENE_NAME.RData")
 # I tend to just go with r2 cutoff = 0.5 but can be adjusted if you like. The exercise here is getting rid of inaccuracies from linked snps and reducing the list of unique snps down. As an example ORMDL3 one of my controls had ~1200 SNPs and an r2 of 0.5 took this down to 60 SNPs. When searched in Phewas this still resulted in 1000s of SNP-trait associations and so still gave a good picture on what was going on. 
 
 
-if(length(unique_YOUR_GENE_NAME_Gtex_snps)>=1000){
+if(length(unique_YOUR_GENE_NAME_Gtex_snps)>=700){
 setwd("DRIVE:/YOUR FILE DIRECTORY/YOUR_GENE_NAME_test/LDMatrix")
 
  library(LDlinkR)
