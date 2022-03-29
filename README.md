@@ -26,8 +26,26 @@ ONCE ONLY!
 
 
 
+## Getting started with putting your first gene in the pipeline
+PRE-SETUP: Open up packages.R and run, this will install all the required packages into your Rstudio.
+### Downloading the key data that can't be automatically downloaded
+The only un-automatable step is downloading the qualitative SNPs from gnomAD. Instead the script will open the correct page for your gene and you will need to click the "Export Variants as csv" button and save as "gnomAD_v3.1.2_YOUR_GENE_NAME.csv" into your /Gnomad directory. Screenshota below. This page will open automatically and the process halted if that data isn't saved correctly by that exact name.
 
-## Downloading the key data that can't be automatically downloaded
+<img width="1245" alt="Screenshot 2022-03-29 at 15 16 27" src="https://user-images.githubusercontent.com/66262215/160632536-1dec2b79-ac34-41c8-bd67-1c86776de438.png">
+
+
+
+REPEAT PER GENE FROM YOUR GENE LIST, changing YOUR_GENE_NAME to the genes name each time
+1. Open up the Final_pipeline.Rmd document in RStudio.
+2. Do the same find and replace steps as before:  Use ctrl+f and type in the left-hand box "DRIVE:/YOUR FILE DIRECTORY/" and then put whatever your folder is called. E.g. C:/Harry Young/local work folder/ in the right-hand box.
+3. Next use the find and replace system to find all YOUR_GENE_NAME and replace with your gene name e.g. "NRF2" - again ctrl+f, left-hand box: YOUR_GENE_NAME, right-hand box: NRF2(whatever your gene name is), press the "All" button right of Replace.
+5. Now run all using the "run" dropdown... run all in the top right, or ctrl+alt+enter (SCREENSHOT BELOW)
+ 
+![Screenshot 2021-06-11 at 15 27 54](https://user-images.githubusercontent.com/66262215/121702318-acb96300-cac9-11eb-8996-3228b3aa950f.png)
+
+
+
+THIS MAY NOW NOT BE NEEDED MOVED TO BOTTOM, IGNORE
 REPEATED PER GENE FROM YOUR GENE LIST
 Annoying there are some bits I just can't automate. I've attached screenshots (ADD IN A VIDEO TOO?) of the exact steps for these instructions but just to have it in words for completeness:
 1. Go to the Gtex website: https://www.gtexportal.org/home/ 
@@ -51,22 +69,6 @@ Annoying there are some bits I just can't automate. I've attached screenshots (A
 ![Screenshot 2021-06-11 at 15 17 06](https://user-images.githubusercontent.com/66262215/121700767-22243400-cac8-11eb-97f8-c3e4c50536cc.png)
 
 
-
-
-WHILE THE NEXT STEP IS RUNNING I PREP THE NEXT GENE
-
-
-## Getting started with putting your first gene in the pipeline
-PRE-SETUP: Open up packages.R and run, this will install all the required packages into your Rstudio.
-
-
-REPEAT PER GENE FROM YOUR GENE LIST, changing YOUR_GENE_NAME to the genes name each time
-1. Open up the Shortened_Instructions_FINAL.Rmd document in RStudio.
-2. Do the same find and replace steps as before:  Use ctrl+f and type in the left-hand box "DRIVE:/YOUR FILE DIRECTORY/" and then put whatever your folder is called. E.g. C:/Harry Young/local work folder/ in the right-hand box.
-3. Next use the find and replace system to find all YOUR_GENE_NAME and replace with your gene name e.g. "NRF2" - again ctrl+f, left-hand box: YOUR_GENE_NAME, right-hand box: NRF2(whatever your gene name is), press the "All" button right of Replace.
-5. Now run all using the "run" dropdown... run all in the top right, or ctrl+alt+enter (SCREENSHOT BELOW)
- 
-![Screenshot 2021-06-11 at 15 27 54](https://user-images.githubusercontent.com/66262215/121702318-acb96300-cac9-11eb-8996-3228b3aa950f.png)
 
 
 
