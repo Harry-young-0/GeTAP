@@ -4,6 +4,9 @@ Database of Tissues and Traits and their groupings
 This simple repository is a way of storing the tissue and trait databases I built whilst designing the pipeline (add git link here).
 These are free to download to your file system or can be accessed via github (coded within the pipeline - INCOMPLETE March21)
 
+# Getting an LD-Link token
+This program uses the LDlink web server which requires a unique token to run. THis is easily obtained by following this link: https://ldlink.nci.nih.gov/?tab=apiaccess 
+
 # Using the main R Notebooks
 There are a lot of instructions within the document itself and you are more than welcome to go through running chunk by chunk to get used to how I've setup this pipeline. That being said I understand a lot of you just want to shove a gene in and not think about it to much.
 
@@ -39,6 +42,7 @@ REPEAT PER GENE FROM YOUR GENE LIST, changing YOUR_GENE_NAME to the genes name e
 1. Open up the Final_pipeline.Rmd document in RStudio.
 2. Do the same find and replace steps as before:  Use ctrl+f and type in the left-hand box "DRIVE:/YOUR FILE DIRECTORY/" and then put whatever your folder is called. E.g. C:/Harry Young/local work folder/ in the right-hand box.
 3. Next use the find and replace system to find all YOUR_GENE_NAME and replace with your gene name e.g. "NRF2" - again ctrl+f, left-hand box: YOUR_GENE_NAME, right-hand box: NRF2(whatever your gene name is), press the "All" button right of Replace.
+4. Finally you'll need to replace my generic LD token with yours: ctrl-f "generic_token" , replace with "YOUR_TOKEN - from https://ldlink.nci.nih.gov/?tab=apiaccess"
 5. Now run all using the "run" dropdown... run all in the top right, or ctrl+alt+enter (SCREENSHOT BELOW)
  
 ![Screenshot 2021-06-11 at 15 27 54](https://user-images.githubusercontent.com/66262215/121702318-acb96300-cac9-11eb-8996-3228b3aa950f.png)
