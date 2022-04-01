@@ -1,55 +1,56 @@
-RAW_Tissue,Tissue,Secondary
-Heart - Left Ventricle,Heart,Muscle
-Heart - Atrial Appendage,Heart,Muscle
-Artery - Aorta,Vascular,NA
-Artery - Coronary,Vascular,NA
-Artery - Tibial,Vascular,NA
-Nerve - Tibial,Nervous,NA
-Brain - Amygdala,Nervous,Brain
-Brain - Anterior cingulate cortex (BA24),Nervous,Brain
-Brain - Caudate (basal ganglia),Nervous,Brain
-Brain - Cerebellar Hemisphere,Nervous,Brain
-Brain - Cerebellum,Nervous,Brain
-Brain - Cortex,Nervous,Brain
-Brain - Frontal Cortex (BA9),Nervous,Brain
-Brain - Hippocampus,Nervous,Brain
-Brain - Nucleus accumbens (basal ganglia),Nervous,Brain
-Brain - Putamen (basal ganglia),Nervous,Brain
-Brain - Spinal cord (cervical c-1),Nervous,Brain
-Brain - Substantia nigra,Nervous,Brain
-Breast - Mammary Tissue,Mammary,NA
-Ovary,Female Reproductive Tissue,Endocrine
-Uterus,Female Reproductive Tissue,NA
-Vagina,Female Reproductive Tissue,NA
-Cervix - Ectocervix,Female Reproductive Tissue,NA
-Cervix - Endocervix,Female Reproductive Tissue,NA
-Fallopian Tube,Female Reproductive Tissue,NA
-Prostate,Male Specific Tissue,Endocrine
-Testis,Male Specific Tissue,Endocrine
-Cells - Cultured fibroblasts,Cultured Cells,NA
-Cells - EBV-transformed lymphocytes,Cultured Cells,NA
-Lung,Respiratory Tissue,NA
-Whole Blood,Blood,NA
-Adipose - Subcutaneous,Fat,NA
-Adipose - Visceral (Omentum),Fat,NA
-Colon - Transverse,Digestive,NA
-Colon - Sigmoid,Digestive,NA
-Small Intestine - Terminal Ileum,Digestive,NA
-Pancreas,Digestive,Endocrine
-Esophagus - Gastroesophageal Junction,Digestive,NA
-Stomach,Digestive,NA
-Esophagus - Mucosa,Digestive,NA
-Liver,Digestive,Endocrine
-Minor Salivary Gland,Digestive,NA
-Adrenal Gland,Endocrine,NA
-Thyroid,Endocrine,Immune
-Pituitary,Endocrine,NA
-Spleen,Lymphatic,Immune
-Muscle - Skeletal,Muscle,NA
-Esophagus - Muscularis,Muscle,NA
-Skin - Not Sun Exposed (Suprapubic),Skin,NA
-Skin - Sun Exposed (Lower leg),Skin,NA
-Kidney - Cortex,Urinary,Kidney
-Kidney - Medulla,Urinary,Kidney
-Bladder,Urinary,NA
-Brain - Hypothalamus,Nervous,Brain
+Tissue,Tissue_nice,tissue_group,tissue_group_secondary
+Adipose_Subcutaneous,Adipose - Subcutaneous,Fat,NA
+Adipose_Visceral_Omentum,Adipose - Visceral (Omentum),Fat,NA
+Adrenal_Gland,Adrenal Gland,Endocrine,NA
+Artery_Aorta,Artery - Aorta,Vascular,NA
+Artery_Coronary,Artery - Coronary,Vascular,NA
+Artery_Tibial,Artery - Tibial,Vascular,NA
+Bladder,Bladder,Urinary,NA
+Brain_Amygdala,Brain - Amygdala,Nervous,Brain
+Brain_Anterior_cingulate_cortex_BA24,Brain - Anterior cingulate cortex (BA24),Nervous,Brain
+Brain_Caudate_basal_ganglia,Brain - Caudate (basal ganglia),Nervous,Brain
+Brain_Cerebellar_Hemisphere,Brain - Cerebellar Hemisphere,Nervous,Brain
+Brain_Cerebellum,Brain - Cerebellum,Nervous,Brain
+Brain_Cortex,Brain - Cortex,Nervous,Brain
+Brain_Frontal_Cortex_BA9,Brain - Frontal Cortex (BA9),Nervous,Brain
+Brain_Hippocampus,Brain - Hippocampus,Nervous,Brain
+Brain_Hypothalamus,Brain - Hypothalamus,Nervous,Brain
+Brain_Nucleus_accumbens_basal_ganglia,Brain - Nucleus accumbens (basal ganglia),Nervous,Brain
+Brain_Putamen_basal_ganglia,Brain - Putamen (basal ganglia),Nervous,Brain
+Brain_Spinal_cord_cervical_c-1,Brain - Spinal cord (cervical c-1),Nervous,Brain
+Brain_Substantia_nigra,Brain - Substantia nigra,Nervous,Brain
+Breast_Mammary_Tissue,Breast - Mammary Tissue,Mammary,NA
+Cells_EBV-transformed_lymphocytes,Cells - EBV-transformed lymphocytes,Cultured Cells,NA
+Cells_Cultured_fibroblasts,Cells - Cultured fibroblasts,Cultured Cells,NA
+Cells_Transformed_fibroblasts,Cells - Transformed fibroblasts,Cultured Cells,NA
+Cervix_Ectocervix,Cervix - Ectocervix,Female Reproductive Tissue,NA
+Cervix_Endocervix,Cervix - Endocervix,Female Reproductive Tissue,NA
+Colon_Sigmoid,Colon - Sigmoid,Digestive,NA
+Colon_Transverse,Colon - Transverse,Digestive,NA
+Esophagus_Gastroesophageal_Junction,Esophagus - Gastroesophageal Junction,Digestive,NA
+Esophagus_Mucosa,Esophagus - Mucosa,Digestive,NA
+Esophagus_Muscularis,Esophagus - Muscularis,Muscle,NA
+Fallopian_Tube,Fallopian Tube,Female Reproductive Tissue,NA
+Heart_Atrial_Appendage,Heart - Atrial Appendage,Heart,Muscle
+Heart_Left_Ventricle,Heart - Left Ventricle,Heart,Muscle
+Kidney_Cortex,Kidney - Cortex,Urinary,Kidney
+Kidney_Medulla,Kidney - Medulla,Urinary,Kidney
+Liver,Liver,Digestive,Endocrine
+Lung,Lung,Respiratory Tissue,NA
+Minor_Salivary_Gland,Minor Salivary Gland,Digestive,NA
+Muscle_Skeletal,Muscle - Skeletal,Muscle,NA
+Nerve_Tibial,Nerve - Tibial,Nervous,NA
+Ovary,Ovary,Female Reproductive Tissue,Endocrine
+Pancreas,Pancreas,Digestive,Endocrine
+Pituitary,Pituitary,Endocrine,NA
+Prostate,Prostate,Male Specific Tissue,Endocrine
+Skin_Not_Sun_Exposed_Suprapubic,Skin - Not Sun Exposed (Suprapubic),Skin,NA
+Skin_Sun_Exposed_Lower_leg,Skin - Sun Exposed (Lower leg),Skin,NA
+Small_Intestine_Terminal_Ileum,Small Intestine - Terminal Ileum,Digestive,NA
+Spleen,Spleen,Lymphatic,Immune
+Stomach,Stomach,Digestive,NA
+Testis,Testis,Male Specific Tissue,Endocrine
+Thyroid,Thyroid,Endocrine,Immune
+Uterus,Uterus,Female Reproductive Tissue,NA
+Vagina,Vagina,Female Reproductive Tissue,NA
+Whole_Blood,Whole Blood,Blood,NA
