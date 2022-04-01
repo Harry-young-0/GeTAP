@@ -13,7 +13,7 @@ for(name in gene_names){
   
   dir.create(paste0("DRIVE:/YOUR FILE DIRECTORY/",name,"_test"))
   setwd(paste0("DRIVE:/YOUR FILE DIRECTORY/",name,"_test"))
-  subfolder_names <- c("Circos","Ensembl","Gtex","LDMatrix", "Sankey", "Gene_diagram_output") 
+  subfolder_names <- c("Circos","Ensembl","Gtex","LDMatrix", "Sankey", "Gene_diagram_output","Gnomad", "final_data") 
   for (n in 1:length(subfolder_names)){
     folder = dir.create(paste0("DRIVE:/YOUR FILE DIRECTORY/",name,"_test/",subfolder_names[n]))
   }
@@ -23,7 +23,7 @@ for(name in gene_names){
   
   setwd(paste0("DRIVE:/YOUR FILE DIRECTORY/",name,"_test/Gtex"))
   dir.create("Plots")
-  
+  dir.create("Final Dataframes")
   setwd(paste0("DRIVE:/YOUR FILE DIRECTORY/",name,"_test/Gtex/Plots"))
   
   subfolder_names <- c("Gtex_egene","NES_vs_tissue_and_overview","p vs trait split by trait group and Expression direction","p vs traitgroup split Expression direction", "snp_against_Tissue", "Tissue_Group_and_Trait_Group_overlap","REG_region_counts") 
@@ -32,3 +32,5 @@ for(name in gene_names){
   }
   
 }
+
+
