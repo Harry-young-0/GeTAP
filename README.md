@@ -9,7 +9,9 @@ This program uses the LDlink web server which requires a unique token to run. TH
 2. Extract files? This will contain the main pipeline, tissue and trait databases and shiny app
 3. Open final_pipeline.Rmd
 4. In the top chunk you'll see gene_name, file_directory and LD Token. Fill these out with your versions. There are also instructions within the file to help you.
-5. in the top right of the window click run all: ![Screenshot 2022-10-05 at 15 49 52](https://user-images.githubusercontent.com/66262215/194091256-20b24428-5823-4850-b339-6ac36d93d45c.png)
+5. in the top right of the window click run all: ![Screenshot 2022-10-05 at 15 49 52](https://user-images.githubusercontent.com/66262215/194095244-452d5831-41b8-4b1d-92ba-78df2f72be98.png)
+
+5. in the top right of the window click run all: 
 6. You will be redirected to gnomad. Click download csv and save within the gnomad directory in the file system (your_directory/gene_name_test/gnomad) ![Screenshot 2022-10-05 at 15 53 01](https://user-images.githubusercontent.com/66262215/194092004-bc811af5-d52a-42a2-b4c5-ee53f0598ad5.png)
 7. Go back to RStudio and run all again 
 8. Be patient! It should take around 20-30 mins to run.
