@@ -31,21 +31,24 @@ You'll need to assign a gene_name, file_directory and LD_token in this block of 
  rm(list=ls())
 
 #1. Gene name list:
-gene_name = "SOD1"
+gene_name = "YOUR_GENE_NAME"
 #gene_name = "YOUR_GENE_NAME"
 #e.g gene_name ="NFE2L2"
 
 #2. setting the file directory to where you want it to go DRIVE:/YOUR_FILE_DIRECTORY/
-file_directory = "/Users/hy14913/Documents/Local_work_folder/JUL_TEST"
+file_directory = "C:/Documents/Example directory"
 #windows: file_directory = "C:/Users/hy14913/OneDrive - University of Bristol/Desktop/May23_test"
 #e.g file_directory ="/Users/hy14913/Documents/Local_work_folder/JUL_TEST"
 
 # LD link token setup
-LD_token = "f0d7bc798f5c"
+LD_token = "generic_token"
 # 12 character token e.g:"abc1bc2bc3bc"
 #e.g LD_token ="f0d7bc798f5c"generic_token
-try(if(gene_name=="YOUR_GENE_NAME") stop("Please enter your Gene Name"))
 
+
+
+try(if(gene_name=="YOUR_GENE_NAME") stop("Please enter your Gene Name"))
+try(if(file_directory=="C:/Documents/Example directory") stop("Please enter your file_directory so the pipeline knows where to save"))
 try(if(LD_token=="generic_token") stop("Please enter your LD token, acquired from https://ldlink.nci.nih.gov/?tab=apiaccess"))
 
 
