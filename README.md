@@ -16,7 +16,7 @@ This program uses the LDlink web server which requires a unique token to run. TH
 ## Important notes
 This pipeline uses three servers, ieugwasr, LDlink and ensembl. All of these have a timeout if it takes too long to run. The pipeline will stop running and an error message will pop up in the console (bottom left box). If this happens please try again later, evenings are often less busy. If it keeps erroring let me know and I'll help as much as I can!
 
-The pipeline will automatically open a shiny app of the data. All the plots shown can be found as pdfs in the Final_plots and Cricos folders if you'd prefer. 
+The pipeline will automatically open a shiny app of the data. All the plots shown can be found as pdfs in the Final_plots and Cricos folders if you'd prefer. Also, the Shiny app can be reopened anytime by using the shiny app rerun chunk on line 3448 (click the play symbol) Or by opening dedicated R file, within your main folder. 
 
 Once the pipeline has been run it'll save the data in the final_data fodler and this can be used to reopen the shiny app to save you rerunning the pipeline every time! (more instructions / shiny support here)
 
