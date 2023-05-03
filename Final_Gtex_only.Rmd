@@ -22,37 +22,37 @@ You'll need to assign a gene_name, file_directory and LD_token in this block of 
   1. Gene name should be an all caps version that appears in gtex: search your gene on https://gtexportal.org/home/ if you're unsure. e.g "SOD2" = super oxide dismutase 2
   2.File directory should be in the format "DRIVE:/YOUR FILE DIRECTORY". This should be as straight forward as R-click "copy as pathname" in mac finder. In windows you'll have to copy the pathname and change all \ for / (who knows why they have this discrepancy!) e.g: copied windows pathname: "C:\Users\Harry\Documents" would need to be changed to: "C:/Users/Harry/Documents"
   3.LD token can be acquired from: https://ldlink.nci.nih.gov/?tab=apiaccess and they'll email it to you. A simple step to stop bots I think
-  4. The packages will install 
+  4. Install all the packages - this should be automatic but is the NUMBER 1 source of error. It drives me mad and is 99% of the time due to admin rights on IT managed computers not playing nicely with R installing non-CRAN but very much verified packages. I'm happy to sort this manually for you if you run into an issue, just ping me an email.
   
-
+## Assign your gene name, file directory and LD token
 ```{r}
 
  #First line to clear out environment
  rm(list=ls())
-#1. Gene name list:
 
-gene_name = "EPDR1"
+#1. Gene name list:
+gene_name = "SOD1"
+#gene_name = "YOUR_GENE_NAME"
 #e.g gene_name ="NFE2L2"
 
-
-#2. setting the file directory to where you want it to go /DRIVE:YOUR_FILE_DIRECTORY/
-# e.g: file_directory ="/Users/hy14913/Documents/Local_work_folder/JUL_TEST"
-
+#2. setting the file directory to where you want it to go DRIVE:/YOUR_FILE_DIRECTORY/
 file_directory = "/Users/hy14913/Documents/Local_work_folder/JUL_TEST"
+#windows: file_directory = "C:/Users/hy14913/OneDrive - University of Bristol/Desktop/May23_test"
 #e.g file_directory ="/Users/hy14913/Documents/Local_work_folder/JUL_TEST"
 
-
-
 # LD link token setup
-
 LD_token = "f0d7bc798f5c"
-#e.g LD_token ="f0d7bc798f5c"
+# 12 character token e.g:"abc1bc2bc3bc"
+#e.g LD_token ="f0d7bc798f5c"generic_token
+try(if(gene_name=="YOUR_GENE_NAME") stop("Please enter your Gene Name"))
+
+try(if(LD_token=="generic_token") stop("Please enter your LD token, acquired from https://ldlink.nci.nih.gov/?tab=apiaccess"))
 
 
 ```
 
 
-##Prerequisites to load in :
+##Prerequisite to load in :
 ```{r, results=FALSE, echo=FALSE}
 
 # Check the packages you have and install the rest:
@@ -66,9 +66,8 @@ list_of_packages = c("circlize",
                      "ggh4x",
                      "shiny",
                      "bslib",
-                     "cowplot")
-
-
+                     "cowplot",
+                     "plotly")
 
 new_packages = list_of_packages[!(list_of_packages %in% installed.packages()[,"Package"])]
 if(length(new_packages)>0){
@@ -83,16 +82,8 @@ if(is_bioc_installed ==F){
   Sys.sleep(15)
   is_bioc_installed = "BiocManager" %in% p
 }
-
-
 ```
 Next, install the ones that aren't CRAN:
-Need to answer the promt for ieugwasr : "1: ALl"
-and biomart "none"
-when prompted
-
-INCOMPLETE - WORK AROUND?
-ALSO maybe a if required for bioc manager too?
 ```{r}
 # refresh list f installed packages and check if they're already there!
 p <- installed.packages()
@@ -111,7 +102,7 @@ BiocManager::install(c("biomaRt"), update = FALSE)
 
 
 
-Now load in and install the final packages:
+Now load in the final packages:
 ```{r}
 
 
@@ -132,7 +123,7 @@ library(biomaRt)
 ```
 
 
-# INCOMPLETE: Folder Setup:
+# Folder Setup:
 sets up all folders and sub directories needed. 
 ```{r}
 
@@ -212,16 +203,12 @@ Firstly, we read in the Gtex "SNPS associated with an expression change in the g
 
 This is done automatically using their url SWAGGER entry to their database.
 ```{r Initial load and clean}
-
-
-
 # Scraping version
 Gtex_1 = read_tsv(paste0("https://gtexportal.org/rest/v1/association/singleTissueEqtl?format=tsv&geneSymbol=",gene_name,"&tissueSiteDetailId=Adipose_Subcutaneous%2CAdipose_Visceral_Omentum%2CAdrenal_Gland%2CArtery_Aorta%2CArtery_Coronary%2CArtery_Tibial%2CBladder%2CBrain_Amygdala%2CBrain_Anterior_cingulate_cortex_BA24%2CBrain_Caudate_basal_ganglia%2CBrain_Cerebellar_Hemisphere%2CBrain_Cerebellum%2CBrain_Cortex%2CBrain_Frontal_Cortex_BA9%2CBrain_Hippocampus%2CBrain_Hypothalamus%2CBrain_Nucleus_accumbens_basal_ganglia%2CBrain_Putamen_basal_ganglia%2CBrain_Spinal_cord_cervical_c-1%2CBrain_Substantia_nigra%2CBreast_Mammary_Tissue%2CCells_EBV-transformed_lymphocytes%2CCells_Cultured_fibroblasts%2CCells_Transformed_fibroblasts%2CCervix_Ectocervix%2CCervix_Endocervix%2CColon_Sigmoid%2CColon_Transverse%2CEsophagus_Gastroesophageal_Junction%2CEsophagus_Mucosa%2CEsophagus_Muscularis%2CFallopian_Tube%2CHeart_Atrial_Appendage%2CHeart_Left_Ventricle%2CKidney_Cortex%2CKidney_Medulla%2CLiver%2CLung%2CMinor_Salivary_Gland%2CMuscle_Skeletal%2CNerve_Tibial%2COvary%2CPancreas%2CPituitary%2CProstate%2CSkin_Not_Sun_Exposed_Suprapubic%2CSkin_Sun_Exposed_Lower_leg%2CSmall_Intestine_Terminal_Ileum%2CSpleen%2CStomach%2CTestis%2CThyroid%2CUterus%2CVagina%2CWhole_Blood&datasetId=gtex_v8"),
                  col_names = T
 )
 
 # reset names to look like web downloaded - saves me re-writing everything
-
 Gtex_1 = Gtex_1 %>% 
   dplyr::rename(`Gencode Id` =gencodeId,
          `Gene Symbol` =geneSymbolUpper,
@@ -250,9 +237,9 @@ df = df[which(is.na(df$rsid)==F),]
 
 ```
 
-So, now we have a Gtex table with a seperated location and mutation column for easy use later on. IMPORTANT NOTE: a = reference allele and b = Effect or Alternate Allele. In other words, the change in expression NES occurs in patients with the mutation at location x from a to b.
+So, now we have a Gtex table with a separated location and mutation column for easy use later on. IMPORTANT NOTE: a = reference allele and b = Effect or Alternate Allele. In other words, the change in expression NES occurs in individuals with the mutation at location x from a to b.
 
-I setup a modulus of NES using the following (can be useful for ordering the dataframe later on): 
+Modulus of NES setup - useful for ordering the dataframe later on: 
 ```{r Modulus NES setup}
 df$`|NES|` = sqrt(df$NES*df$NES)
 head(df)
@@ -261,21 +248,13 @@ tail(df) # Check that |NES| = NES in all cases
 
 Save this file as "cleaned" data:
 ```{r Save clean data}
-
 write_excel_csv(df, paste0(file_directory,"/", gene_name,"_test/Gtex/", gene_name, "_Gtex_cleaned.csv"))
-
-
 ```
 
 Then we need to isolate the unique SNPs for searching in the ieugwasR package:
-
 ```{r Unique SNPs from Gtex}
-unique_Gtex_snps = unique(df$rsid)
-# setwd("~/OneDrive - University of Bristol/PhD/Epidemiology/Quantitative and Qualitative SNP lists")
-paste0(file_directory,"/", gene_name,"_test/Gtex")
+unique_Gtex_snps = unique(df$rsid) # Removes any duplicated rows
 write.table(unique_Gtex_snps, paste0(file_directory,"/", gene_name,"_test/Gtex/unique_Gtex_snps.csv"), sep="\t", row.names=FALSE, col.names=FALSE) # saving the file
-
-
 ```
 
 
@@ -288,13 +267,11 @@ First step is to search your list of snps (unique_Gtex_snps) into LDMatrix to ge
 
 This is an automatable step but I think it is important to see the matrix plot in LD matrix WHEN YOU CAN (<300 online) , open your dataframe of unique SNPs in excel, copy and paste the column into the query box on LD matrix, tick all populations (or even just European) and click calculate.
 
-From this you should get a nice matrix plot of all of of the linkage between your SNPs. Save a copy of this into the LDMatrix/Plots folder and download the two csvs for D' and R2
-
-Alternatively use these lines of code. You'll have to ask for a "token" from the LD link website: https://ldlink.nci.nih.gov/?tab=apiaccess and also install the LDlinkR package using the commented lines.
+From this you should get a nice matrix plot of all of of the linkage between your SNPs. You can save a copy of this into the LDMatrix/Plots folder and download the two csvs for D' and R2
 
 I can add back in the dprime version but just used r2 as default for efficiencies sake
 
-I calculate linkage at an r2 cutoff of 0.5 and 0.75, this can be chosen between later on, email me if you need help modifying the code!
+I calculate linkage at an r2 cutoff of 0.5 and 0.75, though 0.5 is what is used later on. If you want to modify this, let me know if you get stuck!
 
 ##### Get matrices of R2 
 ```{r Automated r2 START dataset}
@@ -394,9 +371,6 @@ save.image(paste0(file_directory,"/", gene_name,"_test/LDMatrix/rs_overlap_ALL_"
 
 
 if(length(unique_Gtex_snps)>=700){
-
-
-
  LIMITED_SNP_LIST = SNPclip(
    unique_Gtex_snps,
    pop = "EUR",
@@ -404,29 +378,22 @@ if(length(unique_Gtex_snps)>=700){
    maf_threshold = "0.01",
   token = LD_token )
 
-
 LIMITED_SNP_LIST = LIMITED_SNP_LIST[grep("Variant kept.", LIMITED_SNP_LIST$Details),  ] # selects the ones that passed the test
 LIMITED_SNP_LIST = as.data.frame(LIMITED_SNP_LIST[,1])
 names(LIMITED_SNP_LIST) = "rsid"
 
 write_csv(LIMITED_SNP_LIST, paste0(file_directory,"/", gene_name,"_test/LDMatrix/",gene_name, "_LIMITED_SNP_LIST.csv"))
-unique_Gtex_snps = read_csv(paste0(file_directory,"/", gene_name,"_test/LDMatrix/",gene_name, "_LIMITED_SNP_LIST.csv"))# , col_names=F
+unique_Gtex_snps = read_csv(paste0(file_directory,"/", gene_name,"_test/LDMatrix/",gene_name, "_LIMITED_SNP_LIST.csv"))
 unique_Gtex_snps = unique_Gtex_snps$rsid
 }
 ```
 
 
 ## STEP 2: PheWAS searching using ieugwasr 
-### Searching snps in ieugwasr (source code: Phewas testing.R)
-
+### Searching snps in ieugwasr
 searching IEU PheWAS database
-
 This step takes a while, give it time, if it errors, chances are the servers are busy, try again or maybe try running in the evening.
 ```{r,Phewas searching }
-
-
-
-
 
 for(n in 1:round(length(unique_Gtex_snps)/25, digits=0)){
   test = na.omit(unique_Gtex_snps[(((n-1)*25)+1):(n*25)])
@@ -444,7 +411,6 @@ for(n in 1:round(length(unique_Gtex_snps)/25, digits=0)){
   }
   
 }
-
 
 if(nrow(Gtex_PHEWAS)==0){
   print("Houston, we have a problem. Re run this chunk using the play button in the top right of the box. If that still doesn't work, run line by line using ctrl-enter OR cmd-enter. If it still doesn't work then I'm afraid something has gone really wrong! email me at harry.young@bristol.ac.uk")
@@ -468,9 +434,6 @@ GtextoPHEWAS_RAW = GtextoPHEWAS_RAW %>%
   rename(position_phewas = position, # Renaming columns to keep track of their original dataframe
          chr_phewas = chr)
 
-
-
-
 #####Reordering PheWas and Gtex dataset - extra - to be removed #####
 # NOT NECERSARY BUT MAKES IT EASIER TO LOOK AT !
 
@@ -484,14 +447,12 @@ Next step is to actually merge these two dataframes: Either of these work, I use
 
 ```{r Merging the gtex and phewas dataframes}
 
-test = merge(Gtex_cleaned, GtextoPHEWAS_RAW, all=T, by = "rsid")
-# OR
-test2 = full_join(Gtex_cleaned, GtextoPHEWAS_RAW, by = "rsid")
+test = full_join(Gtex_cleaned, GtextoPHEWAS_RAW, by = "rsid")
 # You will lose eQTL type but that's fine, old column when i was tempted by doing sQTLs too
 test = test[,c("Gencode Id","Gene Symbol","rsid","a","b", "NES","|NES|","Tissue", "P-Value", "Variant Id","chr_gtex", "position_gtex", "build_gtex", "ea","nea","trait","beta", "p","se","n","eaf","chr_phewas","position_phewas", "id")]
 
 head(test) 
-head(test2)
+
 
 ```
 The next step is cleaning up the merge and checking that it has worked as expected:
@@ -501,8 +462,6 @@ There will be some rows where it only has Gtex data, i.e. rsids that didn't come
 To clean this, remove rows where there are NA's for multiple columns in PHEWAS section:
 
 ```{r cleaning up the merge step}
-
-
 # test number of rows with NAs to see the issue:
 test$na_count = apply(test, 1, function(x) sum(is.na(x)))
 to_remove = test[which(test$na_count>5),]
@@ -516,43 +475,33 @@ test = test %>% drop_na(beta, eaf, chr_phewas, trait)
 # test_rsid = Gtex_YOUR_GENE_NAME[which(Gtex_YOUR_GENE_NAME$rsid =="rs78616393"),]
 
 rm(test2) # cleanup removing the extra table 
-
-  
-
 write_excel_csv(test, paste0(file_directory,"/", gene_name,"_test/Gtex/", gene_name, "_merge_GTEX_PHEWAS.csv"))
 
 
 
 
 ```
-### Correcting beta, ambiguous cases and adding groups: (source code: Trait-tissue_list_gather_for_comparison.R)
+### Correcting beta, ambiguous cases and adding groups:
 
 Now that we have a merged table, we now need to filter out any ambiguous cases. These include A-T or C-G mutations as well as checking that the reference and effect alleles match for phewas/gtex and correcting the beta value if not.
 ### 3a. beta:
-Firstly, Let's correct the beta value (this can be done later if you forget) :
+Firstly, Let's correct the beta value:
 ```{r setting up a corrected beta column}
-# Setup df as our merged dataframe:
-# alt: read_csv(paste0(file_directory,"/", gene_name,"_test/Gtex/", gene_name, "_merge_GTEX_PHEWAS.csv"))
 df=test
-#Sometimes the alleles slip into TRUE/FALSE collumns so to correct that:
+#Sometimes the alleles slip into TRUE/FALSE columns so to correct that:
 df$a = as.character(df$a)
 df$b= as.character(df$b)
 df$ea= as.character(df$ea)
 df$nea = as.character(df$nea)
 
-
 df$beta_cor = ifelse(df$ea == df$b & df$nea == df$a, df$beta,
                      ifelse(df$ea == df$a & df$nea == df$b, df$beta*-1, NA))
-
-
 
 if ((sum(is.na(df$beta_cor)) == 0)==TRUE){
   print("There are no mutations that share an rsid that are completely different in Gtex and PheWAS")
 } # if true then all good, if not you need to remove these cases as they are completely different.
 
 df=df[which(is.na(df$beta_cor)==F),] # Removing cases where alleles are completely different - they are rare and just add confusion
-
-
 
 write_excel_csv(df, paste0(file_directory,"/", gene_name,"_test/Gtex/", gene_name,"_merge_GTEX_PHEWAS-betacor.csv"))
 
@@ -563,9 +512,6 @@ To solve reverse vs sense strand issues
 ```{r setting up an ambiguous case column}
 
 df = read_csv(paste0(file_directory,"/", gene_name,"_test/Gtex/", gene_name,"_merge_GTEX_PHEWAS-betacor.csv"))
-
-
-
 
 df$AT = ifelse(df$ea == "A" & df$nea == "T", "Yes", 
              ifelse(df$ea == "T" & df$nea == "A", "Yes",
@@ -580,16 +526,11 @@ df$ambiguous = ifelse(df$AT =="Yes","AT/TA",
                      ifelse(df$GC =="Yes","GC/CG",
                             ifelse(df$GC =="FS" | df$AT=="FS", "FS", "No")))
 
-
-
 number_of_ambiguous_cases = df[which(df$ambiguous != "No"),]
 
-
 paste0("The percentage of ambiguous cases is ",nrow(number_of_ambiguous_cases)/nrow(df)*100,"%")  # Gives % of cases in df which are ambiguous.
-
 head(df)
 
-#setwd("~/OneDrive - University of Bristol/PhD/Epidemiology/Cross-Reference/GtextoPheWAS-Sorted/YOUR_GENE_NAME")
 write_excel_csv(df, paste0(file_directory,"/", gene_name,"_test/Gtex/", gene_name,"_merge_GTEX_PHEWAS_betacor_ambig.csv"))
 
 ```
@@ -612,18 +553,17 @@ We need to assign those groups to the main dataframe:
 df = read_csv( paste0(file_directory,"/", gene_name,"_test/Gtex/", gene_name,"_merge_GTEX_PHEWAS_betacor_ambig.csv"))
 # read in trait database
 Full_trait_database = read_csv(paste0(file_directory,"/Trait and Tissue Groups/Full_trait_database.csv"))
+Full_trait_database=unique(Full_trait_database)
 
 df_backup=df
 
-
-df = left_join(x=df_backup, y=Full_trait_database) # NEW VERSION
+df = left_join(x=df_backup, y=Full_trait_database)
 
 if(sum(is.na(df$traitgroup))==0){
   print("Merge succesful, no NA's")
 } else{
   paste(df$trait[which(is.na(df$traitgroup)==T)], "needs to be added to Full_trait_database") # VERY UNLIKELY!
 }
-
 
 ```
 
@@ -635,18 +575,12 @@ This time the database won't change because Gtex has a finite number of tissues.
 ```{r Assign Tissue Groups}
 # load in tissue database
 Full_tissue_database = read_csv(paste0(file_directory,"/Trait and Tissue Groups/Full_tissue_database.csv"))
-
 df_backup = df
-
-df = left_join(x=df_backup, y=Full_tissue_database) # NEW VERSION
-
- 
+df = left_join(x=df_backup, y=Full_tissue_database)
 ```
 
 Next it's going to be useful to have a simple binary column for positive and negative NES and beta values
 ```{r adding in binary NES and beta direction columns}
-
-
 df$beta_direction = ifelse(df$beta_cor<0, "Negative",
 							ifelse(df$beta_cor>0, "Positive", "No Change"))
 
@@ -661,7 +595,6 @@ write_excel_csv(df, paste0(file_directory,"/", gene_name,"_test/Gtex/",gene_name
 OK, final step is to reorganise this and spend a little time looking through the data making sure it all looks as expected. 
 
 ```{r Save Merged Dataset}
-
 
 df = df[,c("Gene Symbol",
            "rsid",
@@ -700,9 +633,6 @@ df = df[,c("Gene Symbol",
            "na_count",
            "beta_direction",
            "NES_direction")]
-
-
-
 
 write_excel_csv(df, paste0(file_directory,"/", gene_name,"_test/Gtex/",gene_name,"_merge_GTEX_PHEWAS_betacor_ambig_grouped.csv"))
 ```
@@ -815,7 +745,6 @@ if(nrow(FVC_test2) == 0 & nrow(FVC_test) == nrow(FVC_orginal)){
 
 FVC_test2 should be empty and FVC_test  should have the same number of rows as FVC_original. You can modify these to include whichever one you want to test has worked OK. 
 
-
 ## Step 4: LD removal and other cleanup
 
 The next 4 steps filter out all of the data we don't want:
@@ -852,7 +781,6 @@ df = df[which(df$ambiguous == "No" | df$ambiguous == "FS"),]
 write_csv(df, paste0(file_directory,"/", gene_name,"_test/Gtex/",gene_name,"_gtexPHEWAS_no_ukaORAmbig_FINAL.csv"))
 ```
 ### 4d. Ok now to deal with those pesky LD snps
-
 This is a little more complicated to filter out retrospectively. Arguably I should have filtered out the linked snps prior to the search. The issue with this is that you may miss some associations. For example, if rs1 - kidney disease and rs1 is linked to rs 2 and rs 3, then we choose only to search rs3. rs3 isn't associated with anything so we miss the effect of a snp by filtering prior to the search.
 
 It makes our lives harder here but hopefully it's worth it to have a better indication of snps' effect on disease.
@@ -868,7 +796,7 @@ The plan is as follows:
 
 
 ```{r Removal of LD linked snps for r20.5}
-
+##Data preamble##
 unique_Gtex_snps= read_tsv(paste0(file_directory,"/", gene_name,"_test/Gtex/unique_Gtex_snps.csv"), col_names = FALSE) # read the original unique snps file
 unique_Gtex_snps = unique_Gtex_snps$X1
 if(length(unique_Gtex_snps)<700){
@@ -876,7 +804,6 @@ if(length(unique_Gtex_snps)<700){
 
 load(paste0(file_directory,"/", gene_name,"_test/LDMatrix/rs_overlap_ALL_",gene_name,".RData"))  # specifically the dataframe with ambiguous data removed
 ## Annoyingly, in testing this stuff I found another source of error in my code. There are a whole load of snps that have been associated with a trait twice with similar p-values - I think these are OK because essentially they have been shown by two separate studies.
-
 setwd(paste0(file_directory,"/", gene_name,"_test/Gtex/"))
 
 df = read_csv(paste0(file_directory,"/", gene_name,"_test/Gtex/",gene_name,"_gtexPHEWAS_no_ukaORAmbig_FINAL.csv"))
@@ -887,8 +814,7 @@ backupneg=dfneg
 dfneg = dplyr::select(dfneg, rsid, p, trait,beta_direction) # selects key columns for assigning linkage
 dfneg= unique(dfneg) # remove all replicates created with tissue merge
 dfneg$test ="unlinked"
-# Sort by p-value (phewas) from smallest to largest (most sig to least sig)
-arrange(dfneg, p)
+arrange(dfneg, p)# Sort by p-value (phewas) from smallest to largest (most sig to least sig)
 # unique rsid-trait combos 
 rsid_trait_combos_neg = subset(dfneg, select = c(rsid, trait)) #simplify to two columns
 rsid_trait_combos_neg = unique(rsid_trait_combos_neg) # pull out unique values
@@ -903,9 +829,8 @@ arrange(dfpos, p)
 # unique rsid-trait combos 
 rsid_trait_combos_pos = subset(dfpos, select = c(rsid, trait)) #simplify to two columns
 rsid_trait_combos_pos = unique(rsid_trait_combos_pos) # pull out unique values
-
+####Negative rsid-traits####
 for(n in 1:nrow(rsid_trait_combos_neg)){
-  
   test_id = rsid_trait_combos_neg$rsid[n]
   test_trait = rsid_trait_combos_neg$trait[n]
   for(i in 1:length(rs_overlap_r20.5[[rsid_trait_combos_neg$rsid[n]]])){
@@ -992,7 +917,7 @@ test2neg = full_join(dfneg, backupneg, by = c("rsid","p","trait")) # merging bac
 testneg = test2neg[which(test2neg$test=="unlinked"),]
 
 
-
+###testing lines#####
 #these two test lines check whether a small sample have worked
 # rs72940739 = df[which(df$rsid =="rs72940739"),]
 # rs17640713 = df[which(df$rsid =="rs17640713"),]
@@ -1016,9 +941,8 @@ testneg = test2neg[which(test2neg$test=="unlinked"),]
 # testNEG=test2[which(test2$beta_direction=="Negative"),]
 # testrs139423036=test2[which(test2$rsid=="rs139423036"),]
 # testrs10172305=test2[which(test2$rsid=="rs10172305"),]
+###Positive rsid-traits####
 
-
-### NOW FOR POS
 
 for(n in 1:nrow(rsid_trait_combos_pos)){
   
@@ -1106,10 +1030,7 @@ test2pos = full_join(dfpos, backuppos, by = c("rsid","p","trait"))
 test2=rbind(test2neg,test2pos)
 test2 = test2 %>% rename(beta_direction = beta_direction.y)
 test2 = test2 %>% dplyr::select(-c("beta_direction.x"))
-write_csv(test2, paste0(gene_name,"_gtexPHEWAS_no_ukaORAmbig_FINAL_linkagetempr20.5.csv"))# full dataframe but with the "test" column 
-
-## OK now we've done that we can look at this ukb-d-raw vs irnt discrepancy
-
+write_csv(test2, paste0(gene_name,"_gtexPHEWAS_no_ukaORAmbig_FINAL_linkagetempr20.5.csv"))# full dataframe but with the "test" column
 
 test = test2[which(test2$test=="unlinked"),]
 
@@ -1126,8 +1047,7 @@ write_csv(test, paste0(gene_name,"_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr
 ```{r}
 final_df = df 
 # setting up a logp and directional logp column
-final_df$p= ifelse(final_df$p==0, 1e-300,final_df$p)
-
+final_df$p= ifelse(final_df$p==0, 1e-300,final_df$p)# if p is 0 - a strange error with p being so small it defaults to 0 - replace with a very small value so it doesn't break our plots
 final_df$logp=-log10(final_df$p)
 final_df$logp_DIR =1
 final_df$logp_DIR = if_else(final_df$NES_direction =="Negative", -1,1)
@@ -1144,16 +1064,12 @@ write_csv(final_df,paste0(file_directory,"/", gene_name, "_test/Final_data/final
 
 ```
 
-
-
-# Step 5: Plotting the data so far INCOMPLETE- NEEDS OVERHAUL(source code: Trait-tissue_comparer_MAIN_PLOTTING_SCRIPT.R):
+# Step 5: Plotting the data so far:
 This section is a little less rigid and I would encourage you to think about what kind of things we might be able to pull from the dataset.
 
 However, I think a good starting point is to plot the data of p-value vs trait; Faceted to be split by direction of expression change (NES) and trait group; and colour coded based on the direction of the beta value.
 ## Now for the actual plotting:
 NOTE: I'm not going to go line by line for the ggplotting functions in all of the code below as it's all explained very nicely in the gg cheatsheet available online. 
-
-You will need to activate library(ggplot2() and library(ggpubr) in the console (or install if you don't have them).
 
 For this section I also have made new file directories for each subheading of plots for easier browsing later. However, I have left these out of the code so you can just click through without the complicated sub-folder system. 
 
@@ -1164,12 +1080,14 @@ Main results Figure:
 (B) TissueGROUP-rsid_count_OVERVIEW 
 (C) RNAvsMERGEDdfcount
 (D) Position_count_OVERVIEW
-(E) pvalvstraitgroup_LOG
+(E0) e0-ntraitgroup_associations and e0-RELntraitgroup_associations (raw and relative respectively)
+(E1) pvalvstraitgroup_LOG
 (E2) pvalvstraitgroup_LOG no other
 (E3) pvalvstraitgroup_LOG Other Gene Expression Change only
 (E4) pvsTrait_INFL_LOG_TISCOL
 (E5) pvsTrait_BODY_LOG_TISCOL
-(F) COUNTvstraitgroup_REL_overview_SEATLE#
+(F1) COUNTvstraitgroup_REL_overview_SEATLE#
+(F2) f2COUNTvstraitgroup_REL_overview_SEATLE_NOOGEC#
 
 Circos Figure:
 Position_Gtex_P
@@ -1179,23 +1097,27 @@ trait_position
 Curved_gene_diagram_P_FULL_Colour
 Curved_gene_diagram_RED_colour
 
-
-
-
-
-
-
-
-
-
 ## our df plotting
 Initial sort of traitgroups into a custom order and colour scheme (to be used later)
 ```{r Reading in the FINAL df}
-
+# Data load in and sort 
 df = read_csv(paste0(file_directory,"/", gene_name, "_test/Final_data/final_df.csv"))
-df = unique(df)
-df$beta_direction = factor(df$beta_direction, levels=c("Positive", "Negative"))
 
+df = df %>% dplyr::select(-Alt_Subcat)# remove alt_subcat at least for the moment, as it seems to making duplication events
+df = unique(df)
+# removing duplicated raw values from more recent irnt
+df = df %>% separate(id,into=c("remove1","remove2","remove3","irntvsraw" ), remove=F) %>%
+  filter((irntvsraw !="raw") %>%replace_na(TRUE)) %>%
+  dplyr::select(-remove1,
+                -remove2,
+                -remove3,
+                -irntvsraw)
+
+
+df$beta_direction = factor(df$beta_direction, levels=c("Positive", "Negative"))
+original_gtex =read_csv(paste0(file_directory,"/", gene_name,"_test/Gtex/", gene_name, "_Gtex_cleaned.csv"))
+Full_tissue_database = read_csv(paste0(file_directory,"/Trait and Tissue Groups/Full_tissue_database.csv"))
+original_gtex = left_join(original_gtex,Full_tissue_database)
 
 df$traitgroup = factor(df$traitgroup, levels =c("Body Fat/Size",
             "Metabolism (inc. Diabetes)",
@@ -1268,7 +1190,60 @@ grid_col = c(`Body Fat/Size` = "#0DF485",
 
 
 ```
+#### A - TissueGROUP-rsid_count_OVERVIEW ORIGINAL GTEX
+This plot shows the overview of our SNPs in each tissuegroup from the Original GTEx dataframe. (i.e after phewas search and LD removal but then filtered to remove duplicated tissuegroups from the trait matching process)
+```{r}
 
+list_of_tissuegroups = unique(Full_tissue_database$tissue_group)
+list_of_tissuegroups = sort(list_of_tissuegroups)
+
+original_gtex$NES_direction =ifelse(original_gtex$NES>0, "Positive", "Negative")
+
+test = original_gtex %>% group_by(tissue_group, NES_direction) %>% summarise(count = length(tissue_group[!is.na(tissue_group)])) # frequency by direction
+
+
+original_gtex$tissue_group = ifelse(original_gtex$tissue_group=="Male_Specific_Tissue", "Male Specific Tissue", original_gtex$tissue_group)
+
+# loop to add in the missing tissuegroups
+for(tissuegroup in list_of_tissuegroups){
+  for(n in 1:nrow(test)){
+    if(nrow(test[which(test$tissue_group==tissuegroup),])==0){
+    test[nrow(test)+1,]= test[nrow(test)+1,] # make a new row
+    test$tissue_group[nrow(test)] =tissuegroup
+    test$count[nrow(test)] = 0
+    test$NES_direction[nrow(test)] = "Positive" # set it to either, doesn't matter as value is 0
+    }
+  }
+}
+
+
+test$NES_direction = factor(test$NES_direction, levels=c("Positive", "Negative"))
+test= test[ which(is.na(test$tissue_group)==F),]
+
+SNPcountperTissuegroup = ggplot(test, aes(x=tissue_group,y=count, fill=NES_direction)) + 
+  geom_col()+ # bar chart counting how many times a tissue appears
+  #ylim(0,0.5)+
+  scale_fill_viridis_d(begin=1, end=0, name=paste0("Expression Change")) + # I like this palette but you can remove it or change it 
+  labs(title= "Proportion of SNP - Trait Associations per Tissue" , x= "Tissue Group", y=paste("Proportion of rsIDs \n(n/total)"))+ #labels
+  theme(axis.text.x = element_text(angle = 45, hjust =1),
+        legend.position = "top",
+         panel.background = element_rect(fill="white"),
+         panel.grid.major.x = element_blank(),
+         panel.grid.major.y = element_line(colour = "gray90", linetype="solid", size=0.4),
+        axis.line = element_line(colour = "black", linetype="solid", size=1))+
+    scale_x_discrete(expand = c(0.04, 0)) +
+    scale_y_continuous(expand = c(0, 0)) 
+  # setting up x axis labels so they don't overlap + no legend
+
+ 
+
+SNPcountperTissuegroup
+
+
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/A-RAW_GTEXTissueGROUP-rsid_count_OVERVIEW.pdf"), width= 150, height=100, unit="mm")
+
+
+```
 
 
 #### B - TissueGROUP-rsid_count_OVERVIEW
@@ -1333,68 +1308,13 @@ ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/TissueGROUP-rsid_c
 ```
 
 
-#### C - Correlation between RNA-seq/genotyped merged df - Checking the pattern isn't just beecause of number of samples Gtex has taken from each tissue:
-```{r Plotting the raw Gtex egene data against Tissue line graph}
 
-df_RED = df %>% dplyr::select(Tissue, tissue_group, `P-Value`) 
-df_RED = unique(df_RED)
-
-
-Gtex_egene = read_csv(paste0(file_directory,"/eGene/FINAL_Gtex_egene.csv"))
-Gtex_egene = Gtex_egene %>% rename(eGenes = `# eGenes`,
-                                  RNASeq_and_Genotyped_Samples = `# RNASeq and Genotyped samples`)
-Gtex_egene$tissue_group = ifelse(Gtex_egene$tissue_group=="Respiratory", "Respiratory Tissue", Gtex_egene$tissue_group)
-# This Gtex_egene comes from earlier, need to work out whether I can doa read in step here...
-Gtex_RNA_forcomp = Gtex_egene %>% dplyr::select(RNASeq_and_Genotyped_Samples, Tissue, tissue_group)
-df_forcomp = df_RED %>% group_by(Tissue, tissue_group) %>% summarise(count = length(Tissue[!is.na(Tissue)]))
-# Sorting out annoying vcolumn name mismatch
-df_forcomp = left_join(df_forcomp, Full_tissue_database)
-df_forcomp =df_forcomp %>% rename(Tissue_old =Tissue,
-                                  Tissue =Tissue_nice)
-
-comparison_RNA = left_join(df_forcomp, Gtex_RNA_forcomp, by=c("Tissue", "tissue_group"))
-comparison_RNA =comparison_RNA %>% filter(!is.na(Tissue))
-
-rsq <- function (x, y) cor(x, y) ^ 2
-r2 = rsq(comparison_RNA[,3],comparison_RNA[,6])
-
-Correlation = ggplot(comparison_RNA, aes(x=comparison_RNA$count, y=comparison_RNA$RNASeq_and_Genotyped_Samples, color = Tissue)) + #Plot of SNPs NES vs beta from original dataset
-  #geom_jitter(aes(color=NES)) +
-  geom_point()+ 
-  #geom_text(data=subset(comparison_egene, eGenes/comparison_egene$count>45 | eGenes/comparison_egene$count<20), aes(label=Tissue), vjust=-0.6, hjust=0.8)+
-   # colourblind friendly palette
-  scale_color_viridis_d() +
-  labs(title= paste0("Correlation of RNASeq and Genotyped samples \nand count from Gtex"), x= "SNP count from merged Dataset", y= "Number of RNASeq and Genotyped samples") +# Lables
-  #theme(legend.position = "none")+ 
-  geom_line(inherit.aes = TRUE, data = comparison_RNA[,3:4], stat="smooth", method = "lm", formula = y~x, alpha = 0.5, color = "black")+
-    theme(
-         #panel.background = element_rect(fill="white"),
-         #panel.grid.major.x = element_blank(),
-         #panel.grid.major.y = element_line(colour = "gray90", linetype="solid", size=0.4),
-        axis.line = element_line(colour = "black", linetype="solid", size=1))
- 
-  
-   #  0 line
-   # text adjust
-
-Correlation_egene = Correlation + annotate(geom="text",  x=12, y=20, label = paste0("r2 = ", round(r2[1],4)),
-              fill="black")
-Correlation_egene
-
-
-
-ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/RNAvsMERGEDdfcount.pdf"), width= 150, height=100, unit="mm")
-
-
-```
 #### C-2 - Correlation between nmuber of SNPs in each trait group compared to trait database category size - Checking the pattern isn't just beecause of this:
 ```{r Plotting the raw Gtex egene data against Tissue line graph}
 Full_trait_database = read_csv(paste0(file_directory,"/Trait and Tissue Groups/Full_trait_database.csv"))
 Full_trait_database = unique(Full_trait_database)
 df_RED = df %>% dplyr::select(trait, traitgroup, p) 
 df_RED = unique(df_RED)
-
-
 
 df_forcomp = df_RED %>% group_by(traitgroup) %>% summarise(count = length(traitgroup[!is.na(traitgroup)])) %>% dplyr::select(traitgroup, count)
 
@@ -1418,12 +1338,19 @@ Correlation = ggplot(comparison_TG, aes(x=count, y=count_full, color = traitgrou
   labs(title= paste0("Correlation of traitgroup from our df to full database"), x= "Number of SNP-Traitgroup Associations", y= "Number of Possible Traits in Traitgroups") +
   #theme(legend.position = "none")+ 
   geom_line(inherit.aes = TRUE, data = comparison_TG[,2:3], stat="smooth", method = "lm", formula = y~x, alpha = 0.5, color = "black")+
-    theme(axis.text.x = element_text(angle = 45, hjust =1),
-         #panel.background = element_rect(fill="white"),
-         #panel.grid.major.x = element_blank(),
-         #panel.grid.major.y = element_line(colour = "gray90", linetype="solid", size=0.4),
-        axis.line = element_line(colour = "black", linetype="solid", size=1),
-        legend.position = "none")
+    theme(
+        axis.text.x = element_text( size=14),
+        #legend.position = "none",
+        axis.text.y = element_text(size=14),
+        axis.title.y = element_text(  size=16),
+        axis.title.x = element_text(  size=16),
+        panel.background = element_rect(fill="white"),
+          panel.grid.major.x = element_line(colour = "gray90", linetype="solid", size=0.4),
+        panel.grid.minor.x = element_line(colour = "gray90", linetype="solid", size=0.2),
+         panel.grid.major.y = element_line(colour = "gray90", linetype="solid", size=0.4),
+        panel.grid.minor.y = element_line(colour = "gray90", linetype="solid", size=0.2),
+        axis.line = element_line(colour = "black", linetype="solid", size=1))
+        
           
  
   
@@ -1436,7 +1363,7 @@ Correlation_tg
 
 
 
-ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/TG_dfcount_cor.pdf"), width= 150, height=150, unit="mm")
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/TG_dfcount_cor_leg.pdf"), width= 100, height=100, unit="mm")
 
 
 ```
@@ -1507,6 +1434,33 @@ SNP_by_traitgroupe0= ggplot(summary_of_df, aes(x=reorder(traitgroup, -traitgroup
   labs(x = "Trait Group", y = "Number of SNP-Trait Associations", title = "Number of SNP-Trait Associations in Each Traitgroup")
 SNP_by_traitgroupe0
 ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/e0-ntraitgroup_associations.pdf"), width=200,height=120, unit="mm")
+
+#Alternate version, relative to tissuegroup size#####
+
+
+traitgroup_counts = Full_trait_database %>% 
+  count(traitgroup)
+names(traitgroup_counts) =c("traitgroup", "total_traits_in_database")
+
+summary_of_df = left_join(summary_of_df, traitgroup_counts)
+summary_of_df$rel.traitgroup = summary_of_df$traitgroup_count/summary_of_df$total_traits_in_database
+
+SNP_by_traitgroupe0REL= ggplot(summary_of_df, aes(x=reorder(traitgroup, -rel.traitgroup), y=rel.traitgroup, fill= traitgroup))+
+  geom_col()+
+ # geom_text(check_overlap = T,aes( y=rel.traitgroup, label=rel.traitgroup), vjust=-0.5)+
+  scale_fill_manual(values = grid_col)+
+  theme(legend.position = "none",
+        axis.text.x = element_text( angle =70, hjust=1),
+                 panel.background = element_rect(fill="white"),
+         panel.grid.major.x = element_blank(),
+         panel.grid.major.y = element_line(colour = "gray90", linetype="solid", size=0.4),
+        panel.grid.minor.y = element_line(colour = "gray90", linetype="solid", size=0.2),
+        axis.line = element_line(colour = "black", linetype="solid", size=1))+
+    scale_x_discrete(expand = c(0.04, 0)) +
+    scale_y_continuous( expand = expansion(mult = c(0, .1))) +
+  labs(x = "Trait Group", y = "Number of SNP-Trait Associations", title = "Number of SNP-Trait Associations in Each Traitgroup")
+SNP_by_traitgroupe0REL
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/e0-RELntraitgroup_associations.pdf"), width=200,height=120, unit="mm")
 
 ```
 #### E - pvalvstraitgroup_LOG
@@ -1640,14 +1594,15 @@ theme(axis.text.x = element_text(angle = 60, hjust =1, size = 8),
         panel.grid.major.y = element_line(colour = "gray90", linetype="solid", size=0.4),
         panel.grid.minor.y = element_line(colour = "gray90", linetype="solid", size=0.2),
         panel.background = element_rect(fill="white"),
-        legend.position = "none")+
+        #legend.position = "none"
+      )+
     geom_text(inherit.aes=F,aes(label = Rank_no_OGEC,x=traitgroup,y=min(logp_DIR), fill="black"), check_overlap = T, vjust=1.5)+
   scale_y_continuous(expand = c(0.1, 0))
 
 pvalvstraitgroupNO_O_e2
 
 
-ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/e2-pvalvstraitgroup_noother.pdf"), width=200, height =100 , units="mm")
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/e2-LEGEND.pdf"), width=200, height =100 , units="mm")
 ```
 
 #####E3 only Other Gene Expression Change
@@ -1708,8 +1663,6 @@ length_of_unique_traits = length(unique(temp$trait))
 ```{r, fig.width=6, fig.height=10}
 # Top5_traitgroups = summary_of_df %>% filter(traitgroup!= "Other/Unspecified", traitgroup!= "Other Gene Expression Change") %>% top_n(5) 
 # Top5_traitgroups = arrange(Top5_traitgroups, desc(traitgroup_count))
-
-
 for(i in 1:5){
   print(i)
   temp =df[which(df$traitgroup ==summary_of_df_no_OGEC$traitgroup[i]),] 
@@ -1775,7 +1728,7 @@ f1 = ggplot()+ #Plot of Traitgroup vs SNP Count
     geom_hline(yintercept=0, color ="gray70")+
   #ylim(-0.175,0.175)+
   scale_fill_viridis_d(direction=-1) + # I like this palette but you can remove it or change it 
-  labs(title= paste0("Trait Groups Effected by SNPs that Change in Expression of", gene_name) , x= "Trait Group", y= paste("Relative Number of SNP-Trait \nAssociations (n/Total)"))+ #labels
+  labs(title= paste0("Trait Groups Effected by SNPs that Change in Expression of ", gene_name) , x= "Trait Group", y= paste("Relative Number of SNP-Trait \nAssociations (n/Total)"))+ #labels
   theme(axis.text.x = element_text(angle = 60, hjust =1, size = 8),
         axis.text.y =   element_text(size = 10),
         axis.title = element_text(size = 10, face="bold"),
@@ -1783,7 +1736,8 @@ f1 = ggplot()+ #Plot of Traitgroup vs SNP Count
         panel.grid.major.y = element_line(colour = "gray90", linetype="solid", size=0.4),
         panel.grid.minor.y = element_line(colour = "gray90", linetype="solid", size=0.2),
         panel.background = element_rect(fill="white"),
-        legend.position = "none")  # setting up x axis labels so they don't overlap
+        #legend.position = "none"
+        )  # setting up x axis labels so they don't overlap
   #facet_grid(cols = vars(NES_direction)) # facet splits the plot based on a variable, in this case NES direction
   # annotate("label",
   #          x = -Inf, 
@@ -1987,8 +1941,8 @@ unique(df$Intron_or_Exon_or_UTR)
 
 
 # repeated for Gtex RAW data
-
-Gtex_cleaned = read_csv("/Users/hy14913/Documents/Local_work_folder/JUL_TEST/EPDR1_test/Gtex/EPDR1_Gtex_cleaned.csv")
+# INCOMPLETE APRIL - needs new file directory
+Gtex_cleaned = read_csv(paste0(file_directory,"/", gene_name,"_test/Gtex/", gene_name, "_Gtex_cleaned.csv"))
   Gtex_cleaned$Within_Gene_Region = "No"
 if(limitsSTART>limitsEND){
   for(n in 1:nrow(Gtex_cleaned)){
@@ -3020,6 +2974,7 @@ grid_col = c(`Body Fat/Size` = "#0DF485",
             `Alcohol-related Disease` ="#BCDC32",
              `Life Span` ="#92DC32",
              `Female Specific Traits` = "#43DC32",
+            `Disease (unknown origin)` = "#43DC99",
             `Other/Unspecified` ="#C9C7BD",
             `Other Gene Expression Change` ="#78C47D",
              # Tissues:
@@ -3124,7 +3079,7 @@ grid_col_tissue = grid_col[(length(unique(df$traitgroup))+1):(length(unique(df$t
 grid_col_tissue = grid_col_tissue[which(!is.na(grid_col_tissue))]
 ```
 
-
+INCOMPETE APRIL23 - Need to add in a caveat for the circos plots - maybe without labels and anually add or something else clever, for the moment leaving it as is and it will probably error
 
 
 ####1. Gtex (from merged df)
@@ -3149,8 +3104,8 @@ circos.par(start.degree=-90) # Rotates the plot so tissues are on the right as t
 chordDiagram(test, 
               annotationTrackHeight = c(0.01, 0.01), 
               annotationTrack = "grid",
-              big.gap =15,
-              small.gap = 1,
+              big.gap =10,
+              small.gap = 0,
               column.col = grid_col_tissue, # or col_mat
               grid.col = grid_col_tissue,
               diffHeight = mm_h(1), 
@@ -3158,12 +3113,36 @@ chordDiagram(test,
               preAllocateTracks = list(track.height = 1*max(strwidth(unlist(dimnames(test))))),
               transparency = 0.5
  )
-# This particular plot has SO many positions it makes the labels look a bit rubbish but I've kept them in anyway
+#This particular plot has SO many positions it makes the labels look a bit rubbish but I've kept them in anyway
 circos.track(track.index = 1, panel.fun = function(x, y) {
-   circos.text(CELL_META$xcenter, CELL_META$ylim[1], CELL_META$sector.index, 
+   circos.text(CELL_META$xcenter, CELL_META$ylim[1], CELL_META$sector.index,
                facing = "clockwise", niceFacing = TRUE, adj = c(0, 0.5), cex =0.7)
 }, bg.border = NA)
 dev.off()
+
+for_LUT_plot = simple_LUT_Gmerge %>%
+  mutate(arb=1) %>%
+  dplyr::select(-position_gtex) %>%
+  unique()
+
+for_LUT_plot %>% 
+ggplot() +
+  geom_col(aes(x=tissue_group, y=arb, fill=tissue_group))+
+  scale_fill_manual(values = grid_col)+
+  scale_x_discrete(limits=rev,position = "top")+
+  coord_flip()+
+
+    theme(axis.text.x =  element_blank(),
+          axis.ticks =  element_blank(),
+        axis.text.y =   element_text(size = 10),
+        axis.title =  element_blank(),
+        panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_line(colour = "gray90", linetype="solid", size=0.4),
+        panel.grid.minor.y = element_line(colour = "gray90", linetype="solid", size=0.2),
+        panel.background = element_rect(fill="white"),
+        legend.position = "none")
+ggsave(paste0(file_directory,"/",gene_name,"_test/Circos/tissue_LUT.pdf"), width = 70, height=100, unit="mm")
+
 ```
 
 ####3. Tissue-Traitgroup overlap: NOTE: For these next two the traitgroups are listed here with colours associated. Every gene will have a different list of traitgroups. Best to go through manually and modify accordingly, or use rand_color (see commented lines)
@@ -3189,7 +3168,7 @@ circos.par( start.degree = -90 )
 chordDiagram(test5, 
              annotationTrackHeight = c(0.01, 0.01), 
              annotationTrack = "grid",
-             big.gap =15,
+             big.gap =10,
             #small.gap = 1,
              column.col = grid_col, # or col_mat
             grid.col = grid_col,
@@ -3262,7 +3241,6 @@ simple_LUT_P = simple_LUT_P %>% dplyr::select(position_gtex, traitgroup)
 test4 = table(simple_LUT_P)
  
 layout(matrix(1:6, 2, 3))
-
 circos.clear()
 pdf("trait_position.pdf")
 circos.par( start.degree = 90 ) 
@@ -3270,7 +3248,7 @@ chordDiagram(test4,
               annotationTrackHeight = c(0.01, 0.01), 
               annotationTrack = "grid",
               big.gap =10,
-              #small.gap = 1,
+              small.gap = 1,
               column.col = grid_col_trait, # or col_mat
               grid.col = grid_col_trait,
               diffHeight = mm_h(1), 
@@ -3346,16 +3324,66 @@ dev.off()
  f1
  f2
  (others in file to peruse)
+ INCOMPLETE APRIL 23
+ Need to sort out the shiny implementation properly as well as add in error jumping for the circos plots if they're not playing the game.
 ```{r}
 
 pvalvstraitgroupNO_O_e2_leg = pvalvstraitgroupNO_O_e2+ theme(legend.position = "right")
 plot_grid(SNPcountperTissuegroup,SNP_by_traitgroupe0,pvalvstraitgroupe1,pvalvstraitgroupNO_O_e2_leg, nrow=4, ncol=1, align="v")
 ggsave(paste0(file_directory,"/",gene_name,"_test/Final_Plots/Summary_1.pdf"), height=600, width=300, unit="mm")
 ```
+#Final clean up of the final_df to make it as usable as possible straight out of the box
 
 ```{r}
+df= read_csv(paste0(file_directory,"/", gene_name,"_test/Final_data/final_df.csv"))
+col_order <- c("rsid",
+               "trait",
+               "traitgroup",
+               "Subcat",                
+               "beta_cor",
+               "p",
+               "logp_DIR",
+               "ea",
+               "nea",
+               "se",
+               "n",
+               "eaf",
+               "id",
+               "P-Value",
+               "a",
+               "b",
+               "NES",
+               "Tissue_nice",
+               "tissue_group",
+               "tissue_group_secondary",
+               "Within_Gene_Region",
+               "Intron_or_Exon_or_UTR",
+               "reg_region" )
+
+df <- df[, col_order]
+df = unique(df)
+write_csv(df,paste0(file_directory,"/", gene_name,"_test/Final_data/final_df_reordered.csv"))
+
+```
+
+# Shiny app
+```{r}
 save.image(paste0(file_directory,"/", gene_name,"_test/Final_data/final_workspace_for_shiny.RData"))
-runApp( paste0(file_directory,"/summary_shiny_app.R"))
+runApp( paste0(file_directory,"/app_with_circos.R"))
+```
+
+# Shiny app rerun 
+Fill in these 3 again
+```{r, include=F}
+
+gene_name = "Gene_name"
+
+file_directory = "file_directory"
+
+LD_token = "generic_token"
+
+load(paste0(file_directory,"/", gene_name,"_test/Final_data/final_workspace_for_shiny.RData"))
+runApp( paste0(file_directory,"/app_with_circos.R"))
 
 ```
 
@@ -3367,4 +3395,61 @@ runApp( paste0(file_directory,"/summary_shiny_app.R"))
 
 # Extra comments
 A lot of this code is probably less efficient than it could be. In general I've found it difficult to find the correct vectorised functions to quickly do what I want. For this reason I find myself leaning heavily on more generic computing logic using 'for' and 'if' loops. This does work but please be patient with certain chunks as they may take a little while to run. Any tips and improvements are very welcome. Please do email me :) . 
+
+
+# Old plots to be removed:
+#### C - Correlation between RNA-seq/genotyped merged df - Checking the pattern isn't just beecause of number of samples Gtex has taken from each tissue:
+```{r Plotting the raw Gtex egene data against Tissue line graph, include=FALSE}
+
+df_RED = df %>% dplyr::select(Tissue, tissue_group, `P-Value`) 
+df_RED = unique(df_RED)
+
+
+Gtex_egene = read_csv(paste0(file_directory,"/eGene/FINAL_Gtex_egene.csv"))
+Gtex_egene = Gtex_egene %>% rename(eGenes = `# eGenes`,
+                                  RNASeq_and_Genotyped_Samples = `# RNASeq and Genotyped samples`)
+Gtex_egene$tissue_group = ifelse(Gtex_egene$tissue_group=="Respiratory", "Respiratory Tissue", Gtex_egene$tissue_group)
+# This Gtex_egene comes from earlier, need to work out whether I can doa read in step here...
+Gtex_RNA_forcomp = Gtex_egene %>% dplyr::select(RNASeq_and_Genotyped_Samples, Tissue, tissue_group)
+df_forcomp = df_RED %>% group_by(Tissue, tissue_group) %>% summarise(count = length(Tissue[!is.na(Tissue)]))
+# Sorting out annoying vcolumn name mismatch
+df_forcomp = left_join(df_forcomp, Full_tissue_database)
+df_forcomp =df_forcomp %>% rename(Tissue_old =Tissue,
+                                  Tissue =Tissue_nice)
+
+comparison_RNA = left_join(df_forcomp, Gtex_RNA_forcomp, by=c("Tissue", "tissue_group"))
+comparison_RNA =comparison_RNA %>% filter(!is.na(Tissue))
+
+rsq <- function (x, y) cor(x, y) ^ 2
+r2 = rsq(comparison_RNA[,3],comparison_RNA[,6])
+
+Correlation = ggplot(comparison_RNA, aes(x=comparison_RNA$count, y=comparison_RNA$RNASeq_and_Genotyped_Samples, color = Tissue)) + #Plot of SNPs NES vs beta from original dataset
+  #geom_jitter(aes(color=NES)) +
+  geom_point()+ 
+  #geom_text(data=subset(comparison_egene, eGenes/comparison_egene$count>45 | eGenes/comparison_egene$count<20), aes(label=Tissue), vjust=-0.6, hjust=0.8)+
+   # colourblind friendly palette
+  scale_color_viridis_d() +
+  labs(title= paste0("Correlation of RNASeq and Genotyped samples \nand count from Gtex"), x= "SNP count from merged Dataset", y= "Number of RNASeq and Genotyped samples") +# Lables
+  #theme(legend.position = "none")+ 
+  geom_line(inherit.aes = TRUE, data = comparison_RNA[,3:4], stat="smooth", method = "lm", formula = y~x, alpha = 0.5, color = "black")+
+    theme(
+         #panel.background = element_rect(fill="white"),
+         #panel.grid.major.x = element_blank(),
+         #panel.grid.major.y = element_line(colour = "gray90", linetype="solid", size=0.4),
+        axis.line = element_line(colour = "black", linetype="solid", size=1))
+ 
+  
+   #  0 line
+   # text adjust
+
+Correlation_egene = Correlation + annotate(geom="text",  x=12, y=20, label = paste0("r2 = ", round(r2[1],4)),
+              fill="black")
+Correlation_egene
+
+
+
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/RNAvsMERGEDdfcount.pdf"), width= 150, height=100, unit="mm")
+
+
+```
 
