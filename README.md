@@ -6,7 +6,7 @@ This program uses the LDlink web server which requires a unique token to run. TH
 # Quick start guide:
 
 1. Download the zip file from github and save within your chosen file directory. 
-2. Extract the files. This will contain the main pipeline, tissue and trait databases and shiny app. These should be moved into the main folder and zip file deleted. Looking like this: ![image](https://user-images.githubusercontent.com/66262215/235876391-cab32c9f-ec77-4edb-9f3c-5fef0dbb4d3a.png)
+2. Extract the files. This will contain the main pipeline, tissue and trait databases, readme.md and shiny app. These should be moved into the main folder and zip file deleted. So your folder that you want to be your file directory should look like this:<img width="918" alt="image" src="https://user-images.githubusercontent.com/66262215/236016871-663d8e18-b0c9-4542-8726-3864385cc08e.png">
 3. Open final_pipeline.Rmd
 4. In the top "chunk" you'll see gene_name, file_directory and LD_Token. Fill these out with your versions. There are also instructions within the file to help you.
 5. in the top right of the window click run all: ![Screenshot 2022-10-05 at 15 49 52](https://user-images.githubusercontent.com/66262215/194095244-452d5831-41b8-4b1d-92ba-78df2f72be98.png)
