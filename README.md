@@ -6,7 +6,7 @@ This program uses the LDlink web server which requires a unique token to run. TH
 # Quick start guide:
 
 1. Download the zip file from github and save within your chosen file directory. 
-2. Extract the files. This will contain the main pipeline, tissue and trait databases and shiny app
+2. Extract the files. This will contain the main pipeline, tissue and trait databases and shiny app. These should be moved into the main folder and zip file deleted. Looking like this: ![image](https://user-images.githubusercontent.com/66262215/235876391-cab32c9f-ec77-4edb-9f3c-5fef0dbb4d3a.png)
 3. Open final_pipeline.Rmd
 4. In the top "chunk" you'll see gene_name, file_directory and LD_Token. Fill these out with your versions. There are also instructions within the file to help you.
 5. in the top right of the window click run all: ![Screenshot 2022-10-05 at 15 49 52](https://user-images.githubusercontent.com/66262215/194095244-452d5831-41b8-4b1d-92ba-78df2f72be98.png)
@@ -31,7 +31,20 @@ These are free to download to your file system
 # Using the main R Notebooks
 There are a lot of instructions within the document itself and you are more than welcome to go through running chunk by chunk to get used to how I've setup this pipeline if you're interested!
 
+# Guide to Plots
+In all cases, Yellow = Positive, Purpe = Negative
 
+A-RAW_GTEXTissueGROUP-rsid_count_OVERVIEW.pdf - Summary of SNPs that alter expression, grouped by the tissues quantified by GTEx, colour = direction of expression change
+
+e0/e0REL - Number of SNP-Trait associations per trait category (trait group). color based on trait group. REL = normalised to the number of posible traits within the database. (Number of unique traits from SNP-Trait associations per trait group)/(Number of possible traits in each trait group from Full_trait_database.csv)
+
+e1-3 - Above x axis, increased expression, Below x axis decreased expression, y axis: -log(p) (how certain we are that SNP is truly causing a change to this trait), color = direction of TRAIT change. i.e yellow = SNP increases trait, purple = SNP decreases trait
+
+f1-2 - Proportional to the dataset so y axis is: (number of SNP-trait assocations within that category) / (total SNP-trait associations). f2- removed other and other gene expression change for clarity
+
+Number_x_traitgroup... - Each of your top 5 traitgroups (excluding other gene expression change and other if they are in the top 5) split to see each individual SNP-trait association within the traitgroup
+
+RegRegion_COUNT_G_P.pdf  - Where your SNPs are based on their regulatory region (auto assigned from ensembl) - I always find this super interesting because so far the vast majority are not found in traditional regulatory regions
 
 # Old - to be deleted
 6. You will be redirected to gnomad. Click download csv and save within the gnomad directory in the file system (your_directory/gene_name_test/gnomad) ![Screenshot 2022-10-05 at 15 53 01](https://user-images.githubusercontent.com/66262215/194092004-bc811af5-d52a-42a2-b4c5-ee53f0598ad5.png)
