@@ -4,7 +4,10 @@ This program uses the LDlink web server which requires a unique token to run. TH
 
 
 # Quick start guide:
-
+Download and install R and Rstudio:
+R: https://www.stats.bris.ac.uk/R/ 
+Rstudio: https://posit.co/downloads/
+Then continue with the instructions
 1. Download the zip file from github and save within your chosen file directory. 
 2. Extract the files. This will contain the main pipeline, tissue and trait databases, readme.md and shiny app. These should be moved into the main folder and zip file deleted. So your folder that you want to be your file directory should look like this:<img width="918" alt="image" src="https://user-images.githubusercontent.com/66262215/236016871-663d8e18-b0c9-4542-8726-3864385cc08e.png">
 3. Open final_pipeline.Rmd
@@ -32,19 +35,38 @@ These are free to download to your file system
 There are a lot of instructions within the document itself and you are more than welcome to go through running chunk by chunk to get used to how I've setup this pipeline if you're interested!
 
 # Guide to Plots
-In all cases, Yellow = Positive, Purpe = Negative
+In all cases, Yellow = Positive, Purple = Negative
+List of key plots, Letters to match code
+(B) number_of_SNP-trait_associations_per_tissue_group 
+(C) correlation_of_traits_to_total_possible_traits
+(D) number_of_tissues_each_SNP_affects_expression_in
+(E0) e0-number_of_SNP-trait_associations_per_traitgroup and e0-normalised (raw and normalised respectively)
+(E1) e1--logp_x_expression_change_per_traitgroup
+(E2) e2-e1_no_Other_or_OGEC
+(E3) e3-e1-Other Gene Expression Change only
+(E4) e4-Number_x_Traitgroup 
+(F1) f1-nSNP-trait_associations_per_traitgroup_by_total
+(F2) f2-f1_no_OGEC
+(G) number_of_snps_per_regulatory_region
 
-A-RAW_GTEXTissueGROUP-rsid_count_OVERVIEW.pdf - Summary of SNPs that alter expression, grouped by the tissues quantified by GTEx, colour = direction of expression change
+B - Summary of SNPs that alter expression of your gene of interest and the direction of that change, grouped by the tissue groups quantified by GTEx, colour = direction of expression change
+C - Correlation of the number of unique traits in a Trait Group relative to the total number of possible traits in the full database. An indication of whether the results are due to chance.
+D - number_of_tissues_each_SNP_affects_expression_in A summary of how many tissues the SNPs alter gene expression in (from GTEx eQTLs).
+E0 - Number of SNP-Trait associations per trait group. color based on trait group. e0-normalised - normalised to the number of posible traits within the database. (Number of unique traits from SNP-Trait associations per trait group)/(Number of possible traits in each trait group from Full_trait_database.csv)
 
-e0/e0REL - Number of SNP-Trait associations per trait category (trait group). color based on trait group. REL = normalised to the number of posible traits within the database. (Number of unique traits from SNP-Trait associations per trait group)/(Number of possible traits in each trait group from Full_trait_database.csv)
+E1-3 - Above x axis, increased expression, Below x axis decreased expression, y axis: -log(p(trait change)) , color = direction of TRAIT change. i.e yellow = SNP increases trait, purple = SNP decreases trait
 
-e1-3 - Above x axis, increased expression, Below x axis decreased expression, y axis: -log(p) (how certain we are that SNP is truly causing a change to this trait), color = direction of TRAIT change. i.e yellow = SNP increases trait, purple = SNP decreases trait
+E1 - All Trait Groups with SNP-Trait associations in. 
+E2 - E1 without Other Gene Expression Change or Other categories. These are often very big and so can obscure the other results.
+E3 - Expanding just the Other Gene Expression Change category to look at the individual traits (in this case genes) your gene of interest/your SNPs effect.
+E4 - Expanding the top 5 traitgroups (excluding Other Gene Expression Change and Other) to see individual traits within the categories. NOTE: these can often be very big, if the plot outright breaks hopefully you can find and fix it within the code but if not please email me and I'll be happy to modify it for you.
 
-f1-2 - Proportional to the dataset so y axis is: (number of SNP-trait assocations within that category) / (total SNP-trait associations). f2- removed other and other gene expression change for clarity
+F1-2 - E1, normalised to the dataset, y axis: (number of SNP-Trait assocations within that category) / (total SNP-trait associations). 
 
-Number_x_traitgroup... - Each of your top 5 traitgroups (excluding other gene expression change and other if they are in the top 5) split to see each individual SNP-trait association within the traitgroup
-
-RegRegion_COUNT_G_P.pdf  - Where your SNPs are based on their regulatory region (auto assigned from ensembl) - I always find this super interesting because so far the vast majority are not found in traditional regulatory regions
+F1 - E1, normalised to the dataset
+F2 - F1 without other and other gene expression change for clarity (see above)
+G - How many of your SNPs are based in regulatory regions (auto assigned from ensembl) - I always find this super interesting because so far the vast majority are not found in traditional regulatory regions
+ 
 
 # Old - to be deleted
 6. You will be redirected to gnomad. Click download csv and save within the gnomad directory in the file system (your_directory/gene_name_test/gnomad) ![Screenshot 2022-10-05 at 15 53 01](https://user-images.githubusercontent.com/66262215/194092004-bc811af5-d52a-42a2-b4c5-ee53f0598ad5.png)
