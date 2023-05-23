@@ -3,7 +3,7 @@ This program uses the LDlink web server which requires a unique token to run. TH
 
 
 
-# Quick start guide:
+## Quick start guide:
 Download and install R and Rstudio:
 R: https://www.stats.bris.ac.uk/R/ 
 Rstudio: https://posit.co/downloads/
