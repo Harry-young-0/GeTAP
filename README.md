@@ -52,64 +52,61 @@ The point of the pipeline is to produce novel Gene-Trait associations by using S
 
 A - Summary of SNPs that alter expression of your gene of interest and the direction of that change, grouped by the tissue groups quantified by GTEx, colour = direction of expression change
 
-[TissueGROUP-rsid_count_OVERVIEW.pdf](https://github.com/Hy14913/expression-trait_pipeline/files/11555371/TissueGROUP-rsid_count_OVERVIEW.pdf)
+![A](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/f98ba4c1-f015-4613-9f6c-29e71a6ad48d)
 
 B - Correlation of the number of unique traits in a Trait Group relative to the total number of possible traits in the full database. An indication of whether the results are due to chance.
 
-[TG_dfcount_cor_leg.pdf](https://github.com/Hy14913/expression-trait_pipeline/files/11555382/TG_dfcount_cor_leg.pdf)
-
+![B](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/cccbbfa0-6c86-4aec-adab-8cf4d0570e70)
 
 C - number_of_tissues_each_SNP_affects_expression_in A summary of how many tissues the SNPs alter gene expression in (from GTEx eQTLs).
 
-[d1-Position_count_OVERVIEW.pdf](https://github.com/Hy14913/expression-trait_pipeline/files/11555386/d1-Position_count_OVERVIEW.pdf)
-
+![C](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/34aa5406-56c2-4c72-a350-9ee8a3b0a1d4)
 
 D - Number of SNP-Trait associations per trait group. color based on trait group. 
 
-[e0-ntraitgroup_associations.pdf](https://github.com/Hy14913/expression-trait_pipeline/files/11555388/e0-ntraitgroup_associations.pdf)
+![D](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/04631737-3c4d-4379-b79d-a3e13b292af4)
 
 Normalised Version - normalised to the number of posible traits within the database. (Number of unique traits from SNP-Trait associations per trait group)/(Number of possible traits in each trait group from Full_trait_database.csv)
 
-[e0-RELntraitgroup_associations.pdf](https://github.com/Hy14913/expression-trait_pipeline/files/11555390/e0-RELntraitgroup_associations.pdf)
+![D2](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/9aa05308-2af7-407f-b40f-1f2bd4d594d7)
 
 E - Above x axis, increased expression, Below x axis decreased expression, y axis: -log(p(trait change)) , color = direction of TRAIT change. i.e yellow = SNP increases trait, purple = SNP decreases trait
 
-
 E1 - All Trait Groups with SNP-Trait associations in. 
 
-[e1pvalvstraitgroup.pdf](https://github.com/Hy14913/expression-trait_pipeline/files/11555394/e1pvalvstraitgroup.pdf)
+![E1](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/c0bc1a0a-55dd-47e5-9b40-48dea82ae38b)
+
 E2 - E1 without Other Gene Expression Change or Other categories. These are often very big and so can obscure the other results.
 
-[e2-e1_no_Other_or_OGEC_LEGEND.pdf](https://github.com/Hy14913/expression-trait_pipeline/files/11555396/e2-e1_no_Other_or_OGEC_LEGEND.pdf)
-
+![E2](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/c4fef5ab-7fff-40ab-b866-415b573ac29e)
 
 E3 - Expanding just the Other Gene Expression Change category to look at the individual traits (in this case genes) your gene of interest/your SNPs effect.
 
-[e3-e1_OGEC_only.pdf](https://github.com/Hy14913/expression-trait_pipeline/files/11555405/e3-e1_OGEC_only.pdf)
+![E3](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/7cd0514d-c796-4aa3-9dfb-93bad8ed7c93)
 
-E4 - Expanding the top 5 traitgroups (excluding Other Gene Expression Change and Other) to see individual traits within the categories. NOTE: these can often be very big, if the plot outright breaks hopefully you can find and fix it within the code but if not please email me and I'll be happy to modify it for you.
+E4 - Expanding the top 5 traitgroups (excluding Other Gene Expression Change and Other) to see individual traits within the categories. In this case displaying just one example NOTE: these can often be very big, if the plot outright breaks hopefully you can find and fix it within the code but if not please email me and I'll be happy to modify it for you.
+
+![E4](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/8dede27f-da50-43f0-87b4-361fd0c4b61e)
 
 F1-2 - E1, normalised to the dataset, y axis: (number of SNP-Trait assocations within that category) / (total SNP-trait associations). 
 
 F1 - E1, normalised to the dataset
 
-[f1COUNTvstraitgroup_REL_overview_SEATLE_all.pdf](https://github.com/Hy14913/expression-trait_pipeline/files/11555425/f1COUNTvstraitgroup_REL_overview_SEATLE_all.pdf)
+![F1](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/5cc5f83b-5ad4-4b74-9171-7bbc549b1442)
 
 F2 - F1 without other and other gene expression change for clarity (see above)
 
-[f2-f1_no_OGEC.pdf](https://github.com/Hy14913/expression-trait_pipeline/files/11555426/f2-f1_no_OGEC.pdf)
+![F2](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/ce0b2298-199e-4598-b68f-347d4e58c7dd)
 
 G - How many of your SNPs are based in regulatory regions (auto assigned from ensembl) - I always find this super interesting because so far the vast majority are not found in traditional regulatory regions
 
-[RegRegion_COUNT_G_P.pdf](https://github.com/Hy14913/expression-trait_pipeline/files/11555433/RegRegion_COUNT_G_P.pdf)
+![G](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/1c9444a0-7683-4bd2-9dff-51f0bfde26a8)
 
 H - Circos displaying the overlap of Tissue Groups where teh SNPs were found compared to the Trait Groups their associated traits are in: 
 
-[Tissue_trait_overlap.pdf](https://github.com/Hy14913/expression-trait_pipeline/files/11555455/Tissue_trait_overlap.pdf)
+![Circos](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/fc2dbdea-f5f6-4767-90e3-30fdfef71ddf)
 
-The pipeline will automatically open a shiny app of the data. All the plots shown can be found as pdfs in the Final_plots and Cricos folders if you'd prefer. Also, the Shiny app can be reopened anytime by using the shiny app rerun chunk on lines 3219-3230 (click the play symbol top right of the box). This will include the circos plots that display more nicely in that format than they do as the output pdfs in the circos subfolder
-
-Circos
+The pipeline will automatically open a shiny app of the data. All the plots shown can be found as pdfs in the Final_plots and Cricos folders if you'd prefer. Also, the Shiny app can be reopened anytime by using the shiny app rerun chunk on lines 3204-3215 (click the play symbol top right of the box). This will include the circos plots that display more nicely in that format than they do as the output pdfs in the circos subfolder.
 
 ## Troubleshooting
 This pipeline uses three servers, ieugwasr, LDlink and ensembl. All of these have a timeout if it takes too long to run. The pipeline will stop running and an error message will pop up in the console (bottom left box). If this happens please try again later, evenings are often less busy. If it keeps erroring let me know and I'll help as much as I can!
@@ -123,8 +120,8 @@ These are databases of Tissues and Traits manually grouped into Tissue Groups an
 
 Though exhaustive they can be modified to your own groupings by altering the group column. The plots will autmatically adjust to your edits as long as you do not change the column names.
 
-# Using the main R Notebooks
-There are a lot of instructions within the document itself and you are more than welcome to go through running chunk by chunk to get used to how I've setup this pipeline if you're interested!
+# Using the main R Notebook to modify the code
+There are a lot of instructions within the document itself and you are more than welcome to go through running chunk by chunk to get used to how I've setup this pipeline if you're interested! 
 
 # Guide to Plots TO BE REMOVED
 In all cases, Yellow = Positive, Purple = Negative
