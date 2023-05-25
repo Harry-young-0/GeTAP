@@ -60,7 +60,7 @@ B - Correlation of the number of unique traits in a Trait Group relative to the 
 
 C - number_of_tissues_each_SNP_affects_expression_in A summary of how many tissues the SNPs alter gene expression in (from GTEx eQTLs).
 
-![C](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/34aa5406-56c2-4c72-a350-9ee8a3b0a1d4)
+![C](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/c4dd5090-87ef-4963-b2bc-1a522d8747c7)
 
 D - Number of SNP-Trait associations per trait group. color based on trait group. 
 
