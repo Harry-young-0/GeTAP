@@ -1019,7 +1019,7 @@ NOTE: I'm not going to go line by line for the ggplotting functions in all of th
 
 For this section I also have made new file directories for each subheading of plots for easier browsing later. However, I have left these out of the code so you can just click through without the complicated sub-folder system. 
 
-Finally, it also occurs to me you may want the exact set of plots I have used in the example data. SO here is a list of the file name of each of those plots. Run it all and then you can just search your file directory accordingly:
+Finally, you may want the exact set of plots I have used in the example data. So, here is a list of the file name of each of those plots. Run it all and then you can just search your file directory accordingly:
 
 Main results Figure:
 (A) Not in script, downloaded direct from Gtex website
@@ -1178,7 +1178,7 @@ SNPcountperTissuegroup = ggplot(test, aes(x=tissue_group,y=count, fill=NES_direc
 
 SNPcountperTissuegroup
 
-ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/A-RAW_GTEXTissueGROUP-rsid_count_OVERVIEW.pdf"), width= 150, height=100, unit="mm")
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/A0-RAW_GTEXTissueGROUP-rsid_count_OVERVIEW.pdf"), width= 150, height=100, unit="mm")
 
 ```
 
@@ -1238,7 +1238,7 @@ SNPcountperTissuegroup = ggplot(test, aes(x=tissue_group, y=count/nrow(LD_Gtex),
 SNPcountperTissuegroup
 
 
-ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/b-number_of_SNP-trait_associations_per_tissue_group.pdf"), width= 150, height=100, unit="mm")
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/A-number_of_SNP-trait_associations_per_tissue_group.pdf"), width= 150, height=100, unit="mm")
 
 
 ```
@@ -1304,7 +1304,7 @@ Correlation_tg
 ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/TG_dfcount_cor_leg.pdf"), width= 200, height=100, unit="mm")
 
 Correlation_tg+theme(legend.position = "none")
-ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/c-correlation_of_traits_to_total_possible_traits.pdf"), width= 100, height=100, unit="mm")
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/B-correlation_of_traits_to_total_possible_traits.pdf"), width= 100, height=100, unit="mm")
 
 
 ```
@@ -1337,7 +1337,7 @@ Position_count_OVERVIEWd1
 
 LD_Gtex$position_gtex = as.numeric(LD_Gtex$position_gtex)
 
-ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/d-number_of_tissues_each_SNP_affects_expression_in.pdf"), width= 60, unit="mm")
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/C-number_of_tissues_each_SNP_affects_expression_in.pdf"), width= 60, unit="mm")
 ```
 
 ####E0 Overview of trait-SNP associations per traitgroup (incl empty ones)
@@ -1374,7 +1374,7 @@ SNP_by_traitgroupe0= ggplot(summary_of_df, aes(x=reorder(traitgroup, -traitgroup
     scale_y_continuous( expand = expansion(mult = c(0, .1))) +
   labs(x = "Trait Group", y = "Number of SNP-Trait Associations", title = "Number of SNP-Trait Associations in Each Traitgroup")
 SNP_by_traitgroupe0
-ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/e0-number_of_SNP-trait_associations_per_traitgroup.pdf"), width=200,height=120, unit="mm")
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/D-number_of_SNP-trait_associations_per_traitgroup.pdf"), width=200,height=120, unit="mm")
 
 #Alternate version, relative to Trait Group size#####
 
@@ -1401,7 +1401,7 @@ SNP_by_traitgroupe0REL= ggplot(summary_of_df, aes(x=reorder(traitgroup, -rel.tra
     scale_y_continuous( expand = expansion(mult = c(0, .1))) +
   labs(x = "Trait Group", y = "n(SNP-Trait Associations per Trait Group)/total n(SNP-Trait Associations)", title = "Number of SNP-Trait Associations in Each Traitgroup")
 SNP_by_traitgroupe0REL
-ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/e0-normalised.pdf"), width=200,height=120, unit="mm")
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/D-normalised.pdf"), width=200,height=120, unit="mm")
 
 ```
 #### E - pvalvstraitgroup_LOG
@@ -1465,7 +1465,7 @@ pvalvstraitgroupe1 = ggplot(temp, aes(x=traitgroup, y=logp_DIR, color=beta_direc
 pvalvstraitgroupe1 
 
 
-ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/e1--logp_x_expression_change_per_traitgroup.pdf"), width=200, height =100 , units="mm")
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/E1--logp_x_expression_change_per_traitgroup.pdf"), width=200, height =100 , units="mm")
 ```
 
 
@@ -1526,7 +1526,7 @@ ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/e2-e1_no_Other_or_
 
 pvalvstraitgroupNO_O_e2+theme(legend.position = "none")
 
-ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/e2-e1_no_Other_or_OGEC.pdf"), width=200, height =100 , units="mm")
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/E2-e1_no_Other_or_OGEC.pdf"), width=200, height =100 , units="mm")
 ```
 
 #####E3 only Other Gene Expression Change
@@ -1554,7 +1554,7 @@ OGECe3 = ggplot(temp, aes(x=trait, y=logp_DIR, color=beta_direction)) +
   
 OGECe3
 
-filename=paste0(file_directory,"/",gene_name,"_test/Final_plots/e3-e1_OGEC_only.pdf")
+filename=paste0(file_directory,"/",gene_name,"_test/Final_plots/E3-e1_OGEC_only.pdf")
 
 length_of_unique_traits = length(unique(temp$trait))
   if(length_of_unique_traits>150){
@@ -1600,7 +1600,7 @@ for(i in 1:5){
 
 assign(paste0("e4_", i), pvsTrait_bygroup) 
 
-filename=paste0(file_directory,"/",gene_name,"_test/Final_plots/e4-Number_", i,"_traitgroup.pdf")
+filename=paste0(file_directory,"/",gene_name,"_test/Final_plots/E4-Number_", i,"_traitgroup.pdf")
   if(for_label>150){
     ggsave(filename, height=560, width=230, unit="mm")
   }else if(for_label<150 &for_label>50){
@@ -1662,7 +1662,7 @@ f1 + scale_x_discrete(limits=c("Body Fat/Size",
             )) 
 
 
-ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/f1-nSNP-trait_associations_per_traitgroup_by_total.pdf"), width=200, height =100 , units="mm")
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/F1-nSNP-trait_associations_per_traitgroup_by_total.pdf"), width=200, height =100 , units="mm")
 
 
 
@@ -1711,7 +1711,7 @@ f2+ scale_x_discrete(limits=c("Body Fat/Size",
             "Disease (unknown origin)"
             )) 
 
-ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/f2-f1_no_OGEC.pdf"), width=200, height =100 , units="mm")
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/F2-F1_no_OGEC.pdf"), width=200, height =100 , units="mm")
 
 ```
 
@@ -2751,7 +2751,7 @@ snpvsregion
 
 
 
-ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/number_of_snps_per_regulatory_region.pdf"))
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/G-number_of_snps_per_regulatory_region.pdf"))
 ```
 
 
@@ -2990,7 +2990,7 @@ simple_LUT_COR$tissue_group = factor(simple_LUT_COR$tissue_group, levels =names(
 test5 = table(simple_LUT_COR)
 
 circos.clear()
-pdf("Tissue_trait_overlap.pdf")
+pdf("H-Tissue_trait_overlap.pdf")
 circos.par( start.degree = -90 ) 
 chordDiagram(test5, 
              annotationTrackHeight = c(0.01, 0.01), 
@@ -3153,7 +3153,7 @@ dev.off()
  (others in file to peruse)
  INCOMPLETE APRIL 23
  Need to sort out the shiny implementation properly as well as add in error jumping for the circos plots if they're not playing the game.
-```{r}
+```{r, include=F}
 
 pvalvstraitgroupNO_O_e2_leg = pvalvstraitgroupNO_O_e2+ theme(legend.position = "right")
 plot_grid(SNPcountperTissuegroup,SNP_by_traitgroupe0,pvalvstraitgroupe1,pvalvstraitgroupNO_O_e2_leg, nrow=4, ncol=1, align="v")
