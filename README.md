@@ -59,7 +59,7 @@ B - Correlation of the number of unique traits in a Trait Group relative to the 
 
 ![B](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/cccbbfa0-6c86-4aec-adab-8cf4d0570e70)
 
-C - number_of_tissues_each_SNP_affects_expression_in A summary of how many tissues the SNPs alter gene expression in (from GTEx eQTLs).
+C - A summary of how many tissues each SNP alters gene expression in (from GTEx eQTLs).
 
 ![C](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/c4dd5090-87ef-4963-b2bc-1a522d8747c7)
 
@@ -71,13 +71,13 @@ Normalised Version - normalised to the number of posible traits within the datab
 
 ![D2](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/9aa05308-2af7-407f-b40f-1f2bd4d594d7)
 
-E - Above x axis, increased expression, Below x axis decreased expression, y axis: -log(p(trait change)) , color = direction of TRAIT change. i.e yellow = SNP increases trait, purple = SNP decreases trait
+E - Key: Above x axis, increased expression, Below x axis decreased expression, y axis: -log(p(trait change)) , color = direction of TRAIT change. i.e yellow = SNP increases trait, purple = SNP decreases trait.
 
-E1 - All Trait Groups with SNP-Trait associations in. 
+E1 - Individual SNP-trait associations within grouped into Trait Groups. 
 
 ![E1](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/c0bc1a0a-55dd-47e5-9b40-48dea82ae38b)
 
-E2 - E1 without Other Gene Expression Change or Other categories. These are often very big and so can obscure the other results.
+E2 - E1 without Other Gene Expression Change or Other categories because these are often very big and so can obscure the other results.
 
 ![E2](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/c4fef5ab-7fff-40ab-b866-415b573ac29e)
 
@@ -89,7 +89,7 @@ E4 - Expanding the top 5 traitgroups (excluding Other Gene Expression Change and
 
 ![E4](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/8dede27f-da50-43f0-87b4-361fd0c4b61e)
 
-F1-2 - E1, normalised to the dataset, y axis: (number of SNP-Trait assocations within that category) / (total SNP-trait associations). 
+F1-2 - Normalised versions of E1 for comparing between genes. y axis: (number of SNP-Trait assocations within that category) / (total SNP-trait associations). 
 
 F1 - E1, normalised to the dataset
 
