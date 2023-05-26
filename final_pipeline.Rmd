@@ -1311,7 +1311,7 @@ ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/B-correlation_of_t
 #### D - Position_count_OVERVIEW: 
 Plot of mutation position against their number of effects on expression with direction
 ```{r Number of snps per tissue plot USING LINKAGE2, fig.height=14, fig.width=4}
-#FROM HERE SEP 22
+
 LD_Gtex = df%>%
   dplyr::select(Tissue, tissue_group, position_gtex, rsid, `P-Value`, NES, position_gtex, chr_gtex, a, b, NES_direction)
 LD_Gtex = unique(LD_Gtex)
@@ -1571,8 +1571,8 @@ length_of_unique_traits = length(unique(temp$trait))
 
 #### E4 Top 5 categories after other and OGEC:
 ```{r, fig.width=6, fig.height=10}
-
-for(i in 1:5){
+number_of_traitgroups = df %>% dplyr::select(traitgroup) %>% unique()
+for(i in 3:nrow(number_of_traitgroups)-2){
   print(i)
   temp =df[which(df$traitgroup ==summary_of_df_no_OGEC$traitgroup[i]),] 
   for_label = df[which(df$traitgroup ==summary_of_df_no_OGEC$traitgroup[i]),]
