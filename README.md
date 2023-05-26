@@ -46,7 +46,8 @@ c. Make sure your file_directory has "/" not "\". e.g: file_directory = "C:/Docu
 7. Be patient! It should take around 20-30 mins to run.
 
 # Output example
-The point of the pipeline is to produce novel Gene-Trait associations by using SNPs that are associated with a change in expression of a gene of interest via GTEx. Here are two schamtics providing basic overview to the process:
+The point of the pipeline is to produce novel Gene-Trait associations by using SNPs that are associated with a change in expression of a gene of interest via GTEx. Below are two schamtics providing basic overview to the process. SNPs that affect a gene of interest are collected from GTEx then searched into the PheWAS database (ieugwas::phewas) to find traits also associated with those SNPs. The result will then theoretically be, traits associated with expression change of your gene of interest.
+
 ![Graphical abstract only alt_whitebackground](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/524efa1a-b157-4e9d-97ac-829e46ef9934)
 ![pipeline overview v2-fig1](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/9f1aabde-8ad3-4b40-8067-8ccfab25f63d)
 
