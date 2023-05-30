@@ -43,7 +43,7 @@ This issue will be resolved automatically later on once you click “run all”,
 
 ### 5. Replace defaults with your gene name, token and file directory
 
-Scroll down slightly and you will see gene_name, file_directory and LD_Token on lines 17, 21 and 27 respectively. 
+Scroll down slightly and you will see gene_name, file_directory and LD_Token on lines 17, 21 and 27 respectively. Replace with your versions.
  
  **gene_name** - The name of your human gene or human homolgue of your gene in all capitals as it appears in GTEx - you can check here: https://gtexportal.org/home/ - top right search box. e.g:
  
@@ -67,13 +67,13 @@ b. Make sure your gene name is as it appears in GTEx (check using https://gtexpo
 
 c. Make sure your file_directory has "/" not "\". e.g: file_directory = "C:/Documents/Example directory" not file_directory = "C:\Documents\Example directory"
 
-### 6. in the top right of the window click run all: 
+### 6. In the top right of the window click run all: 
 
 ![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/5dfffe8f-c975-452d-a7fd-a82d2761b791)
 
 ### 7. Be patient! It should take around 20-30 mins to run.
 
-# Output example
+# Pipeline Output Example
 The pipeline will automatically open a shiny app of the data. All the plots shown can be found as pdfs in the Final_plots and Cricos folders if you'd prefer. Also, the Shiny app can be reopened anytime by using the shiny app rerun chunk on lines 3204-3215 (click the play symbol top right of the box). This will include the circos plots that display more nicely in that format than they do as the output pdfs in the circos subfolder.
 
 The goal of the pipeline is to suggest novel Gene-Trait associations by using SNPs that are associated with a change in expression of a gene of interest via GTEx. 
