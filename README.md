@@ -18,13 +18,17 @@ Then continue with the "Quick start guide". NOTE: I am using a mac but it will w
 # Quick start guide
 
 ### 1. Create a file directory
-A folder on your desktop for example. This will be where the pipeline is saved and where the pipeline outputs all the data. For example: ![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/2b254df0-a851-471f-9459-7d8661f70a1b)
+
+A folder on your desktop for example. This will be where the pipeline is saved and where the pipeline outputs all the data. For example: 
+
+![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/2b254df0-a851-471f-9459-7d8661f70a1b)
 
 ### 2. Download the zip file from github and save within your chosen file directory
 
 ![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/4c692d03-41f3-4841-934c-9554b343be85)
 
-### 3. Extract the files 
+### 3. Extract the files from the zip files
+
 This will contain the main pipeline, tissue and trait database csvs, readme.md and shiny app. These should be moved into the main folder and zip file deleted. Your file directory should look like this: 
 
 ![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/3b81aaa0-e885-4afa-a7c0-93659a86f136)
