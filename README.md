@@ -11,7 +11,7 @@ RStudio: https://posit.co/downloads/
 Open RStudio.
 Then continue with the "Quick start guide". NOTE: I am using a mac but it will work identically for a windows computer.
 
-## Quick start guide:
+# Quick start guide:
 
 1. Create a file directory – a folder on your desktop for example. This will be where the pipeline is saved and where the pipeline outputs all the data. For example: ![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/2b254df0-a851-471f-9459-7d8661f70a1b)
 
