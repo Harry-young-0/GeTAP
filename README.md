@@ -2,7 +2,7 @@
 ### LD-Link token
 This program uses the LDlink web server which requires a unique token to run. This is easily obtained by following this link: [https://ldlink.nih.gov/?tab=apiaccess](https://ldlink.nih.gov/?tab=apiaccess) 
 
-Currently saying teh URL is out of date (yellow warning box). Ignore this.
+Currently saying the URL is out of date (yellow warning box). Ignore this.
 
 ### Download and install R and RStudio:
 
@@ -15,17 +15,28 @@ Then continue with the "Quick start guide". NOTE: I am using a mac but it will w
 
 # Quick start guide:
 
-1. Create a file directory – a folder on your desktop for example. This will be where the pipeline is saved and where the pipeline outputs all the data. For example: ![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/2b254df0-a851-471f-9459-7d8661f70a1b)
+### 1. Create a file directory
+A folder on your desktop for example. This will be where the pipeline is saved and where the pipeline outputs all the data. For example: ![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/2b254df0-a851-471f-9459-7d8661f70a1b)
 
-2. Download the zip file from github and save within your chosen file directory. ![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/02ac8751-b3de-4f32-ad89-02a36cb5b177)
+### 2. Download the zip file from github and save within your chosen file directory
 
-3. Extract the files. This will contain the main pipeline, tissue and trait database csvs, readme.md and shiny app. These should be moved into the main folder and zip file deleted. Your file directory should look like this: ![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/3b81aaa0-e885-4afa-a7c0-93659a86f136)
+![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/4c692d03-41f3-4841-934c-9554b343be85)
+
+### 3. Extract the files 
+This will contain the main pipeline, tissue and trait database csvs, readme.md and shiny app. These should be moved into the main folder and zip file deleted. Your file directory should look like this: 
+
+![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/3b81aaa0-e885-4afa-a7c0-93659a86f136)
  
-4. Open final_pipeline.Rmd in RStudio. (R-click>open with>Rstudio OR File > Open File... in RStudio). In the first run, several packages will be installed automatically to allow the pipeline to run. You may get a warning banner appear like this: ![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/93e14a1c-6432-4d92-a595-04173f542c45)
+### 4. Open final_pipeline.Rmd in RStudio
+(Right-click>open with>Rstudio OR File > Open File... in RStudio). In the first run, several packages will be installed automatically to allow the pipeline to run. You may get a warning banner appear like this: 
+ 
+![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/93e14a1c-6432-4d92-a595-04173f542c45)
 
 This will be resolved automatically once you click run all but you can also click "install" on this banner if you wish. It makes no difference
 
-5. Scroll down slightly and you will see gene_name, file_directory and LD_Token on lines 17, 21 and 27 respectively. Fill these out with your versions where:
+### 5. Replace defaults with your gene name, token and file directory
+
+Scroll down slightly and you will see gene_name, file_directory and LD_Token on lines 17, 21 and 27 respectively. 
  
  **gene_name** - The name of your human gene or human homolgue of your gene in all capitals as it appears in GTEx - you can check here: https://gtexportal.org/home/ - top right search box. e.g:
  
@@ -33,39 +44,54 @@ This will be resolved automatically once you click run all but you can also clic
  
  **LD_Token** - Your unique 12 character token from LDlink (see above)
 
-Before: ![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/7af50e7d-0487-4ae5-90cf-d76da18fa22c)
-After: ![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/b679c9db-3ef3-4bf9-a2e2-b0ec92a61cb9)
-Please check these most common errors: (If it still errors please email me the error and your modified final_pipeline.rmd file): 
+### Before your edit: 
 
-a. Make sure each of these changes are within speech marks. e.g: gene_name = "NFE2L2" not gene_name = NFE2L2
+![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/7af50e7d-0487-4ae5-90cf-d76da18fa22c)
 
-b. Make sure your gene name is as it appears in GTEx (check using https://gtexportal.org/home/ - top right search box).
+### After your edit: 
 
-c. Make sure your file_directory has "/" not "\". e.g: file_directory = "C:/Documents/Example directory" not file_directory = "C:\Documents\Example directory"
+![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/b679c9db-3ef3-4bf9-a2e2-b0ec92a61cb9)
 
-6. in the top right of the window click run all: ![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/5dfffe8f-c975-452d-a7fd-a82d2761b791)
+Please check these common errors: (If it still errors please email me the error and your modified final_pipeline.rmd file): 
 
-7. Be patient! It should take around 20-30 mins to run.
+### a. Make sure each of these changes are within speech marks. e.g: gene_name = "NFE2L2" not gene_name = NFE2L2
+
+### b. Make sure your gene name is as it appears in GTEx (check using https://gtexportal.org/home/ - top right search box).
+
+### c. Make sure your file_directory has "/" not "\". e.g: file_directory = "C:/Documents/Example directory" not file_directory = "C:\Documents\Example directory"
+
+### 6. in the top right of the window click run all: 
+
+![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/5dfffe8f-c975-452d-a7fd-a82d2761b791)
+
+### 7. Be patient! It should take around 20-30 mins to run.
 
 # Output example
-The point of the pipeline is to produce novel Gene-Trait associations by using SNPs that are associated with a change in expression of a gene of interest via GTEx. Below are two schamtics providing basic overview to the process. SNPs that affect a gene of interest are collected from GTEx then searched into the PheWAS database (ieugwas::phewas) to find traits also associated with those SNPs. The result will then theoretically be, traits associated with expression change of your gene of interest.
+The pipeline will automatically open a shiny app of the data. All the plots shown can be found as pdfs in the Final_plots and Cricos folders if you'd prefer. Also, the Shiny app can be reopened anytime by using the shiny app rerun chunk on lines 3204-3215 (click the play symbol top right of the box). This will include the circos plots that display more nicely in that format than they do as the output pdfs in the circos subfolder.
+
+The goal of the pipeline is to suggest novel Gene-Trait associations by using SNPs that are associated with a change in expression of a gene of interest via GTEx. 
+
+Below are two schematics providing an overview to the whole process. In Schematic A, the basic rationale of the pipeline is shown. Briefly, SNPs associated with a change in expression of a gene of interest are firstly collected from GTEx, and then searched in the PheWAS database (ieugwas::phewas) to find traits potentially associated with these SNPs. The pipeline output thus suggests traits potentially associated with expression changes in your gene of interest. In Schematic B, more detail is included about the different steps of the pipeline.
+
+NOTE: Traits and tissues were manually grouped into Trait Groups and Tissue Groups and stored in the full_trait_database and full_tissue_database csvs in the zip file. These will be updated with each new release of GTEx and PheWAS but are also modifiable if you would like to regroup for something specific.
 
 ![Graphical abstract only alt_whitebackground](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/524efa1a-b157-4e9d-97ac-829e46ef9934)
+
 ![pipeline overview v2-fig1](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/9f1aabde-8ad3-4b40-8067-8ccfab25f63d)
 
-A - Summary of SNPs that alter expression of your gene of interest and the direction of that change, grouped by the tissue groups quantified by GTEx, colour = direction of expression change
+### A - Summary of SNPs that alter expression of your gene of interest and the direction of that change, grouped by the tissue groups quantified by GTEx, colour = direction of expression change
 
 ![A](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/f98ba4c1-f015-4613-9f6c-29e71a6ad48d)
 
-B - Correlation of the number of unique traits in a Trait Group relative to the total number of possible traits in the full database. An indication of whether the results are due to chance.
+### B - Correlation of the number of unique traits in a Trait Group relative to the total number of possible traits in the full database. An indication of whether the results are due to chance.
 
 ![B](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/cccbbfa0-6c86-4aec-adab-8cf4d0570e70)
 
-C - A summary of how many tissues each SNP alters gene expression in (from GTEx eQTLs).
+### C - A summary of how many tissues each SNP alters gene expression in (from GTEx eQTLs).
 
 ![C](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/c4dd5090-87ef-4963-b2bc-1a522d8747c7)
 
-D - Number of SNP-Trait associations per trait group. color based on trait group. 
+### D - Number of SNP-Trait associations per trait group. color based on trait group. 
 
 ![D](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/04631737-3c4d-4379-b79d-a3e13b292af4)
 
@@ -73,43 +99,41 @@ Normalised Version - normalised to the number of posible traits within the datab
 
 ![D2](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/9aa05308-2af7-407f-b40f-1f2bd4d594d7)
 
-E - Key: Above x axis, increased expression, Below x axis decreased expression, y axis: -log(p(trait change)) , color = direction of TRAIT change. i.e yellow = SNP increases trait, purple = SNP decreases trait.
+### E - Key: Above x axis, increased expression, Below x axis decreased expression, y axis: -log(p(trait change)) , color = direction of TRAIT change. i.e yellow = SNP increases trait, purple = SNP decreases trait.
 
-E1 - Individual SNP-trait associations within grouped into Trait Groups. 
+### E1 - Individual SNP-trait associations within grouped into Trait Groups. 
 
 ![E1](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/c0bc1a0a-55dd-47e5-9b40-48dea82ae38b)
 
-E2 - E1 without Other Gene Expression Change or Other categories because these are often very big and so can obscure the other results.
+### E2 - E1 without Other Gene Expression Change or Other categories because these are often very big and so can obscure the other results.
 
 ![E2](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/c4fef5ab-7fff-40ab-b866-415b573ac29e)
 
-E3 - Expanding just the Other Gene Expression Change category to look at the individual traits (in this case genes) your gene of interest/your SNPs effect.
+### E3 - Expanding just the Other Gene Expression Change category to look at the individual traits (in this case genes) your gene of interest/your SNPs effect.
 
 ![E3](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/7cd0514d-c796-4aa3-9dfb-93bad8ed7c93)
 
-E4 - Expanding the top 5 traitgroups (excluding Other Gene Expression Change and Other) to see individual traits within the categories. In this case displaying just one example NOTE: these can often be very big, if the plot outright breaks hopefully you can find and fix it within the code but if not please email me and I'll be happy to modify it for you.
+### E4 - Expanding the top 5 traitgroups (excluding Other Gene Expression Change and Other) to see individual traits within the categories. In this case displaying just one example NOTE: these can often be very big, if the plot outright breaks hopefully you can find and fix it within the code but if not please email me and I'll be happy to modify it for you.
 
 ![E4](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/8dede27f-da50-43f0-87b4-361fd0c4b61e)
 
-F1-2 - Normalised versions of E1 for comparing between genes. y axis: (number of SNP-Trait assocations within that category) / (total SNP-trait associations). 
+### F1-2 - Normalised versions of E1 for comparing between genes. y axis: (number of SNP-Trait assocations within that category) / (total SNP-trait associations). 
 
-F1 - E1, normalised to the dataset
+### F1 - E1, normalised to the dataset
 
 ![F1](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/5cc5f83b-5ad4-4b74-9171-7bbc549b1442)
 
-F2 - F1 without other and other gene expression change for clarity (see above)
+### F2 - F1 without other and other gene expression change for clarity (see above)
 
 ![F2](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/ce0b2298-199e-4598-b68f-347d4e58c7dd)
 
-G - How many of your SNPs are based in regulatory regions (auto assigned from ensembl) - I always find this super interesting because so far the vast majority are not found in traditional regulatory regions
+### G - How many of your SNPs are based in regulatory regions (auto assigned from ensembl) - I always find this super interesting because so far the vast majority are not found in traditional regulatory regions
 
 ![G](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/1c9444a0-7683-4bd2-9dff-51f0bfde26a8)
 
-H - Circos displaying the overlap of Tissue Groups where teh SNPs were found compared to the Trait Groups their associated traits are in: 
+### H - Circos displaying the overlap of Tissue Groups where teh SNPs were found compared to the Trait Groups their associated traits are in: 
 
 ![Circos](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/fc2dbdea-f5f6-4767-90e3-30fdfef71ddf)
-
-The pipeline will automatically open a shiny app of the data. All the plots shown can be found as pdfs in the Final_plots and Cricos folders if you'd prefer. Also, the Shiny app can be reopened anytime by using the shiny app rerun chunk on lines 3204-3215 (click the play symbol top right of the box). This will include the circos plots that display more nicely in that format than they do as the output pdfs in the circos subfolder.
 
 ## Troubleshooting
 This pipeline uses three servers, ieugwasr, LDlink and ensembl. All of these have a timeout if it takes too long to run. The pipeline will stop running and an error message will pop up in the console (bottom left box). If this happens please try again later, evenings are often less busy. If it keeps erroring let me know and I'll help as much as I can!
