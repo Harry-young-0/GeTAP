@@ -2,6 +2,8 @@
 ### LD-Link token
 This program uses the LDlink web server which requires a unique token to run. This is easily obtained by following this link: [https://ldlink.nih.gov/?tab=apiaccess](https://ldlink.nih.gov/?tab=apiaccess) 
 
+Currently saying teh URL is out of date (yellow warning box). Ignore this.
+
 ### Download and install R and RStudio:
 
 R: https://www.stats.bris.ac.uk/R/ 
