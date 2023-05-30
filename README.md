@@ -1,10 +1,12 @@
-# Requirements before running for the first time:
+# Software and tokens required prior to running the pipeline for the first time
 ### LD-Link token
-This program uses the LDlink web server which requires a unique token to run. This is easily obtained by following this link: [https://ldlink.nih.gov/?tab=apiaccess](https://ldlink.nih.gov/?tab=apiaccess) 
+This program uses the LDlink web server which requires a unique token to run. This is easily obtained by following this link: [https://ldlink.nih.gov/?tab=apiaccess](https://ldlink.nih.gov/?tab=apiaccess) This only needs to be completed once and then that token will stay with you for life (linked to your email).
 
 Currently saying the URL is out of date (yellow warning box). Ignore this.
 
-### Download and install R and RStudio:
+### Download and install R and RStudio
+
+First time only, update whenever prompted.
 
 R: https://www.stats.bris.ac.uk/R/ 
 
@@ -13,7 +15,7 @@ RStudio: https://posit.co/downloads/
 Open RStudio.
 Then continue with the "Quick start guide". NOTE: I am using a mac but it will work identically for a windows computer.
 
-# Quick start guide:
+# Quick start guide
 
 ### 1. Create a file directory
 A folder on your desktop for example. This will be where the pipeline is saved and where the pipeline outputs all the data. For example: ![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/2b254df0-a851-471f-9459-7d8661f70a1b)
@@ -52,13 +54,13 @@ Scroll down slightly and you will see gene_name, file_directory and LD_Token on 
 
 ![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/b679c9db-3ef3-4bf9-a2e2-b0ec92a61cb9)
 
-Please check these common errors: (If it still errors please email me the error and your modified final_pipeline.rmd file): 
+### Please check these common errors: (If it still errors please email me the error and your modified final_pipeline.rmd file): 
 
-### a. Make sure each of these changes are within speech marks. e.g: gene_name = "NFE2L2" not gene_name = NFE2L2
+a. Make sure each of these changes are within speech marks. e.g: gene_name = "NFE2L2" not gene_name = NFE2L2
 
-### b. Make sure your gene name is as it appears in GTEx (check using https://gtexportal.org/home/ - top right search box).
+b. Make sure your gene name is as it appears in GTEx (check using https://gtexportal.org/home/ - top right search box).
 
-### c. Make sure your file_directory has "/" not "\". e.g: file_directory = "C:/Documents/Example directory" not file_directory = "C:\Documents\Example directory"
+c. Make sure your file_directory has "/" not "\". e.g: file_directory = "C:/Documents/Example directory" not file_directory = "C:\Documents\Example directory"
 
 ### 6. in the top right of the window click run all: 
 
@@ -89,8 +91,8 @@ NOTE: Traits and tissues were manually grouped into Trait Groups and Tissue Grou
 
 ### C - A summary of how many tissues each SNP alters gene expression in (from GTEx eQTLs).
 
-![C](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/c4dd5090-87ef-4963-b2bc-1a522d8747c7)
-
+![C](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/c4dd5090-87ef-4963-b2bc-1a522d8747c7 width=150 height=400)
+<img src="https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/c4dd5090-87ef-4963-b2bc-1a522d8747c7" width="200" height="900">
 ### D - Number of SNP-Trait associations per trait group. color based on trait group. 
 
 ![D](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/04631737-3c4d-4379-b79d-a3e13b292af4)
