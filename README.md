@@ -110,8 +110,8 @@ Normalised Version - normalised to the number of posible traits within the datab
 ![D2](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/84020a7d-512c-4942-96f3-eaee0b21d67f)
 
 ### Plots E1-E4
-These plots are grouped together and 
-Key: Above x axis, increased expression, Below x axis decreased expression, y axis: -log(p(trait change)) , color = direction of TRAIT change. i.e yellow = SNP increases trait, purple = SNP decreases trait.
+These plots are grouped together to summarise the SNP-Trait assocations as part of their respective groups whilst considering p-value, expression change and beta change (the direction
+Key: Above x axis, increased expression, Below x axis decreased expression, y axis: -log(p(trait change)) , colour = direction of TRAIT change. i.e yellow = SNP increases trait, purple = SNP decreases trait.
 
 ### E1 - Individual SNP-trait associations within grouped into Trait Groups. 
 
@@ -120,10 +120,12 @@ Key: Above x axis, increased expression, Below x axis decreased expression, y ax
 ### E2 - E1 without Other Gene Expression Change or Other categories because these are often very big and so can obscure the other results.
 
 ![E2](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/c4fef5ab-7fff-40ab-b866-415b573ac29e)
+<img src="https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/c4fef5ab-7fff-40ab-b866-415b573ac29e" width="300" height="1100">
 
 ### E3 - Expanding just the Other Gene Expression Change category to look at the individual traits (in this case genes) your gene of interest/your SNPs effect.
 
 ![E3](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/7cd0514d-c796-4aa3-9dfb-93bad8ed7c93)
+<img src="(https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/7cd0514d-c796-4aa3-9dfb-93bad8ed7c93)" width="300" height="1100">
 
 ### E4 - Expanding the top 5 traitgroups (excluding Other Gene Expression Change and Other) to see individual traits within the categories. In this case displaying just one example NOTE: these can often be very big, if the plot outright breaks hopefully you can find and fix it within the code but if not please email me and I'll be happy to modify it for you.
 
