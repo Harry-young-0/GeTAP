@@ -80,7 +80,7 @@ The goal of the pipeline is to suggest novel Gene-Trait associations by using SN
 
 Below are two schematics providing an overview to the whole process. In Schematic A, the basic rationale of the pipeline is shown. Briefly, SNPs associated with a change in expression of a gene of interest are firstly collected from GTEx, and then searched in the PheWAS database (ieugwas::phewas) to find traits potentially associated with these SNPs. The pipeline output thus suggests traits potentially associated with expression changes in your gene of interest. In Schematic B, more detail is included about the different steps of the pipeline.
 
-NOTE: Traits and tissues were manually grouped into Trait Groups and Tissue Groups and stored in the full_trait_database and full_tissue_database csvs in the zip file. These will be updated with each new release of GTEx and PheWAS but are also modifiable if you would like to regroup for something specific.
+NOTE: Traits and tissues were manually grouped into Trait Groups and Tissue Groups and stored in the full_trait_database and full_tissue_database csvs in the zip file. These will be updated with each new release of GTEx and PheWAS but are also modifiable if you would like to regroup for something specific. Further explanation below.
 
 ![schematic_for_github](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/a165c6e8-2290-4691-9410-4ab40897080a)
 
@@ -137,19 +137,23 @@ Expanding the top 5 Trait Groups (excluding Other Gene Expression Change and Oth
 ### Plots F1-2
 These graphs offer an alternate way of visualising the plots in E. Here we ignore p-value and display the number of SNP-trait associations within each Trait Group. The number in each group is then normalised to the total number of SNPs across all Trait Groups. This will also allow direct comparison between genes as it normalises for a different number of SNP-Trait associations between genes. **Key**: y-axis: (number of SNP-Trait assocations within that category) / (total SNP-trait associations). colour = direction of trait change. Below x-axis, SNPs that decrease the gene of interests expression. Above x-axis, SNPs that increase the gene of interests expression
 
-### F1 - E1, normalised to the dataset
+### F1 
+E1 but normalised to the total dataset as described above.
 
 ![F1](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/5cc5f83b-5ad4-4b74-9171-7bbc549b1442)
 
-### F2 - F1 without other and other gene expression change for clarity (see above)
+### F2
+Modified version of F1 without "Other" and "Other Gene Expression Change" for clarity (see E2 for explanation)
 
 ![F2](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/ce0b2298-199e-4598-b68f-347d4e58c7dd)
 
-### G - How many of your SNPs are based in regulatory regions (auto assigned from ensembl) - I always find this super interesting because so far the vast majority are not found in traditional regulatory regions
+### Plot G
+How many of your SNPs are based in regulatory regions (auto assigned from ensembl)
 
 ![G](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/1c9444a0-7683-4bd2-9dff-51f0bfde26a8)
 
-### H - Circos displaying the overlap of Tissue Groups where teh SNPs were found compared to the Trait Groups their associated traits are in: 
+### Plot H
+Circos plot displaying the overlap of Tissue Groups where the SNPs were found compared to the Trait Groups their associated traits are in. 
 
 ![Circos](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/fc2dbdea-f5f6-4767-90e3-30fdfef71ddf)
 
@@ -161,7 +165,7 @@ The main error this pipeline has is installing and updating the packages needed.
 # Tissue-and-Trait-Databases
 In the zip folder download there are two databases, full_tissue_database and full_trait_database. 
 
-These are databases of Tissues and Traits manually grouped into Tissue Groups and Trait Groups.
+These are databases of Tissues and Traits manually grouped into Tissue Groups and Trait Groups. Originally tissue data was downloaded from GTEx: https://gtexportal.org/home/tissue/. Trait data from ieugwasr package.
 
 Though exhaustive they can be modified to your own groupings by altering the group column. The plots will autmatically adjust to your edits as long as you do not change the column names.
 
