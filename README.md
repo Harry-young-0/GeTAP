@@ -1,6 +1,6 @@
 # Requirements before running for the first time:
 ### LD-Link token
-This program uses the LDlink web server which requires a unique token to run. This is easily obtained by following this link: [https://ldlink.nci.nih.gov/?tab=apiaccess](https://ldlink.nih.gov/?tab=apiaccess) 
+This program uses the LDlink web server which requires a unique token to run. This is easily obtained by following this link: [https://ldlink.nih.gov/?tab=apiaccess](https://ldlink.nih.gov/?tab=apiaccess) 
 
 ### Download and install R and RStudio:
 
