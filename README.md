@@ -84,29 +84,34 @@ NOTE: Traits and tissues were manually grouped into Trait Groups and Tissue Grou
 
 ![schematic_for_github](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/a165c6e8-2290-4691-9410-4ab40897080a)
 
-
+## Example Output Plots
 ### Plot A
-Summary of SNPs that alter expression of your gene of interest and the direction of that change, grouped by the tissue groups quantified by GTEx, colour = direction of expression change
+Summary of SNPs that alter expression of your gene of interest and the direction of that change, grouped by the tissue groups, quantified by GTEx, colour = direction of expression change, rsid = unique SNP identifier
 
-![A](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/f98ba4c1-f015-4613-9f6c-29e71a6ad48d)
+![A](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/e079bc31-c6da-4e23-8a15-34f62526e4ef)
 
-### Plot B - Correlation of the number of unique traits in a Trait Group relative to the total number of possible traits in the full database. An indication of whether the results are due to chance.
+### Plot B
+Correlation of the number of different traits in a Trait Group relative to the total number of different possible traits in the full database. An indication of whether the results are due to chance. This considers repeated SNP-Trait associations. If 100 different SNPs are all associated with LDL, this is recorded as 100 SNP-trait associations. 
 
 ![B](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/cccbbfa0-6c86-4aec-adab-8cf4d0570e70)
 
-### Plot C - A summary of how many tissues each SNP alters gene expression in (from GTEx eQTLs).
+### Plot C
+A summary of how many tissues each SNP alters gene expression in (from GTEx eQTLs).
 
-![C](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/c4dd5090-87ef-4963-b2bc-1a522d8747c7 width=150 height=400)
-<img src="https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/c4dd5090-87ef-4963-b2bc-1a522d8747c7" width="200" height="900">
-### Plot D - Number of SNP-Trait associations per trait group. color based on trait group. 
+<img src="https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/c4dd5090-87ef-4963-b2bc-1a522d8747c7" width="150" height="1100">
+
+### Plot D
+Number of SNP-Trait associations per trait group. color based on trait group. i.e. Regardless of direction of expression change, which trait groups are affected by SNPs that alter a gene of interests expression
 
 ![D](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/04631737-3c4d-4379-b79d-a3e13b292af4)
 
-Normalised Version - normalised to the number of posible traits within the database. (Number of unique traits from SNP-Trait associations per trait group)/(Number of possible traits in each trait group from Full_trait_database.csv)
+Normalised Version - normalised to the number of posible traits within the database. (Number of different traits from SNP-Trait associations per trait group)/(Number of possible traits in each trait group from Full_trait_database.csv)
 
-![D2](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/9aa05308-2af7-407f-b40f-1f2bd4d594d7)
+![D2](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/84020a7d-512c-4942-96f3-eaee0b21d67f)
 
-### E - Key: Above x axis, increased expression, Below x axis decreased expression, y axis: -log(p(trait change)) , color = direction of TRAIT change. i.e yellow = SNP increases trait, purple = SNP decreases trait.
+### Plots E1-E4
+These plots are grouped together and 
+Key: Above x axis, increased expression, Below x axis decreased expression, y axis: -log(p(trait change)) , color = direction of TRAIT change. i.e yellow = SNP increases trait, purple = SNP decreases trait.
 
 ### E1 - Individual SNP-trait associations within grouped into Trait Groups. 
 
