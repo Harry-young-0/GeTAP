@@ -34,11 +34,12 @@ This will contain the main pipeline, tissue and trait database csvs, readme.md a
 ![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/3b81aaa0-e885-4afa-a7c0-93659a86f136)
  
 ### 4. Open final_pipeline.Rmd in RStudio
+
 (Right-click>open with>Rstudio OR File > Open File... in RStudio). In the first run, several packages will be installed automatically to allow the pipeline to run. You may get a warning banner appear like this: 
  
 ![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/93e14a1c-6432-4d92-a595-04173f542c45)
 
-This will be resolved automatically once you click run all but you can also click "install" on this banner if you wish. It makes no difference
+This issue will be resolved automatically later on once you click “run all”, but you can also click "install" on this banner if you wish.
 
 ### 5. Replace defaults with your gene name, token and file directory
 
@@ -81,23 +82,23 @@ Below are two schematics providing an overview to the whole process. In Schemati
 
 NOTE: Traits and tissues were manually grouped into Trait Groups and Tissue Groups and stored in the full_trait_database and full_tissue_database csvs in the zip file. These will be updated with each new release of GTEx and PheWAS but are also modifiable if you would like to regroup for something specific.
 
-![Graphical abstract only alt_whitebackground](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/524efa1a-b157-4e9d-97ac-829e46ef9934)
+![schematic_for_github](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/a165c6e8-2290-4691-9410-4ab40897080a)
 
-![pipeline overview v2-fig1](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/9f1aabde-8ad3-4b40-8067-8ccfab25f63d)
 
-### A - Summary of SNPs that alter expression of your gene of interest and the direction of that change, grouped by the tissue groups quantified by GTEx, colour = direction of expression change
+### Plot A
+Summary of SNPs that alter expression of your gene of interest and the direction of that change, grouped by the tissue groups quantified by GTEx, colour = direction of expression change
 
 ![A](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/f98ba4c1-f015-4613-9f6c-29e71a6ad48d)
 
-### B - Correlation of the number of unique traits in a Trait Group relative to the total number of possible traits in the full database. An indication of whether the results are due to chance.
+### Plot B - Correlation of the number of unique traits in a Trait Group relative to the total number of possible traits in the full database. An indication of whether the results are due to chance.
 
 ![B](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/cccbbfa0-6c86-4aec-adab-8cf4d0570e70)
 
-### C - A summary of how many tissues each SNP alters gene expression in (from GTEx eQTLs).
+### Plot C - A summary of how many tissues each SNP alters gene expression in (from GTEx eQTLs).
 
 ![C](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/c4dd5090-87ef-4963-b2bc-1a522d8747c7 width=150 height=400)
 <img src="https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/c4dd5090-87ef-4963-b2bc-1a522d8747c7" width="200" height="900">
-### D - Number of SNP-Trait associations per trait group. color based on trait group. 
+### Plot D - Number of SNP-Trait associations per trait group. color based on trait group. 
 
 ![D](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/04631737-3c4d-4379-b79d-a3e13b292af4)
 
