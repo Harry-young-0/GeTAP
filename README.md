@@ -132,7 +132,7 @@ Expanding just the Other Gene Expression Change category to look at the individu
 ### E4
 Expanding all the Trait Groups (excluding Other Gene Expression Change and Other) to see individual traits within the categories. In this case displaying just one example. NOTE: these can often be very big, if the plot is unreadable, hopefully you can find and fix it within the code but if not please email me and I'll be happy to modify it for you.
 
-<img src="https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/8dede27f-da50-43f0-87b4-361fd0c4b61e" width="700" height="600">
+<img src="https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/1cffc88b-adc8-4e72-b165-570c48bfbca5" width="400" height="750">
 
 ### Plots F1-2
 These graphs offer an alternate way of visualising the plots in E. Here we ignore p-value and display the number of SNP-trait associations within each Trait Group. The number in each group is then normalised to the total number of SNPs across all Trait Groups. This will also allow direct comparison between different genes run throught he pipeline as it normalises for a different number of SNP-Trait associations between genes. **Key**: y-axis: (number of SNP-Trait assocations within that category) / (total SNP-trait associations). Colour = direction of trait change. Below x-axis, SNPs that decrease the gene of interests expression. Above x-axis, SNPs that increase the gene of interests expression
