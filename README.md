@@ -165,7 +165,7 @@ The main error this pipeline has is installing and updating the packages needed.
 # Tissue-and-Trait-Databases
 In the zip folder download there are two databases, full_tissue_database and full_trait_database. 
 
-These are databases of Tissues and Traits manually grouped into Tissue Groups and Trait Groups. Originally tissue data was downloaded from GTEx: https://gtexportal.org/home/tissue/. Trait data from ieugwasr package.
+These are databases of Tissues and Traits manually grouped into Tissue Groups and Trait Groups. Originally tissue data was downloaded from GTEx: https://gtexportal.org/home/tissue/. Trait data from ieugwasr::gwasinfo().
 
 Though exhaustive they can be modified to your own groupings by altering the group column. The plots will autmatically adjust to your edits as long as you do not change the column names.
 
