@@ -105,7 +105,7 @@ Number of SNP-Trait associations per Trait Group. Colour based on Trait Group. i
 
 ![D](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/04631737-3c4d-4379-b79d-a3e13b292af4)
 
-Normalised Version - normalised to the number of posible traits within the database. (Number of different traits from SNP-Trait associations per Trait Group)/(Number of possible traits in each Trait Group from Full_trait_database.csv).
+Normalised Version - normalised to the number of possible traits within the database. (Number of different traits from SNP-Trait associations per Trait Group)/(Number of possible traits in each Trait Group from Full_trait_database.csv).
 
 ![D2](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/84020a7d-512c-4942-96f3-eaee0b21d67f)
 
@@ -131,6 +131,8 @@ Expanding just the Other Gene Expression Change category to look at the individu
 
 ### E4
 Expanding all the Trait Groups (excluding Other Gene Expression Change and Other) to see individual traits within the categories. In this case displaying just one example. NOTE: these can often be very big, if the plot is unreadable, hopefully you can find and fix it within the code but if not please email me and I'll be happy to modify it for you.
+
+NOTE TO HARRY - HERE IT'D BE USEFUL TO POINT OUT TO THE LINE OF CODE + ADD ANY TIPS ON WHAT TO TRY TO MAKE THE PLOT MORE LEDGIBLE IF THIS HAPPENS (E.G. TRY INPUTTING THIS "" TO SECTION x)
 
 <img src="https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/1cffc88b-adc8-4e72-b165-570c48bfbca5" width="400" height="750">
 
@@ -160,7 +162,7 @@ Circos plot displaying the overlap of Tissue Groups where the SNPs were found co
 ## Troubleshooting
 This pipeline uses three servers, ieugwasr, LDlink and ensembl. All of these have a timeout if it takes too long to run. The pipeline will stop running and an error message will pop up in the console (bottom left box). If this happens please try again later, evenings are often less busy. If it keeps erroring let me know and I'll help as much as I can!
 
-The main error this pipeline has is installing and updating the packages needed. Often this is made complicated if being run on an IT administered system because it is reading and writing RStudio System files. This is in no way dangerous. Everything being downloaded and installed are from verified and incredibly well-used sources. So if you run into trouble on a work computer. Consider asking for temporary admin rights or running on a home computer.
+The main error this pipeline has is installing and updating the packages needed. Often this is made complicated if being run on an IT administered system because it is reading and writing RStudio System files. This is in no way dangerous. Everything being downloaded and installed are from verified and incredibly well-used sources. So if you run into trouble on a work computer, consider asking for temporary admin rights or running on a home computer.
 
 # Tissue-and-Trait-Databases
 In the zip folder download there are two databases, full_tissue_database and full_trait_database. 
