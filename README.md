@@ -31,8 +31,8 @@ A folder on your desktop for example. This will be where the pipeline is saved a
 
 This will contain the main pipeline, tissue and trait database csvs, readme.md and shiny app. These should be moved into the main folder and zip file deleted. Your file directory should look like this: 
 
-![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/3b81aaa0-e885-4afa-a7c0-93659a86f136)
- 
+![Screenshot 2023-06-23 at 11 12 54](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/912a0897-cedb-4925-9ea3-a2512b9bc28e)
+
 ### 4. Open final_pipeline.Rmd in RStudio
 
 (Right-click>open with>Rstudio OR File > Open File... in RStudio). In the first run, several packages will be installed automatically to allow the pipeline to run. You may get a warning banner appear like this: 
