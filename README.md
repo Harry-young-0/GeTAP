@@ -43,7 +43,7 @@ This issue will be resolved automatically later on once you click “run all”,
 
 ### 5. Replace defaults with your gene name, token and file directory
 
-Scroll down slightly and you will see gene_name, file_directory and LD_Token on lines 17, 21 and 27 respectively. Replace with your versions.
+Scroll down slightly and you will see gene_name, file_directory and LD_Token on lines 17, 21 and 27 respectively. Replace with your versions. Don't change anything else unless you are specifically trying to tweak the pipeline, these are teh only changes you need to make.
  
  **gene_name** - The name of your human gene or human homolgue of your gene in all capitals as it appears in GTEx - you can check here: https://gtexportal.org/home/ - top right search box. e.g: "NFE2L2"
  
@@ -65,7 +65,7 @@ a. Make sure each of these changes are within speech marks. e.g: gene_name = "NF
 
 b. Make sure your gene name is as it appears in GTEx (check using https://gtexportal.org/home/ - top right search box).
 
-c. Make sure your file_directory has "/" not "\". e.g: file_directory = "C:/Documents/Example directory" not file_directory = "C:\Documents\Example directory" - This is the default for Windows so is a very common problem.
+c. Make sure your file_directory has "/" not "\\". e.g: file_directory = "C:/Documents/Example directory" not file_directory = "C:\Documents\Example directory" - This is the default for Windows so is a very common problem.
 
 ### 6. In the top right of the window click run all: 
 
@@ -132,7 +132,7 @@ Expanding just the Other Gene Expression Change category to look at the individu
 ### E4
 Expanding all the Trait Groups (excluding Other Gene Expression Change and Other) to see individual traits within the categories. In this case displaying just one example. NOTE: these can often be very big, if the plot is unreadable, hopefully you can find and fix it within the code but if not please email me and I'll be happy to modify it for you.
 
-NOTE TO HARRY - HERE IT'D BE USEFUL TO POINT OUT TO THE LINE OF CODE + ADD ANY TIPS ON WHAT TO TRY TO MAKE THE PLOT MORE LEDGIBLE IF THIS HAPPENS (E.G. TRY INPUTTING THIS "" TO SECTION x)
+I've made a custom chunk at the end of the pipeline, line: 3256, to help out
 
 <img src="https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/1cffc88b-adc8-4e72-b165-570c48bfbca5" width="400" height="750">
 
@@ -169,7 +169,7 @@ In the zip folder download there are two databases, full_tissue_database and ful
 
 These are databases of Tissues and Traits manually grouped into Tissue Groups and Trait Groups. Originally tissue data was downloaded from GTEx: https://gtexportal.org/home/tissue/. Trait data from ieugwasr::gwasinfo().
 
-Though exhaustive they can be modified to your own groupings by altering the group column. The plots will autmatically adjust to your edits as long as you do not change the column names.
+Though exhaustive, they can be modified to your own groupings by altering the group column. The plots will autmatically adjust to your edits as long as you do not change the column names.
 
 A summary plot of each Trait group and the number of traits in each is displayed below.
 
