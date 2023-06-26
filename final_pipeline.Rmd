@@ -40,7 +40,6 @@ try(if(LD_token=="generic_token") stop("Please enter your LD token, acquired fro
 
 ##Prerequisite to load in :
 ```{r, results=FALSE, echo=FALSE}
-
 # Check the packages you have and install the rest:
 list_of_packages = c("circlize",
                      "tidyverse",
@@ -83,36 +82,30 @@ remotes::install_github("mrcieu/ieugwasr", upgrade = "never")
 if(is_biomaRt_installed ==F){
 BiocManager::install(c("biomaRt"), update = FALSE) 
 }
-
 ```
 
 
 
 Now load in the final packages:
 ```{r}
-
-
- library(circlize)
- library(tidyverse)
- library(viridis)
- library(ggpubr)
- library(devtools)
- library(LDlinkR)
- library(ggh4x)
+library(circlize)
+library(tidyverse)
+library(viridis)
+library(ggpubr)
+library(devtools)
+library(LDlinkR)
+library(ggh4x)
 library(shiny)
 library(bslib)
 library(cowplot)
 library(ieugwasr)
 library(biomaRt)
-
-
 ```
 
 
 # Folder Setup:
 sets up all folders and sub directories needed. 
 ```{r}
-
 # Loop to print the names you'll make folders for
 if(file.exists(paste0(file_directory, "/Trait and Tissue Groups"))){
   
@@ -144,9 +137,6 @@ file.remove(paste0(file_directory,"/FINAL_Gtex_egene.csv"))
 write_csv(egene ,paste0(file_directory,"/eGene/FINAL_Gtex_egene.csv"))
 }
 
-
-
-
   #if it already exists, don't make it again
   if(file.exists(paste0(file_directory,"/" ,gene_name,"_test"))){
    print("file does not exist, creating a new folder")
@@ -159,7 +149,6 @@ write_csv(egene ,paste0(file_directory,"/eGene/FINAL_Gtex_egene.csv"))
   dir.create(paste0(file_directory,"/",gene_name,"_test/Ensembl/All_Exon_Options"))
   dir.create(paste0(file_directory,"/", gene_name,"_test/Gtex/Final Dataframes"))
 }
-
 ```
 
 
@@ -178,7 +167,6 @@ This is done automatically using their url SWAGGER entry to their database.
 Gtex_1 = read_tsv(paste0("https://gtexportal.org/rest/v1/association/singleTissueEqtl?format=tsv&geneSymbol=",gene_name,"&tissueSiteDetailId=Adipose_Subcutaneous%2CAdipose_Visceral_Omentum%2CAdrenal_Gland%2CArtery_Aorta%2CArtery_Coronary%2CArtery_Tibial%2CBladder%2CBrain_Amygdala%2CBrain_Anterior_cingulate_cortex_BA24%2CBrain_Caudate_basal_ganglia%2CBrain_Cerebellar_Hemisphere%2CBrain_Cerebellum%2CBrain_Cortex%2CBrain_Frontal_Cortex_BA9%2CBrain_Hippocampus%2CBrain_Hypothalamus%2CBrain_Nucleus_accumbens_basal_ganglia%2CBrain_Putamen_basal_ganglia%2CBrain_Spinal_cord_cervical_c-1%2CBrain_Substantia_nigra%2CBreast_Mammary_Tissue%2CCells_EBV-transformed_lymphocytes%2CCells_Cultured_fibroblasts%2CCells_Transformed_fibroblasts%2CCervix_Ectocervix%2CCervix_Endocervix%2CColon_Sigmoid%2CColon_Transverse%2CEsophagus_Gastroesophageal_Junction%2CEsophagus_Mucosa%2CEsophagus_Muscularis%2CFallopian_Tube%2CHeart_Atrial_Appendage%2CHeart_Left_Ventricle%2CKidney_Cortex%2CKidney_Medulla%2CLiver%2CLung%2CMinor_Salivary_Gland%2CMuscle_Skeletal%2CNerve_Tibial%2COvary%2CPancreas%2CPituitary%2CProstate%2CSkin_Not_Sun_Exposed_Suprapubic%2CSkin_Sun_Exposed_Lower_leg%2CSmall_Intestine_Terminal_Ileum%2CSpleen%2CStomach%2CTestis%2CThyroid%2CUterus%2CVagina%2CWhole_Blood&datasetId=gtex_v8"),
                  col_names = T
 )
-
 # reset names to look like web downloaded - saves me re-writing everything
 Gtex_1 = Gtex_1 %>% 
   dplyr::rename(`Gencode Id` =gencodeId,
@@ -202,10 +190,10 @@ df = df%>%
   dplyr::rename(rsid = `SNP Id`)
 
 head(df) 
-
 #Also clear up any NA rsids that have snuck through
 df = df[which(is.na(df$rsid)==F),]
-
+# And "none"s  
+df = df[which(df$rsid!="none"),]
 ```
 
 So, now we have a Gtex table with a separated location and mutation column for easy use later on. IMPORTANT NOTE: a = reference allele and b = Effect or Alternate Allele. In other words, the change in expression NES occurs in individuals with the mutation at location x from a to b.
@@ -775,8 +763,6 @@ if(length(unique_Gtex_snps)<700){
 
 load(paste0(file_directory,"/", gene_name,"_test/LDMatrix/rs_overlap_ALL_",gene_name,".RData"))  # specifically the dataframe with ambiguous data removed
 
-setwd(paste0(file_directory,"/", gene_name,"_test/Gtex/"))
-
 df = read_csv(paste0(file_directory,"/", gene_name,"_test/Gtex/",gene_name,"_gtexPHEWAS_no_ukaORAmbig_FINAL.csv"))
 backup =df
 
@@ -977,16 +963,16 @@ test2pos = full_join(dfpos, backuppos, by = c("rsid","p","trait"))
 test2=rbind(test2neg,test2pos)
 test2 = test2 %>% rename(beta_direction = beta_direction.y)
 test2 = test2 %>% dplyr::select(-c("beta_direction.x"))
-write_csv(test2, paste0(gene_name,"_gtexPHEWAS_no_ukaORAmbig_FINAL_linkagetempr20.5.csv"))# full dataframe but with the "test" column
+write_csv(test2, paste0(file_directory,"/",gene_name,"_test/Gtex/",gene_name,"_gtexPHEWAS_no_ukaORAmbig_FINAL_linkagetempr20.5.csv"))# full dataframe but with the "test" column
 
 test = test2[which(test2$test=="unlinked"),]
 
 
-write_csv(test, paste0(gene_name,"_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv")) # reduced df
+write_csv(test,paste0(file_directory,"/",gene_name,"_test/Gtex/",gene_name,"_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv")) # reduced df
 } else{
-  df = read_csv(paste0(gene_name,"_gtexPHEWAS_no_ukaORAmbig_FINAL.csv"))
+  df = read_csv(paste0(file_directory,"/",gene_name,"_test/Gtex/",gene_name,"_gtexPHEWAS_no_ukaORAmbig_FINAL.csv"))
   df$test ="filler"
-  write_csv(df, paste0(gene_name,"_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv"))
+  write_csv(df,paste0(file_directory,"/",gene_name,"_test/Gtex/",gene_name,"_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv"))
 }
 
 ```
@@ -1568,11 +1554,51 @@ length_of_unique_traits = length(unique(temp$trait))
   }
 
 ```
+#####E3-2 only Other 
+The overview of all snps relative to traitgroups:
 
-#### E4 Top 5 categories after other and OGEC:
+```{r NO CUTOFF Trait Groups Effected by SNPs that Change in Expression of YOUR_GENE_NAME on Traits by logp}
+temp = df[ which(is.na(df$tissue_group)==F),]
+temp$beta_direction = factor(temp$beta_direction, levels=c("Positive", "Negative"))
+temp = temp[which(temp$traitgroup=="Other/Unspecified"),]
+
+Oe3 = ggplot(temp, aes(x=trait, y=logp_DIR, color=beta_direction)) + 
+  geom_point(alpha=0.6, position = position_jitterdodge())+ #  alpha is transparancy from 0-1
+  scale_colour_viridis_d(direction=-1, ) + 
+  labs( x= "Genes", y= "-log(p) * Direction")+ 
+  geom_hline(aes(yintercept=0,), alpha=0.3)+ # faint line at 0
+  theme(axis.text.y =   element_text(size = 10),
+        axis.title = element_text(size = 10, face="bold"),
+        panel.background = element_rect(fill="white"),
+        panel.grid.major.y = element_blank(),
+        panel.grid.major.x = element_line(colour = "gray90", linetype="solid", size=0.4),
+        panel.grid.minor.x = element_line(colour = "gray90", linetype="solid", size=0.2),
+        legend.position = "none")+
+  coord_flip()+
+      force_panelsizes(cols=unit(1, "in"))#cols=unit(1,"in"))
+  
+Oe3
+
+filename=paste0(file_directory,"/",gene_name,"_test/Final_plots/E3-e1_Other_only.pdf")
+
+length_of_unique_traits = length(unique(temp$trait))
+  if(length_of_unique_traits>150){
+    ggsave(filename, height=560, width=230, unit="mm")
+  }else if(length_of_unique_traits<150 &length_of_unique_traits>50){
+    ggsave(filename, height=380, width=230, unit="mm")
+  }else if(length_of_unique_traits<50){
+    ggsave(filename, height=250, width=230, unit="mm")
+  }else if(length_of_unique_traits<300){
+    ggsave(filename, height=130, width=230, unit="mm")
+  }
+
+```
+
+#### E4 Top n categories after other and OGEC:
 ```{r, fig.width=6, fig.height=10}
 number_of_traitgroups = df %>% dplyr::select(traitgroup) %>% unique()
-for(i in 3:nrow(number_of_traitgroups)-2){
+number_of_traitgroups = number_of_traitgroups %>% dplyr::filter(traitgroup!="Other Gene Expression Change"|traitgroup!="Other/Unspecified")
+for(i in 1:nrow(number_of_traitgroups)){
   print(i)
   temp =df[which(df$traitgroup ==summary_of_df_no_OGEC$traitgroup[i]),] 
   for_label = df[which(df$traitgroup ==summary_of_df_no_OGEC$traitgroup[i]),]
@@ -1596,10 +1622,10 @@ for(i in 3:nrow(number_of_traitgroups)-2){
     coord_flip()+
     force_panelsizes(cols=unit(40, "mm"))
   pvsTrait_bygroup
-
-
+  
+# Manual version:
+# ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/E4-Number_", i,"_traitgroup.pdf"),height=y, width=x,  )}
 assign(paste0("e4_", i), pvsTrait_bygroup) 
-
 filename=paste0(file_directory,"/",gene_name,"_test/Final_plots/E4-Number_", i,"_traitgroup.pdf")
   if(for_label>150){
     ggsave(filename, height=560, width=230, unit="mm")
@@ -1611,7 +1637,6 @@ filename=paste0(file_directory,"/",gene_name,"_test/Final_plots/E4-Number_", i,"
     ggsave(filename, height=130, width=230, unit="mm")
   }
 }
-
 ```
 
 #### F1 Proportional count the snps in each beta direction:
@@ -3214,7 +3239,38 @@ runApp( paste0(file_directory,"/app_with_circos.R"))
 
 ```
 
+# Manual version of Number_x_traitgroup
+```{r}
+number_of_traitgroups = df %>% dplyr::select(traitgroup) %>% unique()
+number_of_traitgroups = number_of_traitgroups %>% dplyr::filter(traitgroup!="Other Gene Expression Change"|traitgroup!="Other/Unspecified")
 
+
+  temp =df[which(df$traitgroup =="traitgroup name"),] 
+  for_label = df[which(df$traitgroup =="traitgroup name"),]
+  for_label = length(unique(for_label$trait))
+
+  pvsTrait_bygroup = ggplot(temp, aes(x=trait, y=logp_DIR, color=beta_direction)) + 
+    geom_point(position = position_jitterdodge(), size =2)+ #  alpha is transparancy from 0-1
+    scale_colour_viridis_d(direction=-1, ) +
+    labs(title= paste0("Traits in",summary_of_df_no_OGEC$traitgroup[i],  paste0("Affected by SNPs that Change in Expression of ", gene_name)) , x= "Traits", y= "-log(p) x Direction")+ #labels
+    geom_hline(aes(yintercept=0,), alpha=0.3)+# faint line at 0
+    geom_hline(aes(yintercept=4,), alpha=0.3, color="red")+
+    geom_hline(aes(yintercept=-4,), alpha=0.3, color="red")+
+    theme(        axis.text.y =   element_text(size = 10),
+        axis.title = element_text(size = 10, face="bold"),
+        panel.background = element_rect(fill="white"),
+        panel.grid.major.y = element_blank(),
+        panel.grid.major.x = element_line(colour = "gray90", linetype="solid", size=0.4),
+        panel.grid.minor.x = element_line(colour = "gray90", linetype="solid", size=0.2),
+        legend.position = "none")+
+    facet_grid(rows = vars(Subcat), scales = "free", space="free")+
+    coord_flip()+
+    force_panelsizes(cols=unit(40, "mm"))
+  pvsTrait_bygroup
+  
+
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/E4-Number_TRAITGROUP_NAME_traitgroup.pdf"),height=y, width=x,  )
+```
 # Extra comments
 A lot of this code is probably less efficient than it could be. In general I've found it difficult to find the correct vectorised functions to quickly do what I want. For this reason I find myself leaning heavily on more generic computing logic using 'for' and 'if' loops. This does work but please be patient with certain chunks as they may take a little while to run. Any tips and improvements are very welcome. Please do email me :) . 
 
