@@ -18,7 +18,7 @@ gene_name = "YOUR_GENE_NAME"
 #e.g gene_name ="NFE2L2"
 
 #2. setting the file directory to where you want it to go DRIVE:/YOUR_FILE_DIRECTORY/
-file_directory = "C:/Documents/Example Directory"
+file_directory = "C:/Documents/Example directory"
 #windows e.g: file_directory = "C:/Users/hy14913/OneDrive - University of Bristol/Desktop/May23_test"
 #mac e.g: file_directory ="/Users/hy14913/Documents/Local_work_folder/JUL_TEST"
 
@@ -194,6 +194,7 @@ head(df)
 df = df[which(is.na(df$rsid)==F),]
 # And "none"s  
 df = df[which(df$rsid!="none"),]
+df = df[which(df$rsid!="None"),]
 ```
 
 So, now we have a Gtex table with a separated location and mutation column for easy use later on. IMPORTANT NOTE: a = reference allele and b = Effect or Alternate Allele. In other words, the change in expression NES occurs in individuals with the mutation at location x from a to b.
@@ -1595,23 +1596,47 @@ length_of_unique_traits = length(unique(temp$trait))
 ```
 
 #### E4 Top n categories after other and OGEC:
+
 ```{r, fig.width=6, fig.height=10}
 number_of_traitgroups = df %>% dplyr::select(traitgroup) %>% unique()
-number_of_traitgroups = number_of_traitgroups %>% dplyr::filter(traitgroup!="Other Gene Expression Change"|traitgroup!="Other/Unspecified")
-for(i in 1:nrow(number_of_traitgroups)){
+number_of_traitgroups = number_of_traitgroups %>% 
+  dplyr::filter(traitgroup!="Other Gene Expression Change"|
+                traitgroup!="Other/Unspecified")
+colors_man <- c("Positive" = "#FDE725FF", "Negative" = "#440154FF")
+
+for(i in 3:nrow(number_of_traitgroups)-2){
   print(i)
   temp =df[which(df$traitgroup ==summary_of_df_no_OGEC$traitgroup[i]),] 
   for_label = df[which(df$traitgroup ==summary_of_df_no_OGEC$traitgroup[i]),]
   for_label = length(unique(for_label$trait))
-
+  if(length(unique(temp$Subcat))==1){
   pvsTrait_bygroup = ggplot(temp, aes(x=trait, y=logp_DIR, color=beta_direction)) + 
     geom_point(position = position_jitterdodge(), size =2)+ #  alpha is transparancy from 0-1
-    scale_colour_viridis_d(direction=-1, ) +
-    labs(title= paste0("Traits in",summary_of_df_no_OGEC$traitgroup[i],  paste0("Affected by SNPs that Change in Expression of ", gene_name)) , x= "Traits", y= "-log(p) x Direction")+ #labels
+    scale_colour_manual(values = colors_man) +
+    labs(title= paste0("Traits in ",summary_of_df_no_OGEC$traitgroup[i]," Affected by SNPs that Change in Expression of ", gene_name) , x= "Traits", y= "-log(p) x Direction")+ #labels
     geom_hline(aes(yintercept=0,), alpha=0.3)+# faint line at 0
     geom_hline(aes(yintercept=4,), alpha=0.3, color="red")+
     geom_hline(aes(yintercept=-4,), alpha=0.3, color="red")+
-    theme(        axis.text.y =   element_text(size = 10),
+    theme(axis.text.y =   element_text(size = 10),
+        axis.title = element_text(size = 10, face="bold"),
+        panel.background = element_rect(fill="white"),
+        panel.grid.major.y = element_blank(),
+        panel.grid.major.x = element_line(colour = "gray90", linetype="solid", size=0.4),
+        panel.grid.minor.x = element_line(colour = "gray90", linetype="solid", size=0.2),
+        legend.position = "none")+
+    #facet_grid(rows = vars(Subcat), scales = "free", space="free")+
+    coord_flip()+
+    force_panelsizes(cols=unit(40, "mm"))
+  pvsTrait_bygroup
+  }else{
+  pvsTrait_bygroup = ggplot(temp, aes(x=trait, y=logp_DIR, color=beta_direction)) + 
+    geom_point(position = position_jitterdodge(), size =2)+ #  alpha is transparancy from 0-1
+    scale_colour_manual(values = colors_man) +
+    labs(title= paste0("Traits in ",summary_of_df_no_OGEC$traitgroup[i]," Affected by SNPs that Change in Expression of ", gene_name) , x= "Traits", y= "-log(p) x Direction")+ #labels
+    geom_hline(aes(yintercept=0,), alpha=0.3)+# faint line at 0
+    geom_hline(aes(yintercept=4,), alpha=0.3, color="red")+
+    geom_hline(aes(yintercept=-4,), alpha=0.3, color="red")+
+    theme(axis.text.y =   element_text(size = 10),
         axis.title = element_text(size = 10, face="bold"),
         panel.background = element_rect(fill="white"),
         panel.grid.major.y = element_blank(),
@@ -1622,7 +1647,8 @@ for(i in 1:nrow(number_of_traitgroups)){
     coord_flip()+
     force_panelsizes(cols=unit(40, "mm"))
   pvsTrait_bygroup
-  
+    }
+    
 # Manual version:
 # ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/E4-Number_", i,"_traitgroup.pdf"),height=y, width=x,  )}
 assign(paste0("e4_", i), pvsTrait_bygroup) 
@@ -1637,6 +1663,7 @@ filename=paste0(file_directory,"/",gene_name,"_test/Final_plots/E4-Number_", i,"
     ggsave(filename, height=130, width=230, unit="mm")
   }
 }
+
 ```
 
 #### F1 Proportional count the snps in each beta direction:
