@@ -354,8 +354,8 @@ unique_Gtex_snps = unique_Gtex_snps$rsid
 searching IEU PheWAS database
 This step takes a while, give it time, if it errors, chances are the servers are busy, try again or maybe try running in the evening.
 ```{r,Phewas searching }
-
-for(n in 1:round(length(unique_Gtex_snps)/25, digits=0)){
+unique_Gtex_snps = df$rsid
+for(n in 1:round(length(na.omit(unique_Gtex_snps))/25, digits=0)){
   test = na.omit(unique_Gtex_snps[(((n-1)*25)+1):(n*25)])
   
   if(n==1){
@@ -403,22 +403,19 @@ GtextoPHEWAS_RAW = GtextoPHEWAS_RAW %>%
  head(GtextoPHEWAS_RAW)
 ```
 
-Next step is to actually merge these two dataframes: Either of these work, I use merge because I found it first, but since I've been using dyplr this full_join is also nice. Worth checking that both produce the same dataframe as a test!
+Next step is to merge these two dataframes: dyplr full_join or merge both work.
 
 ```{r Merging the gtex and phewas dataframes}
 
 test = full_join(Gtex_cleaned, GtextoPHEWAS_RAW, by = "rsid")
-# You will lose eQTL type but that's fine, old column when i was tempted by doing sQTLs too
 test = test[,c("Gencode Id","Gene Symbol","rsid","a","b", "NES","|NES|","Tissue", "P-Value", "Variant Id","chr_gtex", "position_gtex", "build_gtex", "ea","nea","trait","beta", "p","se","n","eaf","chr_phewas","position_phewas", "id")]
-
 head(test) 
-
 
 ```
 The next step is cleaning up the merge and checking that it has worked as expected:
-NOTE: the positions WILL NOT MATCH. phewas uses build 37 where gtex uses b38 so just be aware of this
+NOTE: the positions WILL NOT MATCH. phewas uses build 37 where gtex uses b38.
 
-There will be some rows where it only has Gtex data, i.e. rsids that didn't come out with a result from PHEWAS searching.
+There will be some rows where it only has GTEx data, i.e. rsids that didn't come out with a result from PHEWAS searching.
 To clean this, remove rows where there are NA's for multiple columns in PHEWAS section:
 
 ```{r cleaning up the merge step}
@@ -429,16 +426,8 @@ head(to_remove) # any rows with lots of NAs in Phewas columns
 
 ## Remove rows with NA in these PHEWAS columns
 test = test %>% drop_na(beta, eaf, chr_phewas, trait) 
-
-## here a couple of testing lines to see a specific rsidif you want to check your merge worked ok
-# test_rsid = PS_YOUR_GENE_NAME[which(PS_YOUR_GENE_NAME$rsid =="rs78616393"),]
-# test_rsid = Gtex_YOUR_GENE_NAME[which(Gtex_YOUR_GENE_NAME$rsid =="rs78616393"),]
-
 rm(test2) # cleanup removing the extra table 
 write_excel_csv(test, paste0(file_directory,"/", gene_name,"_test/Gtex/", gene_name, "_merge_GTEX_PHEWAS.csv"))
-
-
-
 
 ```
 ### Correcting beta, ambiguous cases and adding groups:
@@ -1053,6 +1042,7 @@ Full_tissue_database = read_csv(paste0(file_directory,"/Trait and Tissue Groups/
 original_gtex = left_join(original_gtex,Full_tissue_database)
 
 df$traitgroup = factor(df$traitgroup, levels =c("Body Fat/Size",
+            "Diet",
             "Metabolism (inc. Diabetes)",
             "Tumours (Benign/Cancer)",
             "Atrophy/Dystrophy", 
@@ -1080,12 +1070,13 @@ df$traitgroup = factor(df$traitgroup, levels =c("Body Fat/Size",
 
 # INCOMPLETE - From later, moved back for completions sake?
 grid_col = c(`Body Fat/Size` = "#0DF485",
-            `Metabolism (inc. Diabetes)` = "#0DF4BF",
-             `Tumours (Benign/Cancer)` = "#32DCC1",
-             `Atrophy/Dystrophy` = "#32CCDC",
-            `Congenital Defects` = "#0DB5F4",
-             `Cardiovascular Traits` = "#3277DC",
-             `Blood/Vascular Traits` ="#4532DC",
+             `Diet` = "#39FFC0",
+            `Metabolism (inc. Diabetes)` ="#32DCC1",
+             `Tumours (Benign/Cancer)` ="#32CCDC" ,
+             `Atrophy/Dystrophy` = "#0DB5F4",
+            `Congenital Defects` = "#3277DC",
+             `Cardiovascular Traits` = "#4532DC",
+             `Blood/Vascular Traits` ="#6C39FF",
              Inflammation ="#9A32DC", #  or #AA98A970
             `Respiratory` ="#C432DC",
              `Renal/Urinary` = "#DC32D0",
@@ -1406,6 +1397,7 @@ temp = left_join(temp,summary_of_df)
 temp$beta_direction = factor(temp$beta_direction, levels=c("Positive", "Negative"))
 
 temp$traitgroup = factor(temp$traitgroup, levels =c("Body Fat/Size",
+                                                    "Diet",
             "Metabolism (inc. Diabetes)",
             "Tumours (Benign/Cancer)",
             "Atrophy/Dystrophy", 
@@ -1466,6 +1458,7 @@ temp = temp[which(temp$traitgroup!="Other/Unspecified" &temp$traitgroup!="Other 
 temp = left_join(temp,summary_of_df_no_OGEC)
 temp$beta_direction = factor(temp$beta_direction, levels=c("Positive", "Negative"))
 temp$traitgroup = factor(temp$traitgroup, levels =c("Body Fat/Size",
+                                                    "Diet",
             "Metabolism (inc. Diabetes)",
             "Tumours (Benign/Cancer)",
             "Atrophy/Dystrophy", 
@@ -2835,12 +2828,13 @@ NOTE: The issue here is circlize isn't really cut out for assigning specific col
 df$traitgroup =ifelse(df$traitgroup =="Muscle/Tendon Traits", "Muscular/Tendon Traits", df$traitgroup)
 # FUll colour list
 grid_col = c(`Body Fat/Size` = "#0DF485",
-            `Metabolism (inc. Diabetes)` = "#0DF4BF",
-             `Tumours (Benign/Cancer)` = "#32DCC1",
-             `Atrophy/Dystrophy` = "#32CCDC",
-            `Congenital Defects` = "#0DB5F4",
-             `Cardiovascular Traits` = "#3277DC",
-             `Blood/Vascular Traits` ="#4532DC",
+             `Diet` = "#39FFC0",
+            `Metabolism (inc. Diabetes)` ="#32DCC1",
+             `Tumours (Benign/Cancer)` ="#32CCDC" ,
+             `Atrophy/Dystrophy` = "#0DB5F4",
+            `Congenital Defects` = "#3277DC",
+             `Cardiovascular Traits` = "#4532DC",
+             `Blood/Vascular Traits` ="#6C39FF",
              Inflammation ="#9A32DC", #  or #AA98A970
             `Respiratory` ="#C432DC",
              `Renal/Urinary` = "#DC32D0",
@@ -2848,15 +2842,16 @@ grid_col = c(`Body Fat/Size` = "#0DF485",
              `Digestive Traits` ="#DC4132",
             `Nervous System/Brain` = "#DC5D32",
              `Bone Traits (inc. Dental)` = "#DC8732",
-            `Muscular/Tendon Traits` = "#DCA732",
+            `Muscle/Tendon Traits` = "#DCA732",
             `Physical Injury` = "#DCD232",
             `Alcohol-related Disease` ="#BCDC32",
              `Life Span` ="#92DC32",
              `Female Specific Traits` = "#43DC32",
-            `Disease (unknown origin)` = "#43DC99",
+            `Male Specific Traits` = "#00f556",
+            `Disease (unknown origin)` ="#00f577",
             `Other/Unspecified` ="#C9C7BD",
             `Other Gene Expression Change` ="#78C47D",
-             # Tissues:
+             #Tissues:
              Blood = "#CC5500",
              `Cultured Cells` = "#00FFFF",
              Digestive ="#A7C7E7",
@@ -2883,54 +2878,6 @@ print(new_groups)
 # 
 to_add = setdiff(new_groups, colour_data) # data unique to colour data
 to_comment_out = setdiff(colour_data, new_groups)
-
-
-## Loop to correct out a spelling mistake
-# for(n in 1:nrow(df)){
-#   if(df$traitgroup[n] == "Neuorological_Function_OR_Brain_Traits"){
-#     df$traitgroup[n] = "Neurological_Function_OR_Brain_Traits"
-#   }
-# }
-
-###fairly random colour list#######
-#2E9AFE
-#800020
-#00FFFF - cyan
-#301934
-#CBC3E3
-#7FFFD4 - aqua
-#AA98A9
-#E0B0FF
-#8A9A5B - sage green
-#ACFA58
-#800080
-#7F00FF
-#4169E1 - royal blue
-#673147
-#CC5500
-#DF013A
-#AA336A
-#D70040
-#A7C7E7 - pastel blue
-#610B4B
-#FF4433
-#E0115F
-#80461B
-#023020 - dark green
-#FFA500
-#FFBF00
-#90EE90
-#610B0B
-#00A36C
-#630330 - tyrian purple
-
-# for gene diagram split:
-#9430c2 - purple
-#bd680d - orange
-
-# for other:
-#808080 - grey
-#F5F5DC - beige
 
 ```
 Now we have two lists, one that tells which to add to grid_col as new groups (to_add) and the other telling us which to comment out (to_comment_out)
