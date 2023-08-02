@@ -7100,7 +7100,6 @@ Worry,Nervous System/Brain,Psychological,NA
 Worry too long after an embarrassing experience,Nervous System/Brain,Psychological,NA
 Worry too long after embarrassment,Nervous System/Brain,Psychological,NA
 41,Other Gene Expression Change,Other Gene Expression Change,NA
-14/03/2003,Other Gene Expression Change,Other Gene Expression Change,Signalling Cascade
 "[Pyruvate dehydrogenase (acetyl-transferring)] kinase isozyme 1, mitochondrial",Other Gene Expression Change,Other Gene Expression Change,Metabolic Enzyme
 "[Pyruvate dehydrogenase (acetyl-transferring)] kinase isozyme 2, mitochondrial",Other Gene Expression Change,Other Gene Expression Change,Metabolic Enzyme
 14-3-3 protein epsilon,Other Gene Expression Change,Other Gene Expression Change,Signalling Cascade
@@ -37061,3 +37060,49 @@ Type of cancer: ICD10: D05.1 Intraductal carcinoma in situ,Tumours (Benign/Cance
 "Type of cancer: ICD10: D06.9 Cervix, unspecified",Tumours (Benign/Cancer),Cancer,NA
 Z12 Special screening examination for neoplasms,Tumours (Benign/Cancer),Cancer,NA
 Z85 Personal history of malignant neoplasm,Tumours (Benign/Cancer),Cancer,NA
+White blood cell count,Blood/Vascular Traits,Blood Traits,Immune Cell Fraction
+STROKE,Blood/Vascular Traits,Stroke/Clotting/Haemorrhage,NA
+diastolic blood pressure,Blood/Vascular Traits,Vascular Traits,NA
+systolic blood pressure,Blood/Vascular Traits,Vascular Traits,Pressure
+Apolipoprotein A-I,Body Fat/Size,Body Fat,Lipoproteins
+apolipoprotein B,Body Fat/Size,Body Fat,Lipoproteins
+body mass index,Body Fat/Size,Body Fat,NA
+Atrial Fibrillation,Cardiovascular Traits,Heartbeat,NA
+Rheumatoid Arthritis,Inflammation,Joint/Muscle/Tendon Inflammation,NA
+multiple sclerosis,Inflammation,Nervous Inflammation,Autoinflammation
+Type 2 Diabetes,Metabolism (inc. Diabetes),Diabetes,NA
+3-Hydroxybutyrate,Metabolism (inc. Diabetes),Metabolites/Hormones/Other Products,NA
+Albumin/globulin ratio,Metabolism (inc. Diabetes),Metabolites/Hormones/Other Products,NA
+Follistatin,Metabolism (inc. Diabetes),Metabolites/Hormones/Other Products,NA
+leptin,Diet,Appetitive,NA
+triglycerides,Metabolism (inc. Diabetes),Metabolites/Hormones/Other Products,NA
+Anorexia Nervosa,Nervous System/Brain,Psychological,NA
+bipolar disorder,Nervous System/Brain,Psychological,NA
+Major depressive disorder,Nervous System/Brain,Psychological,NA
+schizophrenia,Nervous System/Brain,Psychological,NA
+14-3-3,Other Gene Expression Change,Other Gene Expression Change,Signalling Cascade
+adrenomedullin,Other Gene Expression Change,Other Gene Expression Change,NA
+Calreticulin,Other Gene Expression Change,Other Gene Expression Change,Calcium Signalling
+Cathepsin D,Other Gene Expression Change,Other Gene Expression Change,Cathepsin
+Coagulation Factor Xa,Other Gene Expression Change,Other Gene Expression Change,Clotting
+Epidermal growth factor,Other Gene Expression Change,Other Gene Expression Change,NA
+fibroblast growth factor 23,Other Gene Expression Change,Other Gene Expression Change,Growth Factor
+Granzyme A,Other Gene Expression Change,Other Gene Expression Change,Cytotoxin
+HbA1C,Other Gene Expression Change,Other Gene Expression Change,NA
+Hepatitis A virus cellular receptor 1,Other Gene Expression Change,Other Gene Expression Change,NA
+hepatocyte growth factor,Other Gene Expression Change,Other Gene Expression Change,Growth Factor
+KIT ligand,Other Gene Expression Change,Other Gene Expression Change,NA
+myeloperoxidase,Other Gene Expression Change,Other Gene Expression Change,Peroxidase
+myoglobin,Other Gene Expression Change,Other Gene Expression Change,Globin
+P-Selectin,Other Gene Expression Change,Other Gene Expression Change,NA
+phosphoglycerate kinase 1,Other Gene Expression Change,Other Gene Expression Change,Metabolic Protein
+prolactin,Other Gene Expression Change,Other Gene Expression Change,NA
+Prolactin receptor,Other Gene Expression Change,Other Gene Expression Change,NA
+Renin,Other Gene Expression Change,Other Gene Expression Change,NA
+Resistin,Other Gene Expression Change,Other Gene Expression Change,NA
+vascular endothelial growth factor A,Other Gene Expression Change,Other Gene Expression Change,VEGF
+Vascular endothelial growth factor D,Other Gene Expression Change,Other Gene Expression Change,VEGF
+Age Of Smoking Initiation,Other/Unspecified,Other,NA
+Cigarettes per Day,Other/Unspecified,Other,NA
+Cervical cancer,Tumours (Benign/Cancer),Cancer,NA
+Colorectal Cancer,Tumours (Benign/Cancer),Cancer,NA
