@@ -43,7 +43,7 @@ This issue will be resolved automatically later on once you click “run all”,
 
 ### 5. Replace defaults with your gene name, token and file directory
 
-Scroll down slightly and you will see gene_name, file_directory and LD_Token on lines 17, 21 and 27 respectively. Replace with your versions. Don't change anything else unless you are specifically trying to tweak the pipeline, these are teh only changes you need to make.
+Scroll down slightly and you will see gene_name, file_directory and LD_Token on lines 17, 21 and 27 respectively. Replace with your versions. Don't change anything else unless you are specifically trying to tweak the pipeline, these are the only changes you need to make.
  
  **gene_name** - The name of your human gene or human homolgue of your gene in all capitals as it appears in GTEx - you can check here: https://gtexportal.org/home/ - top right search box. e.g: "NFE2L2"
  
