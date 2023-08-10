@@ -38,7 +38,7 @@ R: https://www.stats.bris.ac.uk/R/
 
 RStudio: https://posit.co/downloads/
 
-Following installation, open RStudio. Then continue following the instructions below for "Quick start guide". NOTE: I am using a Mac but the pipeline will work identically for a Windows computer.
+Following installation, open RStudio. Then continue following the instructions below for "Quick start guide". The pipeline was built on a Mac but will work identically on a Windows computer.
 
 Important: If you already have R and Rstudio installed prior to your first run, please either fresh install or reset all of your packages.
 
