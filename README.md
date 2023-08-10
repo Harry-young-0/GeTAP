@@ -2,7 +2,7 @@ An overview of the various Sections on this page:
 
 #### Section A: Pipeline Rationale 
 #### Section B: Software and tokens required prior to running the pipeline
-#### [Section C: Quick start guide](#section-c-quick-start-guide)
+#### [Section C: Quick start guide](#Section-C)
 #### Section D: Understanding the Pipeline Output Plots
 #### Section E: Modifying the Tissue-and-Trait-Databases
 #### Section F: Using the main R Notebook to modify the code
@@ -35,7 +35,8 @@ RStudio: https://posit.co/downloads/
 
 Following installation, open RStudio. Then continue following the instructions below for "Quick start guide". NOTE: I am using a Mac but the pipeline will work identically for a Windows computer.
 
-## Section C: Quick start guide
+## Section C
+### Quick Start Guide
 
 ### 1. Create a file directory
 
