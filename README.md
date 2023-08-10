@@ -1,4 +1,4 @@
-# Software and tokens required prior to running the pipeline for the first time
+# Section A: Software and tokens required prior to running the pipeline for the first time
 ### LD-Link token
 This program uses the LDlink web server which requires a unique token to run. This is easily obtained by following this link: [https://ldlink.nih.gov/?tab=apiaccess](https://ldlink.nih.gov/?tab=apiaccess). This only needs to be completed once and then that token will stay with you for life (linked to your email).
 
@@ -15,7 +15,7 @@ RStudio: https://posit.co/downloads/
 Open RStudio.
 Then continue with the "Quick start guide". NOTE: I am using a mac but it will work identically for a windows computer.
 
-# Quick start guide
+# Section B: Quick start guide
 
 ### 1. Create a file directory
 
@@ -73,7 +73,7 @@ c. Make sure your file_directory has "/" not "\\". e.g: file_directory = "C:/Doc
 
 ### 7. Be patient! It should take around 20-30 mins to run.
 
-# Pipeline Output Example
+# Section C: Pipeline Output Example
 The pipeline will automatically open a shiny app of the data. All the plots shown can also be found as pdfs in the Final_plots and Circos folders. Also, the Shiny app can be reopened anytime by using the shiny app rerun chunk on lines 3204-3215 (click the play symbol top right of the box). This will include the circos plots that display more nicely in that format than they do as the output pdfs in the circos subfolder.
 
 The goal of the pipeline is to suggest novel Gene-Trait associations by using SNPs that are associated with a change in expression of a gene of interest via GTEx. 
