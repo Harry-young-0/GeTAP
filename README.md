@@ -6,7 +6,7 @@ An overview of the various Sections on this page:
  
  - [Section C: Quick start guide](#section-c--quick-start-guide)
  
- - [Section D: Understanding the Pipeline Output Plots](#Section-D)
+ - [Section D: Understanding the Pipeline Output Plots](##Section-D)
  
  - [Section E: Modifying the Tissue-and-Trait-Databases](#Section-E)
  
