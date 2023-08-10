@@ -1,3 +1,10 @@
+## Section A: Pipeline Rationale
+## Section B: Software and tokens required prior to running the pipeline
+## Section C: Quick start guide
+## Section D: Understanding the Pipeline Output Plots
+## Section E: Tissue-and-Trait-Databases
+## Section F: Using the main R Notebook to modify the code
+
 # Section A: Pipeline Rationale
 
 The goal of this pipeline is to suggest novel Gene-Trait associations by integrating two independent and publicly available datasets: (i) SNP-gene expression data from the GTEx Project and (ii) SNP-trait data from the PheWAS database.
@@ -10,7 +17,7 @@ IMPORTANT NOTE: Traits and tissues were manually grouped into Trait Groups and T
 
 ![schematic_for_github](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/a165c6e8-2290-4691-9410-4ab40897080a)
 
-# Section B: Software and tokens required prior to running the pipeline for the first time
+# Section B: Software and tokens required prior to running the pipeline
 ### 1. LDlink token
 This pipeline uses the LDlink web server, which requires a unique token to run. The token is easily obtained here: [https://ldlink.nih.gov/?tab=apiaccess](https://ldlink.nih.gov/?tab=apiaccess). This step needs to be completed only once and then that token will stay with you for life (it is linked to your email address).
 
@@ -98,6 +105,11 @@ The pipeline will also automatically open a Shiny App of the data. The Shiny App
 
 ALSO ADD IMAGE OF SHINY APP THAT POPS UP
 
+### 8. Troubleshooting
+This pipeline uses three servers: ieugwasr, LDlink and ensembl. All of these will time-out if the pipeline takes too long to run. If this happens, the pipeline will stop running and an error message will pop up in the console (bottom left box). If this happens please try running the pipeline again at a later time, evenings are often less busy. If the pipeline keeps erroring, please let me know and I'll help as much as I can!
+
+The main errors experienced during running of the pipeline occur during installation and updating of the packages. This is often complicated if the pipeline is run on an IT administered system, because it is reading and writing RStudio System files. This is in no way dangerous. All files being downloaded and installed are from verified and incredibly well-used sources. So if you experience trouble using a work computer, consider asking for temporary admin rights.
+
 # Section D: Understanding the Pipeline Output Plots
 
 ## Example Pipeline Output Plots
@@ -180,7 +192,7 @@ This pipeline uses three servers, ieugwasr, LDlink and ensembl. All of these hav
 
 The main error this pipeline has is installing and updating the packages needed. Often this is made complicated if being run on an IT administered system because it is reading and writing RStudio System files. This is in no way dangerous. Everything being downloaded and installed are from verified and incredibly well-used sources. So if you run into trouble on a work computer, consider asking for temporary admin rights or running on a home computer.
 
-# Tissue-and-Trait-Databases
+# Section E: Tissue-and-Trait-Databases
 In the zip folder download there are two databases, full_tissue_database and full_trait_database. 
 
 These are databases of Tissues and Traits manually grouped into Tissue Groups and Trait Groups. Originally tissue data was downloaded from GTEx: https://gtexportal.org/home/tissue/. Trait data from ieugwasr::gwasinfo().
@@ -191,6 +203,6 @@ A summary plot of each Trait group and the number of traits in each is displayed
 
 ![Traits in trait database](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/7529ff3c-ef30-44d4-b842-5695a9debf21)
 
-# Using the main R Notebook to modify the code
+#  Section F: Using the main R Notebook to modify the code
 There are a lot of instructions within the document itself and you are more than welcome to go through running chunk by chunk to get used to how I've setup this pipeline if you're interested! 
 
