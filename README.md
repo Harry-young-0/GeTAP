@@ -1,4 +1,4 @@
-Page overview:
+An overview of the various Sections on this page:
 
 #### Section A: Pipeline Rationale
 #### Section B: Software and tokens required prior to running the pipeline
@@ -19,7 +19,7 @@ IMPORTANT NOTE: Traits and tissues were manually grouped into Trait Groups and T
 
 ![schematic_for_github](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/a165c6e8-2290-4691-9410-4ab40897080a)
 
-# Section B: Software and tokens required prior to running the pipeline
+## Section B: Software and tokens required prior to running the pipeline
 ### 1. LDlink token
 This pipeline uses the LDlink web server, which requires a unique token to run. The token is easily obtained here: [https://ldlink.nih.gov/?tab=apiaccess](https://ldlink.nih.gov/?tab=apiaccess). This step needs to be completed only once and then that token will stay with you for life (it is linked to your email address).
 
@@ -112,7 +112,7 @@ This pipeline uses three servers: ieugwasr, LDlink and ensembl. All of these wil
 
 The main errors experienced during running of the pipeline occur during installation and updating of the packages. This is often complicated if the pipeline is run on an IT administered system, because it is reading and writing RStudio System files. This is in no way dangerous. All files being downloaded and installed are from verified and incredibly well-used sources. So if you experience trouble using a work computer, consider asking for temporary admin rights.
 
-# Section D: Understanding the Pipeline Output Plots
+## Section D: Understanding the Pipeline Output Plots
 
 ## Example Pipeline Output Plots
 ### Plot A
@@ -189,7 +189,7 @@ Circos plot displaying the overlap of Tissue Groups where the SNPs were found co
 
 ![Circos](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/fc2dbdea-f5f6-4767-90e3-30fdfef71ddf)
 
-# Section E: Modifying the Tissue-and-Trait-Databases
+## Section E: Modifying the Tissue-and-Trait-Databases
 The pipeline relies on two manually curated databases: full_tissue_database and full_trait_database. These are located in the original zip folder.
 
 The original tissue data was downloaded from GTEx: https://gtexportal.org/home/tissue/. The original trait data was downloaded from ieugwasr::gwasinfo(). These extensive databases of Tissues and Traits have already been manually grouped into Tissue Groups and Trait Groups. However, these groupings can be further modified and regrouped according to your own preferences, by altering the group column in the **FILE**. The output plots will automatically adjust to match your edits, as long as you do not change the column names.
@@ -198,6 +198,6 @@ A summary plot of each Trait group and the number of traits in each group is dis
 
 ![Traits in trait database](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/7529ff3c-ef30-44d4-b842-5695a9debf21)
 
-#  Section F: Using the main R Notebook to modify the code
+##  Section F: Using the main R Notebook to modify the code
 There are a lot of instructions within the pipeline document itself and you are more than welcome to go through running chunk by chunk to get used to how I've setup this pipeline if you're interested! 
 
