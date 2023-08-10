@@ -125,6 +125,10 @@ The output of the pipeline will be automatically saved in a 'GENE_test' folder, 
   - **LDMatrix**  showing.....
   - **GENE_GtextoPHEWAS_RAW.csv**  showing.....
 
+The **'Circos'** folder contains the following plots:
+
+The **'Ensembl'** folder contains the following plots:
+
 The **'Final_plots'** folder contains the following plots:
 
 ### Plot A
