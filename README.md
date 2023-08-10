@@ -108,7 +108,7 @@ In the top right of the RStudio window, click 'run all':
 
 Once the pipeline has successfully and completely run, the various outputs of the pipeline will automatically be saved in a dedicated folder ('GENE_test') within the main directory folder.
 
-![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/6c1671d7-c9a9-48cb-ba76-a3369683ac62)
+![Screenshot 2023-08-10 at 16 08 38](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/64e70275-9d68-4da6-b4c1-5f3325b54696)
 
 The pipeline will also automatically open a Shiny App of the data. The Shiny App can be reopened at anytime, by specifcally running the Shiny App rerun chunk on lines 3204-3215 - the code in this chuck needs to be updated with GENE-NAME and File_directory - then click the 'play' symbol at the top right of the box. All of the plots displayed in the Shiny App will also be saved as pdfs in the 'GENE_test' folder. The Shiny App will display the Circos plots in a nicer format than the output pdfs saved in the Circos folder.
 
