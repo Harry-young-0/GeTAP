@@ -52,27 +52,31 @@ In RStudio, scroll down the pipeline slightly and you will see 'gene_name', 'fil
  
  **LD_Token** - Your unique 12 character token from LDlink (obtained above) e.g: "abc1def2ghi3"
 
-#### Before your edit: 
+#### Before your edit the pipeline appears: 
 
 ![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/7af50e7d-0487-4ae5-90cf-d76da18fa22c)
 
-### After your edit: 
+#### After your edit the pipeline appears: 
 
 ![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/b679c9db-3ef3-4bf9-a2e2-b0ec92a61cb9)
 
-### Please check these common errors: (If it still errors please email me the error and your modified final_pipeline.rmd file): 
+#### Please check these common errors:
 
 a. Make sure each of these changes are within speech marks. e.g: gene_name = "NFE2L2" not gene_name = NFE2L2
 
-b. Make sure your gene name is as it appears in GTEx (check using https://gtexportal.org/home/ - top right search box).
+b. Make sure your gene name is exactly as it appears in GTEx (check using https://gtexportal.org/home/).
 
-c. Make sure your file_directory has "/" not "\\". e.g: file_directory = "C:/Documents/Example directory" not file_directory = "C:\Documents\Example directory" - This is the default for Windows so is a very common problem.
+c. Make sure your file_directory has "/" not "\\". e.g: file_directory = "C:/Documents/Example directory" not file_directory = "C:\Documents\Example directory". This is the default for Windows so is a very common problem.
 
-### 6. In the top right of the window click run all: 
+If the pipeline still errors, please email me with details of the error and your modified final_pipeline.rmd file.
+
+### 6. Running the pipeline
+
+In the top right of the RStudio window, click 'run all': 
 
 ![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/5dfffe8f-c975-452d-a7fd-a82d2761b791)
 
-### 7. Be patient! It should take around 20-30 mins to run.
+### 7. Be patient! The pipeline should take ~20-30 mins to run.
 
 # Section C: Pipeline Output Example
 The pipeline will automatically open a shiny app of the data. All the plots shown can also be found as pdfs in the Final_plots and Circos folders. Also, the Shiny app can be reopened anytime by using the shiny app rerun chunk on lines 3204-3215 (click the play symbol top right of the box). This will include the circos plots that display more nicely in that format than they do as the output pdfs in the circos subfolder.
