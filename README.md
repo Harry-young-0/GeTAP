@@ -131,9 +131,8 @@ The **'Ensembl'** folder contains the following plots:
 
 The **'Final_data'** folder contains the following files:
 
-Initial PheWAS ouput before LD removal
-
-Final output after LD removal (including Ensembl predicted regulatory regions)
+- Initial PheWAS ouput before LD removal
+- Final output after LD removal (including Ensembl predicted regulatory regions)
 
 The **'Final_plots'** folder contains the following plots:
 
