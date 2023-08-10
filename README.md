@@ -35,7 +35,7 @@ RStudio: https://posit.co/downloads/
 
 Following installation, open RStudio. Then continue following the instructions below for "Quick start guide". NOTE: I am using a Mac but the pipeline will work identically for a Windows computer.
 
-# Section C: Quick start guide
+## Section C: Quick start guide
 
 ### 1. Create a file directory
 
