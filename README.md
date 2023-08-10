@@ -18,23 +18,25 @@ Following installation, open RStudio. Then continue following the instructions b
 
 ### 1. Create a file directory
 
-A folder on your desktop for example. This will be where the pipeline is saved and where the pipeline outputs all the data. For example: 
+This will be where the pipeline is saved and where the pipeline outputs all the data. Create a suitable folder to act as the file directory e.g. on your desktop. For example: 
 
 ![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/2b254df0-a851-471f-9459-7d8661f70a1b)
 
-### 2. Download the zip file from github and save within your chosen file directory
+### 2. Download the pipeline (and all associated databases)
+
+This information is contained in a zip file that can be accessed from this github page. After download, save the zip file to your chosen file directory.
 
 ![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/4c692d03-41f3-4841-934c-9554b343be85)
 
-### 3. Extract the files from the zip files
+### 3. Extract the pipeline files from the zip file
 
-This will contain the main pipeline, tissue and trait database csvs, readme.md and shiny app. These should be moved into the main folder and zip file deleted. Your file directory should look like this: 
+The zip file contains the main pipeline, tissue and trait database csvs, readme.md and shiny app. After unzipping, these files should be moved into the main (directory folder) file and the original zip file should be deleted. Your file directory should now look like this: 
 
 ![Screenshot 2023-06-23 at 11 12 54](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/912a0897-cedb-4925-9ea3-a2512b9bc28e)
 
-### 4. Open final_pipeline.Rmd in RStudio
+### 4. Open the Pipeline in RStudio
 
-(Right-click>open with>Rstudio OR File > Open File... in RStudio). In the first run, several packages will be installed automatically to allow the pipeline to run. You may get a warning banner appear like this: 
+We now need to open the final_pipeline.Rmd i RStudio (Right-click>open with>Rstudio OR File > Open File... in RStudio). In the first run, several packages will be installed automatically to allow the pipeline to run. You may get a warning banner appear like this: 
  
 ![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/93e14a1c-6432-4d92-a595-04173f542c45)
 
