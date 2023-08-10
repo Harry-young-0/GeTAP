@@ -4,7 +4,7 @@ Page overview:
 #### Section B: Software and tokens required prior to running the pipeline
 #### Section C: Quick start guide
 #### Section D: Understanding the Pipeline Output Plots
-#### Section E: Tissue-and-Trait-Databases
+#### Section E: Modifying the Tissue-and-Trait-Databases
 #### Section F: Using the main R Notebook to modify the code
 
 # Section A: Pipeline Rationale
@@ -189,17 +189,15 @@ Circos plot displaying the overlap of Tissue Groups where the SNPs were found co
 
 ![Circos](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/fc2dbdea-f5f6-4767-90e3-30fdfef71ddf)
 
-# Section E: Tissue-and-Trait-Databases
-In the zip folder download there are two databases, full_tissue_database and full_trait_database. 
+# Section E: Modifying the Tissue-and-Trait-Databases
+The pipeline relies on two manually curated databases: full_tissue_database and full_trait_database. These are located in the original zip folder.
 
-These are databases of Tissues and Traits manually grouped into Tissue Groups and Trait Groups. Originally tissue data was downloaded from GTEx: https://gtexportal.org/home/tissue/. Trait data from ieugwasr::gwasinfo().
+The original tissue data was downloaded from GTEx: https://gtexportal.org/home/tissue/. The original trait data was downloaded from ieugwasr::gwasinfo(). These extensive databases of Tissues and Traits have already been manually grouped into Tissue Groups and Trait Groups. However, these groupings can be further modified and regrouped according to your own preferences, by altering the group column in the **FILE**. The output plots will automatically adjust to match your edits, as long as you do not change the column names.
 
-Though exhaustive, they can be modified to your own groupings by altering the group column. The plots will autmatically adjust to your edits as long as you do not change the column names.
-
-A summary plot of each Trait group and the number of traits in each is displayed below.
+A summary plot of each Trait group and the number of traits in each group is displayed below.
 
 ![Traits in trait database](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/7529ff3c-ef30-44d4-b842-5695a9debf21)
 
 #  Section F: Using the main R Notebook to modify the code
-There are a lot of instructions within the document itself and you are more than welcome to go through running chunk by chunk to get used to how I've setup this pipeline if you're interested! 
+There are a lot of instructions within the pipeline document itself and you are more than welcome to go through running chunk by chunk to get used to how I've setup this pipeline if you're interested! 
 
