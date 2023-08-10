@@ -24,7 +24,7 @@ This will be where the pipeline is saved and where the pipeline outputs all the 
 
 ### 2. Download the pipeline (and all associated databases)
 
-This information is contained in a zip file that can be accessed from this github page. After download, save the zip file to your chosen file directory.
+This information is contained in a zip file that can be accessed from this github page (see arrows in image below). After download, save the zip file to your chosen file directory.
 
 ![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/4c692d03-41f3-4841-934c-9554b343be85)
 
