@@ -99,7 +99,7 @@ In the top right of the RStudio window, click 'run all':
 
 ### 7. Be patient! The pipeline should take ~20-30 mins to run.
 
-Once the pipeline has successfully and completely run, the various outputs of the pipeline will automatically be saved in a dedicated folder ('GENE_test') within the main directory folder. 
+Once the pipeline has successfully and completely run, the various outputs of the pipeline will automatically be saved in a dedicated folder ('GENE_test') within the main directory folder.
 
 ADD IMAGE HERE OF RSTUDIO WHEN RUN IS COMPLETE
 
@@ -114,7 +114,19 @@ The main errors experienced during running of the pipeline occur during installa
 
 ## Section D: Understanding the Pipeline Output Plots
 
-## Example Pipeline Output Plots
+The output of the pipeline will be automatically saved in a 'GENE_test' folder, which contains the following subfolders:
+
+**Circos** Circos style plots
+**Ensembl**  Data from....
+**Final_data**  Data from......
+**Final_plots**  Output plots of pipeline (see below for details)
+**Gene_diagram_output** showing.....
+**Gtex**  showing.....
+**LDMatrix**  showing.....
+**GENE_GtextoPHEWAS_RAW.csv**  showing.....
+
+The **Final_plots** folder contains the following plots:
+
 ### Plot A
 Summary of SNPs that alter expression of your gene of interest and the direction of that change as quantified by GTEx, grouped by the tissue groups. Colour = direction of expression change, rsid = unique SNP identifier
 
