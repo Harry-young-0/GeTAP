@@ -103,7 +103,7 @@ Once the pipeline has successfully and completely run, the various outputs of th
 
 _ADD IMAGE HERE OF RSTUDIO or OUTPUT FOLDER WHEN RUN IS COMPLETE
 _
-The pipeline will also automatically open a Shiny App of the data. The Shiny App can be reopened at anytime, by specifcally running the Shiny App rerun chunk on lines 3204-3215 (click the 'play' symbol at the top right of the box). All of the plots displayed in the Shiny App will also be saved as pdfs in the 'GENE_test' folder. The Shiny App will display the Circos plots in a nicer format than the output pdfs saved in the Circos folder.
+The pipeline will also automatically open a Shiny App of the data. The Shiny App can be reopened at anytime, by specifcally running the Shiny App rerun chunk on lines 3204-3215 - the code in this chuck needs to be updated with GENE-NAME and File_directory - then click the 'play' symbol at the top right of the box. All of the plots displayed in the Shiny App will also be saved as pdfs in the 'GENE_test' folder. The Shiny App will display the Circos plots in a nicer format than the output pdfs saved in the Circos folder.
 
 _ALSO ADD IMAGE OF SHINY APP THAT POPS UP_
 
@@ -133,6 +133,7 @@ The **'Final_data'** folder contains the following files:
 
 - Initial PheWAS ouput before LD removal
 - Final output after LD removal (including Ensembl predicted regulatory regions)
+- final_workspace_for_shiny 
 
 The **'Final_plots'** folder contains the following plots:
 
