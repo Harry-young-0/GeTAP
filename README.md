@@ -1,16 +1,16 @@
 An overview of the various Sections on this page:
 
- - [Section_A: Pipeline Rationale](#-section-a)
+ - [Section A: Pipeline Rationale](#section-a)
  
- - [Section_B: Software and tokens required prior to running the pipeline](#-section-b)
+ - [Section B: Software and tokens required prior to running the pipeline](#section-b)
  
- - [Section C: Quick start guide](#-section-c)
+ - [Section C: Quick start guide](#section-c)
  
- - [Section D: Understanding the Pipeline Output Plots](##Section-D)
+ - [Section D: Understanding the Pipeline Output Plots](#section-d)
  
- - [Section E: Modifying the Tissue-and-Trait-Databases](#Section-E)
+ - [Section E: Modifying the Tissue-and-Trait-Databases](#section-e)
  
- - [Section F: Using the main R Notebook to modify the code](#Section-F)
+ - [Section F: Using the main R Notebook to modify the code](#section-f)
 
 ## Section A: Pipeline Rationale
 
