@@ -4,7 +4,7 @@ An overview of the various Sections on this page:
  
  -[Section_B: Software and tokens required prior to running the pipeline](#Section-B)
  
- -[SecC: Quick start guide](#Section-C)
+ -[awda wfawf g: Quick start guide](#Section-C)
  
  -[Section D: Understanding the Pipeline Output Plots](#Section-D)
  
