@@ -129,9 +129,15 @@ The **'Circos'** folder contains the following plots:
 
 The **'Ensembl'** folder contains the following plots:
 
+The **'Final_data'** folder contains the following files:
+
+Initial PheWAS ouput before LD removal
+
+Final output after LD removal (including Ensembl predicted regulatory regions)
+
 The **'Final_plots'** folder contains the following plots:
 
-### Plot A1
+### Plot A1 = SNPs vs tissue groups
 _Before LD - not as a proportion, but just total number of SNPs that affect gene expression._
 
 Summary of SNPs that alter expression of your gene of interest and the direction of that change as quantified by GTEx, grouped by the tissue groups. Colour = direction of expression change, rsid = unique SNP identifier
@@ -140,9 +146,11 @@ Title and axis says proportion of SNP-trait associations per tissue? Proportion 
 
 ![A](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/e079bc31-c6da-4e23-8a15-34f62526e4ef)
 
-### Plot A2
+### Plot A2 = SNPs vs tissue groups
 
-### Plot B
+_after run through pipeline - number of SNPs that are associated with a trait, after LD removal. First as a total number of SNPs, optional to have also as a proportion_
+
+### Plot B = Correlation
 Correlation of the number of different traits in a Trait Group relative to the total number of different possible traits in the full database. An indication of whether the results are due to chance. This considers repeated SNP-Trait associations. If 100 different SNPs are all associated with LDL, this is recorded as 100 SNP-Trait associations. 
 
 ![B](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/cccbbfa0-6c86-4aec-adab-8cf4d0570e70)
