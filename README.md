@@ -2,7 +2,7 @@ An overview of the various Sections on this page:
 
 #### Section A: Pipeline Rationale 
 #### Section B: Software and tokens required prior to running the pipeline
-#### Section C: Quick start guide [Go to Section C: Quick start guide](##-Section-C:-Quick-start-guide)
+#### [Section C: Quick start guide](##-Section-C:-Quick-start-guide)
 #### Section D: Understanding the Pipeline Output Plots
 #### Section E: Modifying the Tissue-and-Trait-Databases
 #### Section F: Using the main R Notebook to modify the code
