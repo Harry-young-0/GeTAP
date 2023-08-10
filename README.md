@@ -117,7 +117,6 @@ The main errors experienced during running of the pipeline occur during installa
 The output of the pipeline will be automatically saved in a 'GENE_test' folder, which contains the following subfolders:
 
 **Circos** Circos style plots
-
 **Ensembl**  Data from....
 
 **Final_data**  Data from......
