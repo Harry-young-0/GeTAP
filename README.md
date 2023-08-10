@@ -7,7 +7,7 @@ Page overview:
 #### Section E: Modifying the Tissue-and-Trait-Databases
 #### Section F: Using the main R Notebook to modify the code
 
-# Section A: Pipeline Rationale
+## Section A: Pipeline Rationale
 
 The goal of this pipeline is to suggest novel Gene-Trait associations by integrating two independent and publicly available datasets: (i) SNP-gene expression data from the GTEx Project and (ii) SNP-trait data from the PheWAS database.
 
