@@ -1,10 +1,10 @@
 An overview of the various Sections on this page:
 
- - [Section_A: Pipeline Rationale](#Section-A)
+ - [Section_A: Pipeline Rationale](#-section-a)
  
- - [Section_B: Software and tokens required prior to running the pipeline](#Section-B)
+ - [Section_B: Software and tokens required prior to running the pipeline](#-section-b)
  
- - [test: Quick start guide](#section-c)
+ - [Section C: Quick start guide](#-section-c)
  
  - [Section D: Understanding the Pipeline Output Plots](##Section-D)
  
@@ -22,7 +22,7 @@ More detail about the different steps of the pipeline are illustrated in **Schem
 
 IMPORTANT NOTE: Traits and tissues were manually grouped into Trait Groups and Tissue Groups. This information is stored in the full_trait_database and full_tissue_database csvs found in the zip file. These groupings will be updated with each new release of GTEx and PheWAS. The groupings can also be manually rearranged if new group allocations are required. Further explanation below in section [Tissue-and-Trait-Databases](#-Tissue-and-Trait-Databases).
 
-![schematic_for_github](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/a165c6e8-2290-4691-9410-4ab40897080a)
+![shematic_for_github](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/c46895a6-a306-4c44-84a9-aa49de639dc8)
 
 ## Section B: Software and tokens required prior to running the pipeline
 ### 1. LDlink token
