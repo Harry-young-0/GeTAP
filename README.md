@@ -130,7 +130,11 @@ The **'Final_plots'** folder contains the following plots:
 ### Plot A
 Summary of SNPs that alter expression of your gene of interest and the direction of that change as quantified by GTEx, grouped by the tissue groups. Colour = direction of expression change, rsid = unique SNP identifier
 
+Title and axis says proportion of SNP-trait associations per tissue? Proportion calculated how????
+
 ![A](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/e079bc31-c6da-4e23-8a15-34f62526e4ef)
+
+What is Plot AO?
 
 ### Plot B
 Correlation of the number of different traits in a Trait Group relative to the total number of different possible traits in the full database. An indication of whether the results are due to chance. This considers repeated SNP-Trait associations. If 100 different SNPs are all associated with LDL, this is recorded as 100 SNP-Trait associations. 
