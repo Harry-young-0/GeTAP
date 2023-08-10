@@ -117,6 +117,7 @@ The main errors experienced during running of the pipeline occur during installa
 The output of the pipeline will be automatically saved in a 'GENE_test' folder, which contains the following subfolders:
 
 **Circos** Circos style plots
+
 **Ensembl**  Data from....
 
 **Final_data**  Data from......
@@ -131,7 +132,8 @@ The output of the pipeline will be automatically saved in a 'GENE_test' folder, 
 
 **GENE_GtextoPHEWAS_RAW.csv**  showing.....
 
-The **Final_plots** folder contains the following plots:
+
+### The 'Final_plots' folder contains the following plots:
 
 ### Plot A
 Summary of SNPs that alter expression of your gene of interest and the direction of that change as quantified by GTEx, grouped by the tissue groups. Colour = direction of expression change, rsid = unique SNP identifier
