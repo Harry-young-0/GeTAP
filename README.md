@@ -1,4 +1,14 @@
-# Section A: Software and tokens required prior to running the pipeline for the first time
+# Section A: Pipeline Rationale
+
+The goal of the pipeline is to suggest novel Gene-Trait associations by using SNPs that are associated with a change in expression of a gene of interest via GTEx. 
+
+Below are two schematics providing an overview to the whole process. In Schematic A, the basic rationale of the pipeline is shown. Briefly, SNPs associated with a change in expression of a gene of interest are firstly collected from GTEx, and then searched in the PheWAS database (ieugwas::phewas) to find traits potentially associated with these SNPs. The pipeline output thus suggests traits potentially associated with expression changes in your gene of interest. In Schematic B, more detail is included about the different steps of the pipeline.
+
+NOTE: Traits and tissues were manually grouped into Trait Groups and Tissue Groups and stored in the full_trait_database and full_tissue_database csvs in the zip file. These will be updated with each new release of GTEx and PheWAS but are also modifiable if you would like to regroup for something specific. Further explanation below in section [Tissue-and-Trait-Databases](#-Tissue-and-Trait-Databases).
+
+![schematic_for_github](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/a165c6e8-2290-4691-9410-4ab40897080a)
+
+# Section B: Software and tokens required prior to running the pipeline for the first time
 ### 1. LDlink token
 This pipeline uses the LDlink web server, which requires a unique token to run. The token is easily obtained here: [https://ldlink.nih.gov/?tab=apiaccess](https://ldlink.nih.gov/?tab=apiaccess). This step needs to be completed only once and then that token will stay with you for life (it is linked to your email address).
 
@@ -14,7 +24,7 @@ RStudio: https://posit.co/downloads/
 
 Following installation, open RStudio. Then continue following the instructions below for "Quick start guide". NOTE: I am using a Mac but the pipeline will work identically for a Windows computer.
 
-# Section B: Quick start guide
+# Section C: Quick start guide
 
 ### 1. Create a file directory
 
@@ -78,18 +88,17 @@ In the top right of the RStudio window, click 'run all':
 
 ### 7. Be patient! The pipeline should take ~20-30 mins to run.
 
-# Section C: Pipeline Output Example
-The pipeline will automatically open a shiny app of the data. All the plots shown can also be found as pdfs in the Final_plots and Circos folders. Also, the Shiny app can be reopened anytime by using the shiny app rerun chunk on lines 3204-3215 (click the play symbol top right of the box). This will include the circos plots that display more nicely in that format than they do as the output pdfs in the circos subfolder.
+Once the pipeline has successfully and completely run, the various outputs of the pipeline will automatically be saved in a dedicated folder ('GENE_test') within the main directory folder. 
 
-The goal of the pipeline is to suggest novel Gene-Trait associations by using SNPs that are associated with a change in expression of a gene of interest via GTEx. 
+ADD IMAGE HERE OF RSTUDIO WHEN RUN IS COMPLETE
 
-Below are two schematics providing an overview to the whole process. In Schematic A, the basic rationale of the pipeline is shown. Briefly, SNPs associated with a change in expression of a gene of interest are firstly collected from GTEx, and then searched in the PheWAS database (ieugwas::phewas) to find traits potentially associated with these SNPs. The pipeline output thus suggests traits potentially associated with expression changes in your gene of interest. In Schematic B, more detail is included about the different steps of the pipeline.
+The pipeline will also automatically open a Shiny App of the data. The Shiny App can be reopened at anytime, by specifcally running the Shiny App rerun chunk on lines 3204-3215 (click the 'play' symbol at the top right of the box). All of the plots displayed in the Shiny App will also be saved as pdfs in the Final_plots and Circos folders. The Shiny App will display the Circos plots in a nicer format than the output pdfs saved in the Circos folder.
 
-NOTE: Traits and tissues were manually grouped into Trait Groups and Tissue Groups and stored in the full_trait_database and full_tissue_database csvs in the zip file. These will be updated with each new release of GTEx and PheWAS but are also modifiable if you would like to regroup for something specific. Further explanation below in section [Tissue-and-Trait-Databases](#-Tissue-and-Trait-Databases).
+ALSO ADD IMAGE OF SHINY APP THAT POPS UP
 
-![schematic_for_github](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/a165c6e8-2290-4691-9410-4ab40897080a)
+# Section D: Understanding the Pipeline Output Plots
 
-## Example Output Plots
+## Example Pipeline Output Plots
 ### Plot A
 Summary of SNPs that alter expression of your gene of interest and the direction of that change as quantified by GTEx, grouped by the tissue groups. Colour = direction of expression change, rsid = unique SNP identifier
 
