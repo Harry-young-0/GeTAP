@@ -189,11 +189,6 @@ Circos plot displaying the overlap of Tissue Groups where the SNPs were found co
 
 ![Circos](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/fc2dbdea-f5f6-4767-90e3-30fdfef71ddf)
 
-## Troubleshooting
-This pipeline uses three servers, ieugwasr, LDlink and ensembl. All of these have a timeout if it takes too long to run. The pipeline will stop running and an error message will pop up in the console (bottom left box). If this happens please try again later, evenings are often less busy. If it keeps erroring let me know and I'll help as much as I can!
-
-The main error this pipeline has is installing and updating the packages needed. Often this is made complicated if being run on an IT administered system because it is reading and writing RStudio System files. This is in no way dangerous. Everything being downloaded and installed are from verified and incredibly well-used sources. So if you run into trouble on a work computer, consider asking for temporary admin rights or running on a home computer.
-
 # Section E: Tissue-and-Trait-Databases
 In the zip folder download there are two databases, full_tissue_database and full_trait_database. 
 
