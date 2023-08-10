@@ -1,10 +1,10 @@
 # Section A: Software and tokens required prior to running the pipeline for the first time
-### LD-Link token
+### 1. LD-Link token
 This program uses the LDlink web server which requires a unique token to run. This is easily obtained by following this link: [https://ldlink.nih.gov/?tab=apiaccess](https://ldlink.nih.gov/?tab=apiaccess). This only needs to be completed once and then that token will stay with you for life (linked to your email).
 
 Currently saying the URL is out of date (yellow warning box). Ignore this.
 
-### Download and install R and RStudio
+### 2. Download and install R and RStudio
 
 First time only, update whenever prompted.
 
