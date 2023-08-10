@@ -4,7 +4,7 @@ An overview of the various Sections on this page:
  
  - [Section_B: Software and tokens required prior to running the pipeline](#Section-B)
  
- - [Section C: Quick start guide](#section-c)
+ - [Section C: Quick start guide](#section--c)
  
  - [Section D: Understanding the Pipeline Output Plots](#Section-D)
  
