@@ -1,10 +1,10 @@
 An overview of the various Sections on this page:
 
- -[**SectioA: Pipeline Rationale**](#Section-A)
+ -[**Section_A: Pipeline Rationale**](#Section-A)
  
  -[**Section_B: Software and tokens required prior to running the pipeline**](#Section-B)
  
- -[**Section C: Quick start guide**](#Section-C)
+ -[**SecC: Quick start guide**](#Section-C)
  
  -[**Section D: Understanding the Pipeline Output Plots**](#Section-D)
  
