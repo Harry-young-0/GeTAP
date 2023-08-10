@@ -1,19 +1,18 @@
 # Section A: Software and tokens required prior to running the pipeline for the first time
 ### 1. LDlink token
-This pipeline uses the LDlink web server, which requires a unique token to run. This is easily obtained by following this link: [https://ldlink.nih.gov/?tab=apiaccess](https://ldlink.nih.gov/?tab=apiaccess). This only needs to be completed once and then that token will stay with you for life (linked to your email).
+This pipeline uses the LDlink web server, which requires a unique token to run. The token is easily obtained here: [https://ldlink.nih.gov/?tab=apiaccess](https://ldlink.nih.gov/?tab=apiaccess). This step needs to be completed only once and then that token will stay with you for life (it is linked to your email address).
 
-Currently saying the URL is out of date (yellow warning box). Ignore this.
+The LDlink website is currently saying the URL is out of date (yellow warning box). Please ignore this.
 
 ### 2. Download and install R and RStudio
 
-First time only, update whenever prompted.
+This step should be performed the first time the pipeline is run, but do allow updates whenever prompted. You can find the downloads at the following links:
 
 R: https://www.stats.bris.ac.uk/R/ 
 
 RStudio: https://posit.co/downloads/
 
-Open RStudio.
-Then continue with the "Quick start guide". NOTE: I am using a mac but it will work identically for a windows computer.
+Following installation, open RStudio. Then continue following the instructions below for "Quick start guide". NOTE: I am using a Mac but the pipeline will work identically for a Windows computer.
 
 # Section B: Quick start guide
 
