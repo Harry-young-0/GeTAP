@@ -1,11 +1,11 @@
 Page overview:
 
-### Section A: Pipeline Rationale
-### Section B: Software and tokens required prior to running the pipeline
-### Section C: Quick start guide
-### Section D: Understanding the Pipeline Output Plots
-### Section E: Tissue-and-Trait-Databases
-### Section F: Using the main R Notebook to modify the code
+#### Section A: Pipeline Rationale
+#### Section B: Software and tokens required prior to running the pipeline
+#### Section C: Quick start guide
+#### Section D: Understanding the Pipeline Output Plots
+#### Section E: Tissue-and-Trait-Databases
+#### Section F: Using the main R Notebook to modify the code
 
 # Section A: Pipeline Rationale
 
