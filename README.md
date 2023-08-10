@@ -1,6 +1,6 @@
 # Section A: Software and tokens required prior to running the pipeline for the first time
 ### 1. LDlink token
-This pipeline uses the LDlink web server which requires a unique token to run. This is easily obtained by following this link: [https://ldlink.nih.gov/?tab=apiaccess](https://ldlink.nih.gov/?tab=apiaccess). This only needs to be completed once and then that token will stay with you for life (linked to your email).
+This pipeline uses the LDlink web server, which requires a unique token to run. This is easily obtained by following this link: [https://ldlink.nih.gov/?tab=apiaccess](https://ldlink.nih.gov/?tab=apiaccess). This only needs to be completed once and then that token will stay with you for life (linked to your email).
 
 Currently saying the URL is out of date (yellow warning box). Ignore this.
 
