@@ -52,7 +52,7 @@ In RStudio, scroll down the pipeline slightly and you will see 'gene_name', 'fil
  
  **LD_Token** - Your unique 12 character token from LDlink (obtained above) e.g: "abc1def2ghi3"
 
-### Before your edit: 
+#### Before your edit: 
 
 ![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/7af50e7d-0487-4ae5-90cf-d76da18fa22c)
 
