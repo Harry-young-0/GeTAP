@@ -36,21 +36,21 @@ The zip file contains the main pipeline, tissue and trait database csvs, readme.
 
 ### 4. Open the Pipeline in RStudio
 
-We now need to open the final_pipeline.Rmd i RStudio (Right-click>open with>Rstudio OR File > Open File... in RStudio). In the first run, several packages will be installed automatically to allow the pipeline to run. You may get a warning banner appear like this: 
+We now need to open the final_pipeline.Rmd in RStudio. This can be achieved by either: Right-click>open with>Rstudio, or, File > Open File... in RStudio. When the pipeline is run for the first time, several packages will be installed automatically. You may get a warning banner appear like this: 
  
 ![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/93e14a1c-6432-4d92-a595-04173f542c45)
 
-This issue will be resolved automatically later on once you click “run all”, but you can also click "install" on this banner if you wish.
+This issue will be resolved automatically later on, once you click “run all”. To resolve the issue at this stage, you can also click "install" on this banner (this is optional).
 
-### 5. Replace defaults with your gene name, token and file directory
+### 5. Setting up the pipeline with your LDlink token, file directory and specific gene name
 
-Scroll down slightly and you will see gene_name, file_directory and LD_Token on lines 17, 21 and 27 respectively. Replace with your versions. Don't change anything else unless you are specifically trying to tweak the pipeline, these are the only changes you need to make.
+In RStudio, scroll down the pipeline slightly and you will see 'gene_name', 'file_directory' and 'LD_Token' on lines 17, 21 and 27 respectively. These defaults should now be replaced with your own versions. These are the only changes you need to make - please don't change anything else in the code unless you are specifically trying to tweak the pipeline.
  
- **gene_name** - The name of your human gene or human homolgue of your gene in all capitals as it appears in GTEx - you can check here: https://gtexportal.org/home/ - top right search box. e.g: "NFE2L2"
+ **gene_name** - The name of the human gene to be investigated, in all capitals as it appears in GTEx. You can check your gene name here: https://gtexportal.org/home/ in the dedicated search box. e.g: "NFE2L2"
  
- **file_directory** - Path to your file directory, e.g "C:/Harry/Documents/Example Directory"
+ **file_directory** - The path to your own file directory, e.g "C:/Harry/Documents/Example Directory"
  
- **LD_Token** - Your unique 12 character token from LDlink (see above) e.g: "abc1def2ghi3"
+ **LD_Token** - Your unique 12 character token from LDlink (obtained above) e.g: "abc1def2ghi3"
 
 ### Before your edit: 
 
