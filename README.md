@@ -1,6 +1,6 @@
 # Section A: Pipeline Rationale
 
-The goal of this pipeline is to suggest novel Gene-Trait associations by integrating two independent and publicly available datasets: SNP-gene expression data from the GTEx Project and SNP-trait data from the PheWAS database.
+The goal of this pipeline is to suggest novel Gene-Trait associations by integrating two independent and publicly available datasets: (i) SNP-gene expression data from the GTEx Project and (ii) SNP-trait data from the PheWAS database.
 
 The basic rationale of the Pipeline is illustrated in **Schematic A**. Firstly, using the GTEx Portal, SNPs are identified that are associated with a change in the expression of a specific gene of interest. These specific SNPs are then searched in the PheWAS database (ieugwas::phewas) to find traits potentially associated with these SNPs. The pipeline thus suggests traits potentially associated with expression changes in your gene of interest. 
 
