@@ -101,11 +101,11 @@ In the top right of the RStudio window, click 'run all':
 
 Once the pipeline has successfully and completely run, the various outputs of the pipeline will automatically be saved in a dedicated folder ('GENE_test') within the main directory folder.
 
-ADD IMAGE HERE OF RSTUDIO or OUTPUT FOLDER WHEN RUN IS COMPLETE
-
+_ADD IMAGE HERE OF RSTUDIO or OUTPUT FOLDER WHEN RUN IS COMPLETE
+_
 The pipeline will also automatically open a Shiny App of the data. The Shiny App can be reopened at anytime, by specifcally running the Shiny App rerun chunk on lines 3204-3215 (click the 'play' symbol at the top right of the box). All of the plots displayed in the Shiny App will also be saved as pdfs in the 'GENE_test' folder. The Shiny App will display the Circos plots in a nicer format than the output pdfs saved in the Circos folder.
 
-ALSO ADD IMAGE OF SHINY APP THAT POPS UP
+_ALSO ADD IMAGE OF SHINY APP THAT POPS UP_
 
 ### 8. Troubleshooting
 This pipeline uses three servers: ieugwasr, LDlink and ensembl. All of these will time-out if the pipeline takes too long to run. If this happens, the pipeline will stop running and an error message will pop up in the console (bottom left box). If this happens please try running the pipeline again at a later time, evenings are often less busy. If the pipeline keeps erroring, please let me know and I'll help as much as I can!
@@ -131,14 +131,16 @@ The **'Ensembl'** folder contains the following plots:
 
 The **'Final_plots'** folder contains the following plots:
 
-### Plot A
+### Plot A1
+_Before LD - not as a proportion, but just total number of SNPs that affect gene expression._
+
 Summary of SNPs that alter expression of your gene of interest and the direction of that change as quantified by GTEx, grouped by the tissue groups. Colour = direction of expression change, rsid = unique SNP identifier
 
 Title and axis says proportion of SNP-trait associations per tissue? Proportion calculated how????
 
 ![A](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/e079bc31-c6da-4e23-8a15-34f62526e4ef)
 
-What is Plot AO?
+### Plot A2
 
 ### Plot B
 Correlation of the number of different traits in a Trait Group relative to the total number of different possible traits in the full database. An indication of whether the results are due to chance. This considers repeated SNP-Trait associations. If 100 different SNPs are all associated with LDL, this is recorded as 100 SNP-Trait associations. 
