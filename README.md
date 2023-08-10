@@ -125,7 +125,7 @@ The output of the pipeline will be automatically saved in a 'GENE_test' folder, 
   - **LDMatrix**  showing.....
   - **GENE_GtextoPHEWAS_RAW.csv**  showing.....
 
-### **The 'Final_plots' folder contains the following plots:**
+The **'Final_plots'** folder contains the following plots:
 
 ### Plot A
 Summary of SNPs that alter expression of your gene of interest and the direction of that change as quantified by GTEx, grouped by the tissue groups. Colour = direction of expression change, rsid = unique SNP identifier
