@@ -14,21 +14,17 @@ Please see instructions on github / in readme.md for details
 rm(list=ls())
 
 #1. Gene name list:
-gene_name = "YOUR_GENE_NAME"
+gene_name = "RBM45"
 #e.g gene_name ="NFE2L2"
 
 #2. setting the file directory to where you want it to go DRIVE:/YOUR_FILE_DIRECTORY/
-file_directory = "C:/Documents/Example directory"
+file_directory = "/Users/hy14913/Documents/Local_work_folder/JUL_TEST"
 #windows e.g: file_directory = "C:/Users/hy14913/OneDrive - University of Bristol/Desktop/May23_test"
 #mac e.g: file_directory ="/Users/hy14913/Documents/Local_work_folder/JUL_TEST"
 
-
 #3. LD link token setup
-LD_token = "generic_token"
+LD_token = "f0d7bc798f5c"
 # 12 character token e.g:"abc1bc2bc3bc"
-
-
-
 
 try(if(gene_name=="YOUR_GENE_NAME") stop("Please enter your Gene Name"))
 try(if(file_directory=="C:/Documents/Example directory") stop("Please enter your file_directory so the pipeline knows where to save"))
@@ -163,6 +159,9 @@ Firstly, we read in the Gtex "SNPS associated with an expression change in the g
 
 This is done automatically using their url SWAGGER entry to their database.
 ```{r Initial load and clean}
+if(exists("Gtex_1")==T){
+  print("df exists so moving on")
+}else{
 # Scraping version
 Gtex_1 = read_tsv(paste0("https://gtexportal.org/rest/v1/association/singleTissueEqtl?format=tsv&geneSymbol=",gene_name,"&tissueSiteDetailId=Adipose_Subcutaneous%2CAdipose_Visceral_Omentum%2CAdrenal_Gland%2CArtery_Aorta%2CArtery_Coronary%2CArtery_Tibial%2CBladder%2CBrain_Amygdala%2CBrain_Anterior_cingulate_cortex_BA24%2CBrain_Caudate_basal_ganglia%2CBrain_Cerebellar_Hemisphere%2CBrain_Cerebellum%2CBrain_Cortex%2CBrain_Frontal_Cortex_BA9%2CBrain_Hippocampus%2CBrain_Hypothalamus%2CBrain_Nucleus_accumbens_basal_ganglia%2CBrain_Putamen_basal_ganglia%2CBrain_Spinal_cord_cervical_c-1%2CBrain_Substantia_nigra%2CBreast_Mammary_Tissue%2CCells_EBV-transformed_lymphocytes%2CCells_Cultured_fibroblasts%2CCells_Transformed_fibroblasts%2CCervix_Ectocervix%2CCervix_Endocervix%2CColon_Sigmoid%2CColon_Transverse%2CEsophagus_Gastroesophageal_Junction%2CEsophagus_Mucosa%2CEsophagus_Muscularis%2CFallopian_Tube%2CHeart_Atrial_Appendage%2CHeart_Left_Ventricle%2CKidney_Cortex%2CKidney_Medulla%2CLiver%2CLung%2CMinor_Salivary_Gland%2CMuscle_Skeletal%2CNerve_Tibial%2COvary%2CPancreas%2CPituitary%2CProstate%2CSkin_Not_Sun_Exposed_Suprapubic%2CSkin_Sun_Exposed_Lower_leg%2CSmall_Intestine_Terminal_Ileum%2CSpleen%2CStomach%2CTestis%2CThyroid%2CUterus%2CVagina%2CWhole_Blood&datasetId=gtex_v8"),
                  col_names = T
@@ -195,6 +194,7 @@ df = df[which(is.na(df$rsid)==F),]
 # And "none"s  
 df = df[which(df$rsid!="none"),]
 df = df[which(df$rsid!="None"),]
+}
 ```
 
 So, now we have a Gtex table with a separated location and mutation column for easy use later on. IMPORTANT NOTE: a = reference allele and b = Effect or Alternate Allele. In other words, the change in expression NES occurs in individuals with the mutation at location x from a to b.
@@ -234,88 +234,81 @@ I can add back in the dprime version but just used r2 as default for efficiencie
 I calculate linkage at an r2 cutoff of 0.5 and 0.75, though 0.5 is what is used later on. If you want to modify this, let me know if you get stuck!
 
 ##### Get matrices of R2 
-```{r Automated r2 START dataset}
-
+```{r Automated r2 START dataset }
+if(exists("r2")){
+  print("r2 already exists, moving on")
+}else{
 if(length(unique_Gtex_snps)<700){
-
-
 r2 = LDmatrix(unique_Gtex_snps, pop = "EUR", r2d = "r2", token =LD_token)
 write_csv(r2, paste0(file_directory,"/", gene_name,"_test/LDMatrix/",gene_name,"_r2.csv"))
-
 # open up the .csv file from the website as tab-deliminated 
-
 r2 = read_csv(paste0(file_directory,"/", gene_name,"_test/LDMatrix/",gene_name,"_r2.csv"))
 head(r2)
 
-
-for(n in 1:ncol(r2)){#         LOOP to create a df of NA and values above 0.5 - CHANGE THIS CUTOFF TO WHAT YOU WANT
-  if(n==1){ # First column is the rsid so skip it using 'next'
-    next
+  for(n in 1:ncol(r2)){#         LOOP to create a df of NA and values above 0.5 - CHANGE THIS CUTOFF TO WHAT YOU WANT
+    if(n==1){ # First column is the rsid so skip it using 'next'
+      next
+    }
+    else if(n==2){linked0.5 = r2[which(r2[,n]>=0.5),] # For the first column setup a new df to write to, called 'linked0.5'
+      linked0.5 = linked0.5[,c(1,n)]
+    }
+    else{
+      linked0.5_temp =r2[which(r2[,n]>=0.5),] # Each loop you are making a temporary file 'linked0.5_temp', 
+      linked0.5_temp = linked0.5_temp[,c(1,n)] 
+      linked0.5 = merge(linked0.5, linked0.5_temp, all.x=T, all.y=T) # Then merging to the original linked0.5 file
+    }
   }
-  else if(n==2){linked0.5 = r2[which(r2[,n]>=0.5),] # For the first column setup a new df to write to, called 'linked0.5'
-    linked0.5 = linked0.5[,c(1,n)]
-  }
-  else{
-    linked0.5_temp =r2[which(r2[,n]>=0.5),] # Each loop you are making a temporary file 'linked0.5_temp', 
-    linked0.5_temp = linked0.5_temp[,c(1,n)] 
-    linked0.5 = merge(linked0.5, linked0.5_temp, all.x=T, all.y=T) # Then merging to the original linked0.5 file
-  }
-}
-
-head(linked0.5)
 
 #Repeated for 0.75
-for(n in 1:ncol(r2)){#         LOOP to create a df of NA and values above 0.5 - CHANGE THIS CUTOFF TO WHAT YOU WANT
-  if(n==1){ # First column is the rsid so skip it using 'next'
-    next
+  for(n in 1:ncol(r2)){#         LOOP to create a df of NA and values above 0.5 - CHANGE THIS CUTOFF TO WHAT YOU WANT
+    if(n==1){ # First column is the rsid so skip it using 'next'
+      next
+    }
+    else if(n==2){linked0.75 = r2[which(r2[,n]>=0.75),] # For the first column setup a new df to write to, called 'linked0.75'
+      linked0.75 = linked0.75[,c(1,n)]
+    }
+    else{
+      linked0.75_temp =r2[which(r2[,n]>=0.75),] # Each loop you are making a temporary file 'linked0.75_temp', 
+      linked0.75_temp = linked0.75_temp[,c(1,n)] 
+      linked0.75 = merge(linked0.75, linked0.75_temp, all.x=T, all.y=T) # Then merging to the original linked file
+    }
   }
-  else if(n==2){linked0.75 = r2[which(r2[,n]>=0.75),] # For the first column setup a new df to write to, called 'linked0.75'
-    linked0.75 = linked0.75[,c(1,n)]
-  }
-  else{
-    linked0.75_temp =r2[which(r2[,n]>=0.75),] # Each loop you are making a temporary file 'linked0.75_temp', 
-    linked0.75_temp = linked0.75_temp[,c(1,n)] 
-    linked0.75 = merge(linked0.75, linked0.75_temp, all.x=T, all.y=T) # Then merging to the original linked file
-  }
-}
 
 ## Cleanup environment as it can get busy:
 rm(linked0.5_temp, linked0.75_temp)
 
-
-
  ###Lines to convert numbers above 0.5 into rsID strings
 linked_test0.5 =linked0.5 # duplicate the new dataframe
 # This is a little complicated to understand so do read the description above
-for(n in 2:ncol(linked0.5)){
-  linked_test0.5[,n] = with(linked_test0.5, ifelse(linked_test0.5[,n]>=0.5, linked_test0.5[,1], linked_test0.5[,n]))
-}
+  for(n in 2:ncol(linked0.5)){
+    linked_test0.5[,n] = with(linked_test0.5, ifelse(linked_test0.5[,n]>=0.5, linked_test0.5[,1], linked_test0.5[,n]))
+  }
 head(linked_test0.5)
 
 # now we set up a r2ictionary so we can see which snps associate with which snps
 rs_overlap_r20.5 = vector(mode="list", length = nrow(r2)) # set up a dictionary style list
 names(rs_overlap_r20.5) = names(r2[,2:ncol(r2)]) # add in the names of the snps (rsids)
 
-for(n in 1:(ncol(linked_test0.5)-1)){
-  rs_overlap_r20.5[[n]] = na.omit(linked_test0.5[,n+1]) # fill in the associated snps from the matrix columns
-}
+  for(n in 1:(ncol(linked_test0.5)-1)){
+    rs_overlap_r20.5[[n]] = na.omit(linked_test0.5[,n+1]) # fill in the associated snps from the matrix columns
+  }
 test = na.omit(linked_test0.5[,1+1])
 
 
  ###Lines to convert numbers above 0.5 into rsID strings
 linked_test0.75 =linked0.75 # duplicate the new dataframe
 # This is a little complicated to understand so do read the description above
-for(n in 2:ncol(linked0.75)){
-  linked_test0.75[,n] = with(linked_test0.75, ifelse(linked_test0.75[,n]>=0.75, linked_test0.75[,1], linked_test0.75[,n]))
-}
+  for(n in 2:ncol(linked0.75)){
+    linked_test0.75[,n] = with(linked_test0.75, ifelse(linked_test0.75[,n]>=0.75, linked_test0.75[,1], linked_test0.75[,n]))
+  }
 
 # now we set up a dictionary so we can see which snps associate with which snps
 rs_overlap_r20.75 = vector(mode="list", length = nrow(r2)) # set up a dictionary style list
 names(rs_overlap_r20.75) = names(r2[,2:ncol(r2)]) # add in the names of the snps (rsids)
 
-for(n in 1:(ncol(linked_test0.75)-1)){
-  rs_overlap_r20.75[[n]] = na.omit(linked_test0.75[,n+1]) # fill in the associated snps from the matrix columns
-}
+  for(n in 1:(ncol(linked_test0.75)-1)){
+    rs_overlap_r20.75[[n]] = na.omit(linked_test0.75[,n+1]) # fill in the associated snps from the matrix columns
+  }
 test = na.omit(linked_test0.75[,1+1])
 
 # Saving for later
@@ -344,7 +337,8 @@ names(LIMITED_SNP_LIST) = "rsid"
 
 write_csv(LIMITED_SNP_LIST, paste0(file_directory,"/", gene_name,"_test/LDMatrix/",gene_name, "_LIMITED_SNP_LIST.csv"))
 unique_Gtex_snps = read_csv(paste0(file_directory,"/", gene_name,"_test/LDMatrix/",gene_name, "_LIMITED_SNP_LIST.csv"))
-unique_Gtex_snps = unique_Gtex_snps$rsid
+unique_Gtex_snps = unique(unique_Gtex_snps$rsid)
+}
 }
 ```
 
@@ -354,30 +348,54 @@ unique_Gtex_snps = unique_Gtex_snps$rsid
 searching IEU PheWAS database
 This step takes a while, give it time, if it errors, chances are the servers are busy, try again or maybe try running in the evening.
 ```{r,Phewas searching }
-unique_Gtex_snps = df$rsid
-for(n in 1:round(length(na.omit(unique_Gtex_snps))/25, digits=0)){
-  test = na.omit(unique_Gtex_snps[(((n-1)*25)+1):(n*25)])
-  
-  if(n==1){
-    print("First dataframe")
-    Gtex_PHEWAS = phewas(test, pval = 1e-04) # Adjustable p-value here #
-  }
-  else{
+unique_Gtex_snps_df =as.data.frame(unique_Gtex_snps)
+if(exists("completed_snps")){
+  print(paste0("Already attempted run, ",length(completed_snps)," rsids searched - carrying on from where we left off"))
+  m=(length(na.omit(completed_snps))%/%25+1)
+  unique_Gtex_snps_df$test = !unique_Gtex_snps %in%completed_snps
+  unique_Gtex_snps_df = unique_Gtex_snps_df %>% filter(test==T)
+  unique_Gtex_snps = unique_Gtex_snps_df$unique_Gtex_snps
+  for(n in 1:(length(na.omit(unique_Gtex_snps))%/%25 + 1)){
+    test = na.omit(unique_Gtex_snps[(((n-1)*25)+1):(n*25)])
     print(paste0("Temporary dataframe ",n))
     Gtex_PHEWAS_2 = phewas(test, pval = 1e-04) # Adjustable p-value here #
+    completed_snps2 = test
+    completed_snps=c(completed_snps,completed_snps2)
     if(nrow(Gtex_PHEWAS_2)>0){
       Gtex_PHEWAS = rbind(Gtex_PHEWAS, Gtex_PHEWAS_2)
     }
   }
-  
+}else{
+  for(n in 1:(length(na.omit(unique_Gtex_snps))%/%25 + 1)){
+    test = na.omit(unique_Gtex_snps[(((n-1)*25)+1):(n*25)])
+    
+    if(n==1){
+      print("First dataframe")
+      Gtex_PHEWAS = phewas(test, pval = 1e-04) # Adjustable p-value here #
+      completed_snps = test
+      }
+    else{
+      print(paste0("Temporary dataframe ",n))
+      Gtex_PHEWAS_2 = phewas(test, pval = 1e-04) # Adjustable p-value here #
+      completed_snps2 = test
+      completed_snps=c(completed_snps,completed_snps2)
+      if(nrow(Gtex_PHEWAS_2)>0){
+        Gtex_PHEWAS = rbind(Gtex_PHEWAS, Gtex_PHEWAS_2)
+      }
+    }
+  }
 }
 
 if(nrow(Gtex_PHEWAS)==0){
   print("Houston, we have a problem. Re run this chunk using the play button in the top right of the box. If that still doesn't work, run line by line using ctrl-enter OR cmd-enter. If it still doesn't work then I'm afraid something has gone really wrong! email me at harry.young@bristol.ac.uk")
 } else{
 # Then save using the following line:
-write_excel_csv(Gtex_PHEWAS, paste0(file_directory,"/", gene_name,"_test/",gene_name,"_GtextoPHEWAS_RAW.csv"))
+write_excel_csv(Gtex_PHEWAS, paste0(file_directory,"/", gene_name,"_test/Final_data/",gene_name,"_GtextoPHEWAS_RAW.csv"))
 }
+
+
+
+
 ```
 
 ## STEP 3: Merging the datasets
@@ -387,7 +405,7 @@ write_excel_csv(Gtex_PHEWAS, paste0(file_directory,"/", gene_name,"_test/",gene_
 Firstly, load in these libraries and start to reorganize the Gtex-to-phewas RAW and original Gtex data to get more of a feel for what the data looks like:
 ```{r initial read in of dataframes and ordering step}
 
-GtextoPHEWAS_RAW = read_csv(paste0(file_directory,"/", gene_name,"_test/",gene_name,"_GtextoPHEWAS_RAW.csv")) # load in Phewas output
+GtextoPHEWAS_RAW = read_csv(paste0(file_directory,"/", gene_name,"_test/Final_data/",gene_name,"_GtextoPHEWAS_RAW.csv")) # load in Phewas output
 Gtex_cleaned = read_csv(paste0(file_directory,"/", gene_name,"_test/Gtex/", gene_name, "_Gtex_cleaned.csv")) #  load in Gtex input
 
 GtextoPHEWAS_RAW = GtextoPHEWAS_RAW %>%
@@ -452,15 +470,12 @@ if ((sum(is.na(df$beta_cor)) == 0)==TRUE){
 
 df=df[which(is.na(df$beta_cor)==F),] # Removing cases where alleles are completely different - they are rare and just add confusion
 
-write_excel_csv(df, paste0(file_directory,"/", gene_name,"_test/Gtex/", gene_name,"_merge_GTEX_PHEWAS-betacor.csv"))
-
 ```
 
 ### 3b. ambiguous cases (AT  CG):
 To solve reverse vs sense strand issues
 ```{r setting up an ambiguous case column}
 
-df = read_csv(paste0(file_directory,"/", gene_name,"_test/Gtex/", gene_name,"_merge_GTEX_PHEWAS-betacor.csv"))
 
 df$AT = ifelse(df$ea == "A" & df$nea == "T", "Yes", 
              ifelse(df$ea == "T" & df$nea == "A", "Yes",
@@ -480,8 +495,6 @@ number_of_ambiguous_cases = df[which(df$ambiguous != "No"),]
 paste0("The percentage of ambiguous cases is ",nrow(number_of_ambiguous_cases)/nrow(df)*100,"%")  # Gives % of cases in df which are ambiguous.
 head(df)
 
-write_excel_csv(df, paste0(file_directory,"/", gene_name,"_test/Gtex/", gene_name,"_merge_GTEX_PHEWAS_betacor_ambig.csv"))
-
 ```
 For the moment we are just labelling the ambiguous data, we can filter it out when plotting.
 
@@ -497,9 +510,6 @@ Feel free to go thorugh and alter categories and subcategories as they are HEAVI
 We need to assign those groups to the main dataframe:
 
 ```{r Assign Trait Groups}
-# read in our df (traits vs SNPs)
-
-df = read_csv( paste0(file_directory,"/", gene_name,"_test/Gtex/", gene_name,"_merge_GTEX_PHEWAS_betacor_ambig.csv"))
 # read in trait database
 Full_trait_database = read_csv(paste0(file_directory,"/Trait and Tissue Groups/Full_trait_database.csv"))
 Full_trait_database=unique(Full_trait_database)
@@ -536,7 +546,6 @@ df$beta_direction = ifelse(df$beta_cor<0, "Negative",
 df$NES_direction = ifelse(df$NES <0, "Negative",
 							ifelse(df$NES>0, "Positive", "No Change"))
 
-write_excel_csv(df, paste0(file_directory,"/", gene_name,"_test/Gtex/",gene_name,"_merge_GTEX_PHEWAS_betacor_ambig_grouped.csv"))
 ```
 
 
@@ -583,7 +592,6 @@ df = df[,c("Gene Symbol",
            "beta_direction",
            "NES_direction")]
 
-write_excel_csv(df, paste0(file_directory,"/", gene_name,"_test/Gtex/",gene_name,"_merge_GTEX_PHEWAS_betacor_ambig_grouped.csv"))
 ```
 
 OK, looking good, we now have our new dataset, merged with the added columns for traitgroup and tissue group.
@@ -597,9 +605,6 @@ Firstly you need to clean up 'repeated traits'. This is annoying things like a c
 These 2 appear as separate traits where they are essentially the same. So the following lines helps clean this up. I tend to look at the plots then come back to this code to add in more errors. But this serves as a list of ones I've found!
 
 ```{r Cleaning up duplicated traits}
-
-df = read_csv( paste0(file_directory,"/", gene_name,"_test/Gtex/",gene_name,"_merge_GTEX_PHEWAS_betacor_ambig_grouped.csv"))
-
 # all of these work as replace the first argument with the second argument
 df = df %>% 
   mutate(trait = ifelse(as.character(trait) == "Serum creatinine (eGFRcrea)", "Serum creatinine", as.character(trait)))%>%
@@ -724,9 +729,7 @@ if nrow(test) is 0 then no overlap, if not you need to check what overlap there 
 ### 4c-2. - (3a). Ambiguous case removal: (may seem out of place but like LD, this was assessed earlier and not removed until now)
 ```{r Removal of any abiguous cases}
 df = df[which(df$ambiguous == "No" | df$ambiguous == "FS"),]
-
 #And finally save it:
-
 write_csv(df, paste0(file_directory,"/", gene_name,"_test/Gtex/",gene_name,"_gtexPHEWAS_no_ukaORAmbig_FINAL.csv"))
 ```
 ### 4d. Ok now to deal with those pesky LD snps
@@ -954,15 +957,11 @@ test2=rbind(test2neg,test2pos)
 test2 = test2 %>% rename(beta_direction = beta_direction.y)
 test2 = test2 %>% dplyr::select(-c("beta_direction.x"))
 write_csv(test2, paste0(file_directory,"/",gene_name,"_test/Gtex/",gene_name,"_gtexPHEWAS_no_ukaORAmbig_FINAL_linkagetempr20.5.csv"))# full dataframe but with the "test" column
-
 test = test2[which(test2$test=="unlinked"),]
-
-
-write_csv(test,paste0(file_directory,"/",gene_name,"_test/Gtex/",gene_name,"_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv")) # reduced df
+df=test
 } else{
   df = read_csv(paste0(file_directory,"/",gene_name,"_test/Gtex/",gene_name,"_gtexPHEWAS_no_ukaORAmbig_FINAL.csv"))
   df$test ="filler"
-  write_csv(df,paste0(file_directory,"/",gene_name,"_test/Gtex/",gene_name,"_gtexPHEWAS_no_ukaORAmbig_FINAL_LINKEDREMOVEDr20.5.csv"))
 }
 
 ```
@@ -982,7 +981,9 @@ final_df$traitgroup = ifelse(final_df$Subcat=="Other Gene Expression Change", "O
 final_df=unique(final_df)
 
 write_csv(final_df,paste0(file_directory,"/", gene_name, "_test/Final_data/final_df.csv"))
-
+if(file.exists(paste0(file_directory,"/",gene_name,"_test/Gtex/",gene_name,"_gtexPHEWAS_no_ukaORAmbig_FINAL.csv"))){
+file.remove(paste0(file_directory,"/",gene_name,"_test/Gtex/",gene_name,"_gtexPHEWAS_no_ukaORAmbig_FINAL.csv"))
+}
 
 
 ```
@@ -1457,31 +1458,32 @@ temp = df[ which(is.na(df$tissue_group)==F),]
 temp = temp[which(temp$traitgroup!="Other/Unspecified" &temp$traitgroup!="Other Gene Expression Change" ),]
 temp = left_join(temp,summary_of_df_no_OGEC)
 temp$beta_direction = factor(temp$beta_direction, levels=c("Positive", "Negative"))
-temp$traitgroup = factor(temp$traitgroup, levels =c("Body Fat/Size",
-                                                    "Diet",
-            "Metabolism (inc. Diabetes)",
-            "Tumours (Benign/Cancer)",
-            "Atrophy/Dystrophy", 
-            "Congenital Defects", 
-            "Cardiovascular Traits",
-            "Blood/Vascular Traits",
-            "Inflammation" , 
-            "Respiratory",
-            "Renal/Urinary",
-            "Physical Activity",
-           
-            "Digestive Traits",
-            "Nervous System/Brain",
-            "Bone Traits (inc. Dental)",
-            "Muscle/Tendon Traits",
-            "Physical Injury",
-            "Alcohol-related Disease",
-            "Life Span",
-            "Female Specific Traits",
-            "Male Specific Traits",
-            "Disease (unknown origin)",
-            "Other Gene Expression Change",
-            "Other/Unspecified"
+temp$traitgroup = factor(temp$traitgroup, 
+                         levels =c("Body Fat/Size",
+                                  "Diet",
+                                  "Metabolism (inc. Diabetes)",
+                                  "Tumours (Benign/Cancer)",
+                                  "Atrophy/Dystrophy", 
+                                  "Congenital Defects", 
+                                  "Cardiovascular Traits",
+                                  "Blood/Vascular Traits",
+                                  "Inflammation" , 
+                                  "Respiratory",
+                                  "Renal/Urinary",
+                                  "Physical Activity",
+                                 
+                                  "Digestive Traits",
+                                  "Nervous System/Brain",
+                                  "Bone Traits (inc. Dental)",
+                                  "Muscle/Tendon Traits",
+                                  "Physical Injury",
+                                  "Alcohol-related Disease",
+                                  "Life Span",
+                                  "Female Specific Traits",
+                                  "Male Specific Traits",
+                                  "Disease (unknown origin)",
+                                  "Other Gene Expression Change",
+                                  "Other/Unspecified"
             ))
 
 pvalvstraitgroupNO_O_e2 = ggplot(temp, aes(x=traitgroup, y=logp_DIR, color=beta_direction)) + 
@@ -1665,8 +1667,8 @@ temp_pos = df[which(df$NES_direction=="Positive"),]
 temp_neg = df[which(df$NES_direction=="Negative"),]
 
 f1 = ggplot()+ #Plot of Traitgroup vs SNP Count
-  geom_bar(data= temp_pos, aes(x=factor(traitgroup), fill=beta_direction, y=..count../nrow(temp_pos)),  position = position_dodge2(width = 1, preserve = "single"))+
-  geom_bar(data= temp_neg, aes(x=factor(traitgroup), fill=beta_direction, y=(..count../nrow(temp_neg))*-1), position = position_dodge2(width = 1, preserve = "single"))+##  alpha is transparancy from 0-1
+  geom_bar(data= temp_pos, aes(x=factor(traitgroup), fill=beta_direction, y=after_stat(count)/nrow(temp_pos)),  position = position_dodge2(width = 1, preserve = "single"))+
+  geom_bar(data= temp_neg, aes(x=factor(traitgroup), fill=beta_direction, y=(after_stat(count)/nrow(temp_neg))*-1), position = position_dodge2(width = 1, preserve = "single"))+##  alpha is transparancy from 0-1
     geom_hline(yintercept=0, color ="gray70")+
   #ylim(-0.175,0.175)+
   scale_fill_viridis_d(direction=-1) + # I like this palette but you can remove it or change it 
@@ -1681,6 +1683,7 @@ f1 = ggplot()+ #Plot of Traitgroup vs SNP Count
         )  
 
 f1 + scale_x_discrete(limits=c("Body Fat/Size",
+            "Diet",
             "Metabolism (inc. Diabetes)",
             "Tumours (Benign/Cancer)",
             "Atrophy/Dystrophy", 
@@ -1734,6 +1737,7 @@ f2 = ggplot()+ #Plot of Traitgroup vs SNP Count
         legend.position = "none")  
 
 f2+ scale_x_discrete(limits=c("Body Fat/Size",
+            "Diet",
             "Metabolism (inc. Diabetes)",
             "Tumours (Benign/Cancer)",
             "Atrophy/Dystrophy", 
@@ -2808,13 +2812,9 @@ Step 1, load in the dataframes you want. In my case that's the full merged df an
 
 
 ```{r for circos data load in}
-
-# reg_feat = read_csv(paste0(file_directory,"/",gene_name,"_test/Ensembl/",gene_name,"_full_REG_region.csv"))
-# df = read_csv(paste0(file_directory,"/",gene_name,"_test/Final_data/final_df.csv"))
 df=df %>% filter(!is.na(tissue_group))
-# Gtex = read_csv(paste0(file_directory,"/",gene_name,"_test/Gtex/Gtex_cleaned_REG.csv"))
-# Full_tissue_database = read_csv(paste0(file_directory,"/Trait and Tissue Groups/Full_tissue_database.csv")) 
-
+# saving what we have so far in case circos breaks
+save.image(paste0(file_directory,"/", gene_name,"_test/Final_data/final_workspace_for_shiny.RData"))
 ```
 
 Step 2, Now we are going to go through and plot each circos plot first. NOTE: this section uses the generic df name "test" as the frequency table that each circos plot is made from. This means each chunk will override this test table. If you would like to save it then use writetsv(test, "filename.tsv"). But they are quick and easy to make and not much point commiting to memory I've found.
@@ -3073,7 +3073,7 @@ circos.par( start.degree = 90 )
 chordDiagram(test4, 
               annotationTrackHeight = c(0.01, 0.01), 
               annotationTrack = "grid",
-              big.gap =10,
+              big.gap =2,
               small.gap = 1,
               column.col = grid_col_trait, # or col_mat
               grid.col = grid_col_trait,
@@ -3162,7 +3162,9 @@ ggsave(paste0(file_directory,"/",gene_name,"_test/Final_Plots/Summary_1.pdf"), h
 
 ```{r}
 df= read_csv(paste0(file_directory,"/", gene_name,"_test/Final_data/final_df.csv"))
-col_order <- c("rsid",
+df_b=df
+col_order <- c("Gene Symbol",
+               "rsid",
                "trait",
                "traitgroup",
                "Subcat",                
@@ -3184,11 +3186,30 @@ col_order <- c("rsid",
                "tissue_group_secondary",
                "Within_Gene_Region",
                "Intron_or_Exon_or_UTR",
-               "reg_region" )
+               "reg_region",
+               "|NES|",
+               "Tissue" ,
+               "Alt_Subcat",
+               "beta",
+               "AT",
+               "eaf",
+               "chr_phewas",
+               "position_phewas",
+               "id",
+               "Variant Id",
+               "chr_gtex",
+               "position_gtex",
+               "build_gtex",
+               "Gencode Id" ,
+               "na_count",
+               "beta_direction" ,
+               "NES_direction",
+               "logp"  
+               )
 
 df <- df[, col_order]
 df = unique(df)
-write_csv(df,paste0(file_directory,"/", gene_name,"_test/Final_data/final_df_reordered.csv"))
+write_csv(df,paste0(file_directory,"/", gene_name,"_test/Final_data/final_df.csv"))
 
 ```
 
@@ -3206,7 +3227,7 @@ gene_name = "Gene_name"
 
 file_directory = "file_directory"
 
-LD_token = "generic_token"
+library(shiny)
 
 load(paste0(file_directory,"/", gene_name,"_test/Final_data/final_workspace_for_shiny.RData"))
 runApp( paste0(file_directory,"/app_with_circos.R"))
@@ -3214,7 +3235,7 @@ runApp( paste0(file_directory,"/app_with_circos.R"))
 ```
 
 # Manual version of Number_x_traitgroup
-```{r}
+```{r, include=FALSE, eval=F}
 number_of_traitgroups = df %>% dplyr::select(traitgroup) %>% unique()
 number_of_traitgroups = number_of_traitgroups %>% dplyr::filter(traitgroup!="Other Gene Expression Change"|traitgroup!="Other/Unspecified")
 
