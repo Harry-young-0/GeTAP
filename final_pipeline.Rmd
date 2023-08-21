@@ -1,5 +1,5 @@
 ---
-title: "Gtex Only"
+title: "Final Pipeline, Linking GTEx SNPs to Phenotypes"
 author: "Henry Young"
 date: "2022-12-16"
 output: html_document
@@ -12,16 +12,16 @@ Please see instructions on github / in readme.md for details
 #First line to clear out environment
 rm(list=ls())
 #1. Gene name list:
-gene_name = "NFE2L2"
+gene_name = "YOUR_GENE_NAME"
 #e.g gene_name ="NFE2L2" ; "YOUR_GENE_NAME"
 
 #2. setting the file directory to where you want it to go DRIVE:/YOUR_FILE_DIRECTORY/
-file_directory = "/Users/hy14913/Documents/Local_work_folder/JUL_TEST"
+file_directory = "C:/Documents/Example directory"
 #windows e.g: file_directory = "C:/Users/hy14913/OneDrive - University of Bristol/Desktop/May23_test"
 #mac e.g: file_directory ="/Users/hy14913/Documents/Local_work_folder/JUL_TEST"
 
 #3. LD link token setup
-LD_token = "f0d7bc798f5c"
+LD_token = "generic_token"
 # 12 character token e.g:"abc1bc2bc3bc"
 # "abc1bc2bc3bc"generic_token
 
@@ -3134,34 +3134,6 @@ my_final_list <- setNames(object_list, label_list)
 Top5_choice = c(my_final_list,list("Other Gene Expression Change" = F3OGEC,
                                    "Other" = F3_O))
 
-choices_top =c("Other Gene Expression Change",
-           "Number 1 Trait Group",
-           "Number 2 Trait Group",
-           "Number 3 Trait Group",
-           "Number 4 Trait Group",
-           "Number 5 Trait Group",
-           "Number 6 Trait Group",
-           "Number 7 Trait Group",
-           "Number 8 Trait Group",
-           "Number 9 Trait Group",
-           "Number 10 Trait Group",
-           "Number 11 Trait Group",
-           "Number 12 Trait Group",
-           "Number 13 Trait Group",
-           "Number 14 Trait Group",
-           "Number 15 Trait Group",
-           "Number 16 Trait Group",
-           "Number 17 Trait Group",
-           "Number 18 Trait Group",
-           "Number 19 Trait Group",
-           "Number 20 Trait Group",
-           "Number 21 Trait Group",
-           "Number 22 Trait Group",
-           "Number 23 Trait Group",
-           "Number 24 Trait Group",
-           "Number 25 Trait Group"
-)
-choices_top =choices_top[1:(length(matching_objects)+1)]
 save.image(paste0(file_directory,"/", gene_name,"_test/Final_data/final_workspace_for_shiny.RData"))
 runApp( paste0(file_directory,"/app_with_circos.R"))
 ```
