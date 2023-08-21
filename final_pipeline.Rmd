@@ -9,13 +9,11 @@ output: html_document
 Please see instructions on github / in readme.md for details
 ## Assign your gene name, file directory and LD token
 ```{r}
-
 #First line to clear out environment
 rm(list=ls())
-
 #1. Gene name list:
-gene_name = "RBM45"
-#e.g gene_name ="NFE2L2"
+gene_name = "NFE2L2"
+#e.g gene_name ="NFE2L2" ; "YOUR_GENE_NAME"
 
 #2. setting the file directory to where you want it to go DRIVE:/YOUR_FILE_DIRECTORY/
 file_directory = "/Users/hy14913/Documents/Local_work_folder/JUL_TEST"
@@ -25,12 +23,11 @@ file_directory = "/Users/hy14913/Documents/Local_work_folder/JUL_TEST"
 #3. LD link token setup
 LD_token = "f0d7bc798f5c"
 # 12 character token e.g:"abc1bc2bc3bc"
+# "abc1bc2bc3bc"generic_token
 
 try(if(gene_name=="YOUR_GENE_NAME") stop("Please enter your Gene Name"))
 try(if(file_directory=="C:/Documents/Example directory") stop("Please enter your file_directory so the pipeline knows where to save"))
 try(if(LD_token=="generic_token") stop("Please enter your LD token, acquired from https://ldlink.nci.nih.gov/?tab=apiaccess"))
-
-
 ```
 
 
@@ -57,7 +54,6 @@ if(length(new_packages)>0){
 
 p <- installed.packages()
 is_bioc_installed = "BiocManager" %in% p
-
 
 if(is_bioc_installed ==F){
   Sys.sleep(15)
@@ -752,7 +748,7 @@ The plan is as follows:
 unique_Gtex_snps= read_tsv(paste0(file_directory,"/", gene_name,"_test/Gtex/unique_Gtex_snps.csv"), col_names = FALSE) # read the original unique snps file
 unique_Gtex_snps = unique_Gtex_snps$X1
 if(length(unique_Gtex_snps)<700){
-  rm(list=ls()[! ls() %in% c("file_directory","gene_name","LD_token","unique_Gtex_snps")])
+  rm(list=ls()[! ls() %in% c("file_directory","gene_name","LD_token","unique_Gtex_snps","completed_snps")])
 
 load(paste0(file_directory,"/", gene_name,"_test/LDMatrix/rs_overlap_ALL_",gene_name,".RData"))  # specifically the dataframe with ambiguous data removed
 
@@ -1041,33 +1037,33 @@ df$beta_direction = factor(df$beta_direction, levels=c("Positive", "Negative"))
 original_gtex =read_csv(paste0(file_directory,"/", gene_name,"_test/Gtex/", gene_name, "_Gtex_cleaned.csv"))
 Full_tissue_database = read_csv(paste0(file_directory,"/Trait and Tissue Groups/Full_tissue_database.csv"))
 original_gtex = left_join(original_gtex,Full_tissue_database)
-
-df$traitgroup = factor(df$traitgroup, levels =c("Body Fat/Size",
-            "Diet",
-            "Metabolism (inc. Diabetes)",
-            "Tumours (Benign/Cancer)",
-            "Atrophy/Dystrophy", 
-            "Congenital Defects", 
-            "Cardiovascular Traits",
-            "Blood/Vascular Traits",
-            "Inflammation" , 
-            "Respiratory",
-            "Renal/Urinary",
-            "Physical Activity",
-           
-            "Digestive Traits",
-            "Nervous System/Brain",
-            "Bone Traits (inc. Dental)",
-            "Muscle/Tendon Traits",
-            "Physical Injury",
-            "Alcohol-related Disease",
-            "Life Span",
-            "Female Specific Traits",
-            "Male Specific Traits",
-            "Disease (unknown origin)",
-            "Other Gene Expression Change",
-            "Other/Unspecified"
-            ))
+trait_order =c("Body Fat/Size",
+                                  "Diet",
+                                  "Metabolism (inc. Diabetes)",
+                                  "Tumours (Benign/Cancer)",
+                                  "Atrophy/Dystrophy", 
+                                  "Congenital Defects", 
+                                  "Cardiovascular Traits",
+                                  "Blood/Vascular Traits",
+                                  "Inflammation" , 
+                                  "Respiratory",
+                                  "Renal/Urinary",
+                                  "Physical Activity",
+                                 
+                                  "Digestive Traits",
+                                  "Nervous System/Brain",
+                                  "Bone Traits (inc. Dental)",
+                                  "Muscle/Tendon Traits",
+                                  "Physical Injury",
+                                  "Alcohol-related Disease",
+                                  "Life Span",
+                                  "Female Specific Traits",
+                                  "Male Specific Traits",
+                                  "Disease (unknown origin)",
+                                  "Other Gene Expression Change",
+                                  "Other/Unspecified"
+            )
+df$traitgroup = factor(df$traitgroup, levels =trait_order)
 
 # INCOMPLETE - From later, moved back for completions sake?
 grid_col = c(`Body Fat/Size` = "#0DF485",
@@ -1109,11 +1105,13 @@ grid_col = c(`Body Fat/Size` = "#0DF485",
              Nervous = "#90EE90",
              `Respiratory Tissue` = "#D673C9",
              Skin = "#00A36C",
+            Urniary = "darkorchid4",
              Vascular ="#630330"
              
 )
+
 ```
-#### A - TissueGROUP-rsid_count_OVERVIEW ORIGINAL GTEX
+#### A1 - TissueGROUP-rsid_count_OVERVIEW ORIGINAL GTEX
 This plot shows the overview of our SNPs in each tissuegroup from the Original GTEx dataframe. (i.e after phewas search and LD removal but then filtered to remove duplicated tissuegroups from the trait matching process)
 ```{r}
 list_of_tissuegroups = unique(Full_tissue_database$tissue_group)
@@ -1142,10 +1140,10 @@ for(tissuegroup in list_of_tissuegroups){
 test$NES_direction = factor(test$NES_direction, levels=c("Positive", "Negative"))
 test= test[ which(is.na(test$tissue_group)==F),]
 
-SNPcountperTissuegroup = ggplot(test, aes(x=tissue_group,y=count, fill=NES_direction)) + 
+A1SNPcountperTissuegroup = ggplot(test, aes(x=tissue_group,y=count, fill=NES_direction)) + 
   geom_col()+ # bar chart counting how many times a tissue appears
-  scale_fill_viridis_d(begin=1, end=0, name=paste0("Expression Change")) + 
-  labs(title= "Proportion of SNP - Trait Associations per Tissue" , x= "Tissue Group", y=paste("Proportion of rsIDs \n(n/total)"))+ #labels
+  scale_fill_viridis_d(begin=1, end=0, name=paste0("Expression Change\n          (NES)")) + 
+  labs(title= "Number of SNPs per Tissue from GTEx (before PheWAS and LD removal)" , x= "Tissue Group", y=paste("Number of SNPs"))+ #labels
   theme(axis.text.x = element_text(angle = 45, hjust =1),
         legend.position = "top",
          panel.background = element_rect(fill="white"),
@@ -1155,29 +1153,22 @@ SNPcountperTissuegroup = ggplot(test, aes(x=tissue_group,y=count, fill=NES_direc
     scale_x_discrete(expand = c(0.04, 0)) +
     scale_y_continuous(expand = c(0, 0)) 
 
-SNPcountperTissuegroup
+A1SNPcountperTissuegroup
 
-ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/A0-RAW_GTEXTissueGROUP-rsid_count_OVERVIEW.pdf"), width= 150, height=100, unit="mm")
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/A-Number of SNPs per Tissue from GTEx .pdf"), width= 150, height=100, unit="mm")
 
 ```
-
-
-#### B - number_of_SNP-trait_associations_per_tissue_group
+#### A2 - number_of_SNP-trait_associations_per_tissue_group after LD and pipeline run
 This plot shows the overview of our SNPs in each Tissue Group from the final df. (i.e after PheWAS search and LD removal but then filtered to remove duplicated Tissue Groups from the trait matching process)
 ```{r}
-
-Full_tissue_database = read_csv(paste0(file_directory,"/Trait and Tissue Groups/Full_tissue_database.csv"))
-
 LD_Gtex = df%>%
   dplyr::select(Tissue, tissue_group, rsid, `P-Value`, NES, position_gtex, chr_gtex, a, b, NES_direction)
 LD_Gtex = unique(LD_Gtex)# Removes duplicated tissues
-write_csv(LD_Gtex, paste0(file_directory,"/", gene_name,"_test/Gtex/LDRED_Gtex.csv")) # Storage of this dataframe for future use
 
 list_of_tissuegroups = unique(Full_tissue_database$tissue_group)
 list_of_tissuegroups = sort(list_of_tissuegroups)
 
 test = LD_Gtex %>% group_by(tissue_group, NES_direction) %>% summarise(count = length(tissue_group[!is.na(tissue_group)])) # frequency by direction
-
 
 LD_Gtex$tissue_group = ifelse(LD_Gtex$tissue_group=="Male_Specific_Tissue", "Male Specific Tissue", LD_Gtex$tissue_group)
 
@@ -1193,15 +1184,14 @@ for(tissuegroup in list_of_tissuegroups){
   }
 }
 
-
 test$NES_direction = factor(test$NES_direction, levels=c("Positive", "Negative"))
 test= test[ which(is.na(test$tissue_group)==F),]
 
-SNPcountperTissuegroup = ggplot(test, aes(x=tissue_group, y=count/nrow(LD_Gtex), fill=NES_direction)) + 
+A2SNPcountperTissuegroup = ggplot(test, aes(x=tissue_group, y=count, fill=NES_direction)) + 
   geom_col()+ # bar chart counting how many times a tissue appears
   #ylim(0,0.5)+
-  scale_fill_viridis_d(begin=1, end=0, name=paste0("Expression Change")) + # I like this palette but you can remove it or change it 
-  labs(title= "Proportion of SNP - Trait Associations per Tissue" , x= "Tissue Group", y=paste("Proportion of rsIDs \n(n/total)"))+ #labels
+  scale_fill_viridis_d(begin=1, end=0, name=paste0("Expression Change\n          (NES)")) + # I like this palette but you can remove it or change it 
+  labs(title= "Number of SNPs (after PheWAS search and LD removal)" , x= "Tissue Group", y=paste("Number of SNPs"))+ #labels
   theme(axis.text.x = element_text(angle = 45, hjust =1),
         legend.position = "top",
          panel.background = element_rect(fill="white"),
@@ -1211,20 +1201,63 @@ SNPcountperTissuegroup = ggplot(test, aes(x=tissue_group, y=count/nrow(LD_Gtex),
     scale_x_discrete(expand = c(0.04, 0)) +
     scale_y_continuous(expand = c(0, 0)) 
   # setting up x axis labels so they don't overlap + no legend
+A2SNPcountperTissuegroup
 
- 
-
-SNPcountperTissuegroup
-
-
-ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/A-number_of_SNP-trait_associations_per_tissue_group.pdf"), width= 150, height=100, unit="mm")
-
-
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/A2-Number of SNPs after PheWAS search and LD removal.pdf"), width= 150, height=100, unit="mm")
 ```
 
+#### A3 - number_of_SNP-trait_associations_per_tissue_group after LD and pipeline run
+This plot shows the overview of our SNPs in each Tissue Group from the final df. (i.e after PheWAS search and LD removal but then filtered to remove duplicated Tissue Groups from the trait matching process)
+```{r}
+LD_Gtex = df%>%
+  dplyr::select(Tissue, tissue_group, rsid, p, `P-Value`, NES, position_gtex, chr_gtex, a, b, NES_direction)
+LD_Gtex = unique(LD_Gtex)# Removes duplicated tissues
 
+list_of_tissuegroups = unique(Full_tissue_database$tissue_group)
+list_of_tissuegroups = sort(list_of_tissuegroups)
 
-#### C - "correlation_of_traits_to_total_possible_traits" Correlation between nmuber of SNPs in each trait group compared to trait database category size - Checking the pattern isn't just beecause of this:
+test = LD_Gtex %>% group_by(tissue_group, NES_direction) %>% summarise(count = length(tissue_group[!is.na(tissue_group)])) # frequency by direction
+
+LD_Gtex$tissue_group = ifelse(LD_Gtex$tissue_group=="Male_Specific_Tissue", "Male Specific Tissue", LD_Gtex$tissue_group)
+
+# loop to add in the missing tissuegroups
+for(tissuegroup in list_of_tissuegroups){
+  for(n in 1:nrow(test)){
+    if(nrow(test[which(test$tissue_group==tissuegroup),])==0){
+    test[nrow(test)+1,]= test[nrow(test)+1,] # make a new row
+    test$tissue_group[nrow(test)] =tissuegroup
+    test$count[nrow(test)] = 0
+    test$NES_direction[nrow(test)] = "Positive" # set it to either, doesn't matter as value is 0
+    }
+  }
+}
+
+test$NES_direction = factor(test$NES_direction, levels=c("Positive", "Negative"))
+test= test[ which(is.na(test$tissue_group)==F),]
+
+A3STAcountperTissuegroup = ggplot(test, aes(x=tissue_group, y=count, fill=NES_direction)) + 
+  geom_col()+ # bar chart counting how many times a tissue appears
+  #ylim(0,0.5)+
+  scale_fill_viridis_d(begin=1, end=0, name=paste0("Expression Change\n          (NES)")) + # I like this palette but you can remove it or change it 
+  labs(title= "Number of SNP - Trait Associations per Tissue (after LD removal)" , x= "Tissue Group", y=paste("Number of STAs"))+ #labels
+  theme(axis.text.x = element_text(angle = 45, hjust =1),
+        legend.position = "top",
+         panel.background = element_rect(fill="white"),
+         panel.grid.major.x = element_blank(),
+         panel.grid.major.y = element_line(colour = "gray90", linetype="solid", size=0.4),
+        axis.line = element_line(colour = "black", linetype="solid", size=1))+
+    scale_x_discrete(expand = c(0.04, 0)) +
+    scale_y_continuous(expand = c(0, 0)) 
+  # setting up x axis labels so they don't overlap + no legend
+A3STAcountperTissuegroup
+
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/A3-Number of STAs per Tissue (after LD removal).pdf"), width= 150, height=100, unit="mm")
+```
+
+#### A4
+G - saved later on
+
+#### B - "correlation_of_traits_to_total_possible_traits" Correlation between nmuber of SNPs in each trait group compared to trait database category size - Checking the pattern isn't just beecause of this:
 ```{r Plotting the raw Gtex egene data against Tissue line graph}
 Full_trait_database = read_csv(paste0(file_directory,"/Trait and Tissue Groups/Full_trait_database.csv"))
 Full_trait_database = unique(Full_trait_database)
@@ -1240,18 +1273,23 @@ comparison_TG = full_join(df_forcomp, TG_count, by=c("traitgroup"))
 comparison_TG =comparison_TG %>% filter(!is.na(traitgroup))
 comparison_TG$count = ifelse(is.na(comparison_TG$count), 0, comparison_TG$count)
 
-rsq <- function (x, y) cor(x, y, method = "pearson") ^ 2
-r2 = rsq(comparison_TG[,2],comparison_TG[,3])
 
-Correlation = ggplot(comparison_TG, aes(x=count, y=count_full, color = traitgroup)) + #Plot of SNPs NES vs beta from original dataset
+comparison_TG$count_rel =(comparison_TG$count/sum(comparison_TG$count) )*100
+comparison_TG$count_full_rel =(comparison_TG$count_full/sum(comparison_TG$count_full) )*100
+
+rsq <- function (x, y) cor(x, y, method = "pearson") ^ 2
+r2 = rsq(comparison_TG[,4],comparison_TG[,5])
+
+comparison_TG$count_rel_dif =Mod(comparison_TG$count_rel-comparison_TG$count_full_rel)
+
+BCorrelation_tg = ggplot(comparison_TG, aes(x=count_rel, y=count_full_rel, color = traitgroup)) + #Plot of SNPs NES vs beta from original dataset
   #geom_jitter(aes(color=NES)) +
   geom_point()+ 
-  #geom_text(data=subset(comparison_egene, eGenes/comparison_egene$count>45 | eGenes/comparison_egene$count<20), aes(label=Tissue), vjust=-0.6, hjust=0.8)+
    # colourblind friendly palette
   scale_color_manual(values = grid_col) +
-  labs(title= paste0("Correlation of traitgroup from our df to full database"), x= "Number of SNP-Traitgroup Associations", y= "Number of Possible Traits in Traitgroups") +
+  labs(title= paste0("Correlation of STAs per traitgroup from our df to full database"), x= "% of STAs", y= "% Possible Traits in Database") +
   #theme(legend.position = "none")+ 
-  geom_line(inherit.aes = TRUE, data = comparison_TG[,2:3], stat="smooth", method = "lm", formula = y~x, alpha = 0.5, color = "black")+
+  geom_line(inherit.aes = T, data = comparison_TG[,4:5], stat="smooth", method = "lm", formula = y~x, alpha = 0.5, color = "black")+
   scale_y_continuous(expand = c(0.1, 0.1))+
     theme(
         axis.text.x = element_text( size=14),
@@ -1265,32 +1303,30 @@ Correlation = ggplot(comparison_TG, aes(x=count, y=count_full, color = traitgrou
          panel.grid.major.y = element_line(colour = "gray90", linetype="solid", size=0.4),
         panel.grid.minor.y = element_line(colour = "gray90", linetype="solid", size=0.2),
         axis.line = element_line(colour = "black", linetype="solid", size=1))+
-  coord_flip()
-  
-        
-          
- 
-  
-   #  0 line
-   # text adjust
+  coord_flip()+ 
+  annotate(geom="text",  x=50, y=30, label = paste0("r2 = ", round(r2[1],4)),
+              fill="black")+ 
+  geom_line(inherit.aes=F,aes(x=`count_full_rel`,y=`count_full_rel`), linetype=2, color="darkorchid2")+
+    annotate(geom="text",  x=45, y=60, label = paste0("perfect\nrandom\nchance"),color="darkorchid3")
+BCorrelation_tg
 
-Correlation_tg = Correlation + annotate(geom="text",  x=75, y=10000, label = paste0("r2 = ", round(r2[1],4)),
-              fill="black")
-Correlation_tg
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/B-Correlation.pdf"), width= 200, height=100, unit="mm")
 
+B2 = BCorrelation_tg +xlim(c(0,15))+ylim(c(0,15))
+B2
 
-
-ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/TG_dfcount_cor_leg.pdf"), width= 200, height=100, unit="mm")
-
-Correlation_tg+theme(legend.position = "none")
-ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/B-correlation_of_traits_to_total_possible_traits.pdf"), width= 100, height=100, unit="mm")
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/B2-zoom.pdf"), width= 200, height=100, unit="mm")
+# BCorrelation_tg=B2Correlation_tg+
+#   theme(legend.position = "none")+
+#   geom_text(data=subset(comparison_TG, count_rel_dif>4) , aes(label=traitgroup), vjust=-0.6, hjust=0.2)
+# BCorrelation_tg
+# ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/B-correlation_of_traits_to_total_possible_traits.pdf"), width= 100, height=100, unit="mm")
 
 
 ```
-#### D - Position_count_OVERVIEW: 
+#### C - Position_count_OVERVIEW: 
 Plot of mutation position against their number of effects on expression with direction
 ```{r Number of snps per tissue plot USING LINKAGE2, fig.height=14, fig.width=4}
-
 LD_Gtex = df%>%
   dplyr::select(Tissue, tissue_group, position_gtex, rsid, `P-Value`, NES, position_gtex, chr_gtex, a, b, NES_direction)
 LD_Gtex = unique(LD_Gtex)
@@ -1299,11 +1335,17 @@ LD_Gtex$position_gtex = as.character(LD_Gtex$position_gtex)
 LD_Gtex = filter(LD_Gtex, !is.na(Tissue))
 Chromosome = df$chr_phewas[1]
 
-Position_count_OVERVIEWd1 = ggplot(LD_Gtex, aes(x=position_gtex,  fill = NES_direction)) + 
+CPosition_count_OVERVIEW = ggplot(LD_Gtex, aes(x=position_gtex,  fill = NES_direction)) + 
   geom_bar()+ # bar chart counting number of times rsid appears
-  scale_fill_viridis_d() + # I like this palette but you can remove it or change it 
-  labs(title= paste0("Number of tissues each SNP Affects expression in", gene_name) , x= paste0("Position (Chr ",Chromosome, ")"), y = "Number of Tissues")+ #labels
-  theme(legend.position = "none",
+  scale_fill_viridis_d(name=paste0("NES")) + # I like this palette but you can remove it or change it 
+  labs(title= paste0("Number of tissues each SNP affects expression in", gene_name) , x= paste0("Position (Chr ",Chromosome, ")"), y = "Number of Tissues")+ #labels
+  theme(legend.position = "top",
+        #legend.box.spacing = unit(0.1, 'cm'),
+        #legend.box.margin = unit(0.1, 'cm'),
+        legend.justification = c(3,-1),
+        legend.key.width = unit(0.2, 'cm'),
+        legend.text = element_text(size=8),
+        legend.title = element_text(size=8),
          panel.background = element_rect(fill="white"),
          panel.grid.major.x = element_blank(),
          panel.grid.major.y = element_blank(),
@@ -1312,16 +1354,15 @@ Position_count_OVERVIEWd1 = ggplot(LD_Gtex, aes(x=position_gtex,  fill = NES_dir
      scale_y_continuous(expand = c(0, 0))+
     coord_flip()
 
-Position_count_OVERVIEWd1
+CPosition_count_OVERVIEW
 
 LD_Gtex$position_gtex = as.numeric(LD_Gtex$position_gtex)
 
-ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/C-number_of_tissues_each_SNP_affects_expression_in.pdf"), width= 60, unit="mm")
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/C-Number of tissues each SNP affects expression in.pdf"), width= 60, unit="mm")
 ```
 
-####E0 Overview of trait-SNP associations per traitgroup (incl empty ones)
+####D Overview of trait-SNP associations per traitgroup (incl empty ones) - no direction
 ```{r}
-
 summary_of_df =df %>% 
   dplyr::select(rsid, traitgroup,trait) %>% 
   group_by(traitgroup) %>%
@@ -1338,7 +1379,7 @@ summary_of_df =full_join(summary_of_df, all_traitgroups)
 summary_of_df = summary_of_df %>% filter(!is.na(traitgroup))
 
 
-SNP_by_traitgroupe0= ggplot(summary_of_df, aes(x=reorder(traitgroup, -traitgroup_count), y=traitgroup_count, fill= traitgroup))+
+DSNP_by_traitgroup= ggplot(summary_of_df, aes(x=reorder(traitgroup, -traitgroup_count), y=traitgroup_count, fill= traitgroup))+
   geom_col()+
   geom_text(check_overlap = T,aes( y=traitgroup_count, label=traitgroup_count), vjust=-0.5)+
   scale_fill_manual(values = grid_col)+
@@ -1352,8 +1393,8 @@ SNP_by_traitgroupe0= ggplot(summary_of_df, aes(x=reorder(traitgroup, -traitgroup
     scale_x_discrete(expand = c(0.04, 0)) +
     scale_y_continuous( expand = expansion(mult = c(0, .1))) +
   labs(x = "Trait Group", y = "Number of SNP-Trait Associations", title = "Number of SNP-Trait Associations in Each Traitgroup")
-SNP_by_traitgroupe0
-ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/D-number_of_SNP-trait_associations_per_traitgroup.pdf"), width=200,height=120, unit="mm")
+DSNP_by_traitgroup
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/D Number of STAs in Each Traitgroup.pdf"), width=200,height=120, unit="mm")
 
 #Alternate version, relative to Trait Group size#####
 
@@ -1365,7 +1406,7 @@ names(traitgroup_counts) =c("traitgroup", "total_traits_in_database")
 summary_of_df = left_join(summary_of_df, traitgroup_counts)
 summary_of_df$rel.traitgroup = summary_of_df$traitgroup_count/summary_of_df$total_traits_in_database
 
-SNP_by_traitgroupe0REL= ggplot(summary_of_df, aes(x=reorder(traitgroup, -rel.traitgroup), y=rel.traitgroup, fill= traitgroup))+
+D2RELSNP_by_traitgroup= ggplot(summary_of_df, aes(x=reorder(traitgroup, -rel.traitgroup), y=rel.traitgroup, fill= traitgroup))+
   geom_col()+
  # geom_text(check_overlap = T,aes( y=rel.traitgroup, label=rel.traitgroup), vjust=-0.5)+
   scale_fill_manual(values = grid_col)+
@@ -1378,12 +1419,82 @@ SNP_by_traitgroupe0REL= ggplot(summary_of_df, aes(x=reorder(traitgroup, -rel.tra
         axis.line = element_line(colour = "black", linetype="solid", size=1))+
     scale_x_discrete(expand = c(0.04, 0)) +
     scale_y_continuous( expand = expansion(mult = c(0, .1))) +
-  labs(x = "Trait Group", y = "n(SNP-Trait Associations per Trait Group)/total n(SNP-Trait Associations)", title = "Number of SNP-Trait Associations in Each Traitgroup")
-SNP_by_traitgroupe0REL
-ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/D-normalised.pdf"), width=200,height=120, unit="mm")
+  labs(x = "Trait Group", y = paste0("STAs per Trait Group/\ntotal traits in database"), title = "Proportion of STAs in Each Traitgroup Relative to Database")
+D2RELSNP_by_traitgroup
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/D2 Proportion of STAs in Each Traitgroup Relative to Database.pdf"), width=200,height=120, unit="mm")
 
 ```
-#### E - pvalvstraitgroup_LOG
+#### E - pvalvstraitgroup Raw Number of STAs
+#### E1 Proportional count of the STAs in each beta direction and expression direction:
+```{r relative counts vs trait overview SEATTLE}
+colors_man <- c("Positive" = "#FDE725FF", "Negative" = "#440154FF") 
+# Remove duplicates from snps in multiple tissues and split by NES
+temp_pos = df %>% dplyr::filter(NES_direction=="Positive") %>%
+  select(traitgroup, beta_direction, rsid, p , trait, NES_direction)%>%
+  unique()
+temp_neg = df %>% dplyr::filter(NES_direction=="Negative") %>%
+  select(traitgroup, beta_direction, rsid, p , trait, NES_direction) %>%
+  unique()
+
+E1 = ggplot()+ #Plot of Traitgroup vs SNP Count
+  geom_bar(data= temp_pos, aes(x=factor(traitgroup), fill=beta_direction, y=after_stat(count)/nrow(temp_pos)),  position = position_dodge2(width = 1, preserve = "single"))+
+  geom_bar(data= temp_neg, aes(x=factor(traitgroup), fill=beta_direction, y=(after_stat(count)/nrow(temp_neg))*-1), position = position_dodge2(width = 1, preserve = "single"))+##  alpha is transparancy from 0-1
+    geom_hline(yintercept=0, color ="gray70")+
+  #ylim(-0.175,0.175)+
+  scale_fill_manual(values = colors_man) +
+  labs(title= paste0("Number of STAs per Traitgroup Relative to Total Number of Traitgroups in this Dataframe") , x= "Trait Group", y= paste("Relative Number of STAs (n/Total)"))+ #labels
+  theme(axis.text.x = element_text(angle = 60, hjust =1, size = 8),
+        axis.text.y =   element_text(size = 10),
+        axis.title = element_text(size = 10, face="bold"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_line(colour = "gray90", linetype="solid", size=0.4),
+        panel.grid.minor.y = element_line(colour = "gray90", linetype="solid", size=0.2),
+        panel.background = element_rect(fill="white"),
+        legend.position = "top"
+        )  + 
+  scale_x_discrete(limits=trait_order)
+
+E1  
+
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/E1 STAs relative to total in df.pdf"), width=200, height =100 , units="mm")
+
+
+
+```
+
+#### E2 Proportional (WITHOUT other gene expression change (OGEC))
+```{r relative counts NO OGEC vs trait overview SEATTLE, fig.width = 8, fig.height =4}
+# Remove duplicates from snps in multiple tissues and split by NES
+temp_pos = df %>% dplyr::filter(NES_direction=="Positive"& traitgroup!="Other Gene Expression Change"& traitgroup!="Other/Unspecified") %>%
+  select(traitgroup, beta_direction, rsid, p , trait, NES_direction)%>%
+  unique()
+temp_neg = df %>% dplyr::filter(NES_direction=="Negative"& traitgroup!="Other Gene Expression Change"& traitgroup!="Other/Unspecified") %>%
+  select(traitgroup, beta_direction, rsid, p , trait, NES_direction) %>%
+  unique()
+
+E2 = ggplot()+ #Plot of Traitgroup vs SNP Count
+  geom_bar(data= temp_pos, aes(x=traitgroup, fill=beta_direction, y=after_stat(count)/nrow(temp_pos)),  position = position_dodge2(width = 1, preserve = "single"))+
+  geom_bar(data= temp_neg, aes(x=traitgroup, fill=beta_direction, y=(after_stat(count)/nrow(temp_neg))*-1), position = position_dodge2(width = 1, preserve = "single"))+##  alpha is transparancy from 0-1
+    geom_hline(yintercept=0, color ="gray70")+
+  scale_fill_manual(values = colors_man) +
+  labs(title= paste0("Number of STAs per Traitgroup Relative to Total Number of Traitgroups in this Dataframe") , x= "Trait Group", y= paste("Relative Number of STAs (n/Total)"))+ #labels
+  theme(axis.text.x = element_text(angle = 60, hjust =1, size = 8),
+        axis.text.y =   element_text(size = 10),
+        axis.title = element_text(size = 10, face="bold"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_line(colour = "gray90", linetype="solid", size=0.4),
+        panel.grid.minor.y = element_line(colour = "gray90", linetype="solid", size=0.2),
+        panel.background = element_rect(fill="white"),
+        legend.position = "top")  + 
+  scale_x_discrete(limits=trait_order[1:22]) 
+
+E2
+
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/E2-E1 no OGEC or Other.pdf"), width=200, height =100 , units="mm")
+
+```
+
+#### F
 #####1 - all
 The overview of all snps relative to traitgroups:
 INCOMPLETE - ADJUST FONT SIZES FOR FINAL FIGURE!
@@ -1396,40 +1507,17 @@ summary_of_df_no_OGEC = summary_of_df %>% filter(traitgroup!="Other Gene Express
 temp = df[ which(is.na(df$tissue_group)==F),]
 temp = left_join(temp,summary_of_df)
 temp$beta_direction = factor(temp$beta_direction, levels=c("Positive", "Negative"))
-
-temp$traitgroup = factor(temp$traitgroup, levels =c("Body Fat/Size",
-                                                    "Diet",
-            "Metabolism (inc. Diabetes)",
-            "Tumours (Benign/Cancer)",
-            "Atrophy/Dystrophy", 
-            "Congenital Defects", 
-            "Cardiovascular Traits",
-            "Blood/Vascular Traits",
-            "Inflammation" , 
-            "Respiratory",
-            "Renal/Urinary",
-            "Physical Activity",
-           
-            "Digestive Traits",
-            "Nervous System/Brain",
-            "Bone Traits (inc. Dental)",
-            "Muscle/Tendon Traits",
-            "Physical Injury",
-            "Alcohol-related Disease",
-            "Life Span",
-            "Female Specific Traits",
-            "Male Specific Traits",
-            "Disease (unknown origin)",
-            "Other Gene Expression Change",
-            "Other/Unspecified"
-            ))
+#Now select only the traits to avoid tissue duplication
+temp = temp %>% dplyr::select(trait,traitgroup,logp_DIR,beta_direction,rsid, Rank) %>%
+  unique()
+temp$traitgroup = factor(temp$traitgroup, levels =trait_order)
 
 
 
-pvalvstraitgroupe1 = ggplot(temp, aes(x=traitgroup, y=logp_DIR, color=beta_direction)) + #Plot of Traitgroup vs p (P-Value is the Gtex P not PS p)
+F1pvalvstraitgroup = ggplot(temp, aes(x=traitgroup, y=logp_DIR, color=beta_direction)) + #Plot of Traitgroup vs p (P-Value is the Gtex P not PS p)
   geom_point(alpha=0.6, position = position_jitterdodge())+ #  alpha is transparancy from 0-1
-  scale_colour_viridis_d(direction=-1, ) + # I like this palette but you can remove it or change it - green/blue option begin=0.2, end=0.7
-  labs(title= paste0("Trait Groups Affected by SNPs that Change Expression of ",gene_name) , x= "Trait Group", y= "-log(p) x Direction of expression change")+ #labels
+  scale_colour_manual(values = colors_man) + # I like this palette but you can remove it or change it - green/blue option begin=0.2, end=0.7
+  labs(title= paste0("Overview of STAs in Traitgroups and their -log(p) values") , x= "Trait Group", y= "-log(p) x Direction of expression change")+ #labels
   geom_hline(aes(yintercept=0,), alpha=0.3)+ # faint line at 0
   theme(axis.text.x = element_text(angle = 60, hjust =1, size = 8),
         axis.text.y =   element_text(size = 10),
@@ -1438,18 +1526,18 @@ pvalvstraitgroupe1 = ggplot(temp, aes(x=traitgroup, y=logp_DIR, color=beta_direc
         panel.grid.major.y = element_line(colour = "gray90", linetype="solid", size=0.4),
         panel.grid.minor.y = element_line(colour = "gray90", linetype="solid", size=0.2),
         panel.background = element_rect(fill="white"),
-        legend.position = "none")+
+        legend.position = "top")+
   geom_text(inherit.aes=F,aes(label = Rank,x=traitgroup,y=min(logp_DIR), fill="black"), check_overlap = T, vjust=0.5)
 
   
-pvalvstraitgroupe1 
+F1pvalvstraitgroup 
 
 
-ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/E1--logp_x_expression_change_per_traitgroup.pdf"), width=200, height =100 , units="mm")
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/F1--logp_x_expression_change_per_traitgroup.pdf"), width=200, height =100 , units="mm")
 ```
 
 
-#####E2 Without Other or OGEC - often skews data due to high amount of SNPS in these categories
+#####F2 Without Other or OGEC - often skews data due to high amount of SNPS in these categories
 
 
 ```{r NO CUTOFF Trait Groups Affected by SNPs that Change in Expression of YOUR_GENE_NAME on Traits by logp}
@@ -1458,38 +1546,15 @@ temp = df[ which(is.na(df$tissue_group)==F),]
 temp = temp[which(temp$traitgroup!="Other/Unspecified" &temp$traitgroup!="Other Gene Expression Change" ),]
 temp = left_join(temp,summary_of_df_no_OGEC)
 temp$beta_direction = factor(temp$beta_direction, levels=c("Positive", "Negative"))
+temp = temp %>% dplyr::select(trait,traitgroup,logp_DIR,beta_direction,rsid, Rank_no_OGEC) %>%
+  unique()
 temp$traitgroup = factor(temp$traitgroup, 
-                         levels =c("Body Fat/Size",
-                                  "Diet",
-                                  "Metabolism (inc. Diabetes)",
-                                  "Tumours (Benign/Cancer)",
-                                  "Atrophy/Dystrophy", 
-                                  "Congenital Defects", 
-                                  "Cardiovascular Traits",
-                                  "Blood/Vascular Traits",
-                                  "Inflammation" , 
-                                  "Respiratory",
-                                  "Renal/Urinary",
-                                  "Physical Activity",
-                                 
-                                  "Digestive Traits",
-                                  "Nervous System/Brain",
-                                  "Bone Traits (inc. Dental)",
-                                  "Muscle/Tendon Traits",
-                                  "Physical Injury",
-                                  "Alcohol-related Disease",
-                                  "Life Span",
-                                  "Female Specific Traits",
-                                  "Male Specific Traits",
-                                  "Disease (unknown origin)",
-                                  "Other Gene Expression Change",
-                                  "Other/Unspecified"
-            ))
+                         levels =trait_order)
 
-pvalvstraitgroupNO_O_e2 = ggplot(temp, aes(x=traitgroup, y=logp_DIR, color=beta_direction)) + 
+F2pvalvstraitgroupNO_O = ggplot(temp, aes(x=traitgroup, y=logp_DIR, color=beta_direction)) + 
   geom_point(alpha=0.6, position = position_jitterdodge())+ #  alpha is transparancy from 0-1
-  scale_colour_viridis_d(direction=-1, ) + 
-  labs(title= paste0("Trait Groups Affected by SNPs that Change in Expression of ", gene_name, " (No Other or Other Gene Expression Change)") , x= "Trait Group", y= "-log(p) x Direction of expression change")+ #labels
+  scale_colour_manual(values = colors_man) + 
+  labs(title= paste0("Overview of STAs in Traitgroups (No Other or Other Gene Expression Change)") , x= "Trait Group", y= "-log(p) x Direction of expression change")+ #labels
   geom_hline(aes(yintercept=0,), alpha=0.3)+ # faint line at 0
 theme(axis.text.x = element_text(angle = 60, hjust =1, size = 8),
         axis.text.y =   element_text(size = 10),
@@ -1497,31 +1562,32 @@ theme(axis.text.x = element_text(angle = 60, hjust =1, size = 8),
         panel.grid.major.x = element_blank(),
         panel.grid.major.y = element_line(colour = "gray90", linetype="solid", size=0.4),
         panel.grid.minor.y = element_line(colour = "gray90", linetype="solid", size=0.2),
-        panel.background = element_rect(fill="white")
+        panel.background = element_rect(fill="white"),
+      legend.position = "top"
       )+
     geom_text(inherit.aes=F,aes(label = Rank_no_OGEC,x=traitgroup,y=min(logp_DIR), fill="black"), check_overlap = T, vjust=1.5)+
   scale_y_continuous(expand = c(0.1, 0))
 
-pvalvstraitgroupNO_O_e2
+F2pvalvstraitgroupNO_O
 
-ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/e2-e1_no_Other_or_OGEC_LEGEND.pdf"), width=200, height =100 , units="mm")
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/F2_no_Other_or_OGEC.pdf"), width=200, height =100 , units="mm")
 
-pvalvstraitgroupNO_O_e2+theme(legend.position = "none")
-
-ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/E2-e1_no_Other_or_OGEC.pdf"), width=200, height =100 , units="mm")
 ```
 
-#####E3 only Other Gene Expression Change
+#####F3 only Other Gene Expression Change
 The overview of all snps relative to traitgroups:
 
 ```{r NO CUTOFF Trait Groups Effected by SNPs that Change in Expression of YOUR_GENE_NAME on Traits by logp}
 temp = df[ which(is.na(df$tissue_group)==F),]
 temp$beta_direction = factor(temp$beta_direction, levels=c("Positive", "Negative"))
 temp = temp[which(temp$traitgroup=="Other Gene Expression Change"),]
+temp = temp %>% dplyr::select(trait,traitgroup,logp_DIR,beta_direction,rsid) %>%
+  unique()
 
-OGECe3 = ggplot(temp, aes(x=trait, y=logp_DIR, color=beta_direction)) + 
+
+F3OGEC = ggplot(temp, aes(x=trait, y=logp_DIR, color=beta_direction)) + 
   geom_point(alpha=0.6, position = position_jitterdodge())+ #  alpha is transparancy from 0-1
-  scale_colour_viridis_d(direction=-1, ) + 
+  scale_colour_manual(values = colors_man) + 
   labs( x= "Genes", y= "-log(p) * Direction")+ 
   geom_hline(aes(yintercept=0,), alpha=0.3)+ # faint line at 0
   theme(axis.text.y =   element_text(size = 10),
@@ -1530,13 +1596,13 @@ OGECe3 = ggplot(temp, aes(x=trait, y=logp_DIR, color=beta_direction)) +
         panel.grid.major.y = element_blank(),
         panel.grid.major.x = element_line(colour = "gray90", linetype="solid", size=0.4),
         panel.grid.minor.x = element_line(colour = "gray90", linetype="solid", size=0.2),
-        legend.position = "none")+
+        legend.position = "top")+
   coord_flip()+
       force_panelsizes(cols=unit(1, "in"))#cols=unit(1,"in"))
   
-OGECe3
+F3OGEC
 
-filename=paste0(file_directory,"/",gene_name,"_test/Final_plots/E3-e1_OGEC_only.pdf")
+filename=paste0(file_directory,"/",gene_name,"_test/Final_plots/F3_OGEC_only.pdf")
 
 length_of_unique_traits = length(unique(temp$trait))
   if(length_of_unique_traits>150){
@@ -1550,17 +1616,20 @@ length_of_unique_traits = length(unique(temp$trait))
   }
 
 ```
-#####E3-2 only Other 
+#####F3-2 only Other 
 The overview of all snps relative to traitgroups:
 
 ```{r NO CUTOFF Trait Groups Effected by SNPs that Change in Expression of YOUR_GENE_NAME on Traits by logp}
 temp = df[ which(is.na(df$tissue_group)==F),]
 temp$beta_direction = factor(temp$beta_direction, levels=c("Positive", "Negative"))
 temp = temp[which(temp$traitgroup=="Other/Unspecified"),]
+temp = temp %>% dplyr::select(trait,traitgroup,logp_DIR,beta_direction,rsid) %>%
+  unique()
 
-Oe3 = ggplot(temp, aes(x=trait, y=logp_DIR, color=beta_direction)) + 
+
+F3_O = ggplot(temp, aes(x=trait, y=logp_DIR, color=beta_direction)) + 
   geom_point(alpha=0.6, position = position_jitterdodge())+ #  alpha is transparancy from 0-1
-  scale_colour_viridis_d(direction=-1, ) + 
+  scale_colour_manual(values = colors_man) + 
   labs( x= "Genes", y= "-log(p) * Direction")+ 
   geom_hline(aes(yintercept=0,), alpha=0.3)+ # faint line at 0
   theme(axis.text.y =   element_text(size = 10),
@@ -1569,13 +1638,13 @@ Oe3 = ggplot(temp, aes(x=trait, y=logp_DIR, color=beta_direction)) +
         panel.grid.major.y = element_blank(),
         panel.grid.major.x = element_line(colour = "gray90", linetype="solid", size=0.4),
         panel.grid.minor.x = element_line(colour = "gray90", linetype="solid", size=0.2),
-        legend.position = "none")+
+        legend.position = "top")+
   coord_flip()+
       force_panelsizes(cols=unit(1, "in"))#cols=unit(1,"in"))
   
-Oe3
+F3_O
 
-filename=paste0(file_directory,"/",gene_name,"_test/Final_plots/E3-e1_Other_only.pdf")
+filename=paste0(file_directory,"/",gene_name,"_test/Final_plots/F3-2_Other_only.pdf")
 
 length_of_unique_traits = length(unique(temp$trait))
   if(length_of_unique_traits>150){
@@ -1590,25 +1659,26 @@ length_of_unique_traits = length(unique(temp$trait))
 
 ```
 
-#### E4 Top n categories after other and OGEC:
+#### F4 Top n categories after other and OGEC:
 
 ```{r, fig.width=6, fig.height=10}
 number_of_traitgroups = df %>% dplyr::select(traitgroup) %>% unique()
 number_of_traitgroups = number_of_traitgroups %>% 
   dplyr::filter(traitgroup!="Other Gene Expression Change"|
                 traitgroup!="Other/Unspecified")
-colors_man <- c("Positive" = "#FDE725FF", "Negative" = "#440154FF")
 
+n_tg_for_shiny = nrow(number_of_traitgroups)-2
 for(i in 3:nrow(number_of_traitgroups)-2){
   print(i)
-  temp =df[which(df$traitgroup ==summary_of_df_no_OGEC$traitgroup[i]),] 
-  for_label = df[which(df$traitgroup ==summary_of_df_no_OGEC$traitgroup[i]),]
+  traitgroup_i = summary_of_df_no_OGEC$traitgroup[i]
+  temp =df[which(df$traitgroup ==traitgroup_i),] 
+  for_label = df[which(df$traitgroup ==traitgroup_i),]
   for_label = length(unique(for_label$trait))
   if(length(unique(temp$Subcat))==1){
   pvsTrait_bygroup = ggplot(temp, aes(x=trait, y=logp_DIR, color=beta_direction)) + 
     geom_point(position = position_jitterdodge(), size =2)+ #  alpha is transparancy from 0-1
     scale_colour_manual(values = colors_man) +
-    labs(title= paste0("Traits in ",summary_of_df_no_OGEC$traitgroup[i]," Affected by SNPs that Change in Expression of ", gene_name) , x= "Traits", y= "-log(p) x Direction")+ #labels
+    labs(title= paste0("Traits in ",traitgroup_i," Affected by SNPs that Change in Expression of ", gene_name) , x= "Traits", y= "-log(p) x Direction")+ #labels
     geom_hline(aes(yintercept=0,), alpha=0.3)+# faint line at 0
     geom_hline(aes(yintercept=4,), alpha=0.3, color="red")+
     geom_hline(aes(yintercept=-4,), alpha=0.3, color="red")+
@@ -1618,7 +1688,7 @@ for(i in 3:nrow(number_of_traitgroups)-2){
         panel.grid.major.y = element_blank(),
         panel.grid.major.x = element_line(colour = "gray90", linetype="solid", size=0.4),
         panel.grid.minor.x = element_line(colour = "gray90", linetype="solid", size=0.2),
-        legend.position = "none")+
+        legend.position = "top")+
     #facet_grid(rows = vars(Subcat), scales = "free", space="free")+
     coord_flip()+
     force_panelsizes(cols=unit(40, "mm"))
@@ -1627,7 +1697,7 @@ for(i in 3:nrow(number_of_traitgroups)-2){
   pvsTrait_bygroup = ggplot(temp, aes(x=trait, y=logp_DIR, color=beta_direction)) + 
     geom_point(position = position_jitterdodge(), size =2)+ #  alpha is transparancy from 0-1
     scale_colour_manual(values = colors_man) +
-    labs(title= paste0("Traits in ",summary_of_df_no_OGEC$traitgroup[i]," Affected by SNPs that Change in Expression of ", gene_name) , x= "Traits", y= "-log(p) x Direction")+ #labels
+    labs(title= paste0("Traits in ",traitgroup_i," Affected by SNPs that Change in Expression of ", gene_name) , x= "Traits", y= "-log(p) x Direction")+ #labels
     geom_hline(aes(yintercept=0,), alpha=0.3)+# faint line at 0
     geom_hline(aes(yintercept=4,), alpha=0.3, color="red")+
     geom_hline(aes(yintercept=-4,), alpha=0.3, color="red")+
@@ -1637,7 +1707,7 @@ for(i in 3:nrow(number_of_traitgroups)-2){
         panel.grid.major.y = element_blank(),
         panel.grid.major.x = element_line(colour = "gray90", linetype="solid", size=0.4),
         panel.grid.minor.x = element_line(colour = "gray90", linetype="solid", size=0.2),
-        legend.position = "none")+
+        legend.position = "top")+
     facet_grid(rows = vars(Subcat), scales = "free", space="free")+
     coord_flip()+
     force_panelsizes(cols=unit(40, "mm"))
@@ -1646,8 +1716,10 @@ for(i in 3:nrow(number_of_traitgroups)-2){
     
 # Manual version:
 # ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/E4-Number_", i,"_traitgroup.pdf"),height=y, width=x,  )}
-assign(paste0("e4_", i), pvsTrait_bygroup) 
-filename=paste0(file_directory,"/",gene_name,"_test/Final_plots/E4-Number_", i,"_traitgroup.pdf")
+#  sub('f','F',df$address)
+  traitgroup_i_ = sub("/","_or_",traitgroup_i)
+assign(paste0("F4_", i), pvsTrait_bygroup) 
+filename=paste0(file_directory,"/",gene_name,"_test/Final_plots/F4-Number_", i,"_traitgroup",traitgroup_i_,".pdf")
   if(for_label>150){
     ggsave(filename, height=560, width=230, unit="mm")
   }else if(for_label<150 &for_label>50){
@@ -1661,108 +1733,6 @@ filename=paste0(file_directory,"/",gene_name,"_test/Final_plots/E4-Number_", i,"
 
 ```
 
-#### F1 Proportional count the snps in each beta direction:
-```{r relative counts vs trait overview SEATTLE}
-temp_pos = df[which(df$NES_direction=="Positive"),]
-temp_neg = df[which(df$NES_direction=="Negative"),]
-
-f1 = ggplot()+ #Plot of Traitgroup vs SNP Count
-  geom_bar(data= temp_pos, aes(x=factor(traitgroup), fill=beta_direction, y=after_stat(count)/nrow(temp_pos)),  position = position_dodge2(width = 1, preserve = "single"))+
-  geom_bar(data= temp_neg, aes(x=factor(traitgroup), fill=beta_direction, y=(after_stat(count)/nrow(temp_neg))*-1), position = position_dodge2(width = 1, preserve = "single"))+##  alpha is transparancy from 0-1
-    geom_hline(yintercept=0, color ="gray70")+
-  #ylim(-0.175,0.175)+
-  scale_fill_viridis_d(direction=-1) + # I like this palette but you can remove it or change it 
-  labs(title= paste0("Trait Groups Effected by SNPs that Change in Expression of ", gene_name) , x= "Trait Group", y= paste("Relative Number of SNP-Trait \nAssociations (n/Total)"))+ #labels
-  theme(axis.text.x = element_text(angle = 60, hjust =1, size = 8),
-        axis.text.y =   element_text(size = 10),
-        axis.title = element_text(size = 10, face="bold"),
-        panel.grid.major.x = element_blank(),
-        panel.grid.major.y = element_line(colour = "gray90", linetype="solid", size=0.4),
-        panel.grid.minor.y = element_line(colour = "gray90", linetype="solid", size=0.2),
-        panel.background = element_rect(fill="white"),
-        )  
-
-f1 + scale_x_discrete(limits=c("Body Fat/Size",
-            "Diet",
-            "Metabolism (inc. Diabetes)",
-            "Tumours (Benign/Cancer)",
-            "Atrophy/Dystrophy", 
-            "Congenital Defects", 
-            "Cardiovascular Traits",
-            "Blood/Vascular Traits",
-            "Inflammation" , 
-            "Respiratory",
-            "Renal/Urinary",
-            "Physical Activity",
-           
-            "Digestive Traits",
-            "Nervous System/Brain",
-            "Bone Traits (inc. Dental)",
-            "Muscle/Tendon Traits",
-            "Physical Injury",
-            "Alcohol-Related Disease",
-            "Life Span",
-            "Female Specific Traits",
-            "Male Specific Traits",
-            "Disease (unknown origin)",
-            "Other Gene Expression Change",
-            "Other/Unspecified"
-            )) 
-
-
-ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/F1-nSNP-trait_associations_per_traitgroup_by_total.pdf"), width=200, height =100 , units="mm")
-
-
-
-```
-
-#### F2 Proportional (WITHOUT other gene expression change (OGEC))
-```{r relative counts NO OGEC vs trait overview SEATTLE, fig.width = 10, fig.height =10}
-temp_pos = df[which(df$NES_direction=="Positive" & df$traitgroup!="Other Gene Expression Change"& df$traitgroup!="Other/Unspecified"),]
-temp_neg = df[which(df$NES_direction=="Negative" & df$traitgroup!="Other Gene Expression Change"& df$traitgroup!="Other/Unspecified"),]
-
-f2 = ggplot()+ #Plot of Traitgroup vs SNP Count
-  geom_bar(data= temp_pos, aes(x=traitgroup, fill=beta_direction, y=..count../nrow(temp_pos)),  position = position_dodge2(width = 1, preserve = "single"))+
-  geom_bar(data= temp_neg, aes(x=traitgroup, fill=beta_direction, y=(..count../nrow(temp_neg))*-1), position = position_dodge2(width = 1, preserve = "single"))+##  alpha is transparancy from 0-1
-    geom_hline(yintercept=0, color ="gray70")+
-  scale_fill_viridis_d(direction=-1) + # I like this palette but you can remove it or change it 
-  labs(title= paste0("Trait Groups Effected by SNPs that Change in Expression of ", gene_name) , x= "Trait Group", y= paste("Relative Number of SNP-Trait \nAssociations (n/Total)"))+ #labels
-  theme(axis.text.x = element_text(angle = 60, hjust =1, size = 8),
-        axis.text.y =   element_text(size = 10),
-        axis.title = element_text(size = 10, face="bold"),
-        panel.grid.major.x = element_blank(),
-        panel.grid.major.y = element_line(colour = "gray90", linetype="solid", size=0.4),
-        panel.grid.minor.y = element_line(colour = "gray90", linetype="solid", size=0.2),
-        panel.background = element_rect(fill="white"),
-        legend.position = "none")  
-
-f2+ scale_x_discrete(limits=c("Body Fat/Size",
-            "Diet",
-            "Metabolism (inc. Diabetes)",
-            "Tumours (Benign/Cancer)",
-            "Atrophy/Dystrophy", 
-            "Congenital Defects", 
-            "Cardiovascular Traits",
-            "Blood/Vascular Traits",
-            "Inflammation" , 
-            "Respiratory",
-            "Renal/Urinary",
-            "Physical Activity",
-            "Digestive Traits",
-            "Nervous System/Brain",
-            "Bone Traits (inc. Dental)",
-            "Muscle/Tendon Traits",
-            "Physical Injury",
-            "Alcohol-Related Disease",
-            "Life Span",
-            "Female Specific Traits",
-            "Male Specific Traits",
-            "Disease (unknown origin)"
-            )) 
-
-ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/F2-F1_no_OGEC.pdf"), width=200, height =100 , units="mm")
-
-```
 
 # Part 2 - More plots, focussing on gene region and comparisons
 ## Firstly it is important to gather information about your gene structure, exon and intron locations using ensembl.
@@ -1996,22 +1966,7 @@ cols = c("CTCF Binding Site" = "#C39BD3",
          "Promoter Flanking Region" ="#ABEBC6",
          "TF binding" ="#E67E22"
          )
-# Full Tissue List
-   # Blood = "#CC5500",
-   # Cultured_Cells = "#00FFFF",
-   # Digestive ="#A7C7E7",
-   # Endocrine = "#FF4433",
-   # Fat = "#E0115F",
-   # Female_Reproductive_Tissue = "#022A0E",
-   # Heart = "#80461B",
-   # Lymphatic ="#023020",
-   # Male_Specific_Tissue ="#FFA500",
-   # Mammary = "#E9846E",
-   # Muscle = "#FFBF00",
-   # Nervous = "#90EE90",
-   # Respiratory = "#D673C9",
-   # Skin = "#00A36C",
-   # Vascular ="#630330"
+
 ```
 
 
@@ -2201,7 +2156,7 @@ This Section has been moved before the Circos proper because we are still making
 
 All of these are also available with SNPs coloured based on the reg_region they are in (uncomment those lines), Also, change pch from 20 to 21 for rings as opposed to points which can look better, 
 ##### Curved Gtex (all, pre-merge and LD removal)
-```{r Curved Gene diagrams Gtex_G}
+```{r Curved Gene diagrams Gtex_G, error=TRUE}
 
 setwd(paste0(file_directory,"/",gene_name,"_test/Gene_diagram_output"))
 
@@ -2248,15 +2203,6 @@ gene_and_reg$color = ifelse( gene_and_reg$EI== "Enhancer", "#196F3D",
                                                              ifelse(gene_and_reg$EI== "Promoter", "#1ABC9C",
                                                                      ifelse(gene_and_reg$EI== "Exon", "#2C3E50",
                                                                            ifelse(gene_and_reg$EI== "Intron", "#56B4E9","FAIL"))))))))
-# Add in colours for snps:
-# df_for_circle$color = ifelse( df_for_circle$reg_region== "Enhancer", "#196F3D",
-#                              ifelse(df_for_circle$reg_region== "Open chromatin", "#AAB7B8",
-#                                      ifelse(df_for_circle$reg_region== "Promoter Flanking Region", "#ABEBC6",
-#                                              ifelse(df_for_circle$reg_region== "CTCF Binding Site", "#C39BD3",
-#                                                      ifelse(df_for_circle$reg_region== "TF binding", "#E67E22",
-#                                                              ifelse(df_for_circle$reg_region== "Promoter", "#1ABC9C",
-#                                                                      ifelse(df_for_circle$reg_region== "Exon", "#2C3E50",
-#                                                                            ifelse(df_for_circle$reg_region== "Intron", "#56B4E9","#C0392B"))))))))
 
 circos.clear()
 # .par() start and gap degree for setting partial rings up!
@@ -2297,13 +2243,10 @@ dev.off()
 ```
 
 ##### Curved Gtex (all, pre-merge and LD removal) + Colour
-```{r Curved Gene diagrams Gtex_G}
+```{r Curved Gene diagrams Gtex_G, error=TRUE}
 setwd(paste0(file_directory,"/",gene_name,"_test/Gene_diagram_output"))
 
 # Similar to above, select relevent columns, remove duplicates and 
-
-
-
 df_for_circle = Gtex %>% dplyr::select(chr_gtex, position_gtex, reg_region, `P-Value`)
 df_for_circle = unique(df_for_circle)
 df_for_circle$y = runif(nrow(df_for_circle)) # random y value between 0 and 1 - stddist
@@ -2401,13 +2344,10 @@ circos.rect(xleft=scale_bar$x[1:nrow(scale_bar)-1], CELL_META$cell.ylim[1] - mm_
 dev.off()
 ```
 ##### CURVED Gtex SNPs (P-Value) after merge and LD removal
-```{r Curved Gene diagrams Gtex_RED}
+```{r Curved Gene diagrams Gtex_RED, error=TRUE}
 setwd(paste0(file_directory,"/",gene_name,"_test/Gene_diagram_output"))
 
 # Similar to above, select relevent columns, remove duplicates and 
-
-
-
 df_for_circle = df %>% dplyr::select(chr_gtex, position_gtex, reg_region, `P-Value`)
 df_for_circle = unique(df_for_circle)
 df_for_circle$y = runif(nrow(df_for_circle)) # random y value between 0 and 1 - stddist
@@ -2449,15 +2389,7 @@ gene_and_reg$color = ifelse( gene_and_reg$EI== "Enhancer", "#196F3D",
                                                                      ifelse(gene_and_reg$EI== "Exon", "#2C3E50",
                                                                            ifelse(gene_and_reg$EI== "Intron", "#56B4E9","FAIL"))))))))
 
-# # Add in colours for snps:
-# df_for_circle$color = ifelse( df_for_circle$reg_region== "Enhancer", "#196F3D",
-#                              ifelse(df_for_circle$reg_region== "Open chromatin", "#AAB7B8",
-#                                      ifelse(df_for_circle$reg_region== "Promoter Flanking Region", "#ABEBC6",
-#                                              ifelse(df_for_circle$reg_region== "CTCF Binding Site", "#C39BD3",
-#                                                      ifelse(df_for_circle$reg_region== "TF binding", "#E67E22",
-#                                                              ifelse(df_for_circle$reg_region== "Promoter", "#1ABC9C",
-#                                                                      ifelse(df_for_circle$reg_region== "Exon", "#2C3E50",
-#                                                                            ifelse(df_for_circle$reg_region== "Intron", "#56B4E9","#C0392B"))))))))
+
 
 circos.clear()
 # .par() start and gap degree for setting partial rings up!
@@ -2497,9 +2429,6 @@ This plot also has the purple and orange split for figure building - commented o
 setwd(paste0(file_directory,"/",gene_name,"_test/Gene_diagram_output"))
 
 # Similar to above, select relevent columns, remove duplicates and 
-
-
-
 df_for_circle = df %>% dplyr::select(chr_gtex, position_gtex, reg_region, `P-Value`)
 df_for_circle = unique(df_for_circle)
 df_for_circle$y = runif(nrow(df_for_circle)) # random y value between 0 and 1 - stddist
@@ -2508,10 +2437,7 @@ df_for_circle = df_for_circle[which(complete.cases(df_for_circle)==T),]
 
 pmax=df_for_circle$logp[which.max(df_for_circle$logp)]
 pmin=df_for_circle$logp[which.min(df_for_circle$logp)]
-
-
 # colours_for_rect = c("palegreen3","gray70","violet","cyan3","gold","red3","black","skyblue1")
-
 gene_and_reg$color = ifelse( gene_and_reg$EI== "Enhancer", "#196F3D", 
                              ifelse(gene_and_reg$EI== "Open chromatin", "#AAB7B8",
                                      ifelse(gene_and_reg$EI== "Promoter Flanking Region", "#ABEBC6",
@@ -2581,9 +2507,6 @@ dev.off()
 setwd(paste0(file_directory,"/",gene_name,"_test/Gene_diagram_output"))
 
 # Similar to above, select relevent columns, remove duplicates and 
-
-
-
 df_for_circle = df %>% dplyr::select(chr_gtex, position_gtex,reg_region, p)
 df_for_circle = unique(df_for_circle)
 df_for_circle$y = runif(nrow(df_for_circle)) # random y value between 0 and 1 - stddist
@@ -2616,8 +2539,6 @@ gene_and_reg$yminD = if_else(gene_and_reg$EI =="Intron" | gene_and_reg$EI =="Exo
 gene_and_reg$ymaxD = if_else(gene_and_reg$EI =="Intron" | gene_and_reg$EI =="Exon", pmax-((pmax-pmin)/4),pmax)# if it is an intron use the first value, anything else the second
 
 
-# colours_for_rect = c("palegreen3","gray70","violet","cyan3","gold","red3","black","skyblue1")
-
 gene_and_reg$color = ifelse( gene_and_reg$EI== "Enhancer", "#196F3D", 
                              ifelse(gene_and_reg$EI== "Open chromatin", "#AAB7B8",
                                      ifelse(gene_and_reg$EI== "Promoter Flanking Region", "#ABEBC6",
@@ -2627,22 +2548,10 @@ gene_and_reg$color = ifelse( gene_and_reg$EI== "Enhancer", "#196F3D",
                                                                      ifelse(gene_and_reg$EI== "Exon", "#2C3E50",
                                                                            ifelse(gene_and_reg$EI== "Intron", "#56B4E9","FAIL"))))))))
 
-# Add in colours for snps:
-# df_for_circle$color = ifelse( df_for_circle$reg_region== "Enhancer", "#196F3D",
-#                              ifelse(df_for_circle$reg_region== "Open chromatin", "#AAB7B8",
-#                                      ifelse(df_for_circle$reg_region== "Promoter Flanking Region", "#ABEBC6",
-#                                              ifelse(df_for_circle$reg_region== "CTCF Binding Site", "#C39BD3",
-#                                                      ifelse(df_for_circle$reg_region== "TF binding", "#E67E22",
-#                                                              ifelse(df_for_circle$reg_region== "Promoter", "#1ABC9C",
-#                                                                      ifelse(df_for_circle$reg_region== "Exon", "#2C3E50",
-#                                                                            ifelse(df_for_circle$reg_region== "Intron", "#56B4E9","#C0392B"))))))))
-
 circos.clear()
 # .par() start and gap degree for setting partial rings up!
 
 pdf("Curved_gene_diagram_P_FULL.pdf") # change to _outlier if outlier is removed line3104; and _color if using coloured snps
-
-
 circos.par("track.height" = 0.1, start.degree = 180 , gap.degree= 180, canvas.xlim =c(-1,1), canvas.ylim =c(-0.3,1)) # radius of all circles = 1 so this means 1/10 is each track
 # Track 1 - Gene Information
 circos.initialize(df_for_circle$chr_gtex, x = df_for_circle$position_gtex, xlim =c(min(gene_and_reg$Start), max(gene_and_reg$End))) # defining the x axis for the tracks
@@ -2680,9 +2589,6 @@ dev.off()
 ```{r Curved Gene diagrams PHEWAS_RED}
 setwd(paste0(file_directory,"/",gene_name,"_test/Gene_diagram_output"))
 # Similar to above, select relevent columns, remove duplicates and 
-
-
-
 df_for_circle = df %>% dplyr::select(chr_gtex, position_gtex,reg_region, p)
 df_for_circle = unique(df_for_circle)
 df_for_circle$y = runif(nrow(df_for_circle)) # random y value between 0 and 1 - stddist
@@ -2783,7 +2689,6 @@ Unique_snps = df %>% dplyr::select( rsid, Intron_or_Exon_or_UTR, reg_region)
 Unique_snps = unique(Unique_snps)
 Unique_snps$reg_region = factor(Unique_snps$reg_region,levels = c("CTCF Binding Site", "Enhancer","Open chromatin","TF binding", "Promoter", "Promoter Flanking Region", "None"))
 
-
 snpvsregion = ggplot(Unique_snps, aes(x = reg_region, fill = Intron_or_Exon_or_UTR))+
   geom_bar(alpha=0.8, position = position_dodge2(width = 1, preserve = "single"))+#  alpha is transparancy from 0-1
   scale_fill_viridis_d(direction=1, option = "magma", end=0.6, name ="Intron, Exon or Neither") + # I like this palette but you can remove it or change it 
@@ -2800,7 +2705,7 @@ snpvsregion
 
 
 
-ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/G-number_of_snps_per_regulatory_region.pdf"))
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/A4-number_of_snps_per_regulatory_region.pdf"))
 ```
 
 
@@ -2866,6 +2771,7 @@ grid_col = c(`Body Fat/Size` = "#0DF485",
              Nervous = "#90EE90",
              `Respiratory Tissue` = "#D673C9",
              Skin = "#00A36C",
+            Urniary = "darkorchid4",
              Vascular ="#630330"
              
 )
@@ -2909,7 +2815,7 @@ INCOMPETE APRIL23 - Need to add in a caveat for the circos plots - maybe without
 
 
 ####1. Gtex (from merged df)
-```{r Gtex from merged df circos 2}
+```{r Gtex from merged df circos 2, error=TRUE}
 setwd(paste0(file_directory,"/",gene_name,"_test/Circos"))
 
 # First selecting key columns from the Gtex dataframe (pre-merge)
@@ -2972,7 +2878,7 @@ ggsave(paste0(file_directory,"/",gene_name,"_test/Circos/tissue_LUT.pdf"), width
 ```
 
 ####3. Tissue-Traitgroup overlap: NOTE: For these next two the traitgroups are listed here with colours associated. Every gene will have a different list of traitgroups. Best to go through manually and modify accordingly, or use rand_color (see commented lines)
-```{r tissue trait group overlap for circos 3}
+```{r tissue trait group overlap for circos 3, error=TRUE}
 setwd(paste0(file_directory,"/",gene_name,"_test/Circos"))
 # This one Tissuegroup-traitgroup - uising the simple_LUT_COR
 
@@ -3012,13 +2918,9 @@ dev.off()
 ```
 
 ####3b. Tissue-Traitgroup overlap NO OTHER: 
-```{r tissue trait group overlap for circos 3b}
+```{r tissue trait group overlap for circos 3b, error=TRUE}
 setwd(paste0(file_directory,"/",gene_name,"_test/Circos"))
-# This one Tissuegroup-traitgroup - uising the simple_LUT_COR
 
-# OR using rand_color:
-# col_mat = rand_color(length(test))
-# col_mat = rand_color((2*length(unique(simple_LUT_COR$tissue_group))))
 temp = df[which(df$traitgroup!= "Other/Unspecified"),]
  
 simple_LUT_COR = temp %>% dplyr::select(tissue_group, traitgroup)
@@ -3053,7 +2955,7 @@ dev.off()
 ```
 
 ####4. Traitgroup to Position overlap
-```{r traitggroup to position overlap circos 4}
+```{r traitggroup to position overlap circos 4, error=TRUE}
 setwd(paste0(file_directory,"/",gene_name,"_test/Circos"))
 
 simple_LUT_P = df %>% dplyr::select(position_gtex, traitgroup, p)
@@ -3093,13 +2995,10 @@ dev.off()
 ```
 
 ####4b.Traitgroup_pos overlap NO OTHER: 
-```{r tissue trait group overlap for circos 4b}
+```{r tissue trait group overlap for circos 4b, error=TRUE}
 setwd(paste0(file_directory,"/",gene_name,"_test/Circos"))
 # This one Tissuegroup-traitgroup - uising the simple_LUT_COR
 
-# OR using rand_color:
-# col_mat = rand_color(length(test))
-# col_mat = rand_color((2*length(unique(simple_LUT_COR$tissue_group))))
 temp = df[which(df$traitgroup!= "Other/Unspecified"),]
  
 simple_LUT_P = temp %>% dplyr::select(position_gtex, traitgroup, p)
@@ -3150,12 +3049,12 @@ dev.off()
  f1
  f2
  (others in file to peruse)
- INCOMPLETE APRIL 23
- Need to sort out the shiny implementation properly as well as add in error jumping for the circos plots if they're not playing the game.
-```{r, include=F}
+ INCOMPLETE AUG 23
+Can I make a nicer summary sheet, single pdf? is it even worth it?
+```{r, include=F, eval=F}
 
 pvalvstraitgroupNO_O_e2_leg = pvalvstraitgroupNO_O_e2+ theme(legend.position = "right")
-plot_grid(SNPcountperTissuegroup,SNP_by_traitgroupe0,pvalvstraitgroupe1,pvalvstraitgroupNO_O_e2_leg, nrow=4, ncol=1, align="v")
+plot_grid(A2SNPcountperTissuegroup,DSNP_by_traitgroup,pvalvstraitgroupe1,pvalvstraitgroupNO_O_e2_leg, nrow=4, ncol=1, align="v")
 ggsave(paste0(file_directory,"/",gene_name,"_test/Final_Plots/Summary_1.pdf"), height=600, width=300, unit="mm")
 ```
 #Final clean up of the final_df to make it as usable as possible straight out of the box
@@ -3192,10 +3091,8 @@ col_order <- c("Gene Symbol",
                "Alt_Subcat",
                "beta",
                "AT",
-               "eaf",
                "chr_phewas",
                "position_phewas",
-               "id",
                "Variant Id",
                "chr_gtex",
                "position_gtex",
@@ -3204,10 +3101,12 @@ col_order <- c("Gene Symbol",
                "na_count",
                "beta_direction" ,
                "NES_direction",
-               "logp"  
+               "logp",
+               "test"
                )
 
-df <- df[, col_order]
+setdiff(names(df),names(df_b))
+df <- df_b[, col_order]
 df = unique(df)
 write_csv(df,paste0(file_directory,"/", gene_name,"_test/Final_data/final_df.csv"))
 
@@ -3215,6 +3114,54 @@ write_csv(df,paste0(file_directory,"/", gene_name,"_test/Final_data/final_df.csv
 
 # Shiny app
 ```{r}
+# List all objects in the environment
+all_objects <- ls()
+
+# Define the prefix
+prefix <- "F4_"
+
+# Filter objects with the specified prefix
+matching_objects <- all_objects[grep(paste0("^", prefix), all_objects)]
+
+# Create a list of the matching objects
+object_list <- lapply(matching_objects, get)
+
+# Create a list of labels based on the number of matching objects
+label_list <- sprintf("Number %d Trait Group", seq_along(object_list))
+
+# Combine the label_list and object_list to create the final list
+my_final_list <- setNames(object_list, label_list)
+Top5_choice = c(my_final_list,list("Other Gene Expression Change" = F3OGEC,
+                                   "Other" = F3_O))
+
+choices_top =c("Other Gene Expression Change",
+           "Number 1 Trait Group",
+           "Number 2 Trait Group",
+           "Number 3 Trait Group",
+           "Number 4 Trait Group",
+           "Number 5 Trait Group",
+           "Number 6 Trait Group",
+           "Number 7 Trait Group",
+           "Number 8 Trait Group",
+           "Number 9 Trait Group",
+           "Number 10 Trait Group",
+           "Number 11 Trait Group",
+           "Number 12 Trait Group",
+           "Number 13 Trait Group",
+           "Number 14 Trait Group",
+           "Number 15 Trait Group",
+           "Number 16 Trait Group",
+           "Number 17 Trait Group",
+           "Number 18 Trait Group",
+           "Number 19 Trait Group",
+           "Number 20 Trait Group",
+           "Number 21 Trait Group",
+           "Number 22 Trait Group",
+           "Number 23 Trait Group",
+           "Number 24 Trait Group",
+           "Number 25 Trait Group"
+)
+choices_top =choices_top[1:(length(matching_objects)+1)]
 save.image(paste0(file_directory,"/", gene_name,"_test/Final_data/final_workspace_for_shiny.RData"))
 runApp( paste0(file_directory,"/app_with_circos.R"))
 ```
