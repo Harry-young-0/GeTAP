@@ -145,7 +145,7 @@ The **'Final_data'** folder contains the following files:
 
 The **'Final_plots'** folder contains the following plots:
 
-### Plot A1 = SNPs vs tissue groups
+### Plot A1: to match graph title SNPs vs tissue groups
 _Before LD - not as a proportion, but just total number of SNPs that affect gene expression._
 
 Summary of SNPs that alter expression of your gene of interest and the direction of that change as quantified by GTEx, grouped by the tissue groups. Colour = direction of expression change, rsid = unique SNP identifier
@@ -154,7 +154,7 @@ Title and axis says proportion of SNP-trait associations per tissue? Proportion 
 
 ![A](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/e079bc31-c6da-4e23-8a15-34f62526e4ef)
 
-### Plot A2 = SNPs vs tissue groups
+### Plot A2: SNPs vs tissue groups
 
 _after run through pipeline - number of SNPs that are associated with a trait, after LD removal. First as a total number of SNPs, optional to have also as a proportion_
 
