@@ -25,6 +25,7 @@ IMPORTANT NOTE: Traits and tissues were manually grouped into Trait Groups and T
 ![shematic_for_github](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/c46895a6-a306-4c44-84a9-aa49de639dc8)
 
 ## Section B: Software and tokens required prior to running the pipeline
+
 ### 1. LDlink token
 This pipeline uses the LDlink web server, which requires a unique token to run. The token is easily obtained here: [https://ldlink.nih.gov/?tab=apiaccess](https://ldlink.nih.gov/?tab=apiaccess). This step needs to be completed only once and then that token will stay with you for life (it is linked to your email address).
 
