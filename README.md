@@ -7,10 +7,12 @@ An overview of the various Sections on this page:
  - [Section C: Quick start guide](##-section-C)
  
  - [Section D: Understanding the Pipeline Output Plots](#section-d)
+
+ - [Section E: Pipeline extension: Multiple gene comparisons](#section-e)
  
- - [Section E: Modifying the Tissue-and-Trait-Databases](#section-e)
+ - [Section F: Modifying the Tissue-and-Trait-Databases](#section-f)
  
- - [Section F: Using the main R Notebook to modify the code](#section-f)
+ - [Section G: Using the main R Notebook to modify the code](#section-g)
 
 ## Section A: Pipeline Rationale
 
@@ -227,7 +229,11 @@ Circos plot displaying the overlap of Tissue Groups where the SNPs were found co
 
 ![Circos](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/fc2dbdea-f5f6-4767-90e3-30fdfef71ddf)
 
-## Section E: Modifying the Tissue-and-Trait-Databases
+## Section E: Pipeline extension: Multiple gene comparisons
+
+XXXXXXXXXXX
+
+## Section F: Modifying the Tissue-and-Trait-Databases
 The pipeline relies on two manually curated databases: full_tissue_database and full_trait_database. These are located in the original zip folder.
 
 The original tissue data was downloaded from GTEx: https://gtexportal.org/home/tissue/. The original trait data was downloaded from ieugwasr::gwasinfo(). These extensive databases of Tissues and Traits have already been manually grouped into Tissue Groups and Trait Groups. However, these groupings can be further modified and regrouped according to your own preferences, by altering the group column in the **FILE**. The output plots will automatically adjust to match your edits, as long as you do not change the column names.
