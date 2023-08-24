@@ -2,9 +2,9 @@ An overview of the various Sections on this page:
 
  - [Section A: Pipeline Rationale](##-section-A)
  
- - [Section B: Software and tokens required prior to running the pipeline](##-section-B)
+ - [Section B: Software and tokens required prior to running the Pipeline](##-section-B)
  
- - [Section C: Quick start guide](##-section-C)
+ - [Section C: Quick Start Guide and Troubleshooting](##-section-C)
  
  - [Section D: Understanding the Pipeline Output Plots](#section-d)
 
@@ -45,7 +45,7 @@ Following installation, open RStudio. Then continue following the instructions b
 
 Important: If you already have R and Rstudio installed prior to your first run, please either fresh install or reset all of your packages.
 
-## Section C: Quick Start Guide
+## Section C: Quick Start Guide and Troubleshooting
 
 ### 1. Create a file directory
 
