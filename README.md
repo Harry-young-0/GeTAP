@@ -147,26 +147,39 @@ The **'Final_data'** folder contains the following files:
 
 The **'Final_plots'** folder contains the following plots:
 
-### Plot A1: to match graph title SNPs vs tissue groups
-_Before LD - not as a proportion, but just total number of SNPs that affect gene expression._
+### Plot A1: Number of SNPs per Tissue Group from GTEx
+An overview of which tissue groups the SNPs that alter expression of your gene of interest were detected in by GTEx, grouped by the tissue groups. This is generated using the initial download from GTEx before running through the pipeline or assessing linkage disequilibrium.
 
-Summary of SNPs that alter expression of your gene of interest and the direction of that change as quantified by GTEx, grouped by the tissue groups. Colour = direction of expression change, rsid = unique SNP identifier
+Colour = direction of expression change, rsid = unique SNP identifier
 
-Title and axis says proportion of SNP-trait associations per tissue? Proportion calculated how????
 
-![A](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/e079bc31-c6da-4e23-8a15-34f62526e4ef)
 
-### Plot A2: SNPs vs tissue groups
+### Plot A2: Number of SNPs after PheWAS search and LD removal
 
-_after run through pipeline - number of SNPs that are associated with a trait, after LD removal. First as a total number of SNPs, optional to have also as a proportion_
+The same plot as described in A1 but after running the pipeline, thereby loosing SNPs that have not been associated with a phenotype in the IEU Open GWAS project PheWAS database ([REF](https://gwas.mrcieu.ac.uk/)) or are in linkage disequilibrium ([REF](https://ldlink.nih.gov/?tab=home))
+
+
+
+## Plot A3: Number of SNP-Trait Associations per Tissue (after LD removal)
+
+An overview of the SNP-Trait Associations (STAs) per tissue group. The pipeline aims to match known STAs with expression changes and this plot shows which Tissue Groups the SNPs in those STAs were found in relative to the direction of expression change.
+
+
 
 ### Plot B = Correlation
 Correlation of the number of different traits in a Trait Group relative to the total number of different possible traits in the full database. An indication of whether the results are due to chance. This considers repeated SNP-Trait associations. If 100 different SNPs are all associated with LDL, this is recorded as 100 SNP-Trait associations. 
 
-![B](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/cccbbfa0-6c86-4aec-adab-8cf4d0570e70)
+
+
+zoomed version on the 15% x 15% region to avoid big outliers
+
+
+
 
 ### Plot C
 A summary of how many tissues each SNP alters gene expression in (from GTEx eQTLs). Importantly, this also shows cases where a SNP is associated with a decrease in expression in one tissue and an increase in another. Though rare, these could provide further complexity or insight when interpreting the SNP-Trait associations.
+
+
 
 <img src="https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/c4dd5090-87ef-4963-b2bc-1a522d8747c7" width="150" height="1000">
 
