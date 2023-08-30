@@ -152,92 +152,100 @@ An overview of which tissue groups the SNPs that alter expression of your gene o
 
 Colour = direction of expression change, rsid = unique SNP identifier
 
+![A1](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/1374315a-dd39-4394-9353-bb8211a10eb8)
 
 
 ### Plot A2: Number of SNPs after PheWAS search and LD removal
 
 The same plot as described in A1 but after running the pipeline, thereby loosing SNPs that have not been associated with a phenotype in the IEU Open GWAS project PheWAS database ([REF](https://gwas.mrcieu.ac.uk/)) or are in linkage disequilibrium ([REF](https://ldlink.nih.gov/?tab=home))
 
+![A2](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/97581832-e7ac-4452-a489-4d1b2f2f1529)
 
 
 ## Plot A3: Number of SNP-Trait Associations per Tissue (after LD removal)
 
 An overview of the SNP-Trait Associations (STAs) per tissue group. The pipeline aims to match known STAs with expression changes and this plot shows which Tissue Groups the SNPs in those STAs were found in relative to the direction of expression change.
 
+![A3](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/a1a9a31b-0dc2-4b21-bb18-cbbbb0ae06d9)
 
+### Plot A4
+How many of your SNPs are based in regulatory regions (auto assigned from ensembl).
+
+![A4](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/0f327726-b92c-4924-abf2-94363e45112d)
 
 ### Plot B = Correlation
 Correlation of the number of different traits in a Trait Group relative to the total number of different possible traits in the full database. An indication of whether the results are due to chance. This considers repeated SNP-Trait associations. If 100 different SNPs are all associated with LDL, this is recorded as 100 SNP-Trait associations. 
++ zoomed version on the 15% x 15% region to avoid big outliers (B2)
 
-
-
-zoomed version on the 15% x 15% region to avoid big outliers
-
-
+![B1 and B2](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/682027ff-cd59-4712-b16a-ca342549333e)
 
 
 ### Plot C
 A summary of how many tissues each SNP alters gene expression in (from GTEx eQTLs). Importantly, this also shows cases where a SNP is associated with a decrease in expression in one tissue and an increase in another. Though rare, these could provide further complexity or insight when interpreting the SNP-Trait associations.
 
 
+<img src="https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/eabe4dd2-58e4-467a-be2a-b25cc13e5d37" width="180" height="1000">
 
-<img src="https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/c4dd5090-87ef-4963-b2bc-1a522d8747c7" width="150" height="1000">
-
-### Plot D
+### Plot D1
 Number of SNP-Trait associations per Trait Group. Colour based on Trait Group. i.e. Regardless of direction of expression change, which Trait Groups are affected by SNPs that alter a gene of interests expression.
 
-![D](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/04631737-3c4d-4379-b79d-a3e13b292af4)
+![D1](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/6d2cf82c-6003-46d7-b261-379617d1a7e3)
 
+
+### Plot D2
 Normalised Version - normalised to the number of possible traits within the database. (Number of different traits from SNP-Trait associations per Trait Group)/(Number of possible traits in each Trait Group from Full_trait_database.csv).
 
-![D2](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/84020a7d-512c-4942-96f3-eaee0b21d67f)
+![D2](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/21ce350e-9922-4346-a609-f14a215909c0)
 
-### Plots E1-E4
-These plots are grouped together to summarise the SNP-Trait assocations as part of their respective Trait Groups whilst considering p-value, expression change and beta change (the direction of change of a trait).
+### Plots E1-E2
+These plots are grouped together to summarise the SNP-Trait assocations while considering expression change and beta change (the direction of change of a trait).
 
-**Key**: Above x-axis, increased expression, Below x axis decreased expression, y axis: -log(p(trait change)) x direction of expression change , colour = direction of trait change. i.e. Yellow = SNP increases trait, Purple = SNP decreases trait.
+**Key**: Above x-axis, increased expression, Below x axis decreased expression, y axis: Number of STAs in a traitgroup / Number of total STAs in output dataframe, colour = direction of trait change. i.e. Yellow = SNP increases trait, Purple = SNP decreases trait.
 
 ### E1 
 Individual SNP-trait associations grouped by Trait Group. 
 
-![E1](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/c0bc1a0a-55dd-47e5-9b40-48dea82ae38b)
+![E1](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/99d50d17-91f5-4cc6-8184-c94412ba4fdb)
+
 
 ### E2 
 Modified version of E1 without Other Gene Expression Change or Other categories because these are often very big and so can obscure the other results. "Other Gene Expression Change" is a Trait Group where every trait is another gene ID with altered expression, often according to GTEx data. "Other" consists of traits I could not categorise easily. For example, "geographical location: North". Though both of these categories may be important, they are often large and so are removed for clarity here.
 
-![E2](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/c4fef5ab-7fff-40ab-b866-415b573ac29e)
+![E2](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/d75b17a0-f682-4958-bf05-ee720240bd44)
 
-### E3
-Expanding just the Other Gene Expression Change category to look at the individual traits (in this case genes) your gene of interest/your SNPs effect.
-
-<img src="https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/7cd0514d-c796-4aa3-9dfb-93bad8ed7c93" width="450" height="800">
-
-### E4
-Expanding all the Trait Groups (excluding Other Gene Expression Change and Other) to see individual traits within the categories. In this case displaying just one example. NOTE: these can often be very big, if the plot is unreadable, hopefully you can find and fix it within the code but if not please email me and I'll be happy to modify it for you.
-
-I've made a custom chunk at the end of the pipeline, line: 3256, to help out
-
-<img src="https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/1cffc88b-adc8-4e72-b165-570c48bfbca5" width="400" height="750">
 
 ### Plots F1-2
 These graphs offer an alternate way of visualising the plots in E. Here we ignore p-value and display the number of SNP-trait associations within each Trait Group. The number in each group is then normalised to the total number of SNPs across all Trait Groups. This will also allow direct comparison between different genes run throught he pipeline as it normalises for a different number of SNP-Trait associations between genes. **Key**: y-axis: (number of SNP-Trait assocations within that category) / (total SNP-trait associations). Colour = direction of trait change. Below x-axis, SNPs that decrease the gene of interests expression. Above x-axis, SNPs that increase the gene of interests expression
 
 ### F1 
-E1 but normalised to the total dataset as described above.
 
-![F1](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/5cc5f83b-5ad4-4b74-9171-7bbc549b1442)
+These plots are grouped together to summarise the SNP-Trait assocations while considering expression change and beta change (the direction of change of a trait).
+
+**Key**: Above x-axis, increased expression, Below x axis decreased expression, y axis: Number of STAs in a traitgroup / Number of total STAs in output dataframe, colour = direction of trait change. i.e. Yellow = SNP increases trait, Purple = SNP decreases trait
+
+![F1](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/4c3cb505-44af-4b74-9c30-6fc3dd044acf)
+
 
 ### F2
 Modified version of F1 without "Other" and "Other Gene Expression Change" for clarity (see E2 for explanation).
 
-![F2](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/ce0b2298-199e-4598-b68f-347d4e58c7dd)
+![F2](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/80215ade-6834-4a5f-bde4-967e75bf4055)
+
+### F3
+Expanding just the Other Gene Expression Change category to look at the individual traits (in this case genes) your gene of interest/your SNPs effect.
+
+<img src="https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/07c80c07-62a9-410f-9e2d-4f20f23e7180" width="450" height="800">
+
+### F4
+Expanding all the Trait Groups to see individual traits within the categories. In this case displaying just one example. NOTE: these can often be very big, if the plot is unreadable, hopefully you can find and fix it within the code but if not please email me and I'll be happy to modify it for you. INCOMPLETE NEEDS CHANGING
+
+I've made a custom chunk at the end of the pipeline, line: 3256, to help out
+
+Example of the bodyfat/size subcategory shown here:
+
+<img src="https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/e9aae3fd-d9be-4330-b6a0-4a21fd3b64e2" width="400" height="750">
 
 ### Plot G
-How many of your SNPs are based in regulatory regions (auto assigned from ensembl).
-
-![G](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/1c9444a0-7683-4bd2-9dff-51f0bfde26a8)
-
-### Plot H
 Circos plot displaying the overlap of Tissue Groups where the SNPs were found compared to the Trait Groups their associated traits are in. 
 
 ![Circos](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/fc2dbdea-f5f6-4767-90e3-30fdfef71ddf)
