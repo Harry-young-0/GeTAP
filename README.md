@@ -154,6 +154,9 @@ Curved gene diagrams for use with circos plots + straight versions,
 + **unique_Gtex_snps.csv:** List of all GTEx SNPs altering your Genes expression.
 
 #### LDMatrix
++ **NFE2L2_r2.csv** Full matrix of r2 scores from LDLink.
++ **rs_overlap_ALL_NFE2L2** Data object for R of r2 scores in case you want to visualise the data as a matrix.
+
 
 ### 8. Troubleshooting
 This pipeline uses three servers: ieugwasr, LDlink and ensembl. All of these will time-out if the pipeline takes too long to run. If this happens, the pipeline will stop running and an error message will pop up in the console (bottom left box). If this happens please try running the pipeline again at a later time, evenings are often less busy. If the pipeline keeps erroring, please let me know and I'll help as much as I can!
