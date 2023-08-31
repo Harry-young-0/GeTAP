@@ -49,9 +49,9 @@ Important: If you already have R and Rstudio installed prior to your first run, 
 
 ### 1. Create a file directory
 
-This will be where the pipeline is saved and where the pipeline outputs all the data. Create a suitable folder to act as the file directory e.g. on your desktop. For example: 
+This will be where the pipeline is saved and where the pipeline outputs all the data. Create a suitable folder to act as the file directory e.g. on your desktop, or in your documents folder. For example: 
 
-![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/2b254df0-a851-471f-9459-7d8661f70a1b)
+<img width="741" alt="Step 1 Github" src="https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/a2266e2c-1d13-41b4-8014-463053764575">
 
 ### 2. Download the pipeline (and all associated databases)
 
@@ -63,7 +63,7 @@ This information is contained in a zip file that can be accessed from this githu
 
 The zip file contains the main pipeline, tissue and trait database csvs, readme.md and shiny app. After unzipping, these files should be moved into the main (directory folder) file and the original zip file should be deleted. Your file directory should now look like this: 
 
-![Screenshot 2023-06-23 at 11 12 54](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/912a0897-cedb-4925-9ea3-a2512b9bc28e)
+<img width="495" alt="step3 github" src="https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/009da7dd-3b21-43e6-9ebf-0419acfe02eb">
 
 ### 4. Open the Pipeline in RStudio
 
@@ -109,13 +109,47 @@ In the top right of the RStudio window, click 'run all':
 
 ### 7. Be patient! The pipeline should take ~20-30 mins to run.
 
-Once the pipeline has successfully and completely run, the various outputs of the pipeline will automatically be saved in a dedicated folder ('GENE_test') within the main directory folder.
+The pipeline will automatically open a Shiny App to display the data. The Shiny App can be reopened at anytime, by specifcally running the Shiny App rerun chunk on lines 3204-3215 - the code in this chuck needs to be updated with GENE-NAME and File_directory - then click the 'play' symbol at the top right of the box. All of the plots displayed in the Shiny App will also be saved as pdfs in the 'GENE_test' folder. The Shiny App will display the Circos plots in a nicer format than the output pdfs saved in the Circos folder.
 
-![Screenshot 2023-08-10 at 16 08 38](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/64e70275-9d68-4da6-b4c1-5f3325b54696)
+![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/be747c60-8cfe-426c-9ca0-f6628b19e1e3)
 
-The pipeline will also automatically open a Shiny App of the data. The Shiny App can be reopened at anytime, by specifcally running the Shiny App rerun chunk on lines 3204-3215 - the code in this chuck needs to be updated with GENE-NAME and File_directory - then click the 'play' symbol at the top right of the box. All of the plots displayed in the Shiny App will also be saved as pdfs in the 'GENE_test' folder. The Shiny App will display the Circos plots in a nicer format than the output pdfs saved in the Circos folder.
+All outputs of the pipeline will automatically be saved in a dedicated folder ('GENE_test') within the main directory folder.
 
-_ALSO ADD IMAGE OF SHINY APP THAT POPS UP_
+<img width="739" alt="Step7 gituhub" src="https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/5464b4d0-8bae-40c2-8229-1490e0ff8732">
+
+Guide to files (alphabetical order):
+
+#### Circos:
++ **H-Tissue_trait_overlap:** Main trait tissue overlap plot.
++ **Position_Gtex_P:** Position of SNP on the Chromosome linked to each Tissue Group (after PheWAS and LD removal).
++ **tissue_LUT:** Seperated legend, a guide to tissue group colors
++ **Tissue_trait_overlap_NO_OTHER:** Alternate version of H, excluding the "Other" category.
++ **trait_position:** Position of SNP on the Chromosome linked to each Trait Group.
++ **trait_position_NO_OTHER:** Position of SNP on the Chromosome linked to each Trait Group (No "Other" category).
+#### Ensembl:
++ **GENE_full_REG_region.csv:** Overview of each regulatory region within 2mB of your gene of interest.
++ **NFE2L2_structure_FIN.csv:** Ensembl download of your gene's region including introns,exons, 5'UTR and 3'UTR.
+#### Final_data:
++ **final_df.csv:** The pipeline output from which all plots are created.
++ **final_workspace_for_shiny.RData:** Rstudio workspace, to be reloaded for rerunning the shiny app, detailed above.
++ **NFE2L2_GtextoPHEWAS_RAW.csv:** Original search of GTEx SNPs into PheWAS() - before LD removal and all pipeline cleaning/mod steps
+#### Final Plots:
+See above.
+####Gene_diagram_output:
+Curved gene diagrams for use with circos plots + straight versions,
++ **Curved_gene_diagram_G_Colour:**  (BEFORE PheWAS and LD) KEY: y=-log(p) (of GTEx NES value), x=Chromosome position, color = regulatory region each SNP is found in.
++ **Curved_gene_diagram_G:** (BEFORE PheWAS and LD) KEY: y=-log(p) (of GTEx NES value), x=Chromosome position, color = Blue.
++ **Curved_gene_diagram_P_FULL_Colour:** (AFTER PheWAS and LD) KEY: y=-log(p) (of trait beta value), x=Chromosome position, color = regulatory region each SNP is found in.
++ **Curved_gene_diagram_P_FULL:** (AFTER PheWAS and LD) KEY: y=-log(p) (of trait beta value), x=Chromosome position, color = Blue.
++ **Curved_gene_diagram_RED_colour:** (AFTER PheWAS and LD) KEY: y=-log(p) (of GTEx NES value), x=Chromosome position, color = regulatory region each SNP is found in.
++ **Curved_gene_diagram_RED:** (AFTER PheWAS and LD) KEY: y=-log(p) (of GTEx NES value), x=Chromosome position, color = Blue.
++ **Gene_structure_G:**  (BEFORE PheWAS and LD) KEY: y=-log(p) (of GTEx NES value), x=Chromosome position, color = regulatory region each SNP is found in.
++ **Gene_structure_gtex_RED:** (AFTER PheWAS and LD) KEY: y=-log(p) (of GTEx NES value), x=Chromosome position, color = regulatory region each SNP is found in.
+#### Gtex
++ **Gtex_cleaned.csv:** GTEx data download after some minor cleaning steps to make it more readable with some additional columns (|NES|, Gene regions, UTRs) 
++ **Gtex_cleaned_REG.csv:** GTEx data download after some minor cleaning steps to make it more readable AND all predicted regulatory regions assigned - from Ensembl.
++ **GENE_Gtex_cleaned.csv:** GTEx data download after some minor cleaning steps to make it more readable.
++ **NFE2L2_gtexPHEWAS_no_ukaORAmbig_FINAL_linkagetempr20.5:** The last step before LD removal. This is 
 
 ### 8. Troubleshooting
 This pipeline uses three servers: ieugwasr, LDlink and ensembl. All of these will time-out if the pipeline takes too long to run. If this happens, the pipeline will stop running and an error message will pop up in the console (bottom left box). If this happens please try running the pipeline again at a later time, evenings are often less busy. If the pipeline keeps erroring, please let me know and I'll help as much as I can!
