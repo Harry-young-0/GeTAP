@@ -135,7 +135,7 @@ Guide to files (alphabetical order):
 + **NFE2L2_GtextoPHEWAS_RAW.csv:** Original search of GTEx SNPs into PheWAS() - before LD removal and all pipeline cleaning/mod steps
 #### Final Plots:
 See above.
-####Gene_diagram_output:
+#### Gene_diagram_output:
 Curved gene diagrams for use with circos plots + straight versions,
 + **Curved_gene_diagram_G_Colour:**  (BEFORE PheWAS and LD) KEY: y=-log(p) (of GTEx NES value), x=Chromosome position, color = regulatory region each SNP is found in.
 + **Curved_gene_diagram_G:** (BEFORE PheWAS and LD) KEY: y=-log(p) (of GTEx NES value), x=Chromosome position, color = Blue.
@@ -149,7 +149,11 @@ Curved gene diagrams for use with circos plots + straight versions,
 + **Gtex_cleaned.csv:** GTEx data download after some minor cleaning steps to make it more readable with some additional columns (|NES|, Gene regions, UTRs) 
 + **Gtex_cleaned_REG.csv:** GTEx data download after some minor cleaning steps to make it more readable AND all predicted regulatory regions assigned - from Ensembl.
 + **GENE_Gtex_cleaned.csv:** GTEx data download after some minor cleaning steps to make it more readable.
-+ **NFE2L2_gtexPHEWAS_no_ukaORAmbig_FINAL_linkagetempr20.5:** The last step before LD removal. This is 
++ **NFE2L2_gtexPHEWAS_no_ukaORAmbig_FINAL_linkagetempr20.5:** The last step before LD removal. Providing an alternative final_df if you wanted to not filter based on LD. In this case an r2 cutoff of 0.5 was used (this is very leniant LD already).
++ **NFE2L2_merge_GTEX_PHEWAS.csv:** Initial output of GTEx SNPs into PheWAS().
++ **unique_Gtex_snps.csv:** List of all GTEx SNPs altering your Genes expression.
+
+#### LDMatrix
 
 ### 8. Troubleshooting
 This pipeline uses three servers: ieugwasr, LDlink and ensembl. All of these will time-out if the pipeline takes too long to run. If this happens, the pipeline will stop running and an error message will pop up in the console (bottom left box). If this happens please try running the pipeline again at a later time, evenings are often less busy. If the pipeline keeps erroring, please let me know and I'll help as much as I can!
