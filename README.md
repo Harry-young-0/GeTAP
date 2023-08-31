@@ -117,46 +117,6 @@ All outputs of the pipeline will automatically be saved in a dedicated folder ('
 
 <img width="739" alt="Step7 gituhub" src="https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/5464b4d0-8bae-40c2-8229-1490e0ff8732">
 
-Guide to files (alphabetical order):
-
-#### Circos:
-+ **H-Tissue_trait_overlap:** Main trait tissue overlap plot.
-+ **Position_Gtex_P:** Position of SNP on the Chromosome linked to each Tissue Group (after PheWAS and LD removal).
-+ **tissue_LUT:** Seperated legend, a guide to tissue group colors
-+ **Tissue_trait_overlap_NO_OTHER:** Alternate version of H, excluding the "Other" category.
-+ **trait_position:** Position of SNP on the Chromosome linked to each Trait Group.
-+ **trait_position_NO_OTHER:** Position of SNP on the Chromosome linked to each Trait Group (No "Other" category).
-#### Ensembl:
-+ **GENE_full_REG_region.csv:** Overview of each regulatory region within 2mB of your gene of interest.
-+ **NFE2L2_structure_FIN.csv:** Ensembl download of your gene's region including introns,exons, 5'UTR and 3'UTR.
-#### Final_data:
-+ **final_df.csv:** The pipeline output from which all plots are created.
-+ **final_workspace_for_shiny.RData:** Rstudio workspace, to be reloaded for rerunning the shiny app, detailed above.
-+ **NFE2L2_GtextoPHEWAS_RAW.csv:** Original search of GTEx SNPs into PheWAS() - before LD removal and all pipeline cleaning/mod steps
-#### Final Plots:
-See Bleow (NEXT SECTION LINK).
-#### Gene_diagram_output:
-Curved gene diagrams for use with circos plots + straight versions,
-+ **Curved_gene_diagram_G_Colour:**  (BEFORE PheWAS and LD) KEY: y=-log(p) (of GTEx NES value), x=Chromosome position, color = regulatory region each SNP is found in.
-+ **Curved_gene_diagram_G:** (BEFORE PheWAS and LD) KEY: y=-log(p) (of GTEx NES value), x=Chromosome position, color = Blue.
-+ **Curved_gene_diagram_P_FULL_Colour:** (AFTER PheWAS and LD) KEY: y=-log(p) (of trait beta value), x=Chromosome position, color = regulatory region each SNP is found in.
-+ **Curved_gene_diagram_P_FULL:** (AFTER PheWAS and LD) KEY: y=-log(p) (of trait beta value), x=Chromosome position, color = Blue.
-+ **Curved_gene_diagram_RED_colour:** (AFTER PheWAS and LD) KEY: y=-log(p) (of GTEx NES value), x=Chromosome position, color = regulatory region each SNP is found in.
-+ **Curved_gene_diagram_RED:** (AFTER PheWAS and LD) KEY: y=-log(p) (of GTEx NES value), x=Chromosome position, color = Blue.
-+ **Gene_structure_G:**  (BEFORE PheWAS and LD) KEY: y=-log(p) (of GTEx NES value), x=Chromosome position, color = regulatory region each SNP is found in.
-+ **Gene_structure_gtex_RED:** (AFTER PheWAS and LD) KEY: y=-log(p) (of GTEx NES value), x=Chromosome position, color = regulatory region each SNP is found in.
-#### Gtex
-+ **Gtex_cleaned.csv:** GTEx data download after some minor cleaning steps to make it more readable with some additional columns (|NES|, Gene regions, UTRs) 
-+ **Gtex_cleaned_REG.csv:** GTEx data download after some minor cleaning steps to make it more readable AND all predicted regulatory regions assigned - from Ensembl.
-+ **GENE_Gtex_cleaned.csv:** GTEx data download after some minor cleaning steps to make it more readable.
-+ **NFE2L2_gtexPHEWAS_no_ukaORAmbig_FINAL_linkagetempr20.5:** The last step before LD removal. Providing an alternative final_df if you wanted to not filter based on LD. In this case an r2 cutoff of 0.5 was used (this is very leniant LD already).
-+ **NFE2L2_merge_GTEX_PHEWAS.csv:** Initial output of GTEx SNPs into PheWAS().
-+ **unique_Gtex_snps.csv:** List of all GTEx SNPs altering your Genes expression.
-
-#### LDMatrix
-+ **NFE2L2_r2.csv** Full matrix of r2 scores from LDLink.
-+ **rs_overlap_ALL_NFE2L2** Data object for R of r2 scores in case you want to visualise the data as a matrix.
-
 
 ### 8. Troubleshooting
 This pipeline uses three servers: ieugwasr, LDlink and ensembl. All of these will time-out if the pipeline takes too long to run. If this happens, the pipeline will stop running and an error message will pop up in the console (bottom left box). If this happens please try running the pipeline again at a later time, evenings are often less busy. If the pipeline keeps erroring, please let me know and I'll help as much as I can!
@@ -176,17 +136,55 @@ The output of the pipeline will be automatically saved in a 'GENE_test' folder, 
   - **LDMatrix**  showing.....
   - **GENE_GtextoPHEWAS_RAW.csv**  showing.....
 
-The **'Circos'** folder contains the following plots:
+Guide to files (alphabetical order):
 
-The **'Ensembl'** folder contains the following plots:
+### Circos:
++ **G-Tissue_trait_overlap:** Main trait tissue overlap plot.
++ **Position_Gtex_P:** Position of SNP on the Chromosome linked to each Tissue Group (after PheWAS and LD removal).
++ **tissue_LUT:** Seperated legend, a guide to tissue group colors
++ **Tissue_trait_overlap_NO_OTHER:** Alternate version of H, excluding the "Other" category.
++ **trait_position:** Position of SNP on the Chromosome linked to each Trait Group.
++ **trait_position_NO_OTHER:** Position of SNP on the Chromosome linked to each Trait Group (No "Other" category).
 
-The **'Final_data'** folder contains the following files:
+  
+### Ensembl:
++ **GENE_full_REG_region.csv:** Overview of each regulatory region within 2mB of your gene of interest.
++ **NFE2L2_structure_FIN.csv:** Ensembl download of your gene's region including introns,exons, 5'UTR and 3'UTR.
 
-- Initial PheWAS ouput before LD removal
-- Final output after LD removal (including Ensembl predicted regulatory regions)
-- final_workspace_for_shiny 
+  
+### Final_data:
++ **final_df.csv:** The pipeline output from which all plots are created.
++ **final_workspace_for_shiny.RData:** Rstudio workspace, to be reloaded for rerunning the shiny app, detailed above.
++ **NFE2L2_GtextoPHEWAS_RAW.csv:** Original search of GTEx SNPs into PheWAS() - before LD removal and all pipeline cleaning/mod steps.
 
-The **'Final_plots'** folder contains the following plots:
+  
+### Final Plots:
+See Below (NEXT SECTION LINK).
+
+### Gene_diagram_output:
+Curved gene diagrams for use with circos plots + straight versions,
++ **Curved_gene_diagram_G_Colour:**  (BEFORE PheWAS and LD) KEY: y=-log(p) (of GTEx NES value), x=Chromosome position, color = regulatory region each SNP is found in.
++ **Curved_gene_diagram_G:** (BEFORE PheWAS and LD) KEY: y=-log(p) (of GTEx NES value), x=Chromosome position, color = Blue.
++ **Curved_gene_diagram_P_FULL_Colour:** (AFTER PheWAS and LD) KEY: y=-log(p) (of trait beta value), x=Chromosome position, color = regulatory region each SNP is found in.
++ **Curved_gene_diagram_P_FULL:** (AFTER PheWAS and LD) KEY: y=-log(p) (of trait beta value), x=Chromosome position, color = Blue.
++ **Curved_gene_diagram_RED_colour:** (AFTER PheWAS and LD) KEY: y=-log(p) (of GTEx NES value), x=Chromosome position, color = regulatory region each SNP is found in.
++ **Curved_gene_diagram_RED:** (AFTER PheWAS and LD) KEY: y=-log(p) (of GTEx NES value), x=Chromosome position, color = Blue.
++ **Gene_structure_G:**  (BEFORE PheWAS and LD) KEY: y=-log(p) (of GTEx NES value), x=Chromosome position, color = regulatory region each SNP is found in.
++ **Gene_structure_gtex_RED:** (AFTER PheWAS and LD) KEY: y=-log(p) (of GTEx NES value), x=Chromosome position, color = regulatory region each SNP is found in.
+  
+### Gtex
++ **Gtex_cleaned.csv:** GTEx data download after some minor cleaning steps to make it more readable with some additional columns (|NES|, Gene regions, UTRs) 
++ **Gtex_cleaned_REG.csv:** GTEx data download after some minor cleaning steps to make it more readable AND all predicted regulatory regions assigned - from Ensembl.
++ **GENE_Gtex_cleaned.csv:** GTEx data download after some minor cleaning steps to make it more readable.
++ **NFE2L2_gtexPHEWAS_no_ukaORAmbig_FINAL_linkagetempr20.5:** The last step before LD removal. Providing an alternative final_df if you wanted to not filter based on LD. In this case an r2 cutoff of 0.5 was used (this is very leniant LD already).
++ **NFE2L2_merge_GTEX_PHEWAS.csv:** Initial output of GTEx SNPs into PheWAS().
++ **unique_Gtex_snps.csv:** List of all GTEx SNPs altering your Genes expression.
+
+### LDMatrix
++ **NFE2L2_r2.csv:** Full matrix of r2 scores from LDLink.
++ **rs_overlap_ALL_NFE2L2:** Data object for R of r2 scores in case you want to visualise the data as a matrix.
+
+## Final Plots:
 
 ### Plot A1: Number of SNPs per Tissue Group from GTEx
 An overview of which tissue groups the SNPs that alter expression of your gene of interest were detected in by GTEx, grouped by the tissue groups. This is generated using the initial download from GTEx before running through the pipeline or assessing linkage disequilibrium.
@@ -267,7 +265,6 @@ Modified version of F1 without "Other" and "Other Gene Expression Change" for cl
 
 ### F3
 Expanding just the Other Gene Expression Change category to look at the individual traits (in this case genes) your gene of interest/your SNPs effect.
-
 
 <img src="https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/a2675cb7-7d2f-4a4f-99ac-fa4a995fcbb6" width="450" height="800">
 
