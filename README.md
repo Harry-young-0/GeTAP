@@ -134,7 +134,7 @@ Guide to files (alphabetical order):
 + **final_workspace_for_shiny.RData:** Rstudio workspace, to be reloaded for rerunning the shiny app, detailed above.
 + **NFE2L2_GtextoPHEWAS_RAW.csv:** Original search of GTEx SNPs into PheWAS() - before LD removal and all pipeline cleaning/mod steps
 #### Final Plots:
-See above.
+See Bleow (NEXT SECTION LINK).
 #### Gene_diagram_output:
 Curved gene diagrams for use with circos plots + straight versions,
 + **Curved_gene_diagram_G_Colour:**  (BEFORE PheWAS and LD) KEY: y=-log(p) (of GTEx NES value), x=Chromosome position, color = regulatory region each SNP is found in.
