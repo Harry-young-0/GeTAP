@@ -293,7 +293,7 @@ df_red =df_red %>%
   mutate(alpha =subcat_count/max(subcat_count))
   
 for_legend = Full_trait_database %>% 
-  select(traitgroup,Subcat,Alt_Subcat) %>%
+  dplyr::select(traitgroup,Subcat,Alt_Subcat) %>%
   unique() %>%
   mutate(`Gene Symbol` = "Legend",
          subcat_count=max(df_red$subcat_count),
@@ -326,7 +326,8 @@ df_red$`Gene Symbol` =factor(df_red$`Gene Symbol`, levels=c(genes_for_heatmap,"L
 
 ggsave(paste0(file_directory,"/Plots/B2-SubcatvsGene_groupcol_ALPHA_.pdf"), width=150, height=400, unit ="mm")
 
-#ALTERNATE COLOURSCHEME ####
+#ALTERNATE COLOURSCHEME  based on number of rsids####
+df_red$Subcat =ifelse(df_red$Subcat=="Blood Traits", df_red$Alt_Subcat, df_red$Subcat)
 df_red %>% filter(`Gene Symbol`!="Legend")%>%
   ggplot()+
     geom_tile( aes(x=`Gene Symbol`, y=Subcat, fill=subcat_count, height=0.8, width=0.9))+
@@ -350,7 +351,117 @@ df_red %>% filter(`Gene Symbol`!="Legend")%>%
 
 ggsave(paste0(file_directory,"/Plots/B3-SubcatvsGene_colby_n.rsid-trait.pdf"), width=150, height=220, unit ="mm")
 
+#ALTERNATE COLOURSCHEME 2  based on proportion of rsids####
+df =df_merge
+df$Subcat =ifelse(df$Subcat=="Blood Traits", df$Alt_Subcat, df$Subcat)
+test_counts = df %>% 
+  dplyr::select(trait, traitgroup, Subcat, `Gene Symbol`,rsid, p) %>%
+  unique() %>% 
+  group_by(trait, traitgroup,Subcat, `Gene Symbol`)%>%
+  summarise(subcat_count = n()) %>%
+  group_by(`Gene Symbol`)%>%
+  mutate(subcat_count.adj=(subcat_count/sum(subcat_count))*100) %>% 
+  dplyr::select(`Gene Symbol`,traitgroup,Subcat,subcat_count.adj,subcat_count) %>% 
+  group_by(`Gene Symbol`,traitgroup,Subcat)%>%
+  summarise(subcat_count.adj = sum(subcat_count.adj),
+             subcat_count = sum(subcat_count))
+STA_count = df %>% 
+  dplyr::select(trait, traitgroup, Subcat,`Gene Symbol`,rsid, p) %>%
+  unique() %>% 
+  group_by(trait, traitgroup,Subcat, `Gene Symbol`)%>%
+  summarise(subcat_count = n()) %>% 
+  group_by(`Gene Symbol`) %>%
+  summarise(subcat_count= sum(subcat_count))
+trait_database_simple = Full_trait_database %>% 
+  mutate(Subcat=ifelse(Subcat=="Blood Traits", Alt_Subcat, Subcat))%>%
+  dplyr::select(trait,Subcat, traitgroup) %>%
+  unique() %>% 
+  group_by(Subcat,traitgroup)%>%
+  summarise(subcat_count = n()) %>%
+  ungroup() %>%
+  mutate(subcat_count.adj=(subcat_count/sum(subcat_count))*100) 
+trait_database_simple$`Gene Symbol` = "Database"
+test_counts=rbind(test_counts, trait_database_simple)
 
+test_counts$traitgroup = factor(test_counts$traitgroup, levels =trait_order)
+test_counts$`Gene Symbol` = factor(test_counts$`Gene Symbol`, levels=c("Database" , genes_for_heatmap))
+
+
+test_counts %>%
+  ggplot()+
+    geom_tile( aes(x=`Gene Symbol`, y=Subcat, fill=subcat_count, height=0.8, width=0.9))+
+    geom_text(aes(x=`Gene Symbol`, y=Subcat,label=subcat_count), size=2)+ # Comment in/out for text overlay
+    scale_fill_viridis_c(trans = "log", breaks = trans_breaks("log", function(x) 10^x),
+                       c(0.01,1,100))+
+    theme(axis.text.x = element_text(size=8, angle=45, hjust=1), 
+          strip.text.y.right = element_text(angle = 0, face="bold"),
+          strip.background.y = element_blank(),
+          strip.background.x =element_rect(fill="grey20"),
+          strip.text.x = element_text(colour = "white"),
+          legend.position = "bottom",
+          panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank(),
+          panel.background  = element_rect(colour = "grey99"), 
+          axis.line = element_line(colour = "black"),
+          panel.spacing.y = unit(0.2,"lines")
+          )+
+    facet_grid(  rows=vars(traitgroup), scales = "free", space="free" )+
+    scale_y_discrete(limits=rev, position ="left")
+
+ggsave(paste0(file_directory,"/Plots/B4-SubcatvsGene_colby_n.rsid-trait-WITH_DATABASE_COLUMN.pdf"), width=150, height=450, unit ="mm")
+
+test_counts %>%
+  ggplot()+
+    geom_tile( aes(x=`Gene Symbol`, y=Subcat, fill=subcat_count.adj, height=0.8, width=0.9))+
+    geom_text(aes(x=`Gene Symbol`, y=Subcat,label=subcat_count), size=2)+ # Comment in/out for text overlay
+    scale_fill_continuous(type = "viridis",trans = log_trans(10), breaks=c(0.01,0.1,1,10,100))+
+    theme(axis.text.x = element_text(size=8, angle=45, hjust=1), 
+          strip.text.y.right = element_text(angle = 0, face="bold"),
+          strip.background.y = element_blank(),
+          strip.background.x =element_rect(fill="grey20"),
+          strip.text.x = element_text(colour = "white"),
+          legend.position = "bottom",
+          legend.key.width = unit(10,"mm"),
+          panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank(),
+          panel.background  = element_rect(colour = "grey99"), 
+          axis.line = element_line(colour = "black"),
+          panel.spacing.y = unit(0.2,"lines")
+          )+
+    facet_grid(  rows=vars(traitgroup), scales = "free", space="free" )+
+    scale_y_discrete(limits=rev, position ="left")
+
+ggsave(paste0(file_directory,"/Plots/B5-SubcatvsGene_colby_n.rsid-trait-rel_to_total_per_column.pdf"), width=150, height=450, unit ="mm")
+
+temp = trait_database_simple %>% 
+  dplyr::select(Subcat,traitgroup,subcat_count,  subcat_count.adj)
+
+names(temp) =c("Subcat","traitgroup","subcat_count_database","subcat_count.adj_database" )
+temp =left_join(test_counts,temp)
+  
+temp %>% 
+  mutate(subcat_count.adj.rel = subcat_count.adj/subcat_count.adj_database) %>%
+  ggplot()+
+    geom_tile( aes(x=`Gene Symbol`, y=Subcat, fill=subcat_count.adj.rel, height=0.8, width=0.9))+
+    #geom_text(aes(x=`Gene Symbol`, y=Subcat,label=subcat_count.adj.rel, size=2))+ # Comment in/out for text overlay
+    scale_fill_continuous(type = "viridis",trans = log_trans(10))+
+    theme(axis.text.x = element_text(size=8, angle=45, hjust=1), 
+          strip.text.y.right = element_text(angle = 0, face="bold"),
+          strip.background.y = element_blank(),
+          strip.background.x =element_rect(fill="grey20"),
+          strip.text.x = element_text(colour = "white"),
+          legend.position = "bottom",
+          legend.key.width = unit(10,"mm"),
+          panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank(),
+          panel.background  = element_rect(colour = "grey99"), 
+          axis.line = element_line(colour = "black"),
+          panel.spacing.y = unit(0.2,"lines")
+          )+
+    facet_grid(  rows=vars(traitgroup), scales = "free", space="free" )+
+    scale_y_discrete(limits=rev, position ="left")
+
+ggsave(paste0(file_directory,"/Plots/B6-SubcatvsGene_colby_n.rsid-trait-rel_to_total_per_subcat_from_database.pdf"), width=150, height=450, unit ="mm")
 
 
 
@@ -399,9 +510,10 @@ test_counts = df %>%
   summarise(trait_count = n()) %>%
   group_by(`Gene Symbol`)%>%
   mutate(trait_count.adj=(trait_count/sum(trait_count))*100) %>% 
-  dplyr::select(`Gene Symbol`,traitgroup,trait_count.adj) %>% 
+  dplyr::select(`Gene Symbol`,traitgroup,trait_count.adj,trait_count) %>% 
   group_by(`Gene Symbol`,traitgroup)%>%
-  summarise(trait_count.adj = sum(trait_count.adj))
+  summarise(trait_count.adj = sum(trait_count.adj),
+             trait_count = sum(trait_count))
 STA_count = df %>% 
   dplyr::select(trait, traitgroup, `Gene Symbol`,rsid, p) %>%
   unique() %>% 
@@ -409,9 +521,21 @@ STA_count = df %>%
   summarise(trait_count = n()) %>% 
   group_by(`Gene Symbol`) %>%
   summarise(trait_count= sum(trait_count))
-
+trait_database_simple = Full_trait_database %>% 
+  dplyr::select(trait, traitgroup) %>%
+  unique() %>% 
+  group_by(traitgroup)%>%
+  summarise(trait_count = n()) %>%
+  mutate(trait_count.adj=(trait_count/sum(trait_count))*100) %>% 
+  dplyr::select(traitgroup,trait_count.adj, trait_count) %>% 
+  group_by(traitgroup)%>%
+  summarise(trait_count.adj = sum(trait_count.adj),
+            trait_count = sum(trait_count))
+trait_database_simple$`Gene Symbol` = "Database"
+test_counts=rbind(test_counts, trait_database_simple)
 
 test_counts$traitgroup = factor(test_counts$traitgroup, levels =trait_order)
+test_counts$`Gene Symbol` = factor(test_counts$`Gene Symbol`, levels=c("Database" , genes_for_heatmap))
 
 ggplot()+
   geom_col(data=test_counts, aes(x=`Gene Symbol`,y= trait_count.adj, fill=traitgroup))+
@@ -432,6 +556,5 @@ ggplot()+
   scale_y_continuous(expand = expansion(mult =c(0,0.04)))+
   labs(y="Percentage of STAs / Total STAs")
  #SAVE it
-ggsave(paste0(file_directory,"/Plots/C2-Summary_bar_proportions.pdf"), width=140, height=130, unit="mm")
-
+ggsave(paste0(file_directory,"/Plots/C2-Summary_bar_proportions.pdf"), width=250, height=130, unit="mm")
 ```
