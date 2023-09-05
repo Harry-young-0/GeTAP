@@ -284,7 +284,21 @@ Circos plot displaying the overlap of Tissue Groups where the SNPs were found co
 
 ## Section E: Pipeline extension: Multiple gene comparisons
 
-XXXXXXXXXXX
+Once two or more genes have been run through the pipeline, you can compare the results between these genes using heatmaps and stacked bar charts. This is a seperate .rmd file named comparisons_between_genes.rmd.
+
+### Quick Start:
+1. Modify line 24 of the comparisons_between_genes.rmd file to genes_for_heatmap = c("GENE_1","GENE_2","GENE_3") - where GENE_1 to GENE_3 are genes you have run through the pipeline and exist in your file directory as GENE_test. OR to genes_for_heatmap = c("All") to find all genes you have run.
+2. Similar to the pipeline itself, you need to specify the file directory in line 28 to the SAME directory your pipeline has been working in. Screenshot pointing to the lines to modify:
+
+![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/e2b0f42e-9af3-4a2f-a37a-f3172c78bd44)
+
+Your directory should look something like shown below. If you have altered the names of any folders you will need to change them back to the format GENE_test.
+
+![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/0a21ea24-b5dc-49f8-95ef-45c7593ecab4)
+
+Genes will appear on the graphs in the order you place them here. If "All" then they are displayed in alphabetical order by default.
+
+INCOMPLETE : EXAMPLE GRAPHS ONCE WE HAVE CHOSEN ONES!
 
 ## Section F: Modifying the Tissue-and-Trait-Databases
 The pipeline relies on two manually curated databases: full_tissue_database and full_trait_database. These are located in the original zip folder.
