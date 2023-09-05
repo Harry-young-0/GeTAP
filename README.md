@@ -298,6 +298,8 @@ Your directory should look something like shown below. If you have altered the n
 
 Genes will appear on the graphs in the order you place them here. If "All" then they are displayed in alphabetical order by default.
 
+Once this section has run a new folder called "Heatmaps" will have appeared containing df_merge.csv, a dataframe of the compared genes and a plots folder containing INCOMPLETE, FILL IN HERE
+
 INCOMPLETE : EXAMPLE GRAPHS ONCE WE HAVE CHOSEN ONES!
 
 ## Section F: Modifying the Tissue-and-Trait-Databases
