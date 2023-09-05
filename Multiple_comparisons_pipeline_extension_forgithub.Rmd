@@ -26,11 +26,17 @@ rm(list=ls())
 # Can we extract all files from a folder _test to get the gene names
 
 #1. setting the file directory to where you want it to go DRIVE:/YOUR_FILE_DIRECTORY - THIS SHOULD BE THE SAME AS IN FINAL PIPELINE
-file_directory = "DRIVE:/YOUR_FILE_DIRECTORY"
+file_directory = "/Users/hy14913/Documents/Local_work_folder/JUL_TEST/Heatmaps_test"
 
 Full_trait_database = read_csv(paste0(file_directory,"/Trait and Tissue Groups/Full_trait_database.csv"))
 Full_trait_database = unique(Full_trait_database)
-file_directory=paste0(file_directory,"/Heatmaps_test")
+
+if(file.exists(paste0(file_directory, "/Heatmaps"))){
+  print("Doing nothing as directory is there")
+}else{
+  dir.create(paste0(file_directory, "/Heatmaps"))
+}
+
 #windows e.g: file_directory = "C:/Users/hy14913/OneDrive - University of Bristol/Desktop/May23_test"
 #mac e.g: file_directory ="/Users/hy14913/Documents/Local_work_folder/JUL_TEST"
 
@@ -49,7 +55,7 @@ try(if(file_directory=="C:/Documents/Example directory") stop("Please enter your
 setwd(paste0(file_directory))
 files_in_wd <- list.files(file_directory)
 list_of_completed_genes  <- files_in_wd[grepl("_test", files_in_wd)]  
-
+# list_of_completed_genes=list_of_completed_genes[c(1,2,4,5)]
 for(gene in list_of_completed_genes){
   print(gene)
   assign("df_temp", read_csv( paste0(file_directory,"/",gene,"/Final_data/final_df.csv")))
@@ -60,8 +66,9 @@ for(gene in list_of_completed_genes){
   }
   
 }
-
+file_directory =paste0(file_directory,"/Heatmaps")
 genes_for_heatmap = unique(df_merge$`Gene Symbol`)
+write_csv(df_merge, paste0(file_directory,"/df_merge.csv"))
 ```
 
 set up filing system
