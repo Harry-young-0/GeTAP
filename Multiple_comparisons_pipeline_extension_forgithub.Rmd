@@ -5,8 +5,7 @@ date: "2023-08-02"
 output: html_document
 ---
 
-CURRENT FAVPLOT = 1b.3-TraitgroupvsGene_groupcol_FULL_ALPHA.pdf
-AND 1d.3-TraitgroupSubcatvsGene_groupcol_FULL_ALPHA
+
 # STEP 0: Notes on using this notebook
 Prerequisites to load in :
 ```{r}
@@ -16,14 +15,16 @@ library(scales)
 
 ```
 
-Copied from final_pipleine - setup file directories etc INCOMPLETE
+# Step 1: Setup of file directories and gene list
+Modify Line 24 with a custom list of genes that you have run or "All" to find everything. Importantly, This requires your folders being named exactly what the pipeline created, GENE_test.
+FOR GITHUB: Modify line 24 of the ADD NAME HERE.rmd file to genes_for_heatmap = c("GENE_1","GENE_2","GENE_3") - where GENE_1 to GENE_3 are genes you have run through the pipeline and exist in your file directory as GENE_test. OR to genes_for_heatmap = c("All") to find all genes you have run.
+Genes will appear on the graphs in the order you place them here. If "All" then they are displayed in alphabetical order by default
 ```{r}
-
-
 #First line to clear out environment
 rm(list=ls())
-
-# Can we extract all files from a folder _test to get the gene names
+# Edit the line below for a custom list of genes:
+genes_for_heatmap = c("GENE_1","GENE_2","GENE_3")# OR:
+#genes_for_heatmap = c("All")
 
 #1. setting the file directory to where you want it to go DRIVE:/YOUR_FILE_DIRECTORY - THIS SHOULD BE THE SAME AS IN FINAL PIPELINE
 file_directory = "/Users/hy14913/Documents/Local_work_folder/JUL_TEST/Heatmaps_test"
@@ -51,24 +52,42 @@ try(if(file_directory=="C:/Documents/Example directory") stop("Please enter your
 ### Setting up finding the gene names
 
 ```{r, echo=FALSE, results='hide', message=FALSE}
-
+rm(df_merge)
 setwd(paste0(file_directory))
 files_in_wd <- list.files(file_directory)
 list_of_completed_genes  <- files_in_wd[grepl("_test", files_in_wd)]  
+
 # list_of_completed_genes=list_of_completed_genes[c(1,2,4,5)]
-for(gene in list_of_completed_genes){
-  print(gene)
-  assign("df_temp", read_csv( paste0(file_directory,"/",gene,"/Final_data/final_df.csv")))
-  if(exists("df_merge")==T){
-    df_merge =rbind(df_temp, df_merge)
-  }else{
-    df_merge =df_temp
+if(length(genes_for_heatmap)==1){ # if yes then they want all genes done, do first loop- all completed genes
+  for(gene in list_of_completed_genes){
+    print(gene)
+    assign("df_temp", read_csv( paste0(file_directory,"/",gene,"/Final_data/final_df.csv")))
+    if(exists("df_merge")==T){
+      df_merge =rbind(df_temp, df_merge)
+    }else{
+      df_merge =df_temp
+    }
+   
   }
-  
+  df_merge =unique(df_merge) 
+  genes_for_heatmap = unique(df_merge$`Gene Symbol`)
+}else{# Otherwise use their specified genes
+  for(gene in genes_for_heatmap){
+    print(gene)
+    assign("df_temp", read_csv( paste0(file_directory,"/",gene,"_test/Final_data/final_df.csv")))
+    if(exists("df_merge")==T){
+      df_merge =rbind(df_temp, df_merge)
+    }else{
+      df_merge =df_temp
+    }
+   
+  }
+  df_merge =unique(df_merge) 
 }
+
 file_directory =paste0(file_directory,"/Heatmaps")
-genes_for_heatmap = unique(df_merge$`Gene Symbol`)
 write_csv(df_merge, paste0(file_directory,"/df_merge.csv"))
+genes_for_heatmap = sort(genes_for_heatmap)
 ```
 
 set up filing system
@@ -210,7 +229,7 @@ for_legend = for_legend %>%
 df_red=rbind(df_red,for_legend)
 df_red= df_red[which(df_red$traitgroup!= "Other/Unspecified"),]
 df_red$traitgroup =factor(df_red$traitgroup, levels=trait_order)
-df_red$`Gene Symbol` =factor(df_red$`Gene Symbol`, levels=c(genes_for_heatmap,"Legend"))
+df_red$`Gene Symbol` =factor(df_red$`Gene Symbol`, levels=c("Legend",genes_for_heatmap))
 
 
 
@@ -311,7 +330,7 @@ df_red=rbind(df_red,for_legend)
 df_red=df_red %>% filter(!is.na(`Gene Symbol`))
 df_red$traitgroup =factor(df_red$traitgroup, levels=trait_order)
 df_red= df_red[which(df_red$traitgroup!= "Other/Unspecified"),]
-df_red$`Gene Symbol` =factor(df_red$`Gene Symbol`, levels=c(genes_for_heatmap,"Legend"))
+df_red$`Gene Symbol` =factor(df_red$`Gene Symbol`, levels=c("Legend",genes_for_heatmap))
 
   ggplot(data= df_red)+
     geom_tile( aes(x=`Gene Symbol`, y=Subcat, fill=traitgroup, height=0.8,alpha=alpha, width=0.9))+
