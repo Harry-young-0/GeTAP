@@ -68,6 +68,7 @@ if(length(genes_for_heatmap)==1){ # if yes then they want all genes done, do fir
   }
   df_merge =unique(df_merge) 
   genes_for_heatmap = unique(df_merge$`Gene Symbol`)
+  genes_for_heatmap = sort(genes_for_heatmap)
 }else{# Otherwise use their specified genes
   for(gene in genes_for_heatmap){
     print(gene)
@@ -84,7 +85,7 @@ if(length(genes_for_heatmap)==1){ # if yes then they want all genes done, do fir
 
 file_directory =paste0(file_directory,"/Heatmaps")
 write_csv(df_merge, paste0(file_directory,"/df_merge.csv"))
-genes_for_heatmap = sort(genes_for_heatmap)
+
 ```
 
 set up filing system
