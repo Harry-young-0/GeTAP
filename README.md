@@ -109,7 +109,9 @@ In the top right of the RStudio window, click 'run all':
 
 ### 7. Be patient! The pipeline should take ~20-30 mins to run.
 
-The pipeline will automatically open a Shiny App to display the data. The Shiny App can be reopened at anytime, by specifcally running the Shiny App rerun chunk on lines 3204-3215 - the code in this chuck needs to be updated with GENE-NAME and File_directory - then click the 'play' symbol at the top right of the box. All of the plots displayed in the Shiny App will also be saved as pdfs in the 'GENE_test' folder. The Shiny App will display the Circos plots in a nicer format than the output pdfs saved in the Circos folder.
+I COULD PUT THIS AS A SEPERATE SCRIPT? - NOT SURE WHAT IS EASIER
+
+The pipeline will automatically open a Shiny App to display the data. The Shiny App can be reopened at anytime, by specifcally running the Shiny App rerun chunk on lines 3204-3215 - the code in this chunk needs to be updated with GENE-NAME and File_directory in the same way as at teh start of the pipeline - then click the 'play' symbol at the top right of the box. All of the plots displayed in the Shiny App will also be saved as pdfs in the 'GENE_test' folder. The Shiny App will display the Circos plots in a nicer format than the output pdfs saved in the Circos folder.
 
 ![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/be747c60-8cfe-426c-9ca0-f6628b19e1e3)
 
@@ -123,22 +125,12 @@ This pipeline uses three servers: ieugwasr, LDlink and ensembl. All of these wil
 
 The main errors experienced during running of the pipeline occur during installation and updating of the packages. This is often complicated if the pipeline is run on an IT administered system, because it is reading and writing RStudio System files. This is in no way dangerous. All files being downloaded and installed are from verified and incredibly well-used sources. So if you experience trouble using a work computer, consider asking for temporary admin rights.
 
-## Section D: Understanding the Pipeline Output Plots
 
-The output of the pipeline will be automatically saved in a 'GENE_test' folder, which contains the following subfolders:
-
-  - **Circos** Circos style plots
-  - **Ensembl**  Data from....
-  - **Final_data**  Data from......
-  - **Final_plots**  Output plots of pipeline (see below for details)
-  - **Gene_diagram_output** showing.....
-  - **Gtex**  showing.....
-  - **LDMatrix**  showing.....
-  - **GENE_GtextoPHEWAS_RAW.csv**  showing.....
-
-Guide to files (alphabetical order):
+## Guide to files:
+The output of the pipeline will be automatically saved in a 'GENE_test' folder, which contains the following subfolders in alphabetical order:
 
 ### Circos:
+Circos style plots.
 + **G-Tissue_trait_overlap:** Main trait tissue overlap plot.
 + **Position_Gtex_P:** Position of SNP on the Chromosome linked to each Tissue Group (after PheWAS and LD removal).
 + **tissue_LUT:** Seperated legend, a guide to tissue group colors
@@ -148,18 +140,20 @@ Guide to files (alphabetical order):
 
   
 ### Ensembl:
+Data relating to Ensembl - gene and regulatory regions.
 + **GENE_full_REG_region.csv:** Overview of each regulatory region within 2mB of your gene of interest.
 + **NFE2L2_structure_FIN.csv:** Ensembl download of your gene's region including introns,exons, 5'UTR and 3'UTR.
 
   
 ### Final_data:
+Main data output.
 + **final_df.csv:** The pipeline output from which all plots are created.
 + **final_workspace_for_shiny.RData:** Rstudio workspace, to be reloaded for rerunning the shiny app, detailed above.
 + **NFE2L2_GtextoPHEWAS_RAW.csv:** Original search of GTEx SNPs into PheWAS() - before LD removal and all pipeline cleaning/mod steps.
 
   
 ### Final Plots:
-See Below (NEXT SECTION LINK).
+Output plots of pipeline (see below for details).
 
 ### Gene_diagram_output:
 Curved gene diagrams for use with circos plots + straight versions,
@@ -173,6 +167,7 @@ Curved gene diagrams for use with circos plots + straight versions,
 + **Gene_structure_gtex_RED:** (AFTER PheWAS and LD) KEY: y=-log(p) (of GTEx NES value), x=Chromosome position, color = regulatory region each SNP is found in.
   
 ### Gtex
+Data from GTEx - tissue/expression change centric
 + **Gtex_cleaned.csv:** GTEx data download after some minor cleaning steps to make it more readable with some additional columns (|NES|, Gene regions, UTRs) 
 + **Gtex_cleaned_REG.csv:** GTEx data download after some minor cleaning steps to make it more readable AND all predicted regulatory regions assigned - from Ensembl.
 + **GENE_Gtex_cleaned.csv:** GTEx data download after some minor cleaning steps to make it more readable.
@@ -181,13 +176,15 @@ Curved gene diagrams for use with circos plots + straight versions,
 + **unique_Gtex_snps.csv:** List of all GTEx SNPs altering your Genes expression.
 
 ### LDMatrix
+Data on LD calculations
 + **NFE2L2_r2.csv:** Full matrix of r2 scores from LDLink.
 + **rs_overlap_ALL_NFE2L2:** Data object for R of r2 scores in case you want to visualise the data as a matrix.
 
+## Section D: Understanding the Pipeline Output Plots
 ## Final Plots:
 
 ### Plot A1: Number of SNPs per Tissue Group from GTEx
-An overview of which tissue groups the SNPs that alter expression of your gene of interest were detected in by GTEx, grouped by the tissue groups. This is generated using the initial download from GTEx before running through the pipeline or assessing linkage disequilibrium.
+An overview of which tissue groups the SNPs that alter expression of your gene of interest were detected in by GTEx cis-eQTLs, grouped by the tissue groups. This is generated using the initial download from GTEx before running through the pipeline or assessing linkage disequilibrium.
 
 Colour = direction of expression change, rsid = unique SNP identifier
 
@@ -195,41 +192,41 @@ Colour = direction of expression change, rsid = unique SNP identifier
 
 ### Plot A2: Number of SNPs after PheWAS search and LD removal
 
-The same plot as described in A1 but after running the pipeline, thereby removing SNPs that have not been associated with a phenotype in the IEU Open GWAS project PheWAS database ([mecieu](https://gwas.mrcieu.ac.uk/)) or are in linkage disequilibrium ([LDlink](https://ldlink.nih.gov/?tab=home))
+The same plot as described in A1 but after running the pipeline, thereby removing SNPs that have not been associated with a phenotype in the IEU Open GWAS project PheWAS database ([mecieu](https://gwas.mrcieu.ac.uk/)) or that are in linkage disequilibrium ([LDlink](https://ldlink.nih.gov/?tab=home))
 
 <img src="https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/457bd4c2-9f88-4610-9ca7-77f0759cdf07" width="600" height="400">
 
 
 ## Plot A3: Number of SNP-Trait Associations per Tissue (after LD removal)
 
-An overview of the SNP-Trait Associations (STAs) per tissue group. The pipeline aims to match known STAs with expression changes and this plot shows which Tissue Groups the SNPs in those STAs were found in, relative to the direction of expression change.
+An overview of the SNP-Trait Associations (STAs) per tissue group. The pipeline aims to match known STAs with expression changes. This plot shows which Tissue Groups the SNPs in those STAs were found in, relative to the direction of expression change.
 
 <img src="https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/c946c14d-7820-468a-95ee-0034058f3b8e" width="600" height="400">
 
 
-### Plot A4
-An overview of which regulatory regions (auto assigned from ensembl) the SNPs outputted from the pipeline are found in.
+### Plot A4: Overview of regulatory regions SNPs are found in
+An overview of which regulatory regions (auto assigned from ensembl) the SNPs from STAs outputted from the pipeline are found in.
 
 <img src="https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/223fe739-0ba7-4726-a335-65a1c86fb62a" width="500" height="300">
 
 
-### Plot B = Correlation
+### Plot B: Correlation of STAs to number of traits in database
 Correlation of the number of different traits in a Trait Group relative to the total number of different possible traits in the full database. An indication of whether the results are due to chance. This considers repeated SNP-Trait associations. If 100 different SNPs are all associated with LDL, this is recorded as 100 SNP-Trait associations. 
 + zoomed version on the 15% x 15% region to avoid big outliers (B2)
 
 <img src="https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/75587bab-e594-4a15-84c7-01573083fa9c" width="400" height="500">
 
-### Plot C
+### Plot C: Number of tissues each SNP affects expression in
 A summary of how many tissues each SNP alters gene expression in (from GTEx eQTLs). Importantly, this also shows cases where a SNP is associated with a decrease in expression in one tissue and an increase in another. Though rare, these could provide further complexity or insight when interpreting the SNP-Trait associations.
 
 <img src="https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/03d3d006-565e-42bc-97e4-5011f7bba577" width="180" height="1000">
 
-### Plot D1
+### Plot D1: Number of STAs in Each Traitgroup
 Number of SNP-Trait associations per Trait Group. Colour based on Trait Group. i.e. Regardless of direction of expression change, which Trait Groups are affected by SNPs that alter a gene of interests expression.
 
 <img src="https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/c0d60e4c-8c26-4b4d-94a2-d974f4a487e2" width="540" height="300">
 
-### Plot D2
+### Plot D2: Proportion of STAs in Each Traitgroup Relative to Database
 Normalised Version of D1 - normalised to the number of possible traits per Trait Group within the database. (Number of different traits from SNP-Trait associations per Trait Group)/(Number of possible traits in each Trait Group from Full_trait_database.csv).
 
 <img src="https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/0e965ab5-5f2b-47a1-b8d1-4addebde261a" width="540" height="300">
@@ -239,12 +236,12 @@ These plots are grouped together to summarise the number of STAs per Trait Group
 
 **Key**: Above x-axis, increased expression, Below x axis decreased expression, y axis: Number of STAs in a traitgroup / Number of total STAs in output dataframe, colour = direction of trait change. i.e. Yellow = SNP increases trait, Purple = SNP decreases trait.
 
-### E1 
+### E1: STAs relative to total in df
 Individual SNP-trait associations grouped by Trait Group. 
 
 <img src="https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/b9478432-d0d4-4133-ae62-ad09fbd81a70" width="600" height="300">
 
-### E2 
+### E2: STAs relative to total in df (No Other or Other Gene Expression Change)
 Modified version of E1 without Other Gene Expression Change or Other categories because these are often very big and so can obscure the other results. "Other Gene Expression Change" is a Trait Group where every trait is another gene ID with altered expression, often according to GTEx data. "Other" consists of traits I could not categorise easily. For example, "geographical location: North". Though both of these categories may be important, they are often large and so are removed for clarity here.
 
 <img src="https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/324f0fa2-8fe7-448b-b84e-da52f199e5a6" width="600" height="300">
@@ -254,24 +251,29 @@ These graphs offer an alternate way of visualising the plots in E. Here we inclu
 
 **Key**: y-axis: SNP-Trait assocations -log(p) x Direction of expression change. Colour = direction of trait change. Below x-axis, SNPs that decrease the gene of interests expression. Above x-axis, SNPs that increase the gene of interests expression
 
-### F1 
+### F1: Overview of STAs in Traitgroups and their -log(p) values
 Individual STAs per Trait group, including p value, direction of expression change and direction of trait change (beta)
 <img src="https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/4d9c9f2b-ab1e-4215-98c7-6efa935f0743" width="600" height="300">
 
-### F2
+### F2: Overview of STAs in Traitgroups and their -log(p) values (No Other or Other Gene Expression Change)
 Modified version of F1 without "Other" and "Other Gene Expression Change" for clarity (see E2 for explanation).
 
 <img src="https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/d40e3047-25b3-41f1-850e-1f9617da0999" width="600" height="300">
 
-### F3
+### F3: Other Gene Expression Change only
 Expanding just the Other Gene Expression Change category to look at the individual traits (in this case genes) your gene of interest/your SNPs effect.
 
 <img src="https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/a2675cb7-7d2f-4a4f-99ac-fa4a995fcbb6" width="450" height="800">
 
-### F4
-Expanding all the Trait Groups to see individual traits within the categories. In this case displaying just one example. NOTE: these can often be very big, if the plot is unreadable, hopefully you can find and fix it within the code but if not please email me and I'll be happy to modify it for you. INCOMPLETE NEEDS CHANGING
+### F4: Each trait group indivdually
+Expanding all the Trait Groups to visualise individual traits within the categories. In this case displaying just one example: Bodyfat/Size. NOTE: these can often be very big, if the plot is unreadable, hopefully you can find and fix it within the code but if not please email me and I'll be happy to modify it for you. Simply replace the final '}' on line 1724 with:
 
-I've made a custom chunk at the end of the pipeline, line: 3256, to help out
+  }else if(for_label>200){
+    ggsave(filename, height=700, width=230, unit="mm")
+  }
+}
+
+and alter "height=x" accordingly if the plots still don't fit.
 
 Example of the bodyfat/size subcategory shown here:
 
