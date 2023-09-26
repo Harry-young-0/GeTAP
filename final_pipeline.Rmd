@@ -354,15 +354,14 @@ if(exists("completed_snps")){
     test = na.omit(unique_Gtex_snps[(((n-1)*25)+1):(n*25)])
     print(paste0("Temporary dataframe ",n))
     Gtex_PHEWAS_2 = phewas(test, pval = 1e-04) # Adjustable p-value here #
-    completed_snps2 = test
-    completed_snps=c(completed_snps,completed_snps2)
-    completed_snps=unique(completed_snps)
-    
     if(length(Gtex_PHEWAS_2)==12){
       if(nrow(Gtex_PHEWAS_2)>0){
-        Gtex_PHEWAS = rbind(Gtex_PHEWAS, Gtex_PHEWAS_2)
+          Gtex_PHEWAS = rbind(Gtex_PHEWAS, Gtex_PHEWAS_2)
+          completed_snps2 = test
+          completed_snps=c(completed_snps,completed_snps2)
+          completed_snps=unique(completed_snps)
       }
-    }  
+    }else{break}  
   }
 }else{
   for(n in 1:(length(na.omit(unique_Gtex_snps))%/%25 + 1)){
@@ -376,11 +375,13 @@ if(exists("completed_snps")){
     else{
       print(paste0("Temporary dataframe ",n))
       Gtex_PHEWAS_2 = phewas(test, pval = 1e-04) # Adjustable p-value here #
-      completed_snps2 = test
-      completed_snps=c(completed_snps,completed_snps2)
+
       if(length(Gtex_PHEWAS_2)==12){
         if(nrow(Gtex_PHEWAS_2)>0){
           Gtex_PHEWAS = rbind(Gtex_PHEWAS, Gtex_PHEWAS_2)
+          completed_snps2 = test
+          completed_snps=c(completed_snps,completed_snps2)
+          completed_snps=unique(completed_snps)
         }
       } 
     }
@@ -395,7 +396,6 @@ if(nrow(Gtex_PHEWAS)==0){
   write_excel_csv(Gtex_PHEWAS, paste0(file_directory,"/", gene_name,"_test/Final_data/",gene_name,"_GtextoPHEWAS_RAW.csv"))
 }
 
-nrow(rs_overlap_r20.5)
 
 ```
 
