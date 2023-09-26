@@ -16,7 +16,7 @@ gene_name = "YOUR_GENE_NAME"
 #e.g gene_name ="NFE2L2" ; "YOUR_GENE_NAME"
 
 #2. setting the file directory to where you want it to go DRIVE:/YOUR_FILE_DIRECTORY/
-file_directory = "C:/Documents/Example directory"
+file_directory = "DRIVE:/YOUR_FILE_DIRECTORY/"
 #windows e.g: file_directory = "C:/Users/hy14913/OneDrive - University of Bristol/Desktop/May23_test"
 #mac e.g: file_directory ="/Users/hy14913/Documents/Local_work_folder/JUL_TEST"
 
@@ -138,8 +138,6 @@ write_csv(egene ,paste0(file_directory,"/eGene/FINAL_Gtex_egene.csv"))
   for (n in 1:length(subfolder_names)){
     folder =dir.create(paste0(file_directory,"/", gene_name,"_test/",subfolder_names[n]))
   }
-  dir.create(paste0(file_directory,"/",gene_name,"_test/Ensembl/All_Exon_Options"))
-  dir.create(paste0(file_directory,"/", gene_name,"_test/Gtex/Final Dataframes"))
 }
 ```
 
@@ -344,6 +342,7 @@ unique_Gtex_snps = unique(unique_Gtex_snps$rsid)
 searching IEU PheWAS database
 This step takes a while, give it time, if it errors, chances are the servers are busy, try again or maybe try running in the evening.
 ```{r,Phewas searching }
+unique_Gtex_snps = unique(df$rsid)
 unique_Gtex_snps_df =as.data.frame(unique_Gtex_snps)
 if(exists("completed_snps")){
   print(paste0("Already attempted run, ",length(completed_snps)," rsids searched - carrying on from where we left off"))
@@ -357,9 +356,13 @@ if(exists("completed_snps")){
     Gtex_PHEWAS_2 = phewas(test, pval = 1e-04) # Adjustable p-value here #
     completed_snps2 = test
     completed_snps=c(completed_snps,completed_snps2)
-    if(nrow(Gtex_PHEWAS_2)>0){
-      Gtex_PHEWAS = rbind(Gtex_PHEWAS, Gtex_PHEWAS_2)
-    }
+    completed_snps=unique(completed_snps)
+    
+    if(length(Gtex_PHEWAS_2)==12){
+      if(nrow(Gtex_PHEWAS_2)>0){
+        Gtex_PHEWAS = rbind(Gtex_PHEWAS, Gtex_PHEWAS_2)
+      }
+    }  
   }
 }else{
   for(n in 1:(length(na.omit(unique_Gtex_snps))%/%25 + 1)){
@@ -375,9 +378,11 @@ if(exists("completed_snps")){
       Gtex_PHEWAS_2 = phewas(test, pval = 1e-04) # Adjustable p-value here #
       completed_snps2 = test
       completed_snps=c(completed_snps,completed_snps2)
-      if(nrow(Gtex_PHEWAS_2)>0){
-        Gtex_PHEWAS = rbind(Gtex_PHEWAS, Gtex_PHEWAS_2)
-      }
+      if(length(Gtex_PHEWAS_2)==12){
+        if(nrow(Gtex_PHEWAS_2)>0){
+          Gtex_PHEWAS = rbind(Gtex_PHEWAS, Gtex_PHEWAS_2)
+        }
+      } 
     }
   }
 }
@@ -386,11 +391,11 @@ if(nrow(Gtex_PHEWAS)==0){
   print("Houston, we have a problem. Re run this chunk using the play button in the top right of the box. If that still doesn't work, run line by line using ctrl-enter OR cmd-enter. If it still doesn't work then I'm afraid something has gone really wrong! email me at harry.young@bristol.ac.uk")
 } else{
 # Then save using the following line:
-write_excel_csv(Gtex_PHEWAS, paste0(file_directory,"/", gene_name,"_test/Final_data/",gene_name,"_GtextoPHEWAS_RAW.csv"))
+  Gtex_PHEWAS=unique(Gtex_PHEWAS)
+  write_excel_csv(Gtex_PHEWAS, paste0(file_directory,"/", gene_name,"_test/Final_data/",gene_name,"_GtextoPHEWAS_RAW.csv"))
 }
 
-
-
+nrow(rs_overlap_r20.5)
 
 ```
 
@@ -992,22 +997,6 @@ NOTE: I'm not going to go line by line for the ggplotting functions in all of th
 
 For this section I also have made new file directories for each subheading of plots for easier browsing later. However, I have left these out of the code so you can just click through without the complicated sub-folder system. 
 
-Finally, you may want the exact set of plots I have used in the example data. So, here is a list of the file name of each of those plots. Run it all and then you can just search your file directory accordingly:
-
-Main results Figure:
-(A) Not in script, downloaded direct from Gtex website
-(B) number_of_SNP-trait_associations_per_tissue_group 
-(C) correlation_of_traits_to_total_possible_traits
-(D) number_of_tissues_each_SNP_affects_expression_in
-(E0) e0-number_of_SNP-trait_associations_per_traitgroup and e0-normalised (raw and normalised respectively)
-(E1) e1--logp_x_expression_change_per_traitgroup
-(E2) e2-e1_no_Other_or_OGEC
-(E3) e1-Other Gene Expression Change only
-(E4) e4-Number_x_Traitgroup 
-(F1) f1-nSNP-trait_associations_per_traitgroup_by_total
-(F2) f2-f1_no_OGEC
-(G) number_of_snps_per_regulatory_region
-
 Circos Figure:
 Position_Gtex_P
 Tissue_trait_overlap
@@ -1024,14 +1013,14 @@ df = read_csv(paste0(file_directory,"/", gene_name, "_test/Final_data/final_df.c
 
 df = df %>% dplyr::select(-Alt_Subcat)# remove alt_subcat at least for the moment, as it seems to making duplication events
 df = unique(df)
+
 # removing duplicated raw values from more recent irnt
-df = df %>% separate(id,into=c("remove1","remove2","remove3","irntvsraw" ), remove=F) %>%
+df = df %>% tidyr::separate(id,into=c("remove1","remove2","remove3","irntvsraw" ), remove=F) %>%
   filter((irntvsraw !="raw") %>%replace_na(TRUE)) %>%
   dplyr::select(-remove1,
                 -remove2,
                 -remove3,
                 -irntvsraw)
-
 
 df$beta_direction = factor(df$beta_direction, levels=c("Positive", "Negative"))
 original_gtex =read_csv(paste0(file_directory,"/", gene_name,"_test/Gtex/", gene_name, "_Gtex_cleaned.csv"))
@@ -1155,7 +1144,7 @@ A1SNPcountperTissuegroup = ggplot(test, aes(x=tissue_group,y=count, fill=NES_dir
 
 A1SNPcountperTissuegroup
 
-ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/A-Number of SNPs per Tissue from GTEx .pdf"), width= 150, height=100, unit="mm")
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/A1-Number of SNPs per Tissue from GTEx .pdf"), width= 150, height=100, unit="mm")
 
 ```
 #### A2 - number_of_SNP-trait_associations_per_tissue_group after LD and pipeline run
@@ -1310,7 +1299,7 @@ BCorrelation_tg = ggplot(comparison_TG, aes(x=count_rel, y=count_full_rel, color
     annotate(geom="text",  x=45, y=60, label = paste0("perfect\nrandom\nchance"),color="darkorchid3")
 BCorrelation_tg
 
-ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/B-Correlation.pdf"), width= 200, height=100, unit="mm")
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/B1-Correlation.pdf"), width= 200, height=100, unit="mm")
 
 B2 = BCorrelation_tg +xlim(c(0,15))+ylim(c(0,15))
 B2
@@ -1330,19 +1319,20 @@ Plot of mutation position against their number of effects on expression with dir
 LD_Gtex = df%>%
   dplyr::select(Tissue, tissue_group, position_gtex, rsid, `P-Value`, NES, position_gtex, chr_gtex, a, b, NES_direction)
 LD_Gtex = unique(LD_Gtex)
-
 LD_Gtex$position_gtex = as.character(LD_Gtex$position_gtex)
 LD_Gtex = filter(LD_Gtex, !is.na(Tissue))
 Chromosome = df$chr_phewas[1]
+colors_man <- c("Positive" = "#FDE725FF", "Negative" = "#440154FF") 
+LD_Gtex$NES_direction=factor(LD_Gtex$NES_direction, levels= c("Positive","Negative"))
 
 CPosition_count_OVERVIEW = ggplot(LD_Gtex, aes(x=position_gtex,  fill = NES_direction)) + 
   geom_bar()+ # bar chart counting number of times rsid appears
-  scale_fill_viridis_d(name=paste0("NES")) + # I like this palette but you can remove it or change it 
-  labs(title= paste0("Number of tissues each SNP affects expression in", gene_name) , x= paste0("Position (Chr ",Chromosome, ")"), y = "Number of Tissues")+ #labels
+  scale_fill_manual(values = colors_man) +
+  labs(title= paste0("Number of tissues each SNP\n affects expression in", gene_name) , x= paste0("Position (Chr ",Chromosome, ")"), y = "Number of Tissues")+ #labels
   theme(legend.position = "top",
         #legend.box.spacing = unit(0.1, 'cm'),
         #legend.box.margin = unit(0.1, 'cm'),
-        legend.justification = c(3,-1),
+        legend.justification = c(1,-1),
         legend.key.width = unit(0.2, 'cm'),
         legend.text = element_text(size=8),
         legend.title = element_text(size=8),
@@ -1394,7 +1384,7 @@ DSNP_by_traitgroup= ggplot(summary_of_df, aes(x=reorder(traitgroup, -traitgroup_
     scale_y_continuous( expand = expansion(mult = c(0, .1))) +
   labs(x = "Trait Group", y = "Number of SNP-Trait Associations", title = "Number of SNP-Trait Associations in Each Traitgroup")
 DSNP_by_traitgroup
-ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/D Number of STAs in Each Traitgroup.pdf"), width=200,height=120, unit="mm")
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/D1 Number of STAs in Each Traitgroup.pdf"), width=200,height=120, unit="mm")
 
 #Alternate version, relative to Trait Group size#####
 
@@ -1533,7 +1523,7 @@ F1pvalvstraitgroup = ggplot(temp, aes(x=traitgroup, y=logp_DIR, color=beta_direc
 F1pvalvstraitgroup 
 
 
-ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/F1--logp_x_expression_change_per_traitgroup.pdf"), width=200, height =100 , units="mm")
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/F1 Overview of STAs in Traitgroups and their -log(p) values.pdf"), width=200, height =100 , units="mm")
 ```
 
 
@@ -1570,7 +1560,7 @@ theme(axis.text.x = element_text(angle = 60, hjust =1, size = 8),
 
 F2pvalvstraitgroupNO_O
 
-ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/F2_no_Other_or_OGEC.pdf"), width=200, height =100 , units="mm")
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/F2 Overview of STAs in Traitgroups (No Other or Other Gene Expression Change).pdf"), width=200, height =100 , units="mm")
 
 ```
 
@@ -1583,7 +1573,16 @@ temp$beta_direction = factor(temp$beta_direction, levels=c("Positive", "Negative
 temp = temp[which(temp$traitgroup=="Other Gene Expression Change"),]
 temp = temp %>% dplyr::select(trait,traitgroup,logp_DIR,beta_direction,rsid) %>%
   unique()
-
+# Clean up as many ENSG's as we can
+mart <- useDataset("hsapiens_gene_ensembl", useMart("ensembl"))
+genes <- temp %>% dplyr::filter(grepl("ENSG",trait)) 
+genes <-genes$trait
+G_list <- getBM(filters= "ensembl_gene_id", attributes= c("ensembl_gene_id",
+"hgnc_symbol"),values=genes,mart= mart)
+G_list = G_list %>% filter(nchar(hgnc_symbol)>0) 
+names(G_list)=c("trait","correction")
+temp=left_join(temp,G_list)
+temp$trait=ifelse(is.na(temp$correction), temp$trait,temp$correction)
 
 F3OGEC = ggplot(temp, aes(x=trait, y=logp_DIR, color=beta_direction)) + 
   geom_point(alpha=0.6, position = position_jitterdodge())+ #  alpha is transparancy from 0-1
@@ -1602,7 +1601,7 @@ F3OGEC = ggplot(temp, aes(x=trait, y=logp_DIR, color=beta_direction)) +
   
 F3OGEC
 
-filename=paste0(file_directory,"/",gene_name,"_test/Final_plots/F3_OGEC_only.pdf")
+filename=paste0(file_directory,"/",gene_name,"_test/Final_plots/F3 OGEC only.pdf")
 
 length_of_unique_traits = length(unique(temp$trait))
   if(length_of_unique_traits>150){
@@ -1630,7 +1629,7 @@ temp = temp %>% dplyr::select(trait,traitgroup,logp_DIR,beta_direction,rsid) %>%
 F3_O = ggplot(temp, aes(x=trait, y=logp_DIR, color=beta_direction)) + 
   geom_point(alpha=0.6, position = position_jitterdodge())+ #  alpha is transparancy from 0-1
   scale_colour_manual(values = colors_man) + 
-  labs( x= "Genes", y= "-log(p) * Direction")+ 
+  labs( x= "Traits", y= "-log(p) * Direction")+ 
   geom_hline(aes(yintercept=0,), alpha=0.3)+ # faint line at 0
   theme(axis.text.y =   element_text(size = 10),
         axis.title = element_text(size = 10, face="bold"),
@@ -1644,7 +1643,7 @@ F3_O = ggplot(temp, aes(x=trait, y=logp_DIR, color=beta_direction)) +
   
 F3_O
 
-filename=paste0(file_directory,"/",gene_name,"_test/Final_plots/F3-2_Other_only.pdf")
+filename=paste0(file_directory,"/",gene_name,"_test/Final_plots/F3-2 Other only.pdf")
 
 length_of_unique_traits = length(unique(temp$trait))
   if(length_of_unique_traits>150){
@@ -1726,8 +1725,10 @@ filename=paste0(file_directory,"/",gene_name,"_test/Final_plots/F4-Number_", i,"
     ggsave(filename, height=380, width=230, unit="mm")
   }else if(for_label<50){
     ggsave(filename, height=250, width=230, unit="mm")
-  }else if(for_label<300){
+  }else if(for_label<25){
     ggsave(filename, height=130, width=230, unit="mm")
+  }else if(for_label<10){
+    ggsave(filename, height=60, width=230, unit="mm")
   }
 }
 
@@ -1945,8 +1946,6 @@ gene_rectangles = gene_rectangles %>% rename(Start=exon_chrom_start,
 # and finally binding the two table together
 gene_and_reg = rbind(reg_feat_for_bind, gene_rectangles)
 
-write_csv(gene_and_reg, paste0(file_directory,"/",gene_name,"_test/Ensembl/",gene_name,"_and_reg_feat_FOR_GENE_DIAGRAM.csv"))
-
 ```
 
 ### Gene diagram plotting
@@ -2031,65 +2030,7 @@ ggsave(paste0(file_directory,"/",gene_name,"_test/Gene_diagram_output/Gene_struc
 
 ```
 
-####2a. Gtex SNPs (P-Value) after merge
-```{r df_gtex_RED}
 
-df_gtex_RED = df %>% dplyr::select(position_gtex, reg_region, `P-Value`)
-df_gtex_RED$logp=-log10(df_gtex_RED$`P-Value`)
-# df_RED = as.data.frame(df$position_gtex)
-df_gtex_RED=unique(df_gtex_RED) # Creating a reduced version of the positions of the snps from the final dataframe
-df_gtex_RED = arrange(df_gtex_RED, position_gtex)
-df_gtex_RED = as.data.frame(df_gtex_RED)
-df_gtex_RED =df_gtex_RED%>% filter(!is.na(logp))
-
-# Next is assigning y values (rectangle height) to `P-Value`
-pmin = min(df_gtex_RED$logp)
-pmax = max(df_gtex_RED$logp)
-gene_and_reg$yminD = if_else(gene_and_reg$EI =="Intron" | gene_and_reg$EI =="Exon", pmin+((pmax-pmin)/4),pmin) # setting up arbitrary y values for the rectangles
-gene_and_reg$ymaxD = if_else(gene_and_reg$EI =="Intron" | gene_and_reg$EI =="Exon", pmax-((pmax-pmin)/4),pmax)# if it is an intron use the first value, anything else the second
-
-
-intron_hack = gene_and_reg %>% 
-  filter(gene_and_reg$EI =="Exon") %>% 
-  summarise(gene_start=min(Start), gene_end=max(End))
-if(intron_hack$gene_start > intron_hack$gene_end){
-  names(intron_hack)=c("gene_end", "gene_start") # flips names
-}
-  
-intron_hack$yminD = as.numeric(gene_and_reg[which(gene_and_reg$EI =="Exon"),][1,4])
-intron_hack$ymaxD = as.numeric(gene_and_reg[which(gene_and_reg$EI =="Exon"),][1,5])
-intron_hack$EI ="Intron"
-# number of snps plotted:
-Unique_snps = length(unique(df_gtex_RED$position_gtex))
-
-#plot:
-gene_structure_RED = ggplot()+
-  geom_rect(gene_and_reg[which(gene_and_reg$EI !="Intron" & gene_and_reg$EI !="Exon"),], mapping=aes(xmin=Start, xmax=End, ymin=yminD, ymax=ymaxD,  fill=EI ),  alpha=0.8)+
-  geom_rect(intron_hack, mapping=aes(xmin=gene_start, xmax=gene_end, ymin=yminD, ymax=ymaxD, fill = EI),  alpha=0.6)+
-  geom_rect(gene_and_reg[which(gene_and_reg$EI =="Exon"),], mapping=aes(xmin=Start, xmax=End, ymin=yminD, ymax=ymaxD, color=EI))+
-  geom_point(aes(x= df_gtex_RED$position_gtex, y=df_gtex_RED$logp, color = df_gtex_RED$reg_region), size=0.6)+
-  theme(panel.grid.major.x = element_line(size=0.2),
-        panel.grid.minor.x = element_line(size=0.05),
-        axis.text.x = element_text(angle = 70, hjust =1),
-        legend.title = element_blank(),
-        legend.position = "none",
-        aspect.ratio = 0.1,
-        panel.background = element_rect(fill = "white",
-                                        colour = "white"))+
-  labs(title= paste0(gene_name, " Gene Region Diagram (Gtex after Merge SNPs)") , x= "Position", y= "-log(p)",caption = paste("Overall number of SNPs =", Unique_snps))+
-  scale_fill_manual(values=cols)+
-  scale_color_manual(values=cols)+
-  scale_x_reverse()
-
-
-
-
-gene_structure_RED
-
-
-
-ggsave(paste0(file_directory,"/",gene_name,"_test/Gene_diagram_output/Gene_structure_gtex_from_merge.pdf"))
-```
 ####2b. Gtex SNPs (P-Value) after merge and LD removal
 ```{r df_gtex_RED2}
 df_gtex_RED = df %>% dplyr::select(position_gtex, reg_region, `P-Value`)
@@ -2895,7 +2836,7 @@ simple_LUT_COR$tissue_group = factor(simple_LUT_COR$tissue_group, levels =names(
 test5 = table(simple_LUT_COR)
 
 circos.clear()
-pdf("H-Tissue_trait_overlap.pdf")
+pdf("G-Tissue_trait_overlap.pdf")
 circos.par( start.degree = -90 ) 
 chordDiagram(test5, 
              annotationTrackHeight = c(0.01, 0.01), 
@@ -3147,7 +3088,6 @@ gene_name = "Gene_name"
 file_directory = "file_directory"
 
 library(shiny)
-
 load(paste0(file_directory,"/", gene_name,"_test/Final_data/final_workspace_for_shiny.RData"))
 runApp( paste0(file_directory,"/app_with_circos.R"))
 
