@@ -383,7 +383,7 @@ if(exists("completed_snps")){
           completed_snps=c(completed_snps,completed_snps2)
           completed_snps=unique(completed_snps)
         }
-      } 
+      }else{break} 
     }
   }
 }
@@ -396,6 +396,12 @@ if(nrow(Gtex_PHEWAS)==0){
   write_excel_csv(Gtex_PHEWAS, paste0(file_directory,"/", gene_name,"_test/Final_data/",gene_name,"_GtextoPHEWAS_RAW.csv"))
 }
 
+
+if(length(completed_snps)==length(unique(df$rsid))){
+  print("All OK, moving on")
+}else{
+  print("run all from this chunk again")
+}
 
 ```
 
@@ -445,7 +451,6 @@ head(to_remove) # any rows with lots of NAs in Phewas columns
 
 ## Remove rows with NA in these PHEWAS columns
 test = test %>% drop_na(beta, eaf, chr_phewas, trait) 
-rm(test2) # cleanup removing the extra table 
 write_excel_csv(test, paste0(file_directory,"/", gene_name,"_test/Gtex/", gene_name, "_merge_GTEX_PHEWAS.csv"))
 
 ```
@@ -1420,10 +1425,10 @@ ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/D2 Proportion of S
 colors_man <- c("Positive" = "#FDE725FF", "Negative" = "#440154FF") 
 # Remove duplicates from snps in multiple tissues and split by NES
 temp_pos = df %>% dplyr::filter(NES_direction=="Positive") %>%
-  select(traitgroup, beta_direction, rsid, p , trait, NES_direction)%>%
+  dplyr::select(traitgroup, beta_direction, rsid, p , trait, NES_direction)%>%
   unique()
 temp_neg = df %>% dplyr::filter(NES_direction=="Negative") %>%
-  select(traitgroup, beta_direction, rsid, p , trait, NES_direction) %>%
+  dplyr::select(traitgroup, beta_direction, rsid, p , trait, NES_direction) %>%
   unique()
 
 E1 = ggplot()+ #Plot of Traitgroup vs SNP Count
@@ -1456,10 +1461,10 @@ ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/E1 STAs relative t
 ```{r relative counts NO OGEC vs trait overview SEATTLE, fig.width = 8, fig.height =4}
 # Remove duplicates from snps in multiple tissues and split by NES
 temp_pos = df %>% dplyr::filter(NES_direction=="Positive"& traitgroup!="Other Gene Expression Change"& traitgroup!="Other/Unspecified") %>%
-  select(traitgroup, beta_direction, rsid, p , trait, NES_direction)%>%
+  dplyr::select(traitgroup, beta_direction, rsid, p , trait, NES_direction)%>%
   unique()
 temp_neg = df %>% dplyr::filter(NES_direction=="Negative"& traitgroup!="Other Gene Expression Change"& traitgroup!="Other/Unspecified") %>%
-  select(traitgroup, beta_direction, rsid, p , trait, NES_direction) %>%
+  dplyr::select(traitgroup, beta_direction, rsid, p , trait, NES_direction) %>%
   unique()
 
 E2 = ggplot()+ #Plot of Traitgroup vs SNP Count
