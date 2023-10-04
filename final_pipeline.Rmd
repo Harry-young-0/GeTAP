@@ -16,7 +16,7 @@ gene_name = "YOUR_GENE_NAME"
 #e.g gene_name ="NFE2L2" ; "YOUR_GENE_NAME"
 
 #2. setting the file directory to where you want it to go DRIVE:/YOUR_FILE_DIRECTORY/
-file_directory = "DRIVE:/YOUR_FILE_DIRECTORY/"
+file_directory = "YOUR_FILE_DIRECTORY"
 #windows e.g: file_directory = "C:/Users/hy14913/OneDrive - University of Bristol/Desktop/May23_test"
 #mac e.g: file_directory ="/Users/hy14913/Documents/Local_work_folder/JUL_TEST"
 
@@ -342,16 +342,24 @@ unique_Gtex_snps = unique(unique_Gtex_snps$rsid)
 searching IEU PheWAS database
 This step takes a while, give it time, if it errors, chances are the servers are busy, try again or maybe try running in the evening.
 ```{r,Phewas searching }
-unique_Gtex_snps = unique(df$rsid)
-unique_Gtex_snps_df =as.data.frame(unique_Gtex_snps)
+
+if(exists("LIMITED_SNP_LIST")){
+ unique_Gtex_snps = unique(LIMITED_SNP_LIST$rsid)
+ unique_Gtex_snps_df =as.data.frame(unique_Gtex_snps) 
+}else{
+  unique_Gtex_snps = unique(df$rsid)
+  unique_Gtex_snps_df =as.data.frame(unique_Gtex_snps)
+}
+
+
 if(exists("completed_snps")){
   print(paste0("Already attempted run, ",length(completed_snps)," rsids searched - carrying on from where we left off"))
-  m=(length(na.omit(completed_snps))%/%25+1)
+  m=(length(na.omit(completed_snps))%/%15+1)
   unique_Gtex_snps_df$test = !unique_Gtex_snps %in%completed_snps
   unique_Gtex_snps_df = unique_Gtex_snps_df %>% filter(test==T)
   unique_Gtex_snps = unique_Gtex_snps_df$unique_Gtex_snps
-  for(n in 1:(length(na.omit(unique_Gtex_snps))%/%25 + 1)){
-    test = na.omit(unique_Gtex_snps[(((n-1)*25)+1):(n*25)])
+  for(n in 1:(length(na.omit(unique_Gtex_snps))%/%15 + 1)){
+    test = na.omit(unique_Gtex_snps[(((n-1)*15)+1):(n*15)])
     print(paste0("Temporary dataframe ",n))
     Gtex_PHEWAS_2 = phewas(test, pval = 1e-04) # Adjustable p-value here #
     if(length(Gtex_PHEWAS_2)==12){
@@ -364,13 +372,15 @@ if(exists("completed_snps")){
     }else{break}  
   }
 }else{
-  for(n in 1:(length(na.omit(unique_Gtex_snps))%/%25 + 1)){
-    test = na.omit(unique_Gtex_snps[(((n-1)*25)+1):(n*25)])
+  for(n in 1:(length(na.omit(unique_Gtex_snps))%/%15 + 1)){
+    test = na.omit(unique_Gtex_snps[(((n-1)*15)+1):(n*15)])
     
     if(n==1){
       print("First dataframe")
       Gtex_PHEWAS = phewas(test, pval = 1e-04) # Adjustable p-value here #
-      completed_snps = test
+        if(length(Gtex_PHEWAS)==12){
+        completed_snps = test
+        }else{break}
       }
     else{
       print(paste0("Temporary dataframe ",n))
@@ -1578,6 +1588,7 @@ temp$beta_direction = factor(temp$beta_direction, levels=c("Positive", "Negative
 temp = temp[which(temp$traitgroup=="Other Gene Expression Change"),]
 temp = temp %>% dplyr::select(trait,traitgroup,logp_DIR,beta_direction,rsid) %>%
   unique()
+if(nrow(temp)>0){
 # Clean up as many ENSG's as we can
 mart <- useDataset("hsapiens_gene_ensembl", useMart("ensembl"))
 genes <- temp %>% dplyr::filter(grepl("ENSG",trait)) 
@@ -1618,7 +1629,7 @@ length_of_unique_traits = length(unique(temp$trait))
   }else if(length_of_unique_traits<300){
     ggsave(filename, height=130, width=230, unit="mm")
   }
-
+}
 ```
 #####F3-2 only Other 
 The overview of all snps relative to traitgroups:
