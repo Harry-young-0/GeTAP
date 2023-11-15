@@ -345,9 +345,11 @@ This step takes a while, give it time, if it errors, chances are the servers are
 
 if(exists("LIMITED_SNP_LIST")){
  unique_Gtex_snps = unique(LIMITED_SNP_LIST$rsid)
+ unique_Gtex_snps2 = unique(LIMITED_SNP_LIST$rsid)
  unique_Gtex_snps_df =as.data.frame(unique_Gtex_snps) 
 }else{
   unique_Gtex_snps = unique(df$rsid)
+  unique_Gtex_snps2 = unique(df$rsid)
   unique_Gtex_snps_df =as.data.frame(unique_Gtex_snps)
 }
 
@@ -407,11 +409,13 @@ if(nrow(Gtex_PHEWAS)==0){
 }
 
 
-if(length(completed_snps)==length(unique(df$rsid))){
+if(length(completed_snps)==length(unique_Gtex_snps2)){
   print("All OK, moving on")
 }else{
   print("run all from this chunk again")
+  break
 }
+
 
 ```
 
