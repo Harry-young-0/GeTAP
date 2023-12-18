@@ -12,16 +12,16 @@ Please see instructions on github / in readme.md for details
 #First line to clear out environment
 rm(list=ls())
 #1. Gene name list:
-gene_name = "AKAP12"
+gene_name = "YOUR_GENE_NAME"
 #e.g gene_name ="NFE2L2" ; "YOUR_GENE_NAME"
 
 #2. setting the file directory to where you want it to go DRIVE:/YOUR_FILE_DIRECTORY/
-file_directory = "/Users/hy14913/Documents/Local_work_folder/JUL_TEST"
+file_directory = "DRIVE:/YOUR_FILE_DIRECTORY/"
 #windows e.g: file_directory = "C:/Users/hy14913/OneDrive - University of Bristol/Desktop/May23_test"
 #mac e.g: file_directory ="/Users/hy14913/Documents/Local_work_folder/JUL_TEST"
 
 #3. LD link token setup
-LD_token = "f0d7bc798f5c"
+LD_token = "generic_token"
 # 12 character token e.g:"abc1bc2bc3bc"
 # "abc1bc2bc3bc"generic_token
 
@@ -30,6 +30,11 @@ try(if(file_directory=="C:/Documents/Example directory") stop("Please enter your
 try(if(LD_token=="generic_token") stop("Please enter your LD token, acquired from https://ldlink.nci.nih.gov/?tab=apiaccess"))
 ```
 
+###List of things to add with time
+sQTL
+gnomad
+Progress through batches
+how fast to run (set up a n=3 for how many snps per thing, and make sure that it's not being removed in the LD step)
 
 ##Prerequisite to load in :
 ```{r, results=FALSE, echo=FALSE}
@@ -208,7 +213,8 @@ write_excel_csv(df, paste0(file_directory,"/", gene_name,"_test/Gtex/", gene_nam
 Then we need to isolate the unique SNPs for searching in the ieugwasR package:
 ```{r Unique SNPs from Gtex}
 unique_Gtex_snps = unique(df$rsid) # Removes any duplicated rows
-write.table(unique_Gtex_snps, paste0(file_directory,"/", gene_name,"_test/Gtex/unique_Gtex_snps.csv"), sep="\t", row.names=FALSE, col.names=FALSE) # saving the file
+write_csv(as.data.frame(unique_Gtex_snps), paste0(file_directory,"/", gene_name,"_test/Gtex/unique_Gtex_snps_pre_r2.csv")) # saving the file
+write_csv(as.data.frame(unique_Gtex_snps), paste0(file_directory,"/", gene_name,"_test/Gtex/unique_Gtex_snps.csv"))
 ```
 
 
@@ -329,9 +335,7 @@ LIMITED_SNP_LIST = LIMITED_SNP_LIST[grep("Variant kept.", LIMITED_SNP_LIST$Detai
 LIMITED_SNP_LIST = as.data.frame(LIMITED_SNP_LIST[,1])
 names(LIMITED_SNP_LIST) = "rsid"
 
-write_csv(LIMITED_SNP_LIST, paste0(file_directory,"/", gene_name,"_test/LDMatrix/",gene_name, "_LIMITED_SNP_LIST.csv"))
-unique_Gtex_snps = read_csv(paste0(file_directory,"/", gene_name,"_test/LDMatrix/",gene_name, "_LIMITED_SNP_LIST.csv"))
-unique_Gtex_snps = unique(unique_Gtex_snps$rsid)
+write_csv(LIMITED_SNP_LIST, paste0(file_directory,"/", gene_name,"_test/Gtex/unique_Gtex_snps.csv")) # if this happens it'll overwrite the unique snps frame
 }
 }
 ```
@@ -341,12 +345,36 @@ unique_Gtex_snps = unique(unique_Gtex_snps$rsid)
 ### Searching snps in ieugwasr
 searching IEU PheWAS database
 This step takes a while, give it time, if it errors, chances are the servers are busy, try again or maybe try running in the evening.
+
 ```{r,Phewas searching }
 # Lines for generating the batch ids
 # LUT =gwasinfo()
 # LUT2 = LUT %>% separate(id, c("ID1", "ID2", "ID_extra")) %>%
 #   unite("id_new", ID1:ID2, remove = FALSE,sep = "-")
 # unique(LUT2$id_new)
+
+ # Part run test:
+# if(file.exists(paste0(file_directory,"/", gene_name,"_test/Final_data/",gene_name,"_GtextoPHEWAS_RAW.csv"))){ # output from the phewas search
+#  test = read_csv(paste0(file_directory,"/", gene_name,"_test/Final_data/",gene_name,"_GtextoPHEWAS_RAW.csv"))
+#  test_unique_snps = unique(test$rsid)
+# }
+# 
+# 
+# if(file.exists(paste0(file_directory,"/", gene_name,"_test/LDMatrix/",gene_name, "_LIMITED_SNP_LIST.csv"))){# if unqiue snps >700
+#   unique_Gtex_snps=read_csv(paste0(file_directory,"/", gene_name,"_test/LDMatrix/",gene_name, "_LIMITED_SNP_LIST.csv"))
+#   unique_Gtex_snps = as.data.frame(unique(unique_Gtex_snps$rsid))
+# }
+# 
+# 
+# if(file.exists(paste0(file_directory,"/", gene_name,"_test/Gtex/unique_Gtex_snps.csv"))){
+#   unique_Gtex_snps=read_tsv(paste0(file_directory,"/", gene_name,"_test/Gtex/unique_Gtex_snps.csv"),col_names = F )
+# }
+# 
+# 
+# unique_Gtex_snps$test = unique_Gtex_snps$X1 %in% test_unique_snps
+# unique_Gtex_snps = unique_Gtex_snps %>% filter(test==F)
+
+batch_size=3
 
 batch_for_phewas = c("ieu-b",
                      #"ubm-b",
@@ -357,57 +385,41 @@ batch_for_phewas = c("ieu-b",
                      "finn-b",
                      "prot-c",
                      "ukb-d",
-            "prot-a",
+                    "prot-a",
                      "ubm-a",
                      "met-a",
                      "met-b",
                     "ieu-a",
-            "prot-b",
+                    "prot-b",
                      "bbj-a" ,
                      "met-c" ,
                      "met-d" )
 
+unique_Gtex_snps_df_storage = read_csv(paste0(file_directory,"/", gene_name,"_test/Gtex/unique_Gtex_snps.csv"))
+unique_Gtex_snps = unique_Gtex_snps_df_storage$unique_Gtex_snps
+unique_Gtex_snps2=unique_Gtex_snps
 
-
-
-# for(id in 1:length(batch_for_phewas)){
-#   print(batch_for_phewas[id])
-#   Gtex_PHEWAS_temp = phewas(test,
-#                            batch = batch_for_phewas[id],
-#                            pval = 1e-04)
-#   if(nrow(Gtex_PHEWAS_temp>0)){
-#   assign(value=Gtex_PHEWAS_temp,x=paste0("Gtex_PHEWAS_temp_",id))
-#   }
-#   Gtex_PHEWAS =mget(ls(pattern = "Gtex_PHEWAS_temp_"), envir = .GlobalEnv)
-#   Gtex_PHEWAS =rbind(to_do$Gtex_PHEWAS_temp_18,to_do$Gtex_PHEWAS_temp_2)
-# }
-
-if(exists("LIMITED_SNP_LIST")){
- unique_Gtex_snps = unique(LIMITED_SNP_LIST$rsid)
- unique_Gtex_snps2 = unique(LIMITED_SNP_LIST$rsid)
- unique_Gtex_snps_df =as.data.frame(unique_Gtex_snps) 
-}else{
-  unique_Gtex_snps = unique(df$rsid)
-  unique_Gtex_snps2 = unique(df$rsid)
-  unique_Gtex_snps_df =as.data.frame(unique_Gtex_snps)
-}
-
+rm(list = ls(pattern = "Gtex_PHEWAS_temp_"))
 if(exists("completed_snps")){# add in catch for if completed SNPs is enough?
   if(length(completed_snps)<length(unique_Gtex_snps2)){
   print(paste0("Already attempted run, ",length(completed_snps)," rsids searched - carrying on from where we left off"))
-  m=(length(na.omit(completed_snps))%/%3+1)
-  unique_Gtex_snps_df$test = !unique_Gtex_snps %in%completed_snps
+  m=(length(na.omit(completed_snps))%/%batch_size+1)
+  unique_Gtex_snps_df = unique_Gtex_snps_df_storage
+  unique_Gtex_snps_df$test = !unique_Gtex_snps2 %in%completed_snps
   unique_Gtex_snps_df = unique_Gtex_snps_df %>% filter(test==T)
-  unique_Gtex_snps = unique_Gtex_snps_df$unique_Gtex_snps
-  for(n in 1:(length(na.omit(unique_Gtex_snps))%/%3 + 1)){
-    test = na.omit(unique_Gtex_snps[(((n-1)*3)+1):(n*3)])
-    print(paste0("Temporary dataframe ",n))
+  unique_Gtex_snps = unique_Gtex_snps_df$rsid
+  for(n in 1:(length(na.omit(unique_Gtex_snps))%/%batch_size + 1)){
+    test = na.omit(unique_Gtex_snps[(((n-1)*batch_size)+1):(n*batch_size)])
+    print(paste0("Temporary dataframe ",n+m-1))
+    
+    # x=length(mget(ls(pattern = "Gtex_PHEWAS_temp_"), envir = .GlobalEnv))+1 # needs rewokring reomve all gtex_phewas_temp_n after run!
     for(id in 1:length(batch_for_phewas)){
       print(batch_for_phewas[id])
-      Gtex_PHEWAS_temp = phewas(test[1],
+      # Ideally I need some sort of progress saving step here! - only relevent if I have completed SNPS anyway?
+      # 
+      Gtex_PHEWAS_temp = phewas(test,
                                batch = batch_for_phewas[id],
                                pval = 1e-04)
-      
       if(nrow(Gtex_PHEWAS_temp>0)){
       assign(value=Gtex_PHEWAS_temp,x=paste0("Gtex_PHEWAS_temp_",id))
       }
@@ -422,12 +434,13 @@ if(exists("completed_snps")){# add in catch for if completed SNPs is enough?
           completed_snps2 = test
           completed_snps=c(completed_snps,completed_snps2)
           completed_snps=unique(completed_snps)
+          rm(list = ls(pattern = "Gtex_PHEWAS_temp_")) # Clears out all old dataframes to track progress
       }
     }else{break}  
   }
 }}else{
-  for(n in 1:(length(na.omit(unique_Gtex_snps))%/%3 + 1)){
-    test = na.omit(unique_Gtex_snps[(((n-1)*3)+1):(n*3)])
+  for(n in 1:(length(na.omit(unique_Gtex_snps))%/%batch_size + 1)){
+    test = na.omit(unique_Gtex_snps[(((n-1)*batch_size)+1):(n*batch_size)])
     
     if(n==1){
       print("First dataframe")
@@ -457,7 +470,7 @@ if(exists("completed_snps")){# add in catch for if completed SNPs is enough?
         Gtex_PHEWAS_temp = phewas(test,
                                  batch = batch_for_phewas[id],
                                  pval = 1e-04)
-        
+    
         if(nrow(Gtex_PHEWAS_temp>0)){
         assign(value=Gtex_PHEWAS_temp,x=paste0("Gtex_PHEWAS_temp_",id))
         }
@@ -482,7 +495,7 @@ if(nrow(Gtex_PHEWAS)==0){
   print("Houston, we have a problem. Re run this chunk using the play button in the top right of the box. If that still doesn't work, run line by line using ctrl-enter OR cmd-enter. If it still doesn't work then I'm afraid something has gone really wrong! email me at harry.young@bristol.ac.uk")
 } else{
 # Then save using the following line:
-  Gtex_PHEWAS=unique(Gtex_PHEWAS)
+  Gtex_PHEWAS=unique(Gtex_PHEWAS) # clear up any duplication events
   write_excel_csv(Gtex_PHEWAS, paste0(file_directory,"/", gene_name,"_test/Final_data/",gene_name,"_GtextoPHEWAS_RAW.csv"))
 }
 
@@ -496,7 +509,175 @@ if(length(completed_snps)==length(unique_Gtex_snps2)){
 
 
 ```
- ALTERNATE ONE BY ONE APPROACH SUPER SLOW - BUT MAY BE NEEDED
+### BACKUP OF ABOVE LOOP INCASE I BREAK IT:
+```{r,Phewas searching }
+# Lines for generating the batch ids
+# LUT =gwasinfo()
+# LUT2 = LUT %>% separate(id, c("ID1", "ID2", "ID_extra")) %>%
+#   unite("id_new", ID1:ID2, remove = FALSE,sep = "-")
+# unique(LUT2$id_new)
+
+ # Part run test:
+# if(file.exists(paste0(file_directory,"/", gene_name,"_test/Final_data/",gene_name,"_GtextoPHEWAS_RAW.csv"))){ # output from the phewas search
+#  test = read_csv(paste0(file_directory,"/", gene_name,"_test/Final_data/",gene_name,"_GtextoPHEWAS_RAW.csv"))
+#  test_unique_snps = unique(test$rsid)
+# }
+# 
+# 
+# if(file.exists(paste0(file_directory,"/", gene_name,"_test/LDMatrix/",gene_name, "_LIMITED_SNP_LIST.csv"))){# if unqiue snps >700
+#   unique_Gtex_snps=read_csv(paste0(file_directory,"/", gene_name,"_test/LDMatrix/",gene_name, "_LIMITED_SNP_LIST.csv"))
+#   unique_Gtex_snps = as.data.frame(unique(unique_Gtex_snps$rsid))
+# }
+# 
+# 
+# if(file.exists(paste0(file_directory,"/", gene_name,"_test/Gtex/unique_Gtex_snps.csv"))){
+#   unique_Gtex_snps=read_tsv(paste0(file_directory,"/", gene_name,"_test/Gtex/unique_Gtex_snps.csv"),col_names = F )
+# }
+# 
+# 
+# unique_Gtex_snps$test = unique_Gtex_snps$X1 %in% test_unique_snps
+# unique_Gtex_snps = unique_Gtex_snps %>% filter(test==F)
+# 
+# 
+# batch_for_phewas = c("ieu-b",
+#                      #"ubm-b",
+#                      "ebi-a",
+#                      "eqtl-a",
+#                      "ukb-b",
+#                     "ukb-e",
+#                      "finn-b",
+#                      "prot-c",
+#                      "ukb-d",
+#             "prot-a",
+#                      "ubm-a",
+#                      "met-a",
+#                      "met-b",
+#                     "ieu-a",
+#             "prot-b",
+#                      "bbj-a" ,
+#                      "met-c" ,
+#                      "met-d" )
+# 
+# 
+# 
+# 
+# 
+# if(exists("LIMITED_SNP_LIST")){
+#  unique_Gtex_snps = unique(LIMITED_SNP_LIST$rsid)
+#  unique_Gtex_snps2 = unique(LIMITED_SNP_LIST$rsid)
+#  unique_Gtex_snps_df =as.data.frame(unique_Gtex_snps)
+# }else{
+#   unique_Gtex_snps = unique(df$rsid)
+#   unique_Gtex_snps2 = unique(df$rsid)
+#   unique_Gtex_snps_df =as.data.frame(unique_Gtex_snps)
+# }
+# 
+# 
+# if(exists("completed_snps")){# add in catch for if completed SNPs is enough?
+#   if(length(completed_snps)<length(unique_Gtex_snps2)){
+#   print(paste0("Already attempted run, ",length(completed_snps)," rsids searched - carrying on from where we left off"))
+#   m=(length(na.omit(completed_snps))%/%3+1)
+#   unique_Gtex_snps_df$test = !unique_Gtex_snps %in%completed_snps
+#   unique_Gtex_snps_df = unique_Gtex_snps_df %>% filter(test==T)
+#   unique_Gtex_snps = unique_Gtex_snps_df$unique_Gtex_snps
+#   for(n in 1:(length(na.omit(unique_Gtex_snps))%/%3 + 1)){
+#     test = na.omit(unique_Gtex_snps[(((n-1)*3)+1):(n*3)])
+#     print(paste0("Temporary dataframe ",n))
+#     for(id in 1:length(batch_for_phewas)){
+#       print(batch_for_phewas[id])
+#       Gtex_PHEWAS_temp = phewas(test[1],
+#                                batch = batch_for_phewas[id],
+#                                pval = 1e-04)
+#       
+#       if(nrow(Gtex_PHEWAS_temp>0)){
+#       assign(value=Gtex_PHEWAS_temp,x=paste0("Gtex_PHEWAS_temp_",id))
+#       }
+#       Sys.sleep(10)
+#       Gtex_PHEWAS_2 =mget(ls(pattern = "Gtex_PHEWAS_temp_"), envir = .GlobalEnv)
+#       Gtex_PHEWAS_2 = bind_rows(Gtex_PHEWAS_2)
+#     }
+#    
+#     if(length(Gtex_PHEWAS_2)==12){
+#       if(nrow(Gtex_PHEWAS_2)>0){
+#           Gtex_PHEWAS = rbind(Gtex_PHEWAS, Gtex_PHEWAS_2)
+#           completed_snps2 = test
+#           completed_snps=c(completed_snps,completed_snps2)
+#           completed_snps=unique(completed_snps)
+#       }
+#     }else{break}  
+#   }
+# }}else{
+#   for(n in 1:(length(na.omit(unique_Gtex_snps))%/%3 + 1)){
+#     test = na.omit(unique_Gtex_snps[(((n-1)*3)+1):(n*3)])
+#     
+#     if(n==1){
+#       print("First dataframe")
+#       for(id in 1:length(batch_for_phewas)){
+#         print(batch_for_phewas[id])
+#         
+#         Gtex_PHEWAS_temp = phewas(test,
+#                                  batch = batch_for_phewas[id],
+#                                  pval = 1e-04)
+#         
+#         if(nrow(Gtex_PHEWAS_temp>0)){
+#         assign(value=Gtex_PHEWAS_temp,x=paste0("Gtex_PHEWAS_temp_",id))
+#         }
+#         Sys.sleep(10)
+#         Gtex_PHEWAS =mget(ls(pattern = "Gtex_PHEWAS_temp_"), envir = .GlobalEnv)
+#         Gtex_PHEWAS = bind_rows(Gtex_PHEWAS)
+#       }
+#       
+#         if(length(Gtex_PHEWAS)==12){
+#         completed_snps = test
+#         }else{break}
+#       }
+#     else{
+#       print(paste0("Temporary dataframe ",n))
+#       for(id in 1:length(batch_for_phewas)){
+#         print(batch_for_phewas[id])
+#         Gtex_PHEWAS_temp = phewas(test,
+#                                  batch = batch_for_phewas[id],
+#                                  pval = 1e-04)
+#         
+#         if(nrow(Gtex_PHEWAS_temp>0)){
+#         assign(value=Gtex_PHEWAS_temp,x=paste0("Gtex_PHEWAS_temp_",id))
+#         }
+#         Sys.sleep(10)
+#         Gtex_PHEWAS_2 =mget(ls(pattern = "Gtex_PHEWAS_temp_"), envir = .GlobalEnv)
+#         Gtex_PHEWAS_2 = bind_rows(Gtex_PHEWAS_2)
+#       }
+# 
+#       if(length(Gtex_PHEWAS_2)==12){
+#         if(nrow(Gtex_PHEWAS_2)>0){
+#           Gtex_PHEWAS = rbind(Gtex_PHEWAS, Gtex_PHEWAS_2)
+#           completed_snps2 = test
+#           completed_snps=c(completed_snps,completed_snps2)
+#           completed_snps=unique(completed_snps)
+#         }
+#       }else{break} 
+#     }
+#   }
+# }
+# 
+# if(nrow(Gtex_PHEWAS)==0){
+#   print("Houston, we have a problem. Re run this chunk using the play button in the top right of the box. If that still doesn't work, run line by line using ctrl-enter OR cmd-enter. If it still doesn't work then I'm afraid something has gone really wrong! email me at harry.young@bristol.ac.uk")
+# } else{
+# # Then save using the following line:
+#   Gtex_PHEWAS=unique(Gtex_PHEWAS)
+#   write_excel_csv(Gtex_PHEWAS, paste0(file_directory,"/", gene_name,"_test/Final_data/",gene_name,"_GtextoPHEWAS_RAW.csv"))
+# }
+# 
+# 
+# if(length(completed_snps)==length(unique_Gtex_snps2)){
+#   print("All OK, moving on")
+# }else{
+#   print("run all from this chunk again")
+#   break
+# }
+
+
+```
+### ALTERNATE ONE BY ONE APPROACH SUPER SLOW - BUT MAY BE NEEDED
 ```{r,Phewas searching ALT, eval=FALSE}
 # # Lines for generating the batch ids
 # # LUT =gwasinfo()
@@ -552,7 +733,7 @@ if(length(completed_snps)==length(unique_Gtex_snps2)){
 #   m=(length(na.omit(completed_snps))%/%2+1)
 #   unique_Gtex_snps_df$test = !unique_Gtex_snps %in%completed_snps
 #   unique_Gtex_snps_df = unique_Gtex_snps_df %>% filter(test==T)
-#   unique_Gtex_snps = unique_Gtex_snps_df$unique_Gtex_snps
+#   unique_Gtex_snps = unique_Gtex_snps_df$rsid
 #   for(n in 1:(length(na.omit(unique_Gtex_snps))%/%2 + 1)){
 #     test = na.omit(unique_Gtex_snps[(((n-1)*2)+1):(n*2)])
 #     print(paste0("Temporary dataframe ",n))
@@ -772,7 +953,7 @@ df = left_join(x=df_backup, y=Full_trait_database)
 if(sum(is.na(df$traitgroup))==0){
   print("Merge succesful, no NA's")
 } else{
-  paste(df$trait[which(is.na(df$traitgroup)==T)], "needs to be added to Full_trait_database") # VERY UNLIKELY!
+  paste(unique(df$trait[which(is.na(df$traitgroup)==T)]), "needs to be added to Full_trait_database") # VERY UNLIKELY!
 }
 
 ```
@@ -1000,7 +1181,7 @@ The plan is as follows:
 
 ```{r Removal of LD linked snps for r20.5}
 #Data preamble##
-unique_Gtex_snps= read_tsv(paste0(file_directory,"/", gene_name,"_test/Gtex/unique_Gtex_snps.csv"), col_names = FALSE) # read the original unique snps file
+unique_Gtex_snps= read_tsv(paste0(file_directory,"/", gene_name,"_test/Gtex/unique_Gtex_snps_pre_r2.csv"), col_names = FALSE) # read the original unique snps file
 unique_Gtex_snps = unique_Gtex_snps$X1
 if(length(unique_Gtex_snps)<700){
   rm(list=ls()[! ls() %in% c("file_directory","gene_name","LD_token","unique_Gtex_snps","completed_snps")])
@@ -3304,7 +3485,7 @@ write_csv(df,paste0(file_directory,"/", gene_name,"_test/Final_data/final_df.csv
 
 ```
 
-# Shiny app
+# Shiny app INCOMPLETE NEED TO FIX SHINY READING 10 as 2 11 as 3 etc 
 ```{r}
 # List all objects in the environment
 all_objects <- ls()
