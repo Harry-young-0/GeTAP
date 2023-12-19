@@ -491,7 +491,7 @@ if(nrow(Gtex_PHEWAS)==0){
   write_excel_csv(Gtex_PHEWAS, paste0(file_directory,"/", gene_name,"_test/Final_data/",gene_name,"_GtextoPHEWAS_RAW.csv"))
 }
 
-progress = length(Gtex_PHEWAS_list) +1
+progress = length(Gtex_PHEWAS_list)
 if(progress==number_of_runs_needed){
   print("All OK, moving on")
 }else{
