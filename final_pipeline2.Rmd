@@ -499,6 +499,10 @@ if(progress==number_of_runs_needed){
   break
 }
 
+objects_to_remove <- ls(pattern = "Gtex_PHEWAS_run_")
+
+rm(list = objects_to_remove, envir = .GlobalEnv)
+
 
 ```
 
