@@ -7,7 +7,7 @@ output: html_document
 
 ###Please email me at harry.young@bristol.ac.uk with any questions about the pipeline
 Please see instructions on github / in readme.md for details
-## Assign your gene name, file directory and LD token
+# Assign your gene name, file directory and LD token
 ```{r}
 #First line to clear out environment
 rm(list=ls())
@@ -26,7 +26,7 @@ LD_token = "generic_token"
 # "abc1bc2bc3bc"generic_token
 
 # assign a value of 1 or 2, 1 = faster but more likely to error; 2 = slower but less likely to error (DEFAULT= faster)
-speed_vs_reliability = 1
+speed_vs_reliability = 2
 
 try(if(gene_name=="YOUR_GENE_NAME") stop("Please enter your Gene Name"))
 try(if(file_directory=="C:/Documents/Example directory") stop("Please enter your file_directory so the pipeline knows where to save"))
@@ -39,8 +39,9 @@ gnomad
 Progress through batches
 how fast to run (set up a n=3 for how many snps per thing, and make sure that it's not being removed in the LD step)
 
-##Prerequisite to load in :
+###Prerequisite to load in :
 ```{r, results=FALSE, echo=FALSE}
+
 # Check the packages you have and install the rest:
 list_of_packages = c("circlize",
                      "tidyverse",
@@ -53,7 +54,8 @@ list_of_packages = c("circlize",
                      "shiny",
                      "bslib",
                      "cowplot",
-                     "plotly")
+                     "plotly",
+                     "jsonlite")
 
 new_packages = list_of_packages[!(list_of_packages %in% installed.packages()[,"Package"])]
 if(length(new_packages)>0){
@@ -100,6 +102,8 @@ library(bslib)
 library(cowplot)
 library(ieugwasr)
 library(biomaRt)
+library(jsonlite)
+library(httr2)
 ```
 
 
@@ -160,14 +164,46 @@ write_csv(egene ,paste0(file_directory,"/eGene/FINAL_Gtex_egene.csv"))
 Firstly, we read in the Gtex "SNPS associated with an expression change in the gene of interest" dataframe of interest and do some initial clean-up steps:
 
 This is done automatically using their url SWAGGER entry to their database.
+FUCK KNOWS WHAT'S GOING ON HERE:
+I NEED TO CONVERT TO GENCODE ID AND WORKOUT HOW TO USE THE V2 API.....
 ```{r Initial load and clean}
+
 if(exists("Gtex_1")==T){
   print("df exists so moving on")
 }else{
+  
+  # Replace gene symbol with GENCODE ID Versioned by GTEx
+  api_url=paste0("https://gtexportal.org/api/v2/reference/gene?geneId=",gene_name)
+  geneID = GET(url=api_url)
+  geneID <- content(geneID, as = "text")
+  geneID <- fromJSON(geneID)
+  GENCODEID=geneID$data$gencodeId
+  
+  
+  #New Version :
+  # GTEx API endpoint for single tissue eQTL data
+  api_url <- paste0("https://gtexportal.org/api/v2/association/singleTissueEqtl?gencodeId=",GENCODEID,"&itemsPerPage=100000")
+  
+  
+  
+  
+  
+  
+  
 # Scraping version
-Gtex_1 = read_tsv(paste0("https://gtexportal.org/rest/v1/association/singleTissueEqtl?format=tsv&geneSymbol=",gene_name,"&tissueSiteDetailId=Adipose_Subcutaneous%2CAdipose_Visceral_Omentum%2CAdrenal_Gland%2CArtery_Aorta%2CArtery_Coronary%2CArtery_Tibial%2CBladder%2CBrain_Amygdala%2CBrain_Anterior_cingulate_cortex_BA24%2CBrain_Caudate_basal_ganglia%2CBrain_Cerebellar_Hemisphere%2CBrain_Cerebellum%2CBrain_Cortex%2CBrain_Frontal_Cortex_BA9%2CBrain_Hippocampus%2CBrain_Hypothalamus%2CBrain_Nucleus_accumbens_basal_ganglia%2CBrain_Putamen_basal_ganglia%2CBrain_Spinal_cord_cervical_c-1%2CBrain_Substantia_nigra%2CBreast_Mammary_Tissue%2CCells_EBV-transformed_lymphocytes%2CCells_Cultured_fibroblasts%2CCells_Transformed_fibroblasts%2CCervix_Ectocervix%2CCervix_Endocervix%2CColon_Sigmoid%2CColon_Transverse%2CEsophagus_Gastroesophageal_Junction%2CEsophagus_Mucosa%2CEsophagus_Muscularis%2CFallopian_Tube%2CHeart_Atrial_Appendage%2CHeart_Left_Ventricle%2CKidney_Cortex%2CKidney_Medulla%2CLiver%2CLung%2CMinor_Salivary_Gland%2CMuscle_Skeletal%2CNerve_Tibial%2COvary%2CPancreas%2CPituitary%2CProstate%2CSkin_Not_Sun_Exposed_Suprapubic%2CSkin_Sun_Exposed_Lower_leg%2CSmall_Intestine_Terminal_Ileum%2CSpleen%2CStomach%2CTestis%2CThyroid%2CUterus%2CVagina%2CWhole_Blood&datasetId=gtex_v8"),
-                 col_names = T
-)
+  response =GET(url=api_url)
+  if (status_code(response) == 200) {
+    # Parse the JSON response
+    json_data = content(response, as = "text")
+    eqtl_data = fromJSON(api_url,)
+    Gtex_1 = eqtl_data$data
+  } else {
+    # Print an error message if the request was not successful
+    cat("Error for tissue", tissue, ":", status_code(response), "\n")
+    cat(content(response, as = "text"), "\n")
+  }
+
+
 # reset names to look like web downloaded - saves me re-writing everything
 Gtex_1 = Gtex_1 %>% 
   dplyr::rename(`Gencode Id` =gencodeId,
@@ -241,7 +277,7 @@ I calculate linkage at an r2 cutoff of 0.5 and 0.75, though 0.5 is what is used 
 if(exists("r2")){
   print("r2 already exists, moving on")
 }else{
-if(length(unique_Gtex_snps)<700){
+if(length(unique_Gtex_snps)<400){
 r2 = LDmatrix(unique_Gtex_snps, pop = "EUR", r2d = "r2", token =LD_token)
 write_csv(r2, paste0(file_directory,"/", gene_name,"_test/LDMatrix/",gene_name,"_r2.csv"))
 # open up the .csv file from the website as tab-deliminated 
@@ -326,7 +362,7 @@ save.image(paste0(file_directory,"/", gene_name,"_test/LDMatrix/rs_overlap_ALL_"
 
 
 
-if(length(unique_Gtex_snps)>=700){
+if(length(unique_Gtex_snps)>=400){
  LIMITED_SNP_LIST = SNPclip(
    unique_Gtex_snps,
    pop = "EUR",
@@ -336,7 +372,7 @@ if(length(unique_Gtex_snps)>=700){
 
 LIMITED_SNP_LIST = LIMITED_SNP_LIST[grep("Variant kept.", LIMITED_SNP_LIST$Details),  ] # selects the ones that passed the test
 LIMITED_SNP_LIST = as.data.frame(LIMITED_SNP_LIST[,1])
-names(LIMITED_SNP_LIST) = "rsid"
+names(LIMITED_SNP_LIST) = "unique_Gtex_snps"
 
 write_csv(LIMITED_SNP_LIST, paste0(file_directory,"/", gene_name,"_test/Gtex/unique_Gtex_snps.csv")) # if this happens it'll overwrite the unique snps frame
 }
@@ -352,7 +388,7 @@ This step takes a while, give it time, if it errors, chances are the servers are
 ```{r,Phewas searching }
 # New Phewas searching attempt:
 
-batch_size=3
+batch_size=5
 
 #Setup for batching if slow
 batch_for_phewas = c("ieu-b",
@@ -416,8 +452,9 @@ if(speed_vs_reliability==1){
   Gtex_PHEWAS_temp = bind_rows(Gtex_PHEWAS_list)
   Gtex_PHEWAS = rbind(Gtex_PHEWAS,Gtex_PHEWAS_temp)
   
+  }
 }
-}
+
 if(speed_vs_reliability==2){
   # Have we tried this already? 
   ##If so lets pick up where we left of:
@@ -454,7 +491,6 @@ if(speed_vs_reliability==2){
   
   ##If not, lets start from the beginning:
   ###Select unique SNPs, split into batches and run through Phewas
-  number_of_runs_needed = length(na.omit(unique_Gtex_snps))%/%batch_size + 1 # set number of runs based on total unique snps / batch size
   # Set up a loop for each run n=1, n=2 and test = snps 1:3 , 4:6 etc if batch_zie =3
   for(n in 1:number_of_runs_needed){
     test = na.omit(unique_Gtex_snps[(((n-1)*batch_size)+1):(n*batch_size)]) # select batch of SNPS
@@ -482,7 +518,7 @@ if(speed_vs_reliability==2){
   Gtex_PHEWAS = rbind(Gtex_PHEWAS,Gtex_PHEWAS_temp)
   Gtex_PHEWAS =unique(Gtex_PHEWAS)
   
-}
+  }
 }
 
 if(nrow(Gtex_PHEWAS)==0){
@@ -499,10 +535,13 @@ if(progress==number_of_runs_needed){
   break
 }
 
+# line to save progress to check!
 objects_to_remove <- ls(pattern = "Gtex_PHEWAS_run_")
 
 rm(list = objects_to_remove, envir = .GlobalEnv)
 
+
+last_run_batch_size = batch_size
 
 ```
 
@@ -855,10 +894,11 @@ The plan is as follows:
 
 
 ```{r Removal of LD linked snps for r20.5}
+# Need a check to make sure that df isn't so big it break everything
 #Data preamble##
 unique_Gtex_snps= read_tsv(paste0(file_directory,"/", gene_name,"_test/Gtex/unique_Gtex_snps_pre_r2.csv"), col_names = FALSE) # read the original unique snps file
 unique_Gtex_snps = unique_Gtex_snps$X1
-if(length(unique_Gtex_snps)<700){
+if(length(unique_Gtex_snps)<400){
   rm(list=ls()[! ls() %in% c("file_directory","gene_name","LD_token","unique_Gtex_snps","completed_snps")])
 
 load(paste0(file_directory,"/", gene_name,"_test/LDMatrix/rs_overlap_ALL_",gene_name,".RData"))  # specifically the dataframe with ambiguous data removed
@@ -1089,7 +1129,7 @@ final_df=unique(final_df)
 
 write_csv(final_df,paste0(file_directory,"/", gene_name, "_test/Final_data/final_df.csv"))
 if(file.exists(paste0(file_directory,"/",gene_name,"_test/Gtex/",gene_name,"_gtexPHEWAS_no_ukaORAmbig_FINAL.csv"))){
-file.remove(paste0(file_directory,"/",gene_name,"_test/Gtex/",gene_name,"_gtexPHEWAS_no_ukaORAmbig_FINAL.csv"))
+file.remove(paste0(file_directory,"/",gene_name,"_test/Gtex/the ",gene_name,"_gtexPHEWAS_no_ukaORAmbig_FINAL.csv"))
 }
 
 
@@ -1114,6 +1154,7 @@ Curved_gene_diagram_RED_colour
 ## our df plotting
 Initial sort of traitgroups into a custom order and colour scheme (to be used later)
 ```{r Reading in the FINAL df}
+
 # Data load in and sort 
 df = read_csv(paste0(file_directory,"/", gene_name, "_test/Final_data/final_df.csv"))
 
