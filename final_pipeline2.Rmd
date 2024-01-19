@@ -55,7 +55,8 @@ list_of_packages = c("circlize",
                      "bslib",
                      "cowplot",
                      "plotly",
-                     "jsonlite")
+                     "jsonlite",
+		     "httr2")
 
 new_packages = list_of_packages[!(list_of_packages %in% installed.packages()[,"Package"])]
 if(length(new_packages)>0){
