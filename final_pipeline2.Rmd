@@ -56,7 +56,7 @@ list_of_packages = c("circlize",
                      "cowplot",
                      "plotly",
                      "jsonlite",
-		     "httr2")
+		     "httr")
 
 new_packages = list_of_packages[!(list_of_packages %in% installed.packages()[,"Package"])]
 if(length(new_packages)>0){
@@ -104,7 +104,7 @@ library(cowplot)
 library(ieugwasr)
 library(biomaRt)
 library(jsonlite)
-library(httr2)
+library(httr)
 ```
 
 
