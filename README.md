@@ -1,6 +1,6 @@
 An overview of the various Sections on this page:
 
- - [Section A: Pipeline Rationale](##-section-A)
+ - [Section A: Pipeline Rationale](##-Section-A)
  
  - [Section B: Software and tokens required prior to running the Pipeline](##-section-B)
  
@@ -45,7 +45,22 @@ Following installation, open RStudio. Then continue following the instructions b
 
 Important: If you already have R and Rstudio installed prior to your first run, please either fresh install or reset all of your packages.
 
-## Section C: Quick Start Guide and Troubleshooting
+### 3. Create an ieugwas access token
+To use the IEU OpenGWAS, you need to authenticate your account. To authenticate, you need to generate a token from the OpenGWAS website using the following steps:
+
+a. Login to https://api.opengwas.io/profile/ , creating a profile if needed
+
+b. Generate a new token
+
+c. Open your .Renviron file by typing "file.edit("~/.Renviron")" into the console 
+
+d. Copy and paste your token into the following: "OPENGWAS_JWT="\<token\>" (i.e., replacing the "\<token\>" with your own token") and save (Ctrl-S or Cmd-S) (see screenshot below)
+
+e. Restart your R session (close RStudio and reopen again)
+
+![IEUGWAS token](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/1c1db561-f8c4-4175-a0ef-a129d6d71195)
+
+## Section C: Quick Start Guide (incl. Troubleshooting)
 
 ### 1. Create a file directory
 
