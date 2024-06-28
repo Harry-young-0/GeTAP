@@ -1,8 +1,8 @@
 An overview of the various Sections on this page:
 
- - [Section A: Pipeline Rationale](##-Section-A)
+ - [Section A: Pipeline Rationale](##-Section-A-Pipeline-Rationale)
  
- - [Section B: Software and tokens required prior to running the Pipeline](##-section-B)
+ - [Section B: Software and tokens required prior to running the Pipeline](##-Section-B-Software-and-tokens-required-prior-to-running-the-pipeline)
  
  - [Section C: Quick Start Guide and Troubleshooting](##-section-C)
  
