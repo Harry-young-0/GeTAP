@@ -99,12 +99,13 @@ In RStudio, scroll down the pipeline slightly and you will see 'gene_name', 'fil
  **ieu_token** - Your unique many character token from ieugwas (obtained above) e.g: "akjhwbd......hj34lkug"
 
 #### Before your edit the pipeline appears: 
-UPDATED SCREENSHOT NEEDED
-![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/7af50e7d-0487-4ae5-90cf-d76da18fa22c)
+
+![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/9e2d58bd-5886-4ad0-a1ba-cfaf62f4a47d)
+
 
 #### After your edit the pipeline appears: 
 
-![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/b679c9db-3ef3-4bf9-a2e2-b0ec92a61cb9)
+![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/57a75561-92ac-4aa7-8b77-24995ab7e666)
 
 #### Please check these common errors:
 
