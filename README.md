@@ -8,11 +8,12 @@ An overview of the various Sections on this page:
  
  - [Section D: Understanding the Pipeline Output Plots](#section-d-understanding-the-pipeline-output-plots)
 
- - [Section E: Pipeline extension: Multiple gene comparisons](#section-e-pipeline-extension-multiple-gene-comparisons)
+ - [Section E: Pipeline extension: Multiple Gene Vomparisons](#section-e-pipeline-extension-multiple-gene-comparisons)
  
- - [Section F: Modifying the Tissue-and-Trait-Databases](#section-F: Modifying the Tissue-and-Trait-Databases)
+ - [Section F: Modifying the Tissue-and-Trait-Databases](#section-f-modifying-the-tissue-and-trait-databases)
  
- - [Section G: Using the main R Notebook to modify the code](#section-G: Using the main R Notebook to modify the code)
+ - [Section G: Using the main R Notebook to modify the code](#section-g-using-the-main-r-notebook-to-modify-the-code)
+ - [Section H: Alternate Instructions and Advanced Usage Cases](#section-h-alternate-instructions-and-advanced-usage-cases)
 
 ## Section A: Pipeline Rationale
 
