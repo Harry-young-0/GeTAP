@@ -56,7 +56,6 @@ c. Save it, you'll need to enter it (see instructions below)
 
 NOTE: This token resets monthly so you will need to login again and click generate if more than a month has passed since your last run. 
 
-![IEUGWAS token](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/1c1db561-f8c4-4175-a0ef-a129d6d71195)
 
 ## Section C: Quick Start Guide (incl. Troubleshooting)
 
@@ -113,7 +112,7 @@ a. Make sure each of these changes are within speech marks. e.g: gene_name = "NF
 
 b. Make sure your gene name is exactly as it appears in GTEx (check using https://gtexportal.org/home/).
 
-c. Make sure your file_directory has "/" not "\\". e.g: file_directory = "C:/Documents/Example directory" not file_directory = "C:\Documents\Example directory". This is the default for Windows so is a very common problem.
+c. Make sure your file_directory has "/" not "\\". e.g: file_directory = "C:/Documents/Example directory" not file_directory = "C:\Documents\Example directory". This is the default for Windows so is a very common problem. 
 
 If the pipeline still errors, please email me with details of the error and your modified final_pipeline.rmd file.
 
@@ -124,17 +123,13 @@ In the top right of the RStudio window, click 'run all':
 ![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/5dfffe8f-c975-452d-a7fd-a82d2761b791)
 
 ### 7. Be patient! The pipeline should take ~20-30 mins to run.
-
-I COULD PUT THIS AS A SEPERATE SCRIPT? - NOT SURE WHAT IS EASIER
-
-The pipeline will automatically open a Shiny App to display the data. The Shiny App can be reopened at anytime, by specifcally running the Shiny App rerun chunk on lines 3204-3215 - the code in this chunk needs to be updated with GENE-NAME and File_directory in the same way as at teh start of the pipeline - then click the 'play' symbol at the top right of the box. All of the plots displayed in the Shiny App will also be saved as pdfs in the 'GENE_test' folder. The Shiny App will display the Circos plots in a nicer format than the output pdfs saved in the Circos folder.
+The pipeline will automatically open a Shiny App to display the data. The Shiny App can be reopened at anytime, by specifcally running the Shiny App rerun chunk on lines 3204-3215 - the code in this chunk needs to be updated with GENE-NAME and File_directory in the same way as at the start of the pipeline - then click the 'play' symbol at the top right of the box. All of the plots displayed in the Shiny App will also be saved as pdfs in the 'GENE_test' folder. The Shiny App will display the Circos plots in a nicer format than the output pdfs saved in the Circos folder.
 
 ![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/be747c60-8cfe-426c-9ca0-f6628b19e1e3)
 
 All outputs of the pipeline will automatically be saved in a dedicated folder ('GENE_test') within the main directory folder.
 
 <img width="739" alt="Step7 gituhub" src="https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/5464b4d0-8bae-40c2-8229-1490e0ff8732">
-
 
 ### 8. Troubleshooting
 This pipeline uses three servers: ieugwasr, LDlink and ensembl. All of these will time-out if the pipeline takes too long to run. If this happens, the pipeline will stop running and an error message will pop up in the console (bottom left box). If this happens please try running the pipeline again at a later time, evenings are often less busy. If the pipeline keeps erroring, please let me know and I'll help as much as I can!
@@ -305,16 +300,16 @@ Circos plot displaying the overlap of Tissue Groups where the SNPs were found co
 Once two or more genes have been run through the pipeline, you can compare the results between these genes using heatmaps and stacked bar charts. This is a seperate .rmd file named comparisons_between_genes.rmd.
 
 ### Quick Start:
-1. Modify line 24 of the comparisons_between_genes.rmd file to genes_for_heatmap = c("GENE_1","GENE_2","GENE_3") - where GENE_1 to GENE_3 are genes you have run through the pipeline and exist in your file directory as GENE_test. OR to genes_for_heatmap = c("All") to find all genes you have run.
-2. Similar to the pipeline itself, you need to specify the file directory in line 28 to the SAME directory your pipeline has been working in. Screenshot pointing to the lines to modify:
+1. Modify the downloaded spreadsheet Heatmap_LUT.csv and modify to add details about the genes you have run and what they are. It is important to keep the column headers as they are.
+2. Similar to the pipeline itself, you need to specify the file directory in line 26 to the SAME directory your pipeline has been working in. Screenshot pointing to the line to modify:
 
-![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/e2b0f42e-9af3-4a2f-a37a-f3172c78bd44)
+![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/7ad85b3d-2c06-49ba-89d3-2346991f01d9)
 
 Your directory should look something like shown below. If you have altered the names of any folders you will need to change them back to the format GENE_test.
 
 ![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/0a21ea24-b5dc-49f8-95ef-45c7593ecab4)
 
-Genes will appear on the graphs in the order you place them here. If "All" then they are displayed in alphabetical order by default.
+Genes will appear on the graphs in alphabetical order, grouped by the "Group" set in Heatmap_LUT.csv by default. INCOMPLETE - COULD ADD A WAY OF CUSTOMISING ORDER IF WE FEEL IT IS NEEDED.
 
 Once this section has run a new folder called "Heatmaps" will have appeared containing df_merge.csv, a dataframe of the compared genes and a plots folder containing INCOMPLETE, FILL IN HERE
 
@@ -329,14 +324,16 @@ A summary plot of each Trait group and the number of traits in each group is dis
 
 ![Traits in trait database](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/7529ff3c-ef30-44d4-b842-5695a9debf21)
 
-##  Section F: Using the main R Notebook to modify the code
+##  Section G: Using the main R Notebook to modify the code
 There are a lot of instructions within the pipeline document itself and you are more than welcome to go through running chunk by chunk to get used to how I've setup this pipeline if you're interested! 
 
-##  Section G: Alternate instructions and advanced usage cases
+##  Section H: Alternate instructions and advanced usage cases
 ieugwas token alt setup if the one above doesn't work:
 c. Open your .Renviron file by typing "file.edit("~/.Renviron")" into the console 
 
 d. Copy and paste your ieugwas token into the following: "OPENGWAS_JWT="\<token\>" (i.e., replacing the "\<token\>" with your own token") and save (Ctrl-S or Cmd-S) (see screenshot below)
 
 e. Restart your R session (close RStudio and reopen again)
+
+![IEUGWAS token](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/1c1db561-f8c4-4175-a0ef-a129d6d71195)
 
