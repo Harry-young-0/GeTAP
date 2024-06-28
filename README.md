@@ -52,11 +52,9 @@ a. Login to https://api.opengwas.io/profile/ , creating a profile if needed
 
 b. Generate a new token
 
-c. Open your .Renviron file by typing "file.edit("~/.Renviron")" into the console 
+c. Save it, you'll need to enter it (see instructions below)
 
-d. Copy and paste your token into the following: "OPENGWAS_JWT="\<token\>" (i.e., replacing the "\<token\>" with your own token") and save (Ctrl-S or Cmd-S) (see screenshot below)
-
-e. Restart your R session (close RStudio and reopen again)
+NOTE: This token resets monthly so you will need to login again and click generate if more than a month has passed since your last run. 
 
 ![IEUGWAS token](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/1c1db561-f8c4-4175-a0ef-a129d6d71195)
 
@@ -90,7 +88,7 @@ This issue will be resolved automatically later on, once you click “run all”
 
 ### 5. Setting up the pipeline with your LDlink token, file directory and specific gene name
 
-In RStudio, scroll down the pipeline slightly and you will see 'gene_name', 'file_directory' and 'LD_Token' on lines 17, 21 and 27 respectively. These defaults should now be replaced with your own versions. These are the only changes you need to make - please don't change anything else in the code unless you are specifically trying to tweak the pipeline.
+In RStudio, scroll down the pipeline slightly and you will see 'gene_name', 'file_directory', 'LD_Token' amd 'ieu_token' on lines 17, 21, 26 and 31 respectively. These defaults should now be replaced with your own versions. These are the only changes you need to make - please don't change anything else in the code unless you are specifically trying to tweak the pipeline.
  
  **gene_name** - The name of the human gene to be investigated, in all capitals as it appears in GTEx. You can check your gene name here: https://gtexportal.org/home/ in the dedicated search box. e.g: "NFE2L2"
  
@@ -98,8 +96,10 @@ In RStudio, scroll down the pipeline slightly and you will see 'gene_name', 'fil
  
  **LD_Token** - Your unique 12 character token from LDlink (obtained above) e.g: "abc1def2ghi3"
 
-#### Before your edit the pipeline appears: 
+ **ieu_token** - Your unique many character token from ieugwas (obtained above) e.g: "akjhwbd......hj34lkug"
 
+#### Before your edit the pipeline appears: 
+UPDATED SCREENSHOT NEEDED
 ![image](https://github.com/Hy14913/expression-trait_pipeline/assets/66262215/7af50e7d-0487-4ae5-90cf-d76da18fa22c)
 
 #### After your edit the pipeline appears: 
@@ -330,4 +330,12 @@ A summary plot of each Trait group and the number of traits in each group is dis
 
 ##  Section F: Using the main R Notebook to modify the code
 There are a lot of instructions within the pipeline document itself and you are more than welcome to go through running chunk by chunk to get used to how I've setup this pipeline if you're interested! 
+
+##  Section G: Alternate instructions and advanced usage cases
+ieugwas token alt setup if the one above doesn't work:
+c. Open your .Renviron file by typing "file.edit("~/.Renviron")" into the console 
+
+d. Copy and paste your ieugwas token into the following: "OPENGWAS_JWT="\<token\>" (i.e., replacing the "\<token\>" with your own token") and save (Ctrl-S or Cmd-S) (see screenshot below)
+
+e. Restart your R session (close RStudio and reopen again)
 
