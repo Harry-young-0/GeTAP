@@ -4,15 +4,15 @@ An overview of the various Sections on this page:
  
  - [Section B: Software and tokens required prior to running the Pipeline](#section-b-software-and-tokens-required-prior-to-running-the-pipeline)
  
- - [Section C: Quick Start Guide and Troubleshooting](#-section-C)
+ - [Section C: Quick Start Guide and Troubleshooting](#section-c-quick-start-guide-incl-troubleshooting)
  
- - [Section D: Understanding the Pipeline Output Plots](#section-d)
+ - [Section D: Understanding the Pipeline Output Plots](#section-d-understanding-the-pipeline-output-plots)
 
- - [Section E: Pipeline extension: Multiple gene comparisons](#section-e)
+ - [Section E: Pipeline extension: Multiple gene comparisons](#section-e-pipeline-extension-multiple-gene-comparisons)
  
- - [Section F: Modifying the Tissue-and-Trait-Databases](#section-f)
+ - [Section F: Modifying the Tissue-and-Trait-Databases](#section-F: Modifying the Tissue-and-Trait-Databases)
  
- - [Section G: Using the main R Notebook to modify the code](#section-g)
+ - [Section G: Using the main R Notebook to modify the code](#section-G: Using the main R Notebook to modify the code)
 
 ## Section A: Pipeline Rationale
 
