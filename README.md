@@ -8,7 +8,7 @@ An overview of the various Sections on this page:
  
  - [Section D: Understanding the Pipeline Output Plots](#section-d-understanding-the-pipeline-output-plots)
 
- - [Section E: Pipeline extension: Multiple Gene Vomparisons](#section-e-pipeline-extension-multiple-gene-comparisons)
+ - [Section E: Pipeline extension: Multiple Gene Comparisons](#section-e-pipeline-extension-multiple-gene-comparisons)
  
  - [Section F: Modifying the Tissue-and-Trait-Databases](#section-f-modifying-the-tissue-and-trait-databases)
  
