@@ -456,16 +456,16 @@ column_names <- c("beta", "se", "chr", "p", "n", "position", "id", "rsid", "ea",
 Gtex_PHEWAS <- data.frame(matrix(ncol = length(column_names), nrow = 0))
 colnames(Gtex_PHEWAS) <- column_names
 }
-SNPs_run =c()
+if(!exists("SNPs_run")){
+  SNPs_run =c()
+}
 # This loop is for batch size of 1#####
 if(batch_size==1){
   number_of_runs_needed = length(unique_Gtex_snps)
   # Have we tried this already? 
   ##If so lets pick up where we left of:
   if(exists("Gtex_PHEWAS_list")){
-    progress = length(Gtex_PHEWAS_list) +1
-    SNPs_run = bind_rows(Gtex_PHEWAS_list)
-    SNPs_run = as.vector(unique(SNPs_run$rsid))
+    progress = length(SNPs_run) +1
     for(n in progress:number_of_runs_needed){
       test = unique_Gtex_snps[n] # select batch of SNPS
       print(paste0("Temporary dataframe ",n)) # print progress for visual satisfaction
@@ -829,7 +829,6 @@ df = df[,c("Gene Symbol",
            "trait",
            "traitgroup",
            "Subcat",
-           "Alt_Subcat",
            "beta_cor",
            "beta" , 
            "AT",
@@ -1271,7 +1270,7 @@ Initial sort of traitgroups into a custom order and colour scheme (to be used la
 # Data load in and sort 
 df = read_csv(paste0(file_directory,"/", gene_name, "_test/Final_data/final_df.csv"))
 
-df = df %>% dplyr::select(-Alt_Subcat)# remove alt_subcat at least for the moment, as it seems to making duplication events
+#df = df %>% dplyr::select(-Alt_Subcat)# remove alt_subcat at least for the moment, as it seems to making duplication events
 df = unique(df)
 
 # removing duplicated raw values from more recent irnt
@@ -1292,22 +1291,22 @@ grid_col = c(`Body Fat/Size` = "#0DF485",
              `Tumours (Benign/Cancer)` ="#32CCDC" ,
              `Atrophy/Dystrophy` = "#0DB5F4",
             `Congenital Defects` = "#3277DC",
-             `Cardiovascular Traits` = "#4532DC",
-             `Blood/Vascular Traits` ="#6C39FF",
+             `Cardiovascular` = "#4532DC",
+             `Blood/Vascular` ="#6C39FF",
              Inflammation ="#9A32DC", #  or #AA98A970
             `Respiratory` ="#C402DC",
              `Renal/Urinary` = "#DC32D0",
             `Physical Activity` = "#DC024D",
-             `Digestive Traits` ="#DC2532",
+             `Digestive` ="#DC2532",
             `Microbiome` = "#DC3D10",
             `Nervous System/Brain` = "#DC5D32",
-             `Bone Traits (inc. Dental)` = "#DC8732",
-            `Muscle/Tendon Traits` = "#DCA732",
+             `Bone (inc. Dental)` = "#DC8732",
+            `Muscle/Tendon` = "#DCA732",
             `Physical Injury` = "#DCD232",
             `Alcohol-related Disease` ="#BCDC32",
              `Life Span` ="#92DC32",
-             `Female Specific Traits` = "#43DC32",
-            `Male Specific Traits` = "#00f556",
+             `Female Specific` = "#43DC32",
+            `Male Specific` = "#00f556",
             `Disease (unknown origin)` ="#00f577",
             `Other/Unspecified` ="#C9C7BD",
             `Other Gene Expression Change` ="#78C47D",
@@ -1336,22 +1335,22 @@ trait_order =c("Body Fat/Size",
             "Tumours (Benign/Cancer)",
             "Atrophy/Dystrophy", 
             "Congenital Defects", 
-            "Cardiovascular Traits",
-            "Blood/Vascular Traits",
+            "Cardiovascular",
+            "Blood/Vascular",
             "Inflammation" , 
             "Respiratory",
             "Renal/Urinary",
             "Physical Activity",
-            "Digestive Traits",
+            "Digestive",
             "Microbiome",
             "Nervous System/Brain",
-            "Bone Traits (inc. Dental)",
-            "Muscle/Tendon Traits",
+            "Bone (inc. Dental)",
+            "Muscle/Tendon",
             "Physical Injury",
             "Alcohol-related Disease",
             "Life Span",
-            "Female Specific Traits",
-            "Male Specific Traits",
+            "Female Specific",
+            "Male Specific",
             "Disease (unknown origin)",
             "Other Gene Expression Change",
             "Other/Unspecified"
@@ -1941,7 +1940,7 @@ length_of_unique_traits = length(unique(temp$trait))
 
 ```
 
-#### F4 Top n categories after other and OGEC:
+##### F4 Top n categories after other and OGEC:
 
 ```{r, fig.width=6, fig.height=10}
 number_of_traitgroups = df %>% dplyr::select(traitgroup) %>% unique()
@@ -2906,7 +2905,7 @@ dev.off()
 ```
 
 
-####5. Graphs of where the SNPS are: (quick look before circos)
+####5. (A4) Graphs of where the SNPS are: (quick look before circos)
 Next I'd like to plot the  bar chart of each reg/genetic element as a basic visualisation of what's going on.
 ```{r bar plot _G_P bar chart of reg region count}
 Unique_snps = df %>% dplyr::select( rsid, Intron_or_Exon_or_UTR, reg_region)
@@ -2954,7 +2953,7 @@ NOTE: The issue here is circlize isn't really cut out for assigning specific col
 
 ```{r Storage for Colour}
 # Correcting  df  names to actually be plottable
-df$traitgroup =ifelse(df$traitgroup =="Muscle/Tendon Traits", "Muscular/Tendon Traits", df$traitgroup)
+#df$traitgroup =ifelse(df$traitgroup =="Muscle/Tendon Traits", "Muscular/Tendon Traits", df$traitgroup)
 # FUll colour list
 grid_col = c(`Body Fat/Size` = "#0DF485",
              `Diet` = "#39FFC0",
@@ -2962,22 +2961,22 @@ grid_col = c(`Body Fat/Size` = "#0DF485",
              `Tumours (Benign/Cancer)` ="#32CCDC" ,
              `Atrophy/Dystrophy` = "#0DB5F4",
             `Congenital Defects` = "#3277DC",
-             `Cardiovascular Traits` = "#4532DC",
-             `Blood/Vascular Traits` ="#6C39FF",
+             `Cardiovascular` = "#4532DC",
+             `Blood/Vascular` ="#6C39FF",
              Inflammation ="#9A32DC", #  or #AA98A970
             `Respiratory` ="#C402DC",
              `Renal/Urinary` = "#DC32D0",
             `Physical Activity` = "#DC024D",
-             `Digestive Traits` ="#DC2532",
+             `Digestive` ="#DC2532",
             `Microbiome` = "#DC3D10",
             `Nervous System/Brain` = "#DC5D32",
-             `Bone Traits (inc. Dental)` = "#DC8732",
-            `Muscle/Tendon Traits` = "#DCA732",
+             `Bone (inc. Dental)` = "#DC8732",
+            `Muscle/Tendon` = "#DCA732",
             `Physical Injury` = "#DCD232",
             `Alcohol-related Disease` ="#BCDC32",
              `Life Span` ="#92DC32",
-             `Female Specific Traits` = "#43DC32",
-            `Male Specific Traits` = "#00f556",
+             `Female Specific` = "#43DC32",
+            `Male Specific` = "#00f556",
             `Disease (unknown origin)` ="#00f577",
             `Other/Unspecified` ="#C9C7BD",
             `Other Gene Expression Change` ="#78C47D",
@@ -3006,22 +3005,22 @@ trait_order =c("Body Fat/Size",
             "Tumours (Benign/Cancer)",
             "Atrophy/Dystrophy", 
             "Congenital Defects", 
-            "Cardiovascular Traits",
-            "Blood/Vascular Traits",
+            "Cardiovascular",
+            "Blood/Vascular",
             "Inflammation" , 
             "Respiratory",
             "Renal/Urinary",
             "Physical Activity",
-            "Digestive Traits",
+            "Digestive",
             "Microbiome",
             "Nervous System/Brain",
-            "Bone Traits (inc. Dental)",
-            "Muscle/Tendon Traits",
+            "Bone (inc. Dental)",
+            "Muscle/Tendon",
             "Physical Injury",
             "Alcohol-related Disease",
             "Life Span",
-            "Female Specific Traits",
-            "Male Specific Traits",
+            "Female Specific",
+            "Male Specific",
             "Disease (unknown origin)",
             "Other Gene Expression Change",
             "Other/Unspecified"
@@ -3339,7 +3338,6 @@ col_order <- c("Gene Symbol",
                "reg_region",
                "|NES|",
                "Tissue" ,
-               "Alt_Subcat",
                "beta",
                "AT",
                "chr_phewas",
