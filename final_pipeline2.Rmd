@@ -1266,11 +1266,11 @@ Curved_gene_diagram_RED_colour
 ## our df plotting
 Initial sort of traitgroups into a custom order and colour scheme (to be used later)
 ```{r Reading in the FINAL df}
-
 # Data load in and sort 
 df = read_csv(paste0(file_directory,"/", gene_name, "_test/Final_data/final_df.csv"))
-
 #df = df %>% dplyr::select(-Alt_Subcat)# remove alt_subcat at least for the moment, as it seems to making duplication events
+#Storage line for remerge if needed:
+#df = df %>% dplyr::select(-traitgroup,Subcat,Alt_Subcat)%>% left_join(., Full_trait_database)
 df = unique(df)
 
 # removing duplicated raw values from more recent irnt
@@ -1390,7 +1390,7 @@ test= test[ which(is.na(test$tissue_group)==F),]
 A1SNPcountperTissuegroup = ggplot(test, aes(x=tissue_group,y=count, fill=NES_direction)) + 
   geom_col()+ # bar chart counting how many times a tissue appears
   scale_fill_viridis_d(begin=1, end=0, name=paste0("Expression Change\n          (NES)")) + 
-  labs(title= "Number of SNPs per Tissue from GTEx (before PheWAS and LD removal)" , x= "Tissue Group", y=paste("Number of SNPs"))+ #labels
+  labs(title= paste0("Number of SNPs per Tissue from GTEx\n(before PheWAS and LD removal)") , x= "Tissue Group", y=paste("Number of SNPs"))+ #labels
   theme(axis.text.x = element_text(angle = 45, hjust =1),
         legend.position = "top",
          panel.background = element_rect(fill="white"),
@@ -1402,7 +1402,7 @@ A1SNPcountperTissuegroup = ggplot(test, aes(x=tissue_group,y=count, fill=NES_dir
 
 A1SNPcountperTissuegroup
 
-ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/A1-Number of SNPs per Tissue from GTEx .pdf"), width= 150, height=100, unit="mm")
+ggsave(paste0(file_directory,"/",gene_name,"_test/Final_plots/A1-Number of SNPs per Tissue from GTEx.pdf"), width= 150, height=100, unit="mm")
 
 ```
 #### A2 - number_of_SNP-trait_associations_per_tissue_group after LD and pipeline run
