@@ -2425,7 +2425,8 @@ gene_and_reg$color = ifelse( gene_and_reg$EI== "Enhancer", "#196F3D",
                                                      ifelse(gene_and_reg$EI== "TF binding", "#E67E22",
                                                              ifelse(gene_and_reg$EI== "Promoter", "#1ABC9C",
                                                                      ifelse(gene_and_reg$EI== "Exon", "#2C3E50",
-                                                                           ifelse(gene_and_reg$EI== "Intron", "#56B4E9","FAIL"))))))))
+                                                                           ifelse(gene_and_reg$EI== "Intron", "#56B4E9",
+                                                                                  ifelse(gene_and_reg$EI== "EMAR","#8f3e95","FAIL")))))))))
 
 circos.clear()
 # .par() start and gap degree for setting partial rings up!
@@ -2508,7 +2509,7 @@ gene_and_reg$color = ifelse( gene_and_reg$EI== "Enhancer", "#196F3D",
                                                      ifelse(gene_and_reg$EI== "TF binding", "#E67E22",
                                                              ifelse(gene_and_reg$EI== "Promoter", "#1ABC9C",
                                                                      ifelse(gene_and_reg$EI== "Exon", "#2C3E50",
-                                                                           ifelse(gene_and_reg$EI== "Intron", "#56B4E9","FAIL"))))))))
+                                                                           ifelse(gene_and_reg$EI== "Intron", "#56B4E9",                                                                                   ifelse(gene_and_reg$EI== "EMAR","#8f3e95","FAIL")))))))))
 # Add in colours for snps:
 df_for_circle$color = ifelse( df_for_circle$reg_region== "Enhancer", "#196F3D",
                              ifelse(df_for_circle$reg_region== "Open chromatin", "#AAB7B8",
@@ -2610,7 +2611,7 @@ gene_and_reg$color = ifelse( gene_and_reg$EI== "Enhancer", "#196F3D",
                                                      ifelse(gene_and_reg$EI== "TF binding", "#E67E22",
                                                              ifelse(gene_and_reg$EI== "Promoter", "#1ABC9C",
                                                                      ifelse(gene_and_reg$EI== "Exon", "#2C3E50",
-                                                                           ifelse(gene_and_reg$EI== "Intron", "#56B4E9","FAIL"))))))))
+                                                                           ifelse(gene_and_reg$EI== "Intron", "#56B4E9",                                                                                   ifelse(gene_and_reg$EI== "EMAR","#8f3e95","FAIL")))))))))
 
 
 
@@ -2668,7 +2669,7 @@ gene_and_reg$color = ifelse( gene_and_reg$EI== "Enhancer", "#196F3D",
                                                      ifelse(gene_and_reg$EI== "TF binding", "#E67E22",
                                                              ifelse(gene_and_reg$EI== "Promoter", "#1ABC9C",
                                                                      ifelse(gene_and_reg$EI== "Exon", "#2C3E50",
-                                                                           ifelse(gene_and_reg$EI== "Intron", "#56B4E9","FAIL"))))))))
+                                                                           ifelse(gene_and_reg$EI== "Intron", "#56B4E9",                                                                                   ifelse(gene_and_reg$EI== "EMAR","#8f3e95","FAIL")))))))))
 
 # # Add in colours for snps:
 df_for_circle$color = ifelse( df_for_circle$reg_region== "Enhancer", "#196F3D",
@@ -2769,7 +2770,7 @@ gene_and_reg$color = ifelse( gene_and_reg$EI== "Enhancer", "#196F3D",
                                                      ifelse(gene_and_reg$EI== "TF binding", "#E67E22",
                                                              ifelse(gene_and_reg$EI== "Promoter", "#1ABC9C",
                                                                      ifelse(gene_and_reg$EI== "Exon", "#2C3E50",
-                                                                           ifelse(gene_and_reg$EI== "Intron", "#56B4E9","FAIL"))))))))
+                                                                           ifelse(gene_and_reg$EI== "Intron", "#56B4E9",                                                                                   ifelse(gene_and_reg$EI== "EMAR","#8f3e95","FAIL")))))))))
 
 circos.clear()
 # .par() start and gap degree for setting partial rings up!
@@ -2852,7 +2853,7 @@ gene_and_reg$color = ifelse( gene_and_reg$EI== "Enhancer", "#196F3D",
                                                      ifelse(gene_and_reg$EI== "TF binding", "#E67E22",
                                                              ifelse(gene_and_reg$EI== "Promoter", "#1ABC9C",
                                                                      ifelse(gene_and_reg$EI== "Exon", "#2C3E50",
-                                                                           ifelse(gene_and_reg$EI== "Intron", "#56B4E9","FAIL"))))))))
+                                                                           ifelse(gene_and_reg$EI== "Intron", "#56B4E9",                                                                                   ifelse(gene_and_reg$EI== "EMAR","#8f3e95","FAIL")))))))))
 
 # Add in colours for snps:
 df_for_circle$color = ifelse( df_for_circle$reg_region== "Enhancer", "#196F3D",
@@ -3469,5 +3470,6 @@ REORDER the circos plot so that it goes in order of largest segment to smallest 
 # Common Errors for compilation into FAQs / app troubleshooting
 Ensembl Mirror DOWN "Possible SSL connectivity problems detected. - Error in .chooseEnsemblMirror(mirror = mirror, http_config = http_config) : 
   Unable to query any Ensembl site" - tends to be a connection issue, wifi disconnected etc but could do with a link to the server check site
+
 
 
