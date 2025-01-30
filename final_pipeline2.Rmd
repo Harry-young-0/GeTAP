@@ -6,7 +6,7 @@ output: html_document
 ---
 
 
-###Please email me at harry.young@bristol.ac.uk with any questions about the pipeline
+### Please email me at harry.young@manchester.ac.uk with any questions about the pipeline
 Please see instructions on github / in readme.md for details
 # Assign your gene name, file directory, LD token and ieu token
 
@@ -39,13 +39,13 @@ try(if(file_directory=="C:/Documents/Example directory") stop("Please enter your
 try(if(LD_token=="generic_token") stop("Please enter your LD token, acquired from https://ldlink.nci.nih.gov/?tab=apiaccess"))
 ```
 
-###List of things to add with time
+### List of things to add with time
 sQTL
 gnomad
 Progress through batches
 how fast to run (set up a n=3 for how many snps per thing, and make sure that it's not being removed in the LD step)
 
-###Prerequisite to load in :
+### Prerequisite to load in :
 ```{r, results=FALSE, echo=FALSE}
 
 # Check the packages you have and install the rest:
