@@ -1252,7 +1252,7 @@ df=test
 }
 
 ```
-###4e Finalisation
+### 4e Finalisation
 ```{r}
 final_df = df 
 # setting up a logp and directional logp column
@@ -1269,7 +1269,7 @@ final_df=unique(final_df)
 
 write_csv(final_df,paste0(file_directory,"/", gene_name, "_test/Final_data/final_df.csv"))
 if(file.exists(paste0(file_directory,"/",gene_name,"_test/Gtex/",gene_name,"_gtexPHEWAS_no_ukaORAmbig_FINAL.csv"))){
-file.remove(paste0(file_directory,"/",gene_name,"_test/Gtex/the ",gene_name,"_gtexPHEWAS_no_ukaORAmbig_FINAL.csv"))
+file.remove(paste0(file_directory,"/",gene_name,"_test/Gtex/",gene_name,"_gtexPHEWAS_no_ukaORAmbig_FINAL.csv"))
 }
 
 
@@ -3498,6 +3498,7 @@ REORDER the circos plot so that it goes in order of largest segment to smallest 
 # Common Errors for compilation into FAQs / app troubleshooting
 Ensembl Mirror DOWN "Possible SSL connectivity problems detected. - Error in .chooseEnsemblMirror(mirror = mirror, http_config = http_config) : 
   Unable to query any Ensembl site" - tends to be a connection issue, wifi disconnected etc but could do with a link to the server check site
+
 
 
 
