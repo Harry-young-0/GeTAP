@@ -1341,7 +1341,7 @@ grid_col = c(`Body Fat/Size` = "#0DF485",
              # Tissues:
               Blood = "#CC5500",
               `Cultured Cells` = "#00FFFF",
-              Digestive ="#A7C7E7",
+              `Digestive Tissue`="#A7C7E7",
               Endocrine = "#FF4433",
               Fat = "#E0115F",
               `Female Reproductive Tissue` = "#0C5F7D",
@@ -2265,7 +2265,7 @@ Next we begin plotting the basic linear setup. I have also included the 'random 
 #### Color setup preamble
 This section shifts around a fair bit in terms of which variables are in each plot and I wanted to have a consistent colour scheme throughout. So this chunk serves to set up and save colour information.
 ```{r}
-cols = c("CTCF Binding Site" = "#C39BD3",
+cols = c("CTCF" = "#C39BD3",
          "Enhancer" = "#196F3D70", 
          "Exon" = "#2C3E50", 
          "Intron"= "#56B4E9",
@@ -2449,7 +2449,7 @@ gene_and_reg$ymaxD = if_else(gene_and_reg$EI =="Intron" | gene_and_reg$EI =="Exo
 gene_and_reg$color = ifelse( gene_and_reg$EI== "Enhancer", "#196F3D", 
                              ifelse(gene_and_reg$EI== "Open chromatin", "#AAB7B8",
                                      ifelse(gene_and_reg$EI== "Promoter Flanking Region", "#ABEBC6",
-                                             ifelse(gene_and_reg$EI== "CTCF Binding Site", "#C39BD3",
+                                             ifelse(gene_and_reg$EI== "CTCF", "#C39BD3",
                                                      ifelse(gene_and_reg$EI== "TF binding", "#E67E22",
                                                              ifelse(gene_and_reg$EI== "Promoter", "#1ABC9C",
                                                                      ifelse(gene_and_reg$EI== "Exon", "#2C3E50",
@@ -2533,7 +2533,7 @@ gene_and_reg$ymaxD = if_else(gene_and_reg$EI =="Intron" | gene_and_reg$EI =="Exo
 gene_and_reg$color = ifelse( gene_and_reg$EI== "Enhancer", "#196F3D", 
                              ifelse(gene_and_reg$EI== "Open chromatin", "#AAB7B8",
                                      ifelse(gene_and_reg$EI== "Promoter Flanking Region", "#ABEBC6",
-                                             ifelse(gene_and_reg$EI== "CTCF Binding Site", "#C39BD3",
+                                             ifelse(gene_and_reg$EI== "CTCF", "#C39BD3",
                                                      ifelse(gene_and_reg$EI== "TF binding", "#E67E22",
                                                              ifelse(gene_and_reg$EI== "Promoter", "#1ABC9C",
                                                                      ifelse(gene_and_reg$EI== "Exon", "#2C3E50",
@@ -2542,7 +2542,7 @@ gene_and_reg$color = ifelse( gene_and_reg$EI== "Enhancer", "#196F3D",
 df_for_circle$color = ifelse( df_for_circle$reg_region== "Enhancer", "#196F3D",
                              ifelse(df_for_circle$reg_region== "Open chromatin", "#AAB7B8",
                                      ifelse(df_for_circle$reg_region== "Promoter Flanking Region", "#ABEBC6",
-                                             ifelse(df_for_circle$reg_region== "CTCF Binding Site", "#C39BD3",
+                                             ifelse(df_for_circle$reg_region== "CTCF", "#C39BD3",
                                                      ifelse(df_for_circle$reg_region== "TF binding", "#E67E22",
                                                              ifelse(df_for_circle$reg_region== "Promoter", "#1ABC9C",
                                                                      ifelse(df_for_circle$reg_region== "Exon", "#2C3E50",
@@ -2635,7 +2635,7 @@ gene_and_reg$ymaxD = if_else(gene_and_reg$EI =="Intron" | gene_and_reg$EI =="Exo
 gene_and_reg$color = ifelse( gene_and_reg$EI== "Enhancer", "#196F3D", 
                              ifelse(gene_and_reg$EI== "Open chromatin", "#AAB7B8",
                                      ifelse(gene_and_reg$EI== "Promoter Flanking Region", "#ABEBC6",
-                                             ifelse(gene_and_reg$EI== "CTCF Binding Site", "#C39BD3",
+                                             ifelse(gene_and_reg$EI== "CTCF", "#C39BD3",
                                                      ifelse(gene_and_reg$EI== "TF binding", "#E67E22",
                                                              ifelse(gene_and_reg$EI== "Promoter", "#1ABC9C",
                                                                      ifelse(gene_and_reg$EI== "Exon", "#2C3E50",
@@ -2693,7 +2693,7 @@ pmin=df_for_circle$logp[which.min(df_for_circle$logp)]
 gene_and_reg$color = ifelse( gene_and_reg$EI== "Enhancer", "#196F3D", 
                              ifelse(gene_and_reg$EI== "Open chromatin", "#AAB7B8",
                                      ifelse(gene_and_reg$EI== "Promoter Flanking Region", "#ABEBC6",
-                                             ifelse(gene_and_reg$EI== "CTCF Binding Site", "#C39BD3",
+                                             ifelse(gene_and_reg$EI== "CTCF", "#C39BD3",
                                                      ifelse(gene_and_reg$EI== "TF binding", "#E67E22",
                                                              ifelse(gene_and_reg$EI== "Promoter", "#1ABC9C",
                                                                      ifelse(gene_and_reg$EI== "Exon", "#2C3E50",
@@ -2703,7 +2703,7 @@ gene_and_reg$color = ifelse( gene_and_reg$EI== "Enhancer", "#196F3D",
 df_for_circle$color = ifelse( df_for_circle$reg_region== "Enhancer", "#196F3D",
                              ifelse(df_for_circle$reg_region== "Open chromatin", "#AAB7B8",
                                      ifelse(df_for_circle$reg_region== "Promoter Flanking Region", "#ABEBC6",
-                                             ifelse(df_for_circle$reg_region== "CTCF Binding Site", "#C39BD3",
+                                             ifelse(df_for_circle$reg_region== "CTCF", "#C39BD3",
                                                      ifelse(df_for_circle$reg_region== "TF binding", "#E67E22",
                                                              ifelse(df_for_circle$reg_region== "Promoter", "#1ABC9C",
                                                                      ifelse(df_for_circle$reg_region== "Exon", "#2C3E50",
@@ -2794,7 +2794,7 @@ gene_and_reg$ymaxD = if_else(gene_and_reg$EI =="Intron" | gene_and_reg$EI =="Exo
 gene_and_reg$color = ifelse( gene_and_reg$EI== "Enhancer", "#196F3D", 
                              ifelse(gene_and_reg$EI== "Open chromatin", "#AAB7B8",
                                      ifelse(gene_and_reg$EI== "Promoter Flanking Region", "#ABEBC6",
-                                             ifelse(gene_and_reg$EI== "CTCF Binding Site", "#C39BD3",
+                                             ifelse(gene_and_reg$EI== "CTCF", "#C39BD3",
                                                      ifelse(gene_and_reg$EI== "TF binding", "#E67E22",
                                                              ifelse(gene_and_reg$EI== "Promoter", "#1ABC9C",
                                                                      ifelse(gene_and_reg$EI== "Exon", "#2C3E50",
@@ -2877,7 +2877,7 @@ gene_and_reg$ymaxD = if_else(gene_and_reg$EI =="Intron" | gene_and_reg$EI =="Exo
 gene_and_reg$color = ifelse( gene_and_reg$EI== "Enhancer", "#196F3D", 
                              ifelse(gene_and_reg$EI== "Open chromatin", "#AAB7B8",
                                      ifelse(gene_and_reg$EI== "Promoter Flanking Region", "#ABEBC6",
-                                             ifelse(gene_and_reg$EI== "CTCF Binding Site", "#C39BD3",
+                                             ifelse(gene_and_reg$EI== "CTCF", "#C39BD3",
                                                      ifelse(gene_and_reg$EI== "TF binding", "#E67E22",
                                                              ifelse(gene_and_reg$EI== "Promoter", "#1ABC9C",
                                                                      ifelse(gene_and_reg$EI== "Exon", "#2C3E50",
@@ -2887,7 +2887,7 @@ gene_and_reg$color = ifelse( gene_and_reg$EI== "Enhancer", "#196F3D",
 df_for_circle$color = ifelse( df_for_circle$reg_region== "Enhancer", "#196F3D",
                              ifelse(df_for_circle$reg_region== "Open chromatin", "#AAB7B8",
                                      ifelse(df_for_circle$reg_region== "Promoter Flanking Region", "#ABEBC6",
-                                             ifelse(df_for_circle$reg_region== "CTCF Binding Site", "#C39BD3",
+                                             ifelse(df_for_circle$reg_region== "CTCF", "#C39BD3",
                                                      ifelse(df_for_circle$reg_region== "TF binding", "#E67E22",
                                                              ifelse(df_for_circle$reg_region== "Promoter", "#1ABC9C",
                                                                      ifelse(df_for_circle$reg_region== "Exon", "#2C3E50",
@@ -2939,7 +2939,7 @@ Next I'd like to plot the  bar chart of each reg/genetic element as a basic visu
 ```{r bar plot _G_P bar chart of reg region count}
 Unique_snps = df %>% dplyr::select( rsid, Intron_or_Exon_or_UTR, reg_region)
 Unique_snps = unique(Unique_snps)
-Unique_snps$reg_region = factor(Unique_snps$reg_region,levels = c("CTCF Binding Site", "Enhancer","Open chromatin","TF binding", "Promoter", "Promoter Flanking Region", "None"))
+Unique_snps$reg_region = factor(Unique_snps$reg_region,levels = c("CTCF", "EMAR","Enhancer","Open chromatin","TF binding", "Promoter", "Promoter Flanking Region", "None"))
 
 snpvsregion = ggplot(Unique_snps, aes(x = reg_region, fill = Intron_or_Exon_or_UTR))+
   geom_bar(alpha=0.8, position = position_dodge2(width = 1, preserve = "single"))+#  alpha is transparancy from 0-1
@@ -3012,7 +3012,7 @@ grid_col = c(`Body Fat/Size` = "#0DF485",
              # Tissues:
               Blood = "#CC5500",
               `Cultured Cells` = "#00FFFF",
-              Digestive ="#A7C7E7",
+              `Digestive Tissue`="#A7C7E7",
               Endocrine = "#FF4433",
               Fat = "#E0115F",
               `Female Reproductive Tissue` = "#0C5F7D",
@@ -3498,6 +3498,7 @@ REORDER the circos plot so that it goes in order of largest segment to smallest 
 # Common Errors for compilation into FAQs / app troubleshooting
 Ensembl Mirror DOWN "Possible SSL connectivity problems detected. - Error in .chooseEnsemblMirror(mirror = mirror, http_config = http_config) : 
   Unable to query any Ensembl site" - tends to be a connection issue, wifi disconnected etc but could do with a link to the server check site
+
 
 
 
