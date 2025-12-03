@@ -15,6 +15,12 @@ Please see instructions on github / in readme.md for details
 rm(list=ls())
 #1. Gene name list:
 gene_name = "YOUR_GENE_NAME"
+# -------------------------- WARNING ----------------------------
+## GTEx v10 has introduced some gene issues: Please use this overide wherever possible, it is safer! 
+## Got to https://gtexportal.org/home/ search your gene and get the gencode ID from the single tissue header:
+## e.g: Significant Single-Tissue eQTLs for NFE2L2 (ENSG00000116044.16) in all tissues
+
+GENCODEID = "YOUR_GENCODEID" #  e.g: "NFE2L2" = "ENSG00000116044.16"
 #e.g gene_name ="NFE2L2" ; "YOUR_GENE_NAME" #ABI2 #ACAD8 #MBP #ROM1
 
 #2. setting the file directory to where you want it to go DRIVE:/YOUR_FILE_DIRECTORY/
@@ -63,7 +69,8 @@ list_of_packages = c("circlize",
                      "plotly",
                      "jsonlite",
                      "httr",
-                     "ieugwasr")
+                     "ieugwasr",
+                     "gtexr")
 
 new_packages = list_of_packages[!(list_of_packages %in% installed.packages()[,"Package"])]
 if(length(new_packages)>0){
@@ -112,6 +119,7 @@ library(ieugwasr)
 library(biomaRt)
 library(jsonlite)
 library(httr)
+library(gtexr)
 ```
 
 
@@ -194,37 +202,54 @@ A user will need to generate their own token and copy it into the first chunk I 
 Firstly, we read in the Gtex "SNPS associated with an expression change in the gene of interest" dataframe of interest and do some initial clean-up steps:
 
 This is done automatically using their v2 API entry to their database.
-```{r Initial load and clean}
+### Updated GTEx Query using gtexr package
+
+```{r, new GTEX start}
 if(Pre_phewas_test==F){
   print("previous run not detected")
   if(exists("Gtex_1")==T){
     print("df exists so moving on")
   }else{
-    
-    # Replace gene symbol with GENCODE ID Versioned by GTEx
-    api_url=paste0("https://gtexportal.org/api/v2/reference/gene?geneId=",gene_name)
-    geneID = GET(url=api_url)
-    geneID <- content(geneID, as = "text")
-    geneID <- fromJSON(geneID)
-    GENCODEID=geneID$data$gencodeId
-    
-    #New Version :
-    # GTEx API endpoint for single tissue eQTL data
-    api_url <- paste0("https://gtexportal.org/api/v2/association/singleTissueEqtl?gencodeId=",GENCODEID,"&itemsPerPage=100000")
-    
-  # Scraping version
-    response =GET(url=api_url)
-    if (status_code(response) == 200) {
-      # Parse the JSON response
-      json_data = content(response, as = "text")
-      eqtl_data = fromJSON(api_url,)
-      Gtex_1 = eqtl_data$data
-    } else {
-      # Print an error message if the request was not successful
-      cat("Error for tissue", tissue, ":", status_code(response), "\n")
-      cat(content(response, as = "text"), "\n")
-    }
-  
+if(exists("GENCODEID")){
+	if(GENCODEID =="YOUR_GENCODEID"){
+stop("Generic GENCODEID detected, please enter GENCODEID from GTEx: e.g "NFE2L2" would be "ENSG00000116044.16"
+	}
+  Gtex_1 = get_significant_single_tissue_eqtls(
+  gencodeIds = GENCODEID,
+  # variantIds = NULL,
+  # tissueSiteDetailIds = NULL,
+  datasetId = "gtex_v10",
+  # page = 0,
+  itemsPerPage = 5000
+  # .verbose = getOption("gtexr.verbose"),
+  # .return_raw = FALSE
+)
+}else{
+  GENCODEID = get_genes( # NEED OVERRIDE HERE!!
+    gene_name,
+
+    page = 0,
+    itemsPerPage = getOption("gtexr.itemsPerPage"),
+    .verbose = getOption("gtexr.verbose"),
+    .return_raw = FALSE
+  )
+  if(nrow(GENCODEID)==0){
+    stop("Failed to find SNPs, this is most often a gencodeID issue. Please use override in first chunk!")
+  }
+  GENCODEID=GENCODEID$gencodeId
+
+  Gtex_1 = get_significant_single_tissue_eqtls(
+    gencodeIds = GENCODEID,
+    # variantIds = NULL,
+    # tissueSiteDetailIds = NULL,
+    datasetId = "gtex_v10",
+    # page = 0,
+    itemsPerPage = 5000
+    # .verbose = getOption("gtexr.verbose"),
+    # .return_raw = FALSE
+  )
+  }
+
   # reset names to look like web downloaded - saves me re-writing everything
   Gtex_1 = Gtex_1 %>% 
     dplyr::rename(`Gencode Id` =gencodeId,
@@ -251,6 +276,9 @@ if(Pre_phewas_test==F){
   # And "none"s  
   df = df[which(df$rsid!="none"),]
   df = df[which(df$rsid!="None"),]
+  
+
+    
   }
 }
 ```
@@ -3470,6 +3498,7 @@ REORDER the circos plot so that it goes in order of largest segment to smallest 
 # Common Errors for compilation into FAQs / app troubleshooting
 Ensembl Mirror DOWN "Possible SSL connectivity problems detected. - Error in .chooseEnsemblMirror(mirror = mirror, http_config = http_config) : 
   Unable to query any Ensembl site" - tends to be a connection issue, wifi disconnected etc but could do with a link to the server check site
+
 
 
 
