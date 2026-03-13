@@ -6346,8 +6346,8 @@ Cyclin-H,Other Gene Expression Change,Other Gene Expression Change
 Cyclophilin A,Other Gene Expression Change,Other Gene Expression Change
 Cyclophilin F,Other Gene Expression Change,Other Gene Expression Change
 Cystathionine beta-synthase,Other Gene Expression Change,Other Gene Expression Change
-cystatin B,Other Gene Expression Change,Other Gene Expression Change
-Cystatin C,Other Gene Expression Change,Other Gene Expression Change
+cystatin B,Renal/Urinary,Kidney
+Cystatin C,Renal/Urinary,Kidney
 Cystatin D levels,Other Gene Expression Change,Other Gene Expression Change
 Cystatin M,Other Gene Expression Change,Other Gene Expression Change
 Cystatin-8,Other Gene Expression Change,Other Gene Expression Change
@@ -36165,8 +36165,8 @@ IDP_T1_SIENAX_brain-unnormalised_volume,Nervous System/Brain,Neurological Functi
 IDP_T1_SIENAX_peripheral_grey_normalised_volume,Nervous System/Brain,Neurological Function/Brain Physiology
 "Common schizophrenia alleles are enriched in mutation-intolerant genes and in regions under strong background selection, CLOZUK+PGC2",Nervous System/Brain,Psychological
 NA,Other/Unspecified,Unknown
-juvenile myoclonic epilepsy ,Nervous System/Brain,Nervous System
-IgE levels ,Blood/Vascular,Ig Levels
+juvenile myoclonic epilepsy,Nervous System/Brain,Nervous System
+IgE levels,Blood/Vascular,Ig Levels
 Ankylosing hyperostosis [Forestier],Muscle/Tendon,Calcification
 Ankylosis of joint,Muscle/Tendon,Calcification
 Cramp and spasm,Muscle/Tendon,General
@@ -37583,10 +37583,10 @@ Cortisone levels,Metabolism (inc. Diabetes),Metabolites/Hormones/Other Products
 CTSB plasma levels,Metabolism (inc. Diabetes),Metabolites/Hormones/Other Products
 Cyclo(leu-pro),Metabolism (inc. Diabetes),Metabolites/Hormones/Other Products
 "Cys-gly, oxidized levels",Metabolism (inc. Diabetes),Metabolites/Hormones/Other Products
-Cystatin B plasma levels,Metabolism (inc. Diabetes),Metabolites/Hormones/Other Products
-Cystatin C levels,Metabolism (inc. Diabetes),Metabolites/Hormones/Other Products
-Cystatin C levels (UKB data field 30720),Metabolism (inc. Diabetes),Metabolites/Hormones/Other Products
-Cystatin C plasma levels,Metabolism (inc. Diabetes),Metabolites/Hormones/Other Products
+Cystatin B plasma levels,Renal/Urinary,Kidney
+Cystatin C levels,Renal/Urinary,Kidney
+Cystatin C levels (UKB data field 30720),Renal/Urinary,Kidney
+Cystatin C plasma levels,Renal/Urinary,Kidney
 Cysteine,Metabolism (inc. Diabetes),Metabolites/Hormones/Other Products
 Cysteine levels,Metabolism (inc. Diabetes),Metabolites/Hormones/Other Products
 Cysteinylglycine disulfide levels,Metabolism (inc. Diabetes),Metabolites/Hormones/Other Products
